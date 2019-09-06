@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\rafap\\Desktop\\PI 3\\PI 3.csproj": {}
+    "C:\\Users\\rafap\\Desktop\\Projeto_Interdisciplinar_3\\PI 3.csproj": {}
   },
   "projects": {
-    "C:\\Users\\rafap\\Desktop\\PI 3\\PI 3.csproj": {
+    "C:\\Users\\rafap\\Desktop\\Projeto_Interdisciplinar_3\\PI 3.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\rafap\\Desktop\\PI 3\\PI 3.csproj",
+        "projectUniqueName": "C:\\Users\\rafap\\Desktop\\Projeto_Interdisciplinar_3\\PI 3.csproj",
         "projectName": "PI 3",
-        "projectPath": "C:\\Users\\rafap\\Desktop\\PI 3\\PI 3.csproj",
+        "projectPath": "C:\\Users\\rafap\\Desktop\\Projeto_Interdisciplinar_3\\PI 3.csproj",
         "packagesPath": "C:\\Users\\rafap\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\rafap\\Desktop\\PI 3\\obj\\",
+        "outputPath": "C:\\Users\\rafap\\Desktop\\Projeto_Interdisciplinar_3\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
