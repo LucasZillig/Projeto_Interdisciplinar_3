@@ -1,4 +1,4 @@
-namespace PI_3
+namespace PI_3.Models
 {
     public class Arquivo {
 
