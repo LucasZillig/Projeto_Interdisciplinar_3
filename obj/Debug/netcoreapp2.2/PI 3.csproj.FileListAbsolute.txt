@@ -58,3 +58,11 @@ c:\Users\rafap\Desktop\Projeto_Interdisciplinar_3\obj\Debug\netcoreapp2.2\PI 3.V
 c:\Users\rafap\Desktop\Projeto_Interdisciplinar_3\obj\Debug\netcoreapp2.2\PI 3.dll
 c:\Users\rafap\Desktop\Projeto_Interdisciplinar_3\obj\Debug\netcoreapp2.2\PI 3.pdb
 C:\Users\rafap\Desktop\Projeto_Interdisciplinar_3\obj\Debug\netcoreapp2.2\PI 3.csproj.CopyComplete
+D:\Documentos\GitHub\Projeto_Interdisciplinar_3\obj\Debug\netcoreapp2.2\PI 3.csprojAssemblyReference.cache
+D:\Documentos\GitHub\Projeto_Interdisciplinar_3\obj\Debug\netcoreapp2.2\PI 3.csproj.CoreCompileInputs.cache
+D:\Documentos\GitHub\Projeto_Interdisciplinar_3\obj\Debug\netcoreapp2.2\PI 3.RazorAssemblyInfo.cache
+D:\Documentos\GitHub\Projeto_Interdisciplinar_3\obj\Debug\netcoreapp2.2\PI 3.RazorAssemblyInfo.cs
+D:\Documentos\GitHub\Projeto_Interdisciplinar_3\obj\Debug\netcoreapp2.2\PI 3.AssemblyInfoInputs.cache
+D:\Documentos\GitHub\Projeto_Interdisciplinar_3\obj\Debug\netcoreapp2.2\PI 3.AssemblyInfo.cs
+D:\Documentos\GitHub\Projeto_Interdisciplinar_3\obj\Debug\netcoreapp2.2\PI 3.dll
+D:\Documentos\GitHub\Projeto_Interdisciplinar_3\obj\Debug\netcoreapp2.2\PI 3.pdb

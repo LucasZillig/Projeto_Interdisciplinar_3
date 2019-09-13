@@ -17,15 +17,58 @@ namespace MVC_with_EF.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //explicita o relacionamento das tabelass
-            modelBuilder.Entity<Usuario>()
-                .HasOne(u => u.Professor)
-                .WithMany(p => p.Usuarios)
+            // explicita o relacionamento das tabelas
+            // relacionamento entre usuário e professor/aluno
+            modelBuilder.Entity<Aluno>()
+                .HasOne(u => u.Usuario)
+                .WithMany(a => a.Alunos)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            modelBuilder.Entity<Usuario>()
-                .HasOne(u => u.Aluno)
-                .WithMany(a => a.Usuarios)
+            modelBuilder.Entity<Professor>()
+                .HasOne(u => u.Usuario)
+                .WithMany(p => p.Professors)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            // relacionamento entre professor e curso
+            modelBuilder.Entity<Curso>()
+                .HasOne(p => p.Professor)
+                .WithMany(c => c.Cursos)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            // relacionamento entre curso e turma
+            modelBuilder.Entity<Turma>()
+                .HasOne(t => t.Curso)
+                .WithMany(c => c.Turmas)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            // relacionamento entre aluno e turma
+            modelBuilder.Entity<Turma>()
+                .HasOne(t => t.Aluno)
+                .WithMany(a => a.Turmas)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            // relacionamento entre pergunta e turma
+            modelBuilder.Entity<Pergunta>()
+                .HasOne(p => p.Turma)
+                .WithMany(t => t.Perguntas)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            // relacionamento entre pergunta e comentario
+            modelBuilder.Entity<Comentario>()
+                .HasOne(c => c.Pergunta)
+                .WithMany(p => p.Comentarios)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            // relacionamento entre pergunta e anexo
+            modelBuilder.Entity<Anexo>()
+                .HasOne(a => a.Pergunta)
+                .WithMany(p => p.Anexos)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            // relacionamento entre arquivo e anexo
+            modelBuilder.Entity<Anexo>()
+                .HasOne(a => a.Arquivo)
+                .WithMany(b => b.Anexos)
                 .OnDelete(DeleteBehavior.Cascade);
         }
     }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MVC_with_EF.Context.Models
@@ -11,11 +12,8 @@ namespace MVC_with_EF.Context.Models
         public string UsuarioEmail { get; set; }
         public string UsuarioSenha { get; set; }
 
-        public int ProfessorID { get; set; }
-        public Professor Professor { get; set; }
-
-        public int AlunoID { get; set; }
-        public Aluno Aluno { get; set; }
+        public List<Aluno> Alunos { get; set; }
+        public List<Professor> Professors { get; set; }
 
     }
 }
