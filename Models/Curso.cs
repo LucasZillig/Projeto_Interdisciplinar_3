@@ -1,11 +1,9 @@
 namespace PI_3.Models
 {
     public class Curso {
-
-        public int id_curso { get; set; }
-        public int nome_curso { get; set; }
-        public string desc_curso { get; set; }
-        
-        public int id_professor { get; set; }
+        public int CursoID { get; set; }
+        public int CursoNome { get; set; }
+        public string CursoDesc { get; set; }
+        public string CursoTag { get; set; }
     }
 }

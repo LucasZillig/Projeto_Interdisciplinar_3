@@ -28,7 +28,7 @@ namespace PI_3.Controllers.API
                 nome_pergunta="O que fazer com algo?",
                 desc_pergunta="Nao sei o que fazer a hora que preciso colocar uma pergunta",
                 arquivado=false,
-                data_pergunta=DateTime.Now
+                PerguntaData=DateTime.Now
             });
 
             return userList;
