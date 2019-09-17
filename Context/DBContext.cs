@@ -4,9 +4,9 @@ using MVC_with_EF.Context.Models;
 
 namespace MVC_with_EF.Context
 {
-    public class DBBlogContext : DbContext
+    public class DBContext : DbContext
     {
-        public DBBlogContext(DbContextOptions<DBBlogContext> options)
+        public DBContext(DbContextOptions<DBContext> options)
             : base(options) { }
 
         public DbSet<Usuario> Usuario { get; set; }
