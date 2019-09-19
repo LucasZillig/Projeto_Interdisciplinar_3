@@ -7,8 +7,6 @@ namespace PI_3.Models
 {
     public class Pergunta{
 
-
-
         public int PerguntaId { get; set; }
         public string PerguntaNome { get; set; }
         public string PerguntaDesc { get; set; }
