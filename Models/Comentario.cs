@@ -1,10 +1,17 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace PI_3.Models
 {
     public class Comentario {
 
-        public int id_comentario { get; set; }
-        public int data_comentario { get; set; }
+        public int ComentarioId { get; set; }
+        public DateTime ComentarioData { get; set; }
+        public string ComentarioConteudo { get; set; }
 
-        public int id_pergunta { get; set; }
+        public int PerguntaId { get; set; }
+        public Pergunta Pergunta { get; set; }
     }
 }

@@ -1,0 +1,74 @@
+<div class="login-wrapper">
+    <div class="switch-wrapper">
+            <p id="login-p">LOGIN</p>
+            <p id="register-p">REGISTER</p>
+        <label class="switch">
+            <input type="checkbox" id="sliderCheck">
+            <span class="slider"></span>
+        </label>
+    </div>
+    <i class="material-icons">donut_small</i>
+    <div class="login-form-wrapper">
+        <form class="form-style">
+            <div>
+                <p>E-mail</p>
+                <input placeholder="E-mail"/>
+            </div>
+            <div>
+                <p>Password</p>
+                <input placeholder="Password" type="password"/>
+            </div>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+    <div class="register-form-wrapper">
+        <form class="form-style">
+            <div class="inputs-wrapper">
+                <div>
+                    <p>E-mail</p>
+                    <input placeholder="E-mail"/>
+                </div>
+                <div>
+                    <p>Name</p>
+                    <input placeholder="Name"/>
+                </div>
+            </div>
+            <div class="inputs-wrapper">
+                <div>
+                    <p>Password</p>
+                    <input placeholder="Password" type="password"/>
+                </div>
+                <div>
+                    <p>Repeat password</p>
+                    <input placeholder="Repeat password" type="password"/>
+                </div>
+            </div>
+            <button type="submit">Register</button>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+<script type="text/javascript">
+    $("#login-p").hide();
+    $('.login-form-wrapper').hide();
+
+    $('input[type="checkbox"]').click(function(){
+        if($(this).prop("checked") == true){
+            $("#login-p").show();
+            $("#register-p").hide();
+
+            $('.login-form-wrapper').show();
+            $('.register-form-wrapper').hide();
+        }
+        else if($(this).prop("checked") == false){
+            $("#login-p").hide();
+            $("#register-p").show();
+
+            $('.login-form-wrapper').hide();
+            $('.register-form-wrapper').show();
+        }
+    });
+</script>
+}

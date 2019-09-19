@@ -1,14 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
+using MySql.Data.EntityFrameworkCore;
+using PI_3.Models;
 
 namespace PI_3
 {
@@ -31,8 +37,14 @@ namespace PI_3
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            // services.AddDbContext<AppDbContext>(options => options.UseInMemoryDatabase(databaseName: "databse"));
+            services.AddDbContext<AppDbContext>(x => x.UseMySQL("server=localhost;port=3306;database=nossoDB;user=root;password=root"));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            services.AddDistributedMemoryCache();
+
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -49,6 +61,8 @@ namespace PI_3
                 app.UseHsts();
             }
 
+            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+            app.UseAuthentication();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
@@ -57,10 +71,7 @@ namespace PI_3
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
-                routes.MapRoute(
-                    name: "Apidefault",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Home}/{action=Login}/{id?}");
             });
         }
     }

@@ -1,11 +1,20 @@
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace PI_3.Models
 {
     public class Curso {
 
-        public int id_curso { get; set; }
-        public int nome_curso { get; set; }
-        public string desc_curso { get; set; }
+
+        public int CursoId { get; set; }
+        public int CursoNome { get; set; }
+        public string CursoDesc { get; set; }
         
-        public int id_professor { get; set; }
+        public ICollection<CursoAluno> CursoAluno { get; set; }
+
+        public int ProfessorId { get; set; }
+        public Professor Professor { get; set; }
+
     }
 }

@@ -1,10 +1,19 @@
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace PI_3.Models
 {
-    public abstract class Usuario {
+    public class Usuario {
+        public int UsuarioId { get; set; }
+        public string UsuarioNome { get; set; }
+        public string UsuarioSobrenome { get; set; }
+        public string UsuarioEmail { get; set; }
+        public string UsuarioSenha { get; set; }
 
-        public int id_usuario { get; set; }
-        public string nome_usuario { get; set; }
-        public string email_usuario { get; set; }
-        public string senha_usuario { get; set; }
+        public Aluno Aluno { get; set; }
+        public Professor Professor { get; set; }
+        
+
     }
 }
