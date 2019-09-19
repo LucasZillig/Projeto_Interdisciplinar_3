@@ -14,23 +14,29 @@ namespace PI_3.Controllers.API {
 
         public ArquivoController (AppDbContext context)
         {
+            _context = context;
+        }
+        
+        [HttpGet]
+        public ActionResult<IEnumerable<Arquivo>> GetComentarios()
+        {
             return _context.Arquivo.ToList();
+        }
+
+        [HttpGet("{id}")]
+        public ActionResult<Arquivo> GetArquivo(int id)
+        {            
+            return _context.Arquivo.SingleOrDefault(i => i.ArquivoId == id);
         }
 
         [HttpPost]
         public ActionResult<Arquivo> AddArquivo(Arquivo requestArquivo)
         {
-            if (requestArquivo == null)
-                return null;
+            _context.Arquivo.Add(requestArquivo);
 
-            Arquivo arquivo = new Arquivo();
-            arquivo.ArquivoTipo = requestArquivo.ArquivoTipo;
-            arquivo.ArquivoUrl = requestArquivo.ArquivoUrl;
-
-            _context.Arquivo.Add(arquivo);
             _context.SaveChanges();
 
-            return arquivo;
+            return CreatedAtAction(nameof(GetArquivo), new { id = requestArquivo.ArquivoId }, requestArquivo);
         }
 
         [HttpPut("{id}")]
@@ -53,8 +59,10 @@ namespace PI_3.Controllers.API {
         public ActionResult DeleteArquivo(int id) {
             var arquivo = _context.Arquivo.SingleOrDefault(x => x.ArquivoId == id);
 
-            if (curso == null)
+            if (arquivo == null)
+            {
                 return NotFound();
+            }
 
             _context.Arquivo.Remove(arquivo);
             _context.SaveChanges();

@@ -20,7 +20,7 @@ namespace PI_3.Controllers.API
         [HttpGet]
         public ActionResult<IEnumerable<CursoAluno>> GetCursosAlunos(int id)
         {
-            return _context.CursoAluno.Where(s => s.CursoAlunoId == id).ToList();;
+            return _context.CursoAluno.Where(s => s.CursoAlunoId == id).ToList();
         }
 
         [HttpGet("{id}")]
@@ -38,7 +38,7 @@ namespace PI_3.Controllers.API
             {
                 _context.CursoAluno.Add(requestCursoAluno);
                 _context.SaveChanges();
-                
+
                 return requestCursoAluno;
             }
             return null;

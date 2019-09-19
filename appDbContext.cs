@@ -19,6 +19,7 @@ namespace PI_3
         public DbSet<Professor> Professor { get; set; }
         public DbSet<CursoAluno> CursoAluno { get; set; }
         public DbSet<Usuario> Usuario { get; set; }
+        public DbSet<PerguntaArquivo> PerguntaArquivo { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseMySQL("server=localhost;port=3306;database=nossoDB;user=root;password=root");
@@ -118,7 +119,7 @@ namespace PI_3
             modelBuilder.Entity<PerguntaArquivo>(entity =>
             {
                 entity.ToTable("pergunta_arquivo");
-                entity.HasKey(ab => new { ab.ArquivoId, ab.PerguntaId }); 
+                entity.HasKey(a => a.PerguntaArquivoId); 
                 entity.Property(e => e.ArquivoId).HasColumnName("id_arquivo").IsRequired();
                 entity.Property(e => e.PerguntaId).HasColumnName("id_pergunta").IsRequired();
                 entity.HasOne(a => a.Pergunta).WithMany(b => b.ArquivosPergunta).HasForeignKey(ab => ab.PerguntaId); 

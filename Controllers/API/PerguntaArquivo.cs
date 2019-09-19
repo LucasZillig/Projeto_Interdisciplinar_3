@@ -18,34 +18,28 @@ namespace PI_3.Controllers.API
         }
         
         [HttpGet]
-        public ActionResult<IEnumerable<PerguntaArquivo>> GetPerguntasArquivos(int id)
+        public ActionResult<IEnumerable<PerguntaArquivo>> GetPerguntasArquivos()
         {
-            return _context.PerguntaArquivo.Where(s => s.PerguntaArquivoId == id).ToList();
+            return _context.PerguntaArquivo.ToList();
         }
 
         [HttpGet("{id}")]
         public ActionResult<PerguntaArquivo> GetPerguntaArquivo(int id)
         {
-            var PerguntaArquivo = _context.PerguntaArquivo.SingleOrDefault(x => x.PerguntaArquivoId == id);
+
+            var perguntaArquivo = _context.PerguntaArquivo.SingleOrDefault(i => i.PerguntaArquivoId == id);
             
-            return PerguntaArquivo;
+            return perguntaArquivo;
         }
 
         [HttpPost]
         public ActionResult<PerguntaArquivo> AddPerguntaArquivo(PerguntaArquivo requestPerguntaArquivo)
         {
-            if(requestPerguntaArquivo != null){
+            _context.PerguntaArquivo.Add(requestPerguntaArquivo);
 
-                PerguntaArquivo PerguntaArquivo = new PerguntaArquivo();
- 
-                PerguntaArquivo.PerguntaId = requestPerguntaArquivo.PerguntaId;
-                PerguntaArquivo.ArquivoId = requestPerguntaArquivo.ArquivoId;
+            _context.SaveChanges();
 
-                _context.PerguntaArquivo.Add(PerguntaArquivo);
-                _context.SaveChanges();
-                return PerguntaArquivo;
-            }
-            return null;
+            return CreatedAtAction(nameof(GetPerguntaArquivo), new { id = requestPerguntaArquivo.PerguntaArquivoId }, requestPerguntaArquivo);
         }
 
         [HttpPut("{id}")]
@@ -55,8 +49,6 @@ namespace PI_3.Controllers.API
                 return BadRequest();
 
             var PerguntaArquivo = _context.PerguntaArquivo.SingleOrDefault(x => x.PerguntaArquivoId == requestPerguntaArquivo.PerguntaArquivoId);
-
-            PerguntaArquivo.statusInvite = 0;
 
             _context.PerguntaArquivo.Update(PerguntaArquivo);
             _context.SaveChanges();

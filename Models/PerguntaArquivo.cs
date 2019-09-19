@@ -5,6 +5,7 @@ namespace PI_3.Models
 {
     public class PerguntaArquivo{
 
+        public int PerguntaArquivoId { get; set; }
         public int PerguntaId { get; set; }
         public Pergunta Pergunta { get; set; }
         
