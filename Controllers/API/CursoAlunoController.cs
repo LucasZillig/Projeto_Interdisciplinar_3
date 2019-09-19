@@ -34,17 +34,12 @@ namespace PI_3.Controllers.API
         [HttpPost]
         public ActionResult<CursoAluno> AddCursoAluno(CursoAluno requestCursoAluno)
         {
-            if(requestCursoAluno != null){
-
-                CursoAluno cursoAluno = new CursoAluno();
- 
-                cursoAluno.AlunoId = requestCursoAluno.AlunoId;
-                cursoAluno.CursoId = requestCursoAluno.CursoId;
-                cursoAluno.statusInvite = 1;
-
-                _context.CursoAluno.Add(cursoAluno);
+            if(requestCursoAluno != null)
+            {
+                _context.CursoAluno.Add(requestCursoAluno);
                 _context.SaveChanges();
-                return cursoAluno;
+                
+                return requestCursoAluno;
             }
             return null;
         }

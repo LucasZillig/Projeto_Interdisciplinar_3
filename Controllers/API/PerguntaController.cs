@@ -20,7 +20,7 @@ namespace PI_3.Controllers.API
         [HttpGet]
         public ActionResult<IEnumerable<Pergunta>> GetPerguntas()
         {
-            return _context.Pergunta.ToList();;
+            return _context.Pergunta.ToList();
         }
 
         [HttpGet("{id}")]
@@ -38,23 +38,10 @@ namespace PI_3.Controllers.API
         [HttpPost]
         public ActionResult<Pergunta> AddPergunta(Pergunta requestPergunta)
         {
-            if(requestPergunta == null){
-                return null;
-            }
-
-            Pergunta pergunta = new Pergunta();
- 
-            pergunta.PerguntaNome = requestPergunta.PerguntaNome;
-            pergunta.PerguntaDesc = requestPergunta.PerguntaDesc;
-            pergunta.Arquivado = 0;
-            pergunta.PerguntaData = DateTime.Now;
-            pergunta.CursoAlunoId = requestPergunta.CursoAlunoId;
-
-
-            _context.Pergunta.Add(pergunta);
+            _context.Pergunta.Add(requestPergunta);
             _context.SaveChanges();
 
-            return pergunta;
+            return requestPergunta;
         }
 
         [HttpPut("{id}")]

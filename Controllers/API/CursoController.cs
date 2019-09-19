@@ -38,20 +38,11 @@ namespace PI_3.Controllers.API
         [HttpPost]
         public ActionResult<Curso> AddCurso(Curso requestCurso)
         {
-            if(requestCurso == null){
-                return null;
-            }
 
-            Curso curso = new Curso();
- 
-            curso.CursoNome = requestCurso.CursoNome;
-            curso.CursoDesc = requestCurso.CursoDesc;
-            curso.ProfessorId = requestCurso.ProfessorId;
-
-            _context.Curso.Add(curso);
+            _context.Curso.Add(requestCurso);
             _context.SaveChanges();
 
-            return curso;
+            return requestCurso;
         }
 
         [HttpPut("{id}")]

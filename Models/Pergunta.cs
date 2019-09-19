@@ -19,6 +19,5 @@ namespace PI_3.Models
         public ICollection<Comentario> Comentarios { get; set; }
         public ICollection<PerguntaArquivo> ArquivosPergunta { get; set; }
 
-
     }
 }

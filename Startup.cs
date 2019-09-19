@@ -44,39 +44,37 @@ namespace PI_3
 
             services.AddDistributedMemoryCache();
 
-            //Provide a secret key to Encrypt and Decrypt the Token
-            var SecretKey = Encoding.ASCII.GetBytes
-                 ("YourKey-2374-OFFKDI940NG7:56753253-tyuw-5769-0921-kfirox29zoxv");
-            //Configure JWT Token Authentication
-            services.AddAuthentication(auth =>
-            {
-                auth.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                auth.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            })
-            .AddJwtBearer(token =>
-            {
-                token.RequireHttpsMetadata = false;
-                token.SaveToken = true;
-                token.TokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidateIssuerSigningKey = true,
-            //Same Secret key will be used while creating the token
-            IssuerSigningKey = new SymmetricSecurityKey(SecretKey),
-                    ValidateIssuer = true,
-            //Usually, this is your application base URL
-            ValidIssuer = "http://localhost:45092/",
-                    ValidateAudience = true,
-            //Here, we are creating and using JWT within the same application.
-            //In this case, base URL is fine.
-            //If the JWT is created using a web service, then this would be the consumer URL.
-            ValidAudience = "http://localhost:45092/",
-                    RequireExpirationTime = true,
-                    ValidateLifetime = true,
-                    ClockSkew = TimeSpan.Zero
-                };
-            });
-
-
+            // //Provide a secret key to Encrypt and Decrypt the Token
+            // var SecretKey = Encoding.ASCII.GetBytes
+            //      ("YourKey-2374-OFFKDI940NG7:56753253-tyuw-5769-0921-kfirox29zoxv");
+            // //Configure JWT Token Authentication
+            // services.AddAuthentication(auth =>
+            // {
+            //     auth.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            //     auth.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            // })
+            // .AddJwtBearer(token =>
+            // {
+            //     token.RequireHttpsMetadata = false;
+            //     token.SaveToken = true;
+            //     token.TokenValidationParameters = new TokenValidationParameters
+            //     {
+            //         ValidateIssuerSigningKey = true,
+            // //Same Secret key will be used while creating the token
+            // IssuerSigningKey = new SymmetricSecurityKey(SecretKey),
+            //         ValidateIssuer = true,
+            // //Usually, this is your application base URL
+            // ValidIssuer = "http://localhost:45092/",
+            //         ValidateAudience = true,
+            // //Here, we are creating and using JWT within the same application.
+            // //In this case, base URL is fine.
+            // //If the JWT is created using a web service, then this would be the consumer URL.
+            // ValidAudience = "http://localhost:45092/",
+            //         RequireExpirationTime = true,
+            //         ValidateLifetime = true,
+            //         ClockSkew = TimeSpan.Zero
+            //     };
+            // });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -93,8 +91,8 @@ namespace PI_3
                 app.UseHsts();
             }
 
-            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
-            app.UseAuthentication();
+            // app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+            // app.UseAuthentication();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();

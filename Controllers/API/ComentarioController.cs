@@ -38,19 +38,10 @@ namespace PI_3.Controllers.API
         [HttpPost]
         public Comentario AddComentario(Comentario requestComentario)
         {
-            if(requestComentario == null){
-                return null;
-            }
-
-            Comentario comentario = new Comentario();
- 
-            comentario.ComentarioId = requestComentario.ComentarioId;
-            comentario.ComentarioConteudo = requestComentario.ComentarioConteudo;
-
-            _context.Comentario.Add(comentario);
+            _context.Comentario.Add(requestComentario);
             _context.SaveChanges();
             
-            return comentario;
+            return requestComentario;
         }
 
         [HttpPut("{id}")]

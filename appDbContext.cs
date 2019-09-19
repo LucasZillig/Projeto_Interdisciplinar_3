@@ -35,10 +35,8 @@ namespace PI_3
                 //entity.Property(e => e.Id).HasColumnName("id_usuario").ValueGeneratedNever().IsRequired(); // SEM AUTO INCREMENTO
                 entity.Property(e => e.UsuarioId).HasColumnName("id_usuario").ValueGeneratedOnAdd().IsRequired(); // COM AUTO INCREMENTO
                 entity.Property(e => e.UsuarioNome).HasColumnName("nome_usuario").HasColumnType("VARCHAR(100)").IsRequired();
-                entity.Property(e => e.UsuarioSobrenome).HasColumnName("sobrenome_usuario").HasColumnType("VARCHAR(100)").IsRequired();
-                entity.Property(e => e.UsuarioEmail).HasColumnName("email_usuario").HasColumnType("VARCHAR(100)");
+                entity.Property(e => e.UsuarioEmail).HasColumnName("email_usuario").HasColumnType("VARCHAR(100)").IsRequired();;
                 entity.Property(e => e.UsuarioSenha).HasColumnName("senha_usuario").HasColumnType("VARCHAR(25)").IsRequired();
-
             });
 
             modelBuilder.Entity<Aluno>(entity =>
