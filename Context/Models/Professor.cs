@@ -9,9 +9,7 @@ namespace MVC_with_EF.Context.Models
         [DatabaseGenerated(databaseGeneratedOption: DatabaseGeneratedOption.Identity)]
         public int ProfessorID { get; set; }
 
-        public int UsuarioID { get; set; }
-        public Usuario Usuario { get; set; }
+        public List<Usuario> Usuarios { get; set; }
 
-        public List<Curso> Cursos { get; set; }
     }
 }
