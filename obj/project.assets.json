@@ -5412,7 +5412,7 @@
       ]
     },
     "Microsoft.AspNetCore.Razor.Design/2.2.0": {
-      "sha512": "VLWK+ZtMMNukY6XjxYHc7mz33vkquoEzQJHm/LCF5REVxIaexLr+UTImljRRJBdUDJluDAQwU+59IX0rFDfURA==",
+      "sha512": "75mYqJaDoach23XrX95pQRWezlSH5875tHKRHP9eSpCtgNiQlPzSgpWtJaf0LDaNulVCeJzcMAA4ajQkOeC7/w==",
       "type": "package",
       "path": "microsoft.aspnetcore.razor.design/2.2.0",
       "hasTools": true,
@@ -5795,7 +5795,7 @@
       ]
     },
     "Microsoft.CodeAnalysis.Analyzers/1.1.0": {
-      "sha512": "HS3iRWZKcUw/8eZ/08GXKY2Bn7xNzQPzf8gRPHGSowX7u7XXu9i9YEaBeBNKUXWfI7qjvT2zXtLUvbN0hds8vg==",
+      "sha512": "RRiQHU2jDahIEH+hTF5PAA6aXnQG51yMBrl+p2GsLj6Kf6g3OZtB00u1v+7aIX8HWSpdrlTyEPUeLZ7W2xStUw==",
       "type": "package",
       "path": "microsoft.codeanalysis.analyzers/1.1.0",
       "hasTools": true,
@@ -9340,7 +9340,7 @@
       ]
     },
     "System.Linq.Queryable/4.0.1": {
-      "sha512": "Yn/WfYe9RoRfmSLvUt2JerP0BTGGykCZkQPgojaxgzF2N0oPo+/AhB8TXOpdCcNlrG3VRtsamtK2uzsp3cqRVw==",
+      "sha512": "+HfDtNkCrWe3nZCqfXBUp85oC/r1+XTRX7iTX1V44LuHazqZzk7vMthRCqckOaVsWK0dJzZfMQ0GCnwfbeCVPA==",
       "type": "package",
       "path": "system.linq.queryable/4.0.1",
       "files": [
@@ -12232,23 +12232,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Lucas\\.nuget\\packages\\": {},
+    "C:\\Users\\rafap\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Documentos\\GitHub\\Projeto_Interdisciplinar_3\\PI 3.csproj",
+      "projectUniqueName": "C:\\Users\\rafap\\Desktop\\Projeto_Interdisciplinar_3\\PI 3.csproj",
       "projectName": "PI 3",
-      "projectPath": "D:\\Documentos\\GitHub\\Projeto_Interdisciplinar_3\\PI 3.csproj",
-      "packagesPath": "C:\\Users\\Lucas\\.nuget\\packages\\",
-      "outputPath": "D:\\Documentos\\GitHub\\Projeto_Interdisciplinar_3\\obj\\",
+      "projectPath": "C:\\Users\\rafap\\Desktop\\Projeto_Interdisciplinar_3\\PI 3.csproj",
+      "packagesPath": "C:\\Users\\rafap\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\rafap\\Desktop\\Projeto_Interdisciplinar_3\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\Lucas\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\rafap\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

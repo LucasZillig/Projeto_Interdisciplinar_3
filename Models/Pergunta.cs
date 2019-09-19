@@ -3,10 +3,13 @@ using System;
 namespace PI_3.Models
 {
     public class Pergunta{
-        public int PerguntaID { get; set; }
-        public string PerguntaNome { get; set; }
-        public string PerguntaDesc { get; set; }
-        public bool PerguntaArquivado { get; set; }
-        public DateTime PerguntaData { get; set; }
+
+        public int id_pergunta { get; set; }
+        public string nome_pergunta { get; set; }
+        public string desc_pergunta { get; set; }
+        public bool arquivado { get; set; }
+        public DateTime data_pergunta { get; set; }
+
+        public int id_turma { get; set; }
     }
 }
