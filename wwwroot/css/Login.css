@@ -184,4 +184,7 @@ input:checked+.slider:before {
     .input-super-container {
         display: block;
     }
+    .register-form-wrapper form {
+        height: 420px;
+    }
 }
