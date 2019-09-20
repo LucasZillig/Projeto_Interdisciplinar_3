@@ -1,0 +1,21 @@
+<h1>Bem vindo, @ViewBag.Usuario</h1>
+<button onclick="logout()">LOG OUT</button>
+
+@section Scripts {
+<script type="text/javascript">
+
+        function logout(){
+            $.ajax({
+            url: "api/Usuario/LogoutUsuario",
+            type: "GET",
+            success: (data) => {
+                window.location.reload(); 
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.log('error ' + textStatus + " " + errorThrown);
+            }
+        });
+        }
+
+</script>
+}

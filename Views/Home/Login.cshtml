@@ -9,38 +9,38 @@
     </div>
     <i class="material-icons">donut_small</i>
     <div class="login-form-wrapper">
-        <form class="form-style">
+        <form id="login-form" class="form-style" action="GET">
             <div>
                 <p>E-mail</p>
-                <input placeholder="E-mail"/>
+                <input id="login-email" placeholder="E-mail"/>
             </div>
             <div>
                 <p>Password</p>
-                <input placeholder="Password" type="password"/>
+                <input id="login-senha" placeholder="Password" type="password"/>
             </div>
             <button type="submit">Login</button>
         </form>
     </div>
     <div class="register-form-wrapper">
-        <form class="form-style">
+        <form id="register-form" class="form-style" action="POST">
             <div class="inputs-wrapper">
                 <div>
                     <p>E-mail</p>
-                    <input placeholder="E-mail"/>
+                    <input id="register-email" placeholder="E-mail"/>
                 </div>
                 <div>
                     <p>Name</p>
-                    <input placeholder="Name"/>
+                    <input id="register-name" placeholder="Name"/>
                 </div>
             </div>
             <div class="inputs-wrapper">
                 <div>
                     <p>Password</p>
-                    <input placeholder="Password" type="password"/>
+                    <input id="register-senha" placeholder="Password" type="password"/>
                 </div>
                 <div>
                     <p>Repeat password</p>
-                    <input placeholder="Repeat password" type="password"/>
+                    <input id="register-senha-2" placeholder="Repeat password" type="password"/>
                 </div>
             </div>
             <button type="submit">Register</button>
@@ -69,6 +69,46 @@
             $('.login-form-wrapper').hide();
             $('.register-form-wrapper').show();
         }
+    });
+
+    // Login ajax
+    $("#login-form").submit(function(event){
+        event.preventDefault(); //prevent default action 
+
+        var LoginUsuarioEmail = $("#login-email").val();
+        var LoginUsuarioSenha = $("#login-senha").val();
+
+        $.ajax({
+            url: "api/Usuario/LoginUsuario?email=" + LoginUsuarioEmail + "&senha=" + LoginUsuarioSenha,
+            success: (data) => {
+                window.location.reload(); 
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.log('error ' + textStatus + " " + errorThrown);
+            }
+        });
+    });
+    // Signup ajax
+    $("#register-form").submit(function(event){
+        event.preventDefault(); //prevent default action 
+
+        let usuario = {
+            UsuarioEmail: $("#register-email").val(),
+            UsuarioNome: $("register-nome").val(),
+            UsuarioSenha: $("#register-senha").val(),
+        }
+        $.ajax({
+            url: "api/Usuario/RegisterAluno",
+            type: "POST",
+            data: usuario,
+            dataType: "json",
+            success: (data) => {
+                window.location.reload(); 
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.log('error ' + textStatus + " " + errorThrown);
+            }
+        });
     });
 </script>
 }
