@@ -34,7 +34,7 @@ namespace PI_3.Controllers
         {
             Usuario u = _cookie.validarCookie(Request.HttpContext);
             if(u != null){
-                ViewBag.Usuario = u.UsuarioNome;
+                ViewBag.Usuario = u;
                 return View("Index");
             }
             

@@ -1,3 +1,7 @@
+@{
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+
 <div class="login-wrapper">
     <div class="switch-wrapper">
             <p id="login-p">LOGIN</p>
@@ -23,24 +27,26 @@
     </div>
     <div class="register-form-wrapper">
         <form id="register-form" class="form-style" action="POST">
-            <div class="inputs-wrapper">
-                <div>
-                    <p>E-mail</p>
-                    <input id="register-email" placeholder="E-mail"/>
+            <div class="input-super-container" style="display: flex;">
+                <div class="input-container">
+                    <div>
+                        <p>E-mail</p>
+                        <input id="register-email" placeholder="E-mail"/>
+                    </div>
+                    <div>
+                        <p>Nome</p>
+                        <input id="register-nome" placeholder="Nome"/>
+                    </div>
                 </div>
-                <div>
-                    <p>Name</p>
-                    <input id="register-name" placeholder="Name"/>
-                </div>
-            </div>
-            <div class="inputs-wrapper">
-                <div>
-                    <p>Password</p>
-                    <input id="register-senha" placeholder="Password" type="password"/>
-                </div>
-                <div>
-                    <p>Repeat password</p>
-                    <input id="register-senha-2" placeholder="Repeat password" type="password"/>
+                <div class="input-container">
+                    <div>
+                        <p>Password</p>
+                        <input id="register-senha" placeholder="Password"/>
+                    </div>
+                    <div>
+                        <p>Repeat Password</p>
+                        <input id="register-senha-repeat" placeholder="Repeat Password"/>
+                    </div>
                 </div>
             </div>
             <button type="submit">Register</button>
@@ -80,6 +86,7 @@
 
         $.ajax({
             url: "api/Usuario/LoginUsuario?email=" + LoginUsuarioEmail + "&senha=" + LoginUsuarioSenha,
+            type: 'get',
             success: (data) => {
                 window.location.reload(); 
             },

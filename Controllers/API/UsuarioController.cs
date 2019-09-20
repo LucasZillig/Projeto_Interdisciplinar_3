@@ -18,7 +18,7 @@ namespace PI_3.Controllers.API
     public class UsuarioController : ControllerBase
     {
         public AppDbContext _context;
-        public UsuarioController(AppDbContext context, IValidaCookie cookie)
+        public UsuarioController(AppDbContext context)
         {
             _context = context;
         }
@@ -52,7 +52,7 @@ namespace PI_3.Controllers.API
                                     .Where(e => e.UsuarioEmail == email)
                                     .Where(s => s.UsuarioSenha == senha)
                                     .ToList();
-                if (checkUsuario[0].UsuarioId > 0)
+                if (checkUsuario.Count > 0)
                 {
                     var idStr = "0000000" + String.Concat((checkUsuario[0].UsuarioId).ToString("X"));
                     Random rnd = new Random();
@@ -60,6 +60,7 @@ namespace PI_3.Controllers.API
                     rnd.NextBytes(b);
                     string token = Convert.ToBase64String(b);
                     var cookieStr = idStr.Substring(idStr.Length - 8) + token;
+
                     CookieOptions option = new CookieOptions();
                     option.MaxAge = TimeSpan.FromMilliseconds(31536000);
                     option.HttpOnly = true;

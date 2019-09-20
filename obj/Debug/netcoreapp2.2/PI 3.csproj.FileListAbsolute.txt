@@ -66,3 +66,4 @@ D:\Documentos\GitHub\Projeto_Interdisciplinar_3\obj\Debug\netcoreapp2.2\PI 3.dll
 D:\Documentos\GitHub\Projeto_Interdisciplinar_3\obj\Debug\netcoreapp2.2\PI 3.pdb
 >>>>>>> 5ec4f610f356bd443c91f6cfc8ef4889a2b05326
 c:\Users\rafap\Desktop\Projeto_Interdisciplinar_3\obj\Debug\netcoreapp2.2\Razor\Views\Home\Login.g.cshtml.cs
+c:\Users\rafap\Desktop\Projeto_Interdisciplinar_3\obj\Debug\netcoreapp2.2\Razor\Views\Shared\_LayoutLogin.g.cshtml.cs

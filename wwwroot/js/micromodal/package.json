@@ -1,0 +1,111 @@
+{
+  "_from": "micromodal",
+  "_id": "micromodal@0.4.0",
+  "_inBundle": false,
+  "_integrity": "sha512-YDku9Fi57S4Sm6oitSy3sr786qSp5L6NbatuH2kEeXf0jStvZgZk4bLBKaoSONBaq3BEvFz3hAaoUa7/pV1Kgg==",
+  "_location": "/micromodal",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "micromodal",
+    "name": "micromodal",
+    "escapedName": "micromodal",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/micromodal/-/micromodal-0.4.0.tgz",
+  "_shasum": "924b80adff6654310070432ac51bb1d195eefb95",
+  "_spec": "micromodal",
+  "_where": "D:\\Documents\\GitHub\\IDTech\\GamificacaoTech",
+  "author": {
+    "name": "Indrashish Ghosh"
+  },
+  "bugs": {
+    "url": "https://github.com/ghosh/micromodal/issues"
+  },
+  "bundleDependencies": false,
+  "bundlesize": [
+    {
+      "path": "./dist/micromodal.min.js",
+      "maxSize": "2.5 kB"
+    }
+  ],
+  "deprecated": false,
+  "description": "Tiny javascript library for creating accessible modal dialogs",
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-plugin-external-helpers": "^6.22.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-latest": "^6.24.1",
+    "bundlesize": "^0.16.0",
+    "concurrently": "^4.1.0",
+    "cross-env": "^5.2.0",
+    "cssnano": "^4.1.10",
+    "cypress": "^2.1.0",
+    "eslint": "^4.18.2",
+    "eslint-config-standard": "^11.0.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-node": "^6.0.1",
+    "eslint-plugin-promise": "^3.6.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "husky": "^2.2.0",
+    "minifier": "^0.8.1",
+    "npm-run-all": "^4.1.2",
+    "postcss-cli": "^6.1.2",
+    "postcss-import": "^11.0.0",
+    "postcss-scss": "^2.0.0",
+    "postcss-uncss": "^0.16.1",
+    "reload": "^3.0.1",
+    "rollup": "^0.58.2",
+    "rollup-plugin-babel": "^3.0.3",
+    "rollup-plugin-conditional": "^1.1.1",
+    "rollup-plugin-eslint": "^4.0.0",
+    "rollup-plugin-filesize": "^1.5.0",
+    "rollup-plugin-json": "^2.3.0",
+    "rollup-plugin-uglify-es": "^0.0.1",
+    "rollup-watch": "^4.3.1",
+    "tachyons": "^4.9.1",
+    "uncss": "^0.16.1",
+    "watch": "^1.0.2"
+  },
+  "homepage": "https://github.com/ghosh/micromodal#readme",
+  "jsdelivr": "dist/micromodal.min.js",
+  "keywords": [
+    "a11y",
+    "modal",
+    "accesible"
+  ],
+  "license": "MIT",
+  "main": "dist/micromodal.js",
+  "module": "dist/micromodal.es.js",
+  "name": "micromodal",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ghosh/micromodal.git"
+  },
+  "resolutions": {
+    "upath": "^1.1.0"
+  },
+  "scripts": {
+    "build": "concurrently \"run-p scripts:build:*\" \"yarn styles:build\"",
+    "bundlesize": "bundlesize",
+    "demo:scripts": "minify dist/micromodal.js example/assets/scripts/prism.js --output example/site.min.js",
+    "demo:watch": "watch 'yarn demo:scripts' dist/",
+    "dev": "concurrently \"yarn scripts:dev\" \"yarn styles:dev\"  \"yarn demo:watch\" \"yarn livereload\"",
+    "livereload": "reload -b -s --dir example --port 5000",
+    "scripts:build:es": "cross-env NODE_ENV=production TARGET=es rollup -c",
+    "scripts:build:umd": "cross-env NODE_ENV=production TARGET=umd rollup -c && minify dist/micromodal.js --output dist/micromodal.min.js",
+    "scripts:dev": "rollup -c -w",
+    "styles:build": "cross-env NODE_ENV=production postcss example/assets/styles/style.css -c -o example/site.min.css",
+    "styles:dev": "postcss example/assets/styles/style.css -c -o example/site.min.css -w",
+    "test": "cypress run",
+    "test:gui": "cypress open"
+  },
+  "version": "0.4.0"
+}

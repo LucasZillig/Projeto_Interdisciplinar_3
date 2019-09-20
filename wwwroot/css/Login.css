@@ -118,12 +118,12 @@ input:checked+.slider:before {
     border-radius: 50%;
 }
 
-.inputs-wrapper {
-    display: flex;
+.input-container {
+    margin: 0px 30px;
 }
 
-.inputs-wrapper div {
-    margin: 0px 20px;
+.input-container div {
+    margin: 15px 0px
 }
 
 .form-style {

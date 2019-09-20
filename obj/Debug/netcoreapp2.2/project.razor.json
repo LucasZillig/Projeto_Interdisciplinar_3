@@ -2984,6 +2984,11 @@
       "FilePath": "Views\\Home\\Login.cshtml",
       "TargetPath": "Views\\Home\\Login.cshtml",
       "FileKind": "mvc"
+    },
+    {
+      "FilePath": "Views\\Shared\\_LayoutLogin.cshtml",
+      "TargetPath": "Views\\Shared\\_LayoutLogin.cshtml",
+      "FileKind": "mvc"
     }
   ],
   "SerializationFormat": "0.2"
