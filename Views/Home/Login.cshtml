@@ -26,8 +26,8 @@
         </form>
     </div>
     <div class="register-form-wrapper">
-        <form id="register-form" class="form-style" action="POST">
-            <div class="input-super-container" style="display: flex;">
+        <form id="register-form" class="form-style">
+            <div class="input-super-container">
                 <div class="input-container">
                     <div>
                         <p>E-mail</p>
@@ -41,11 +41,11 @@
                 <div class="input-container">
                     <div>
                         <p>Password</p>
-                        <input id="register-senha" placeholder="Password"/>
+                        <input id="register-senha" placeholder="Password" type="password"/>
                     </div>
                     <div>
                         <p>Repeat Password</p>
-                        <input id="register-senha-repeat" placeholder="Repeat Password"/>
+                        <input id="register-senha-repeat" placeholder="Repeat Password" type="password"/>
                     </div>
                 </div>
             </div>
@@ -57,23 +57,25 @@
 
 @section Scripts {
 <script type="text/javascript">
-    $("#login-p").hide();
-    $('.login-form-wrapper').hide();
+    $("#register-p").hide();
+    $('.register-form-wrapper').hide();
 
     $('input[type="checkbox"]').click(function(){
         if($(this).prop("checked") == true){
+            $("#register-p").show();
+            $("#login-p").hide();
+            
+            $('.register-form-wrapper').delay(150).fadeIn(150); 
+            $('.login-form-wrapper').fadeOut(150);
+            
+        }
+        else if($(this).prop("checked") == false){
             $("#login-p").show();
             $("#register-p").hide();
 
-            $('.login-form-wrapper').show();
-            $('.register-form-wrapper').hide();
-        }
-        else if($(this).prop("checked") == false){
-            $("#login-p").hide();
-            $("#register-p").show();
 
-            $('.login-form-wrapper').hide();
-            $('.register-form-wrapper').show();
+            $('.login-form-wrapper').delay(150).fadeIn(150); 
+            $('.register-form-wrapper').fadeOut(150);
         }
     });
 
@@ -85,8 +87,8 @@
         var LoginUsuarioSenha = $("#login-senha").val();
 
         $.ajax({
+            type: 'GET',
             url: "api/Usuario/LoginUsuario?email=" + LoginUsuarioEmail + "&senha=" + LoginUsuarioSenha,
-            type: 'get',
             success: (data) => {
                 window.location.reload(); 
             },
@@ -100,16 +102,19 @@
         event.preventDefault(); //prevent default action 
 
         let usuario = {
+            UsuarioNome: $("#register-nome").val(),
             UsuarioEmail: $("#register-email").val(),
-            UsuarioNome: $("register-nome").val(),
             UsuarioSenha: $("#register-senha").val(),
         }
+        console.log(usuario);
         $.ajax({
-            url: "api/Usuario/RegisterAluno",
             type: "POST",
+            url: "api/Usuario/RegisterAluno",
             data: usuario,
-            dataType: "json",
+            dataType: "JSON",
+            timeout: 4000,
             success: (data) => {
+
                 window.location.reload(); 
             },
             error: function(jqXHR, textStatus, errorThrown) {

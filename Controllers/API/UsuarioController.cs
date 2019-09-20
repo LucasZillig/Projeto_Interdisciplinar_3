@@ -95,7 +95,7 @@ namespace PI_3.Controllers.API
 
         [HttpPost]
         [Route("[action]")]
-        public ActionResult<Usuario> RegisterAluno([FromBody]Usuario requestUsuario)
+        public ActionResult<Usuario> RegisterAluno([FromForm]Usuario requestUsuario)
         {
             _context.Usuario.Add(requestUsuario);
 

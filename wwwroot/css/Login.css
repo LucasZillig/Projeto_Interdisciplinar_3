@@ -118,6 +118,10 @@ input:checked+.slider:before {
     border-radius: 50%;
 }
 
+.input-super-container {
+    display: flex;
+}
+
 .input-container {
     margin: 0px 30px;
 }
@@ -176,5 +180,8 @@ input:checked+.slider:before {
         display: flex;
         flex-direction: column;
         justify-content: center;
+    }
+    .input-super-container {
+        display: block;
     }
 }
