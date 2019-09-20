@@ -18,8 +18,6 @@ namespace PI_3
 
         public Usuario validarCookie(HttpContext req)
         {
-
-            var teste = _context.Pergunta.ToList();
             var cookieStr = req.Request.Cookies["usuario"];
 
             if (cookieStr == null || cookieStr.Length != 40)

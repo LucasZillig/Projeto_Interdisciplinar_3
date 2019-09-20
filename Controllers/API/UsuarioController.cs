@@ -89,7 +89,7 @@ namespace PI_3.Controllers.API
         [Route("[action]")]
         public void LogoutUsuario()
         {
-            Response.Cookies.Delete("usuario");
+            Response.Cookies.Delete("Usuario");
         }
 
 
