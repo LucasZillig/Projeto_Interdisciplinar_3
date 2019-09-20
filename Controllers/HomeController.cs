@@ -25,8 +25,6 @@ namespace PI_3.Controllers
 
         public IActionResult Index()
         {
-            
-            Usuario u = _cookie.validarCookie(Request.HttpContext);
             return View();
         }
 

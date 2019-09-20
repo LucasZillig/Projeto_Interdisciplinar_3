@@ -71,7 +71,7 @@ namespace PI_3.Controllers.API
                     usuarioNovoToken.UsuarioToken = cookieStr;
                     _context.Usuario.Update(usuarioNovoToken);
                     _context.SaveChanges();
-                    Response.Cookies.Append("usuario", cookieStr, option);
+                    Response.Cookies.Append("Usuario", cookieStr, option);
                     return Ok("Bem vindo, " + checkUsuario[0].UsuarioNome);
                 }
                 else
