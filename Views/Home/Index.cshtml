@@ -90,14 +90,14 @@
                             <li>
                                 <a class="list-select" href="#">
                                     <div class="materia-title-container">
-                                        <div class="materia-title">Arquitetura da Informação</div>     
+                                        <div class="materia-title">Arquitetura da Informação</div>
                                     </div>
                                     <div class="list-label-container">
                                         <span class="list-label" style="background: #03a9f4;"></span>
                                     </div>
                                 </a>
                             </li>
-                        </ul>   
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -125,15 +125,15 @@
 
                         </div>
                     </div>
-                    
+
                     <div class="sidebar-section">
                         <div class="section-default">
-                            
+
                         </div>
                     </div>
                     <div class="sidebar-section">
                         <div class="section-custom">
-                            
+
                         </div>
                     </div>
                 </div>
@@ -171,221 +171,243 @@
                                     </div>
                                 </a>
                             </div>
-                        </div>  
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="desktop-content">
+        </div>
+        <div class="desktop-content">
 
-            </div>
         </div>
     </div>
-    <!--MODALS-->
-    <div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
-        <div class="modal__overlay" tabindex="-1" data-micromodal-close>
-            <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
-                <main class="modal__content" id="modal-1-content">
-                        <div class="account-banner">
-                            <div class="account-info-group">
-                                <img class="account-picture" src="~/img/porter.jpg">
-                                <div class="account-info-display">
-                                    <h1>@ViewBag.Usuario.UsuarioNome</h1>
-                                    <h2>@ViewBag.Usuario.UsuarioEmail</h2>
-                                </div>
-                            </div>
-                            <div class="account-edit-info">
-                                <button class="small-option-button">
-                                    <i class="material-icons material-icons-round">settings_application</i>
-                                </button>
-                            </div>
-                        </div>
-                        <button onclick="logout()" class="option-button" style="margin-top: 15px;">Fazer Log Out</button>
-                </main>
-                <footer class="modal__footer">
-                    <a class="footer-link">Privacy Policy</a>
-                    <p class="footer-link" style="margin: 0 5px;">•</p>
-                    <a class="footer-link">Terms of Service</a>
-                </footer>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal micromodal-slide" id="modal-2" aria-hidden="true">
-        <div class="modal__overlay" tabindex="-1" data-micromodal-close>
-            <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-2-title">
-                <header class="modal__header">
-                    <h2 class="modal__title" id="modal-2-title">Convites</h2>
-                </header>
-                <main class="modal__content" id="modal-2-content">
-                    <div class="invite-wrapper">
-                        <div class="invite">
-                            <div class="invite-left">
-                                <img class="account-picture-small" src="~/img/porter.jpg">
-                                <div class="invite-info-display">
-                                    <h1>Banco de Dados</h1>
-                                    <h2>Jorge Surian</h2>
-                                </div>
-                            </div>
-                            <div class="invite-right">
-                                <button class="small-option-button accept-button"><i class="material-icons material-icons-round">check</i></button>
-                                <button class="small-option-button decline-button"><i class="material-icons material-icons-round">clear</i></button>
-                            </div>
+</div>
+<!--MODALS-->
+<div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
+    <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+        <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+            <main class="modal__content" id="modal-1-content">
+                <div class="account-banner">
+                    <div class="account-info-group">
+                        <img class="account-picture" src="~/img/porter.jpg">
+                        <div class="account-info-display">
+                            <h1>@ViewBag.Usuario.UsuarioNome</h1>
+                            <h2>@ViewBag.Usuario.UsuarioEmail</h2>
                         </div>
                     </div>
-                </main>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal micromodal-slide" id="modal-3" aria-hidden="true">
-        <div class="modal__overlay" tabindex="-1" data-micromodal-close>
-            <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-3-title">
-                <header class="modal__header">
-                    <h2 class="modal__title" id="modal-2-title">Nova Pergunta</h2>
-                </header>
-                <main class="modal__content" id="modal-2-content">
-                    <form action="POST" class="pergunta-form">
-                        <div class="input-materia">
-                            <div class="materia-select-dropdown">
-                                <button class="materia-select-btn" id="materia-select-btn">
-                                    <b id="perguntas-filtros-label-2" data-id="">SELECIONAR MATÉRIA</b>
-                                    <input type="checkbox" id="perguntas-filtro-2" class="materia-select-check">
-                                    <i class="material-icons material-icons-round">expand_more</i>
-                                    <div class="materia-select-dropdown-content" id="materia-select-dropdown-content">
-                                        <a href="#" data-target="perguntas-filtros-label-2" data-id="recente" style="border-top-left-radius: 6px; border-top-right-radius: 6px;">BANCO DE DADOS</a>
-                                        <a href="#" data-target="perguntas-filtros-label-2" data-id="popularidade">PROGRAMAÇÃO WEB</a>
-                                        <a href="#" data-target="perguntas-filtros-label-2" data-id="za" style="border-bottom-left-radius: 6px; border-bottom-right-radius: 6px;">SEGURANÇA DE DADOS</a>
-                                    </div>
-                                </button>
-                            </div>
-                        </div>
-                        <input type="text" placeholder="Nome" class="input-field">
-                        <textarea style="resize: none;" rows="5" maxlength="3000" placeholder="Escreva aqui..." class="input-field input-textarea" ></textarea>
-                        <div class="upload-btn-wrapper">
-                            <input type="file" name="myfile" />
-                            <button class="option-button">Upload a file</button>
-                        </div>
-                        <button style="margin: auto;" type="submit" class="option-button">Enviar</button>
-                    </form>
-                </main>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal micromodal-slide" id="modal-4" aria-hidden="true">
-            <div class="modal__overlay" tabindex="-1" data-micromodal-close>
-                <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-4-title">
-                    <header class="modal__header">
-                        <h2 class="modal__title" id="modal-2-title">Gerenciar Matérias</h2>
-                    </header>
-                    <main class="modal__content" id="modal-2-content">
-                        <div class="invite-wrapper">
-                                <div class="invite">
-                                    <div class="invite-left">
-                                        <div class="invite-info-display">
-                                            <h1>Banco de Dados</h1>
-                                        </div>
-                                    </div>
-                                    <div class="invite-right">
-                                        <button class="option-button jscolor {valueElement:null,value:'66ccff'}">           
-                                            Selecionar Cor
-                                        </button>
-                                        <button class="small-option-button decline-button"><i class="material-icons material-icons-round">clear</i></button>
-                                    </div>
-                                </div>
-                            </div>
-                    </main>
+                    <div class="account-edit-info">
+                        <button class="small-option-button">
+                            <i class="material-icons material-icons-round">settings_application</i>
+                        </button>
+                    </div>
                 </div>
-            </div>
+                <button onclick="logout()" class="option-button" style="margin-top: 15px;">Fazer Log Out</button>
+            </main>
+            <footer class="modal__footer">
+                <a class="footer-link">Privacy Policy</a>
+                <p class="footer-link" style="margin: 0 5px;">•</p>
+                <a class="footer-link">Terms of Service</a>
+            </footer>
         </div>
-    <div id="overlay"></div>
-    <!--FOOTER-->
+    </div>
+</div>
+
+<div class="modal micromodal-slide" id="modal-2" aria-hidden="true">
+    <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+        <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-2-title">
+            <header class="modal__header">
+                <h2 class="modal__title" id="modal-2-title">Convites</h2>
+            </header>
+            <main class="modal__content" id="modal-2-content">
+                <div class="invite-wrapper">
+                    <div class="invite">
+                        <div class="invite-left">
+                            <img class="account-picture-small" src="~/img/porter.jpg">
+                            <div class="invite-info-display">
+                                <h1>Banco de Dados</h1>
+                                <h2>Jorge Surian</h2>
+                            </div>
+                        </div>
+                        <div class="invite-right">
+                            <button class="small-option-button accept-button"><i class="material-icons material-icons-round">check</i></button>
+                            <button class="small-option-button decline-button"><i class="material-icons material-icons-round">clear</i></button>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</div>
+
+<div class="modal micromodal-slide" id="modal-3" aria-hidden="true">
+    <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+        <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-3-title">
+            <header class="modal__header">
+                <h2 class="modal__title" id="modal-2-title">Nova Pergunta</h2>
+            </header>
+            <main class="modal__content" id="modal-2-content">
+                <form id="pergunta-form" class="pergunta-form" name="form" action="/uploadmultiple" enctype="multipart/form-data" method="post">
+                    <div class="input-materia">
+                        <div class="materia-select-dropdown">
+                            <button class="materia-select-btn" id="materia-select-btn">
+                                <b id="perguntas-filtros-label-2" data-id="">SELECIONAR MATÉRIA</b>
+                                <input type="checkbox" id="perguntas-filtro-2" class="materia-select-check">
+                                <i class="material-icons material-icons-round">expand_more</i>
+                                <div class="materia-select-dropdown-content" id="materia-select-dropdown-content">
+                                    <a href="#" data-target="perguntas-filtros-label-2" data-id="recente" style="border-top-left-radius: 6px; border-top-right-radius: 6px;">BANCO DE DADOS</a>
+                                    <a href="#" data-target="perguntas-filtros-label-2" data-id="popularidade">PROGRAMAÇÃO WEB</a>
+                                    <a href="#" data-target="perguntas-filtros-label-2" data-id="za" style="border-bottom-left-radius: 6px; border-bottom-right-radius: 6px;">SEGURANÇA DE DADOS</a>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                    <input id="nome-pergunta" type="text" placeholder="Nome" class="input-field">
+                    <textarea id="desc-pergunta" style="resize: none;" rows="5" maxlength="3000" placeholder="Escreva aqui..." class="input-field input-textarea"></textarea>
+                    <div class="upload-btn-wrapper">
+                        <input id="files" name="files" type="file" multiple onchange="fileupload('files');" />
+                        <button class="option-button">Upload a file</button>
+                    </div>
+                    <button style="margin: auto;" type="submit" class="option-button">Enviar</button>
+                </form>
+            </main>
+        </div>
+    </div>
+</div>
+
+<div class="modal micromodal-slide" id="modal-4" aria-hidden="true">
+    <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+        <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-4-title">
+            <header class="modal__header">
+                <h2 class="modal__title" id="modal-2-title">Gerenciar Matérias</h2>
+            </header>
+            <main class="modal__content" id="modal-2-content">
+                <div class="invite-wrapper">
+                    <div class="invite">
+                        <div class="invite-left">
+                            <div class="invite-info-display">
+                                <h1>Banco de Dados</h1>
+                            </div>
+                        </div>
+                        <div class="invite-right">
+                            <button class="option-button jscolor {valueElement:null,value:'66ccff'}">
+                                Selecionar Cor
+                            </button>
+                            <button class="small-option-button decline-button"><i class="material-icons material-icons-round">clear</i></button>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</div>
+<div id="overlay"></div>
+<!--FOOTER-->
 </div>
 
 @section Scripts {
-<script type="text/javascript">
+    <script type="text/javascript">
 
-    function logout(){
-        $.ajax({
-            url: "api/Usuario/LogoutUsuario",
-            type: "GET",
-            success: (data) => {
-                window.location.reload(); 
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-                console.log('error ' + textStatus + " " + errorThrown);
-            }
+        function logout() {
+            $.ajax({
+                url: "api/Usuario/LogoutUsuario",
+                type: "GET",
+                success: (data) => {
+                    window.location.reload();
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log('error ' + textStatus + " " + errorThrown);
+                }
+            });
+        }
+
+        MicroModal.init({
+            awaitCloseAnimation: true,
         });
-    }
-    
-    MicroModal.init({
-        awaitCloseAnimation: true,
-    });
 
-    function selecionaMateria(e) {
-        var id = this.getAttribute("data-id");
-        var target = document.getElementById(this.getAttribute("data-target"));
-        target.setAttribute("data-id", id);
-        target.textContent = this.textContent;
-    }
-    
-    (function () {
+        function selecionaMateria(e) {
+            var id = this.getAttribute("data-id");
+            var target = document.getElementById(this.getAttribute("data-target"));
+            target.setAttribute("data-id", id);
+            target.textContent = this.textContent;
+        }
+
+        (function () {
             links = document.getElementById("materia-select-dropdown-content").getElementsByTagName("a");
             for (var i = 0; i < links.length; i++) {
                 links[i].onclick = selecionaMateria;
             }
-    })();
+        })();
 
-    $(document).ready(function(){ 
-        $("#materia-select-btn").on("click", function () {
-            $("#materia-select-btn").toggleClass("materia-select-btn-after");
+        $(document).ready(function () {
+            $("#materia-select-btn").on("click", function () {
+                $("#materia-select-btn").toggleClass("materia-select-btn-after");
+            });
+
+            const $menu = $('.materia-select-check');
+
+            $(document).mouseup(function (e) {
+                if (!$menu.is(e.target) && $menu.has(e.target).length === 0 && $menu.prop("checked", true))//se o target nao for o container ou um dos filhos
+                {
+                    $menu.prop("checked", false);
+                    $(".materia-select-btn").removeClass("materia-select-btn-after");
+                }
+            });
+
+            //MOBILE - BOTAO VER PERFIL
+            // $("#account-header-button").click(function(){
+            //      $(".account-modal-wrapper").fadeToggle(300);
+            // });
+            //-------------------------------------------------------------
+
+            //MOBILE - ABRIR / FECHAR SIDEBAR
+            $("#mobile-sidebar-button").click(function () {
+                $("#overlay").fadeToggle(300);
+                $(".sidebar-wrapper").toggleClass('sidebar-wrapper-after');
+            });
+
+            $("#overlay").click(function () {
+                $("#overlay").fadeOut(300);
+                $(".sidebar-wrapper").removeClass('sidebar-wrapper-after');
+            });
+            //-------------------------------------------------------------
+
+            //FORMATO MOBILE - HOVER PARA NOMES GRANDES DE INBOX            TODO: MOBILE GESTURES (on hold)
+            $(".list-select").hover(function () {
+                var nomeMateriaContainer = $(this).children('.materia-title-container')[0];
+                var nomeMateria = $(this).children('.materia-title-container').children('.materia-title')[0];
+                if (nomeMateria.offsetWidth < nomeMateria.scrollWidth) {
+                    $(nomeMateria).addClass('list-select-overflowing');
+                    var parent_width = nomeMateriaContainer.offsetWidth;
+                    $(this).mouseover(function () {
+                        nomeMateria.style.transform = 'translateX(calc(-100% + ' + parent_width + 'px))'
+                    });
+
+                    $(this).mouseleave(function () {
+                        nomeMateria.style.transform = ''
+                    });
+                }
+            });
         });
 
-        const $menu = $('.materia-select-check');
+        // SEND FILES
 
-        $(document).mouseup(function (e) {
-            if(!$menu.is(e.target) && $menu.has(e.target).length === 0 && $menu.prop("checked",true))//se o target nao for o container ou um dos filhos
-            {
-                $menu.prop("checked",false);
-                $(".materia-select-btn").removeClass("materia-select-btn-after");
+        function fileupload(filename) {
+            var inputfile = document.getElementById(filename);
+            var files = inputfile.files;
+            var fdata = new FormData();
+            for (var i = 0; i != files.length; i++) {
+                fdata.append("files", files[i]);
             }
-        });
 
-        //MOBILE - BOTAO VER PERFIL
-        // $("#account-header-button").click(function(){
-        //      $(".account-modal-wrapper").fadeToggle(300);
-        // });
-        //-------------------------------------------------------------
-
-        //MOBILE - ABRIR / FECHAR SIDEBAR
-        $("#mobile-sidebar-button").click(function(){
-            $("#overlay").fadeToggle(300);
-            $(".sidebar-wrapper").toggleClass('sidebar-wrapper-after');
-        });
-
-        $("#overlay").click(function(){
-            $("#overlay").fadeOut(300);
-            $(".sidebar-wrapper").removeClass('sidebar-wrapper-after');
-        });
-        //-------------------------------------------------------------
-
-        //FORMATO MOBILE - HOVER PARA NOMES GRANDES DE INBOX            TODO: MOBILE GESTURES (on hold)
-        $(".list-select").hover(function(){ 
-            var nomeMateriaContainer = $(this).children('.materia-title-container')[0];
-            var nomeMateria = $(this).children('.materia-title-container').children('.materia-title')[0];
-            if (nomeMateria.offsetWidth < nomeMateria.scrollWidth){
-                $(nomeMateria).addClass('list-select-overflowing');
-                var parent_width = nomeMateriaContainer.offsetWidth;
-                $(this).mouseover(function(){
-                    nomeMateria.style.transform = 'translateX(calc(-100% + ' + parent_width + 'px))'
-                });
-
-                $(this).mouseleave(function(){
-                    nomeMateria.style.transform = ''
-                });
-            }
-        });
-    });
-</script>
+            $.ajax({
+                url: "api/PerguntaArquivo/UploadArquivo",
+                data: fdata,
+                processData: false,
+                contentType: false,
+                type: "POST",
+                success: function (data) {
+                    alert("DEU CERTO");
+                }
+            });
+        }
+    </script>
 }
