@@ -13,26 +13,26 @@ namespace PI_3.Controllers.API
 {   
     [Route("api/[controller]")]
     [ApiController] 
-    public class PerguntaArquivo : ControllerBase
+    public class PerguntaArquivoController : ControllerBase
     {
         public AppDbContext _context;
 
         private IHostingEnvironment _hostingEnvironment;
 
-        public PerguntaArquivo (AppDbContext context, IHostingEnvironment hostingEnvironment)
+        public PerguntaArquivoController (AppDbContext context, IHostingEnvironment hostingEnvironment)
         {
             _context = context;
             _hostingEnvironment = hostingEnvironment;
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<Models.PerguntaArquivo>> GetPerguntasArquivos()
+        public ActionResult<IEnumerable<PerguntaArquivo>> GetPerguntasArquivos()
         {
             return _context.PerguntaArquivo.ToList();
         }
 
         [HttpGet("{id}")]
-        public ActionResult<Models.PerguntaArquivo> GetPerguntaArquivo(int id)
+        public ActionResult<PerguntaArquivo> GetPerguntaArquivo(int id)
         {
 
             var perguntaArquivo = _context.PerguntaArquivo.SingleOrDefault(i => i.PerguntaArquivoId == id);
@@ -42,7 +42,7 @@ namespace PI_3.Controllers.API
 
         [HttpPost]
         [Route("[action]")]
-        public ActionResult<Models.PerguntaArquivo> AddPerguntaArquivo(Models.PerguntaArquivo requestPerguntaArquivo)
+        public ActionResult<PerguntaArquivo> AddPerguntaArquivo(PerguntaArquivo requestPerguntaArquivo)
         {
             _context.PerguntaArquivo.Add(requestPerguntaArquivo);
 
@@ -83,7 +83,7 @@ namespace PI_3.Controllers.API
         }
 
         [HttpPut("{id}")]
-        public ActionResult UpdatePerguntaArquivo(int id, Models.PerguntaArquivo requestPerguntaArquivo)
+        public ActionResult UpdatePerguntaArquivo(int id, PerguntaArquivo requestPerguntaArquivo)
         {
             if (id != requestPerguntaArquivo.PerguntaArquivoId)
                 return BadRequest();
