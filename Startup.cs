@@ -15,6 +15,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using MySql.Data.EntityFrameworkCore;
 using PI_3.Models;
+using PI_3.Services;
 
 namespace PI_3
 {

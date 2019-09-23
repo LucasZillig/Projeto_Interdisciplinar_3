@@ -10,7 +10,6 @@ using Microsoft.EntityFrameworkCore;
 using PI_3.Models;
 using System.Web;
 
-
 namespace PI_3.Controllers.API
 {
     [Route("api/[controller]")]

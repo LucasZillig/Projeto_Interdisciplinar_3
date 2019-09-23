@@ -7,6 +7,7 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Http;
+using PI_3.Services;
 
 namespace PI_3
 {
@@ -18,7 +19,7 @@ namespace PI_3
 
         public Usuario validarCookie(HttpContext req)
         {
-            var cookieStr = req.Request.Cookies["usuario"];
+            var cookieStr = req.Request.Cookies["Usuario"];
 
             if (cookieStr == null || cookieStr.Length != 40)
             {

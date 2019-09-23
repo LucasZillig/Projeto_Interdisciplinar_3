@@ -32,10 +32,71 @@
     color: #a29bfe;
 }
 
-.switch-wrapper {
+.login-form-input-wrapper {
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.register-form-input-wrapper {
+    display: flex;
+}
+
+.input-container {
+    margin: 0px 30px;
+}
+
+.input-container div {
+    margin: 15px 0px
+}
+
+.form-style {
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    margin: 20px 0px;
+}
+
+.form-style input {
+    width: 300px;
+    padding: 10px;
+    background-color: #2f3640;
+    border: 1px solid #a29bfe;
+    margin: 5px 0px;
+    color: #a29bfe;
+    font-size: 15px;
+}
+
+.form-style input:focus {
+    outline: none;
+}
+
+.form-style button {
+    width: 200px;
+    border: 0;
+    background-color: #a29bfe;
+    height: 50px;
+    border-radius: 5px;
+    font-size: 20px;
+}
+
+.form-style button:hover {
+    cursor: pointer;
+    border: 1px solid #a29bfe;
+    background-color: #2f3640;
+    color: #a29bfe;
+}
+
+.login-switch {
     position: absolute;
     top: 15px;
     left: 15px;
+}
+
+.switch-wrapper {
     width: 80px;
     display: flex;
     flex-direction: column;
@@ -118,62 +179,12 @@ input:checked+.slider:before {
     border-radius: 50%;
 }
 
-.input-super-container {
-    display: flex;
-}
-
-.input-container {
-    margin: 0px 30px;
-}
-
-.input-container div {
-    margin: 15px 0px
-}
-
-.form-style {
-    height: 250px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    margin: 20px 0px;
-}
-
-.form-style input {
-    width: 300px;
-    padding: 10px;
-    background-color: #2f3640;
-    border: 1px solid #a29bfe;
-    margin: 5px 0px;
-    color: #a29bfe;
-    font-size: 15px;
-}
-
-.form-style input:focus {
-    outline: none;
-}
-
-.form-style button {
-    width: 200px;
-    border: 0;
-    background-color: #a29bfe;
-    height: 50px;
-    border-radius: 5px;
-    font-size: 20px;
-}
-
-.form-style button:hover {
-    cursor: pointer;
-    border: 1px solid #a29bfe;
-    background-color: #2f3640;
-    color: #a29bfe;
-}
-
 ::placeholder {
     color: #a29bfe;
+    opacity: 50%;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 1024px) {
     .login-wrapper {
         width: 100%;
         height: 100%;
@@ -181,10 +192,10 @@ input:checked+.slider:before {
         flex-direction: column;
         justify-content: center;
     }
-    .input-super-container {
+    .register-form-input-wrapper {
         display: block;
     }
     .register-form-wrapper form {
-        height: 420px;
+        height: 480px;
     }
 }

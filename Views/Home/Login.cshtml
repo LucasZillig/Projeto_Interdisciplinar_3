@@ -3,31 +3,33 @@
 }
 
 <div class="login-wrapper">
-    <div class="switch-wrapper">
+    <div class="switch-wrapper login-switch">
             <p id="login-p">LOGIN</p>
             <p id="register-p">REGISTER</p>
         <label class="switch">
-            <input type="checkbox" id="sliderCheck">
+            <input id="typelogin-input" type="checkbox" id="sliderCheck">
             <span class="slider"></span>
         </label>
     </div>
     <i class="material-icons">donut_small</i>
     <div class="login-form-wrapper">
         <form id="login-form" class="form-style" action="GET">
-            <div>
-                <p>E-mail</p>
-                <input id="login-email" placeholder="E-mail"/>
-            </div>
-            <div>
-                <p>Password</p>
-                <input id="login-senha" placeholder="Password" type="password"/>
+            <div class="login-form-input-wrapper">
+                <div>
+                    <p>E-mail</p>
+                    <input id="login-email" placeholder="E-mail"/>
+                </div>
+                <div>
+                    <p>Password</p>
+                    <input id="login-senha" placeholder="Password" type="password"/>
+                </div>
             </div>
             <button type="submit">Login</button>
         </form>
     </div>
     <div class="register-form-wrapper">
         <form id="register-form" class="form-style">
-            <div class="input-super-container">
+            <div class="register-form-input-wrapper">
                 <div class="input-container">
                     <div>
                         <p>E-mail</p>
@@ -49,6 +51,14 @@
                     </div>
                 </div>
             </div>
+            <div class="switch-wrapper typeuser-switch">
+                <p id="aluno-p">ALUNO</p>
+                <p id="professor-p">PROFESSOR</p>
+                <label class="switch">
+                    <input id="typeuser-input" type="checkbox" id="sliderCheck">
+                    <span class="slider"></span>
+                </label>
+            </div>
             <button type="submit">Register</button>
         </form>
     </div>
@@ -58,9 +68,10 @@
 @section Scripts {
 <script type="text/javascript">
     $("#register-p").hide();
+    $("#professor-p").hide();
     $('.register-form-wrapper').hide();
 
-    $('input[type="checkbox"]').click(function(){
+    $('#typelogin-input').click(function(){
         if($(this).prop("checked") == true){
             $("#register-p").show();
             $("#login-p").hide();
@@ -76,6 +87,19 @@
 
             $('.login-form-wrapper').delay(150).fadeIn(150); 
             $('.register-form-wrapper').fadeOut(150);
+        }
+    });
+
+    $('#typeuser-input').click(function(){
+        if($(this).prop("checked") == true){
+            $("#professor-p").show();
+            $("#aluno-p").hide();
+                     
+        }
+        else if($(this).prop("checked") == false){
+            $("#aluno-p").show();
+            $("#professor-p").hide();
+
         }
     });
 
@@ -119,6 +143,7 @@
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 console.log('error ' + textStatus + " " + errorThrown);
+                alert()
                 window.location.reload(); 
             }
         });
