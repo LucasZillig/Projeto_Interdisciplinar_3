@@ -17,37 +17,37 @@
             <div class="login-form-input-wrapper">
                 <div>
                     <p>E-mail</p>
-                    <input id="login-email" placeholder="E-mail"/>
+                    <input id="login-email" name="email" placeholder="E-mail"/>
                 </div>
                 <div>
                     <p>Password</p>
-                    <input id="login-senha" placeholder="Password" type="password"/>
+                    <input id="login-senha" name="password" placeholder="Password" type="password"/>
                 </div>
             </div>
             <button type="submit">Login</button>
         </form>
     </div>
     <div class="register-form-wrapper">
-        <form id="register-form" class="form-style">
+        <form id="register-form" class="form-style" action="POST">
             <div class="register-form-input-wrapper">
                 <div class="input-container">
                     <div>
                         <p>E-mail</p>
-                        <input id="register-email" placeholder="E-mail"/>
+                        <input id="register-email" name="email" placeholder="E-mail"/>
                     </div>
                     <div>
                         <p>Nome</p>
-                        <input id="register-nome" placeholder="Nome"/>
+                        <input id="register-nome" name="username" placeholder="Nome"/>
                     </div>
                 </div>
                 <div class="input-container">
                     <div>
                         <p>Password</p>
-                        <input id="register-senha" placeholder="Password" type="password"/>
+                        <input id="register-senha" name="password" placeholder="Password" type="password"/>
                     </div>
                     <div>
                         <p>Repeat Password</p>
-                        <input id="register-senha-repeat" placeholder="Repeat Password" type="password"/>
+                        <input id="register-senha-repeat" name="password-repeat" placeholder="Repeat Password" type="password"/>
                     </div>
                 </div>
             </div>
@@ -105,7 +105,7 @@
 
     // Login ajax
     $("#login-form").submit(function(event){
-        event.preventDefault(); //prevent default action 
+        event.preventDefault();
 
         var LoginUsuarioEmail = $("#login-email").val();
         var LoginUsuarioSenha = $("#login-senha").val();
@@ -113,40 +113,89 @@
         $.ajax({
             type: 'GET',
             url: "api/Usuario/LoginUsuario?email=" + LoginUsuarioEmail + "&senha=" + LoginUsuarioSenha,
-            success: (data) => {
+            success: function(data) {
                 window.location.reload(); 
             },
             error: function(jqXHR, textStatus, errorThrown) {
-                console.log('error ' + textStatus + " " + errorThrown);
+                console.log(textStatus + " " + errorThrown);
             }
         });
     });
     // Signup ajax
     $("#register-form").submit(function(event){
-        event.preventDefault(); //prevent default action 
-
-        let usuario = {
-            UsuarioNome: $("#register-nome").val(),
-            UsuarioEmail: $("#register-email").val(),
-            UsuarioSenha: $("#register-senha").val(),
+        event.preventDefault();
+        
+        var usuario = {
+            'UsuarioNome': $("#register-nome").val(),
+            'UsuarioEmail': $("#register-email").val(),
+            'UsuarioSenha': $("#register-senha").val(),
         }
         console.log(usuario);
-        $.ajax({
-            type: "POST",
-            url: "api/Usuario/RegisterAluno",
-            data: usuario,
-            dataType: "JSON",
-            timeout: 4000,
-            success: (data) => {
+        
+        var registerString = "";
 
-                window.location.reload(); 
+        if($('#typeuser-input').prop("checked") == true){
+            registerString = 'api/Usuario/RegisterProfessor';
+        }
+        else if($('#typeuser-input').prop("checked") == false){
+            registerString = 'api/Usuario/RegisterAluno';
+        }
+        $.ajax({
+            type: 'POST',
+            url: registerString,
+            contentType: 'application/json',
+            dataType: 'json',
+            data: JSON.stringify(usuario),
+            success: function(data) {    
+                alert("registrado")
             },
             error: function(jqXHR, textStatus, errorThrown) {
-                console.log('error ' + textStatus + " " + errorThrown);
-                alert()
-                window.location.reload(); 
+                console.log(textStatus + " " + errorThrown);
+                
             }
         });
     });
+
+    var constraints = {
+        email: {
+            // Email is required
+            presence: true,
+            // and must be an email (duh)
+            email: true
+        },
+        password: {
+            // Password is also required
+            presence: true,
+            // And must be at least 5 characters long
+            length: {
+                minimum: 5
+            }
+        },
+        "confirm-password": {
+            // You need to confirm your password
+            presence: true,
+            // and it needs to be equal to the other password
+            equality: {
+                attribute: "password",
+                message: "^The passwords does not match"
+            }
+        },
+        username: {
+            // You need to pick a username too
+            presence: true,
+            // And it must be between 3 and 20 characters long
+            length: {
+                minimum: 3,
+                maximum: 20
+            },
+            format: {
+                // We don't allow anything that a-z and 0-9
+                pattern: "[a-z0-9]+",
+                // but we don't care if the username is uppercase or lowercase
+                flags: "i",
+                message: "can only contain a-z and 0-9"
+          }
+        }
+    }
 </script>
 }

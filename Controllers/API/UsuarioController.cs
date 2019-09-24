@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PI_3.Models;
 using System.Web;
+using System.Net.Mime;
 
 namespace PI_3.Controllers.API
 {
@@ -94,8 +95,8 @@ namespace PI_3.Controllers.API
 
         [HttpPost]
         [Route("[action]")]
-        public ActionResult<Usuario> RegisterAluno([FromForm]Usuario requestUsuario)
-        {
+        public ActionResult RegisterAluno([FromBody]Usuario requestUsuario)
+        {   
             _context.Usuario.Add(requestUsuario);
 
             Aluno aluno = new Aluno();
@@ -105,12 +106,16 @@ namespace PI_3.Controllers.API
 
             _context.SaveChanges();
 
-            return CreatedAtAction(nameof(GetUsuario), new { id = requestUsuario.UsuarioId }, requestUsuario);
+            requestUsuario.Aluno.Usuario = null;
+
+            return new JsonResult(requestUsuario);
         }
 
+
+        //POR QUE STRINGFY? COMO FAZER CORRETAMENTE? TIRAR DATATYPE?
         [HttpPost]
         [Route("[action]")]
-        public ActionResult<Usuario> RegisterProfessor([FromBody]Usuario requestUsuario)
+        public ActionResult RegisterProfessor([FromBody]Usuario requestUsuario)
         {
             _context.Usuario.Add(requestUsuario);
 
@@ -121,7 +126,9 @@ namespace PI_3.Controllers.API
 
             _context.SaveChanges();
 
-            return CreatedAtAction(nameof(GetUsuario), new { id = requestUsuario.UsuarioId }, requestUsuario);
+            requestUsuario.Professor.Usuario = null;
+
+            return new JsonResult(requestUsuario);
         }
 
         [HttpPut("{id}")]

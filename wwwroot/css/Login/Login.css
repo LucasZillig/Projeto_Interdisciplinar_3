@@ -181,7 +181,7 @@ input:checked+.slider:before {
 
 ::placeholder {
     color: #a29bfe;
-    opacity: 50%;
+    opacity: 0.5;
 }
 
 @media only screen and (max-width: 1024px) {
