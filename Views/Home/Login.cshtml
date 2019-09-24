@@ -130,16 +130,13 @@
             'UsuarioEmail': $("#register-email").val(),
             'UsuarioSenha': $("#register-senha").val(),
         }
-        console.log(usuario);
         
-        var registerString = "";
+        var registerString = 'api/Usuario/RegisterAluno';
 
         if($('#typeuser-input').prop("checked") == true){
             registerString = 'api/Usuario/RegisterProfessor';
         }
-        else if($('#typeuser-input').prop("checked") == false){
-            registerString = 'api/Usuario/RegisterAluno';
-        }
+
         $.ajax({
             type: 'POST',
             url: registerString,
@@ -147,7 +144,8 @@
             dataType: 'json',
             data: JSON.stringify(usuario),
             success: function(data) {    
-                alert("registrado")
+                alert("registrado");
+                window.location.reload();
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 console.log(textStatus + " " + errorThrown);

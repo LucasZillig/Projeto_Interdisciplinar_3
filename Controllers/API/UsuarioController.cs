@@ -46,7 +46,7 @@ namespace PI_3.Controllers.API
         public ActionResult LoginUsuario(string email, string senha)
         {
 
-            if (email != null || senha != null)
+            if (email != null && senha != null)
             {
                 var checkUsuario = _context.Usuario
                                     .Where(e => e.UsuarioEmail == email)
@@ -54,12 +54,14 @@ namespace PI_3.Controllers.API
                                     .ToList();
                 if (checkUsuario.Count > 0)
                 {
-                    var idStr = "0000000" + String.Concat((checkUsuario[0].UsuarioId).ToString("X"));
-                    Random rnd = new Random();
-                    Byte[] b = new Byte[22];
-                    rnd.NextBytes(b);
-                    string token = Convert.ToBase64String(b);
-                    var cookieStr = idStr.Substring(idStr.Length - 8) + token;
+                    var idStr = checkUsuario[0].UsuarioId.ToString("X8");
+                    Guid guid = Guid.NewGuid();
+                    string token = guid.ToString("N");
+                    //Random rnd = new Random();
+                    //Byte[] b = new Byte[24];
+                    //rnd.NextBytes(b);
+                    //string token = Convert.ToBase64String(b);
+                    var cookieStr = idStr + token;
 
                     CookieOptions option = new CookieOptions();
                     option.MaxAge = TimeSpan.FromMilliseconds(31536000);
@@ -67,21 +69,24 @@ namespace PI_3.Controllers.API
                     option.Path = "/";
                     option.Secure = false;
 
-                    var usuarioNovoToken = _context.Usuario.SingleOrDefault(x => x.UsuarioId == checkUsuario[0].UsuarioId);
-                    usuarioNovoToken.UsuarioToken = cookieStr;
-                    _context.Usuario.Update(usuarioNovoToken);
+                    checkUsuario[0].UsuarioToken = token;
+                    _context.Usuario.Update(checkUsuario[0]);
                     _context.SaveChanges();
                     Response.Cookies.Append("Usuario", cookieStr, option);
-                    return Ok("Bem vindo, " + checkUsuario[0].UsuarioNome);
+                    return new JsonResult("Bem vindo, " + checkUsuario[0].UsuarioNome);
                 }
                 else
                 {
-                    return Forbid("Usuario e/ou senha incorretos");
+                    return new JsonResult("Usuario e/ou senha incorretos") {
+                        StatusCode = 403
+                    };
                 }
             }
             else
             {
-                return BadRequest("Complete todos os campos");
+                return new JsonResult("Complete todos os campos") {
+                    StatusCode = 400
+                };
             }
         }
 

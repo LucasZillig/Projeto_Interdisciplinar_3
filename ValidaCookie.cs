@@ -35,7 +35,7 @@ namespace PI_3
                 }
                 var token = cookieStr.Substring(8);
 
-                if (user[0].UsuarioToken == null && token != user[0].UsuarioToken)
+                if (user[0].UsuarioToken == null ||  token != user[0].UsuarioToken)
                 {
                     return null;
                 }
