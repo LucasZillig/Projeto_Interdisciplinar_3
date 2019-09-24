@@ -66,7 +66,7 @@ namespace PI_3
             // app.UseAuthentication();
             //app.UseHttpsRedirection();
             app.UseStaticFiles();
-            app.UseCookiePolicy();
+            // app.UseCookiePolicy();
 
             app.UseMvc(routes =>
             {
