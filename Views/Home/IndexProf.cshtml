@@ -292,6 +292,7 @@
 @section Scripts {
     <script type="text/javascript">
 
+
         function logout() {
             $.ajax({
                 url: "api/Usuario/LogoutUsuario",
@@ -309,35 +310,8 @@
             awaitCloseAnimation: true,
         });
 
-        function selecionaMateria(e) {
-            var id = this.getAttribute("data-id");
-            var target = document.getElementById(this.getAttribute("data-target"));
-            target.setAttribute("data-id", id);
-            target.textContent = this.textContent;
-        }
-
-        (function () {
-            links = document.getElementById("materia-select-dropdown-content").getElementsByTagName("a");
-            for (var i = 0; i < links.length; i++) {
-                links[i].onclick = selecionaMateria;
-            }
-        })();
-
         $(document).ready(function () {
-            $("#materia-select-btn").on("click", function () {
-                $("#materia-select-btn").toggleClass("materia-select-btn-after");
-            });
-
-            const $menu = $('.materia-select-check');
-
-            $(document).mouseup(function (e) {
-                if (!$menu.is(e.target) && $menu.has(e.target).length === 0 && $menu.prop("checked", true))//se o target nao for o container ou um dos filhos
-                {
-                    $menu.prop("checked", false);
-                    $(".materia-select-btn").removeClass("materia-select-btn-after");
-                }
-            });
-
+            
             //MOBILE - BOTAO VER PERFIL
             // $("#account-header-button").click(function(){
             //      $(".account-modal-wrapper").fadeToggle(300);

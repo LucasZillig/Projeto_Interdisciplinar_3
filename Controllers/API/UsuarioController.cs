@@ -52,6 +52,7 @@ namespace PI_3.Controllers.API
                                     .Where(e => e.UsuarioEmail == email)
                                     .Where(s => s.UsuarioSenha == senha)
                                     .ToList();
+                
                 if (checkUsuario.Count > 0)
                 {
                     var idStr = checkUsuario[0].UsuarioId.ToString("X8");
