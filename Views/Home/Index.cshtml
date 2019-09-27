@@ -343,7 +343,6 @@
                 data: JSON.stringify(pergunta),
                 success: function (data) { 
                     sendFiles(data.perguntaId);
-                    debugger;
                     alert("Pergunta Postada");
                 },
                 error: function(jqXHR, textStatus, errorThrown){

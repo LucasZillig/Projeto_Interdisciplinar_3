@@ -54,24 +54,24 @@ namespace PI_3.Controllers.API
 
         [HttpPost]
         [Route("[action]")]
-        public IActionResult UploadArquivo([FromBody]IList<IFormFile> files, int perguntaId)
+        public IActionResult UploadArquivo(IList<IFormFile> files)
         {
             foreach (IFormFile item in files)
             {
                 
                 string filename = ContentDispositionHeaderValue.Parse(item.ContentDisposition).FileName.Trim('"');
                 filename = this.EnsureFilename(filename);
-                using (FileStream filestream = System.IO.File.Create(this.GetPath(filename,perguntaId)))
+                using (FileStream filestream = System.IO.File.Create(this.GetPath(filename)))
                 {
 
                 }
             }
-            return new JsonResult("Pergunta Postada");
+            return new JsonResult("Arquivos enviados!");
         }
 
-        private string GetPath(string filename, string perguntaId)
+        private string GetPath(string filename)
         {
-            string path = _hostingEnvironment.WebRootPath + "\\Perguntas\\" + "\\" + perguntaId +"\\";
+            string path = _hostingEnvironment.WebRootPath + "\\Perguntas\\" + "\\id\\";
             if (!Directory.Exists(path))
                 Directory.CreateDirectory(path);
             return path + filename;
