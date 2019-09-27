@@ -67,22 +67,25 @@ button, input {
 }
 
 ::-webkit-scrollbar-thumb {
-    -webkit-box-shadow: inset 1px 1px 0 rgba(0, 0, 0, .1), inset 0 -1px 0 rgba(0, 0, 0, .07);
-    box-shadow: inset 1px 1px 0 rgba(0, 0, 0, .1), inset 0 -1px 0 rgba(0, 0, 0, .07);
+    /* -webkit-box-shadow: inset 1px 1px 0 rgba(0, 0, 0, .1), inset 0 -1px 0 rgba(0, 0, 0, .07);
+    box-shadow: inset 1px 1px 0 rgba(0, 0, 0, .1), inset 0 -1px 0 rgba(0, 0, 0, .07); */
     background-clip: padding-box;
     background-color: rgba(0, 0, 0, .2);
     min-height: 28px;
+    border-radius: 20px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    -webkit-box-shadow: inset 1px 1px 1px rgba(0, 0, 0, .25);
-    box-shadow: inset 1px 1px 1px rgba(0, 0, 0, .25);
+    border-radius: 20px;
+    /* -webkit-box-shadow: inset 1px 1px 1px rgba(0, 0, 0, .25);
+    box-shadow: inset 1px 1px 1px rgba(0, 0, 0, .25); */
     background-color: rgba(0, 0, 0, .4)
 }
 
 ::-webkit-scrollbar-thumb:active {
-    box-shadow: inset 1px 1px 3px rgba(0, 0, 0, .35);
-    -webkit-box-shadow: inset 1px 1px 3px rgba(0, 0, 0, .35);
+    border-radius: 20px;
+    /* box-shadow: inset 1px 1px 3px rgba(0, 0, 0, .35);
+    -webkit-box-shadow: inset 1px 1px 3px rgba(0, 0, 0, .35); */
     background-color: rgba(0, 0, 0, .5)
 }
 
@@ -94,14 +97,14 @@ button, input {
 }
 
 ::-webkit-scrollbar-track:hover {
-    -webkit-box-shadow: inset 1px 0 0 rgba(0, 0, 0, .1);
-    box-shadow: inset 1px 0 0 rgba(0, 0, 0, .1);
+    /* -webkit-box-shadow: inset 1px 0 0 rgba(0, 0, 0, .1);
+    box-shadow: inset 1px 0 0 rgba(0, 0, 0, .1); */
     background-color: rgba(0, 0, 0, .05)
 }
 
 ::-webkit-scrollbar-track:active {
-    -webkit-box-shadow: inset 1px 0 0 rgba(0, 0, 0, .14), inset -1px -1px 0 rgba(0, 0, 0, .07);
-    box-shadow: inset 1px 0 0 rgba(0, 0, 0, .14), inset -1px -1px 0 rgba(0, 0, 0, .07);
+    /* -webkit-box-shadow: inset 1px 0 0 rgba(0, 0, 0, .14), inset -1px -1px 0 rgba(0, 0, 0, .07);
+    box-shadow: inset 1px 0 0 rgba(0, 0, 0, .14), inset -1px -1px 0 rgba(0, 0, 0, .07); */
     background-color: rgba(0, 0, 0, .05)
 }
 
