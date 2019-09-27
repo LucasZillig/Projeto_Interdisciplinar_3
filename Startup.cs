@@ -62,7 +62,7 @@ namespace PI_3
                 app.UseHsts();
             }
 
-            // app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+            //app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             // app.UseAuthentication();
             //app.UseHttpsRedirection();
             app.UseStaticFiles();

@@ -1,7 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.Net.Http.Headers;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PI_3.Models;
 
@@ -12,9 +16,11 @@ namespace PI_3.Controllers.API
     public class PerguntaController : ControllerBase
     {
         public AppDbContext _context;
-        public PerguntaController (AppDbContext context)
+        private IHostingEnvironment _hostingEnvironment;
+        public PerguntaController (AppDbContext context, IHostingEnvironment hostingEnvironment)
         {
             _context = context;
+            _hostingEnvironment = hostingEnvironment;
         }
         
         [HttpGet]
@@ -36,12 +42,46 @@ namespace PI_3.Controllers.API
         }
 
         [HttpPost]
-        public ActionResult<Pergunta> AddPergunta(Pergunta requestPergunta)
-        {
-            _context.Pergunta.Add(requestPergunta);
+        [Route("[action]")]
+        public ActionResult AddPergunta([FromBody]Pergunta pergunta)
+        {   
+            pergunta.PerguntaData = DateTime.Now;
+            _context.Pergunta.Add(pergunta);
             _context.SaveChanges();
 
-            return requestPergunta;
+            return new JsonResult(pergunta);
+        }
+
+        [HttpPost]
+        [Route("[action]")]
+        public IActionResult UploadArquivo([FromBody]IList<IFormFile> files, int perguntaId)
+        {
+            foreach (IFormFile item in files)
+            {
+                
+                string filename = ContentDispositionHeaderValue.Parse(item.ContentDisposition).FileName.Trim('"');
+                filename = this.EnsureFilename(filename);
+                using (FileStream filestream = System.IO.File.Create(this.GetPath(filename,perguntaId)))
+                {
+
+                }
+            }
+            return new JsonResult("Pergunta Postada");
+        }
+
+        private string GetPath(string filename, string perguntaId)
+        {
+            string path = _hostingEnvironment.WebRootPath + "\\Perguntas\\" + "\\" + perguntaId +"\\";
+            if (!Directory.Exists(path))
+                Directory.CreateDirectory(path);
+            return path + filename;
+        }
+
+        private string EnsureFilename(string filename)
+        {
+            if (filename.Contains("\\"))
+                filename = filename.Substring(filename.LastIndexOf("\\") + 1);
+            return filename;
         }
 
         [HttpPut("{id}")]

@@ -1,113 +1,83 @@
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Net.Http.Headers;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using PI_3.Models;
+// using System;
+// using System.Collections.Generic;
+// using System.Diagnostics;
+// using System.IO;
+// using System.Linq;
+// using System.Net.Http.Headers;
+// using Microsoft.AspNetCore.Hosting;
+// using Microsoft.AspNetCore.Http;
+// using Microsoft.AspNetCore.Mvc;
+// using PI_3.Models;
 
-namespace PI_3.Controllers.API
-{   
-    [Route("api/[controller]")]
-    [ApiController] 
-    public class PerguntaArquivoController : ControllerBase
-    {
-        public AppDbContext _context;
+// namespace PI_3.Controllers.API
+// {   
+//     [Route("api/[controller]")]
+//     [ApiController] 
+//     public class PerguntaArquivoController : ControllerBase
+//     {
+//         public AppDbContext _context;
 
-        private IHostingEnvironment _hostingEnvironment;
+//         private IHostingEnvironment _hostingEnvironment;
 
-        public PerguntaArquivoController (AppDbContext context, IHostingEnvironment hostingEnvironment)
-        {
-            _context = context;
-            _hostingEnvironment = hostingEnvironment;
-        }
+//         public PerguntaArquivoController (AppDbContext context, IHostingEnvironment hostingEnvironment)
+//         {
+//             _context = context;
+//             _hostingEnvironment = hostingEnvironment;
+//         }
 
-        [HttpGet]
-        public ActionResult<IEnumerable<PerguntaArquivo>> GetPerguntasArquivos()
-        {
-            return _context.PerguntaArquivo.ToList();
-        }
+//         [HttpGet]
+//         public ActionResult<IEnumerable<PerguntaArquivo>> GetPerguntasArquivos()
+//         {
+//             return _context.PerguntaArquivo.ToList();
+//         }
 
-        [HttpGet("{id}")]
-        public ActionResult<PerguntaArquivo> GetPerguntaArquivo(int id)
-        {
+//         [HttpGet("{id}")]
+//         public ActionResult<PerguntaArquivo> GetPerguntaArquivo(int id)
+//         {
 
-            var perguntaArquivo = _context.PerguntaArquivo.SingleOrDefault(i => i.PerguntaArquivoId == id);
+//             var perguntaArquivo = _context.PerguntaArquivo.SingleOrDefault(i => i.PerguntaArquivoId == id);
             
-            return perguntaArquivo;
-        }
+//             return perguntaArquivo;
+//         }
 
-        [HttpPost]
-        [Route("[action]")]
-        public ActionResult<PerguntaArquivo> AddPerguntaArquivo(PerguntaArquivo requestPerguntaArquivo)
-        {
-            _context.PerguntaArquivo.Add(requestPerguntaArquivo);
+//         [HttpPost]
+//         [Route("[action]")]
+//         public ActionResult<PerguntaArquivo> AddPerguntaArquivo(PerguntaArquivo requestPerguntaArquivo)
+//         {
+//             _context.PerguntaArquivo.Add(requestPerguntaArquivo);
 
-            _context.SaveChanges();
+//             _context.SaveChanges();
 
-            return CreatedAtAction(nameof(GetPerguntaArquivo), new { id = requestPerguntaArquivo.PerguntaArquivoId }, requestPerguntaArquivo);
-        }
+//             return CreatedAtAction(nameof(GetPerguntaArquivo), new { id = requestPerguntaArquivo.PerguntaArquivoId }, requestPerguntaArquivo);
+//         }
+ 
 
-        [HttpPost]
-        [Route("[action]")]
-        public IActionResult UploadArquivo(IList<IFormFile> files)
-        {
-            foreach (IFormFile item in files)
-            {
-                string filename = ContentDispositionHeaderValue.Parse(item.ContentDisposition).FileName.Trim('"');
-                filename = this.EnsureFilename(filename);
-                using (FileStream filestream = System.IO.File.Create(this.GetPath(filename)))
-                {
+//         [HttpPut("{id}")]
+//         public ActionResult UpdatePerguntaArquivo(int id, PerguntaArquivo requestPerguntaArquivo)
+//         {
+//             if (id != requestPerguntaArquivo.PerguntaArquivoId)
+//                 return BadRequest();
 
-                }
-            }
-            return this.Content("Sucesso");
-        }
+//             var PerguntaArquivo = _context.PerguntaArquivo.SingleOrDefault(x => x.PerguntaArquivoId == requestPerguntaArquivo.PerguntaArquivoId);
 
-        private string GetPath(string filename)
-        {
-            string path = _hostingEnvironment.WebRootPath + "\\upload\\";
-            if (!Directory.Exists(path))
-                Directory.CreateDirectory(path);
-            return path + filename;
-        }
+//             _context.PerguntaArquivo.Update(PerguntaArquivo);
+//             _context.SaveChanges();
 
-        private string EnsureFilename(string filename)
-        {
-            if (filename.Contains("\\"))
-                filename = filename.Substring(filename.LastIndexOf("\\") + 1);
-            return filename;
-        }
+//             return NoContent();
+//         }
 
-        [HttpPut("{id}")]
-        public ActionResult UpdatePerguntaArquivo(int id, PerguntaArquivo requestPerguntaArquivo)
-        {
-            if (id != requestPerguntaArquivo.PerguntaArquivoId)
-                return BadRequest();
+//         [HttpDelete("{id}")]
+//         public ActionResult DeletePerguntaArquivo(int id)
+//         {
+//             var PerguntaArquivo = _context.PerguntaArquivo.SingleOrDefault(x => x.PerguntaArquivoId == id);
 
-            var PerguntaArquivo = _context.PerguntaArquivo.SingleOrDefault(x => x.PerguntaArquivoId == requestPerguntaArquivo.PerguntaArquivoId);
+//             if (PerguntaArquivo == null)
+//                 return NotFound();
 
-            _context.PerguntaArquivo.Update(PerguntaArquivo);
-            _context.SaveChanges();
-
-            return NoContent();
-        }
-
-        [HttpDelete("{id}")]
-        public ActionResult DeletePerguntaArquivo(int id)
-        {
-            var PerguntaArquivo = _context.PerguntaArquivo.SingleOrDefault(x => x.PerguntaArquivoId == id);
-
-            if (PerguntaArquivo == null)
-                return NotFound();
-
-            _context.PerguntaArquivo.Remove(PerguntaArquivo);
-            _context.SaveChanges();
+//             _context.PerguntaArquivo.Remove(PerguntaArquivo);
+//             _context.SaveChanges();
             
-            return NoContent();
-        }
-    }
-}
+//             return NoContent();
+//         }
+//     }
+// }

@@ -29,7 +29,7 @@ namespace PI_3
             {
                 var id = Int32.Parse(cookieStr.Substring(0, 8));
                 var user = _context.Usuario.Where(u => u.UsuarioId == id).ToList();
-                if (user[0] == null)
+                if (user.Count == 0)
                 {
                     return null;
                 }

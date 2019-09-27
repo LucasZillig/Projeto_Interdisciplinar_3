@@ -12,14 +12,12 @@ namespace PI_3
         : base(options) { }
 
         public DbSet<Aluno> Aluno { get; set; }
-        public DbSet<Arquivo> Arquivo { get; set; }
         public DbSet<Comentario> Comentario { get; set; }
         public DbSet<Curso> Curso { get; set; }
         public DbSet<Pergunta> Pergunta { get; set; }
         public DbSet<Professor> Professor { get; set; }
         public DbSet<CursoAluno> CursoAluno { get; set; }
         public DbSet<Usuario> Usuario { get; set; }
-        public DbSet<PerguntaArquivo> PerguntaArquivo { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseMySQL("server=localhost;port=3306;database=nossoDB;user=root;password=root");
@@ -91,9 +89,9 @@ namespace PI_3
                 entity.Property(e => e.PerguntaId).HasColumnName("id_pergunta").ValueGeneratedOnAdd().IsRequired();
                 entity.Property(e => e.PerguntaNome).HasColumnName("nome_pergunta").HasColumnType("VARCHAR(45)").IsRequired();
                 entity.Property(e => e.PerguntaDesc).HasColumnName("desc_pergunta").HasColumnType("VARCHAR(45)");
-                entity.Property(e => e.PerguntaData).HasColumnName("data_pergunta").HasColumnType("Date").IsRequired();
+                entity.Property(e => e.PerguntaData).HasColumnName("data_pergunta").HasColumnType("Date").ValueGeneratedOnAdd().IsRequired();
                 entity.Property(e => e.Arquivado).HasColumnName("arquivado_pergunta").HasColumnType("int").IsRequired();
-                entity.Property(e => e.CursoAlunoId).HasColumnName("id_turma").IsRequired();
+                entity.Property(e => e.CursoAlunoId).HasColumnName("id_cursoAluno").IsRequired();
                 entity.HasOne(a => a.CursoAluno).WithMany(b => b.Perguntas);
             });
 
@@ -106,26 +104,7 @@ namespace PI_3
                 entity.Property(e => e.ComentarioData).HasColumnName("data_comentario").HasColumnType("VARCHAR(45)").IsRequired();
                 entity.Property(e => e.PerguntaId).HasColumnName("id_pergunta").IsRequired();
                 entity.HasOne(a => a.Pergunta).WithMany(b => b.Comentarios).OnDelete(DeleteBehavior.Cascade);
-            }); 
-
-            modelBuilder.Entity<Arquivo>(entity =>
-            {
-                entity.ToTable("arquivo");
-                entity.HasKey(e => e.ArquivoId);
-                entity.Property(e => e.ArquivoId).HasColumnName("id_arquivo").ValueGeneratedOnAdd().IsRequired();
-                entity.Property(e => e.ArquivoTipo).HasColumnName("tipo_arquivo").HasColumnType("INT").IsRequired();
-                entity.Property(e => e.ArquivoUrl).HasColumnName("url_arquivo").HasColumnType("VARCHAR(20)").IsRequired();
-            }); 
-
-            modelBuilder.Entity<PerguntaArquivo>(entity =>
-            {
-                entity.ToTable("pergunta_arquivo");
-                entity.HasKey(a => a.PerguntaArquivoId); 
-                entity.Property(e => e.ArquivoId).HasColumnName("id_arquivo").IsRequired();
-                entity.Property(e => e.PerguntaId).HasColumnName("id_pergunta").IsRequired();
-                entity.HasOne(a => a.Pergunta).WithMany(b => b.ArquivosPergunta).HasForeignKey(ab => ab.PerguntaId); 
-                entity.HasOne(a => a.Arquivo).WithMany(b => b.ArquivosPergunta).HasForeignKey(ab => ab.ArquivoId);
-            }); 
+            });
         }
     }
 }

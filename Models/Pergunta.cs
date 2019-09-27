@@ -17,7 +17,6 @@ namespace PI_3.Models
         public CursoAluno CursoAluno { get; set; }
 
         public ICollection<Comentario> Comentarios { get; set; }
-        public ICollection<PerguntaArquivo> ArquivosPergunta { get; set; }
 
     }
 }
