@@ -1,0 +1,399 @@
+<div class="wrapper">
+    <!--HEADER-->
+    <div class="header-wrapper">
+        <div class="header">
+            <div class="header-left">
+
+            </div>
+            <div class="header-center">
+                <div class="mobile-header">
+                    <button class="header-button" type="button" id="mobile-sidebar-button">
+                        <i class="material-icons material-icons-round header-icon">menu</i>
+                    </button>
+                    <form class="header-search-form">
+                        <input type="text" class="header-search-bar" id="myInput" onkeyup="pesquisaDinamica()" placeholder="Buscar">
+                    </form>
+                    <button id="account-header-button" class="header-button header-icon" type="button" data-micromodal-trigger="modal-1">
+                        <img class="account-picture-small" src="~/img/porter.jpg">
+                    </button>
+                </div>
+            </div>
+            <div class="header-right">
+
+            </div>
+        </div>
+    </div>
+    <!--SIDEBAR-->
+    <div class="sidebar-wrapper" id="sidebar">
+        <div class="sidebar">
+            <div class="mobile-sidebar">
+                <div class="sidebar-section">
+                    <div class="section-new">
+                        <div class="sidebar-logo-container">
+                            <i class="material-icons sidebar-logo">book</i>
+                        </div>
+                        <button class="new-compose" data-micromodal-trigger="modal-3">NOVA MATÉRIA</button>
+                    </div>
+                </div>
+                <div class="sidebar-section notfirst">
+                    <div class="section-default">
+                        <ul class="default-list">
+                            <li>
+                                <a class="list-select" href="#">
+                                    <div class="materia-title-container">
+                                        <div class="materia-title">Inbox</div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="list-select" href="#">
+                                    <div class="materia-title-container">
+                                        <div class="materia-title">Arquivadas</div>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="sidebar-section notfirst">
+                    <div class="section-custom">
+                        <ul class="custom-list">
+                            <li>
+                                <div class="list-title">
+                                    MATÉRIAS
+                                    <button class="edit-label" data-micromodal-trigger="modal-4">
+                                        <i class="material-icons">edit</i>
+                                    </button>
+                                </div>
+                            </li>
+                            <li>
+                                <a class="list-select" href="#">
+                                    <div class="materia-title-container">
+                                        <div class="materia-title">Banco de Dados</div>
+                                    </div>
+                                    <div class="list-label-container">
+                                        <span class="list-label" style="background: #ea4c89;"></span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="list-select" href="#">
+                                    <div class="materia-title-container">
+                                        <div class="materia-title">Programação Web</div>
+                                    </div>
+                                    <div class="list-label-container">
+                                        <span class="list-label" style="background: #673ab7;">
+                                        </span>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="list-select" href="#">
+                                    <div class="materia-title-container">
+                                        <div class="materia-title">Arquitetura da Informação</div>
+                                    </div>
+                                    <div class="list-label-container">
+                                        <span class="list-label" style="background: #03a9f4;"></span>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="desktop-sidebar">
+                <div class="desktop-sidebar-closed">
+                    <div class="sidebar-section">
+                        <div class="section-open">
+
+                        </div>
+                    </div>
+                    <div class="sidebar-section">
+                        <div class="section-all">
+                            <div class="section-all-default">
+
+                            </div>
+                            <div class="section-all-custom">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="desktop-sidebar-open">
+                    <div class="sidebar-section">
+                        <div class="section-new">
+
+                        </div>
+                    </div>
+
+                    <div class="sidebar-section">
+                        <div class="section-default">
+
+                        </div>
+                    </div>
+                    <div class="sidebar-section">
+                        <div class="section-custom">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!--CONTENT-->
+    <div class="content-wrapper">
+        <div class="content">
+            <div class="mobile-content">
+                <div class="mobile-content-header">
+                    <div class="current-inbox-title">Inbox</div>
+                    <button class="option-button" data-micromodal-trigger="modal-2"><i class="material-icons material-icons-round toolbar-icon">email</i>CONVITES</button>
+                </div>
+                <div class="mobile-content-body">
+                    <div class="mail-list-wrapper">
+                        <div class="mail-list">
+                            <div class="mail-item-wrapper">
+                                <a class="mail-item-container">
+                                    <div class="mail-item-left">
+                                        <img class="account-picture" src="~/img/porter.jpg">
+                                        <span class="tag-icon" style="background: #ea4c89;">
+                                        </span>
+                                    </div>
+                                    <div class="mail-item-right">
+                                        <div class="mail-item-header">
+                                            <div class="mail-sender">Vinícius Bolognini</div>
+                                            <div class="mail-time">14:23</div>
+                                        </div>
+                                        <div class="mail-subject">Assunto Lorem Ipsum Lorem Ipsum</div>
+                                        <div class="mail-summary-text">
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="desktop-content">
+
+        </div>
+    </div>
+</div>
+<!--MODALS-->
+<div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
+    <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+        <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+            <main class="modal__content" id="modal-1-content">
+                <div class="account-banner">
+                    <div class="account-info-group">
+                        <img class="account-picture" src="~/img/porter.jpg">
+                        <div class="account-info-display">
+                            <h1>@ViewBag.Usuario.UsuarioNome</h1>
+                            <h2>@ViewBag.Usuario.UsuarioEmail</h2>
+                        </div>
+                    </div>
+                    <div class="account-edit-info">
+                        <button class="small-option-button">
+                            <i class="material-icons material-icons-round">settings_application</i>
+                        </button>
+                    </div>
+                </div>
+                <button onclick="logout()" class="option-button" style="margin-top: 15px;">Fazer Log Out</button>
+            </main>
+            <footer class="modal__footer">
+                <a class="footer-link">Privacy Policy</a>
+                <p class="footer-link" style="margin: 0 5px;">•</p>
+                <a class="footer-link">Terms of Service</a>
+            </footer>
+        </div>
+    </div>
+</div>
+
+<div class="modal micromodal-slide" id="modal-2" aria-hidden="true">
+    <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+        <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-2-title">
+            <header class="modal__header">
+                <h2 class="modal__title" id="modal-2-title">Convites</h2>
+            </header>
+            <main class="modal__content" id="modal-2-content">
+                <div class="invite-wrapper">
+                    <div class="invite">
+                        <div class="invite-left">
+                            <img class="account-picture-small" src="~/img/porter.jpg">
+                            <div class="invite-info-display">
+                                <h1>Banco de Dados</h1>
+                                <h2>Jorge Surian</h2>
+                            </div>
+                        </div>
+                        <div class="invite-right">
+                            <button class="small-option-button accept-button"><i class="material-icons material-icons-round">check</i></button>
+                            <button class="small-option-button decline-button"><i class="material-icons material-icons-round">clear</i></button>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</div>
+
+<div class="modal micromodal-slide" id="modal-3" aria-hidden="true">
+    <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+        <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-3-title">
+            <header class="modal__header">
+                <h2 class="modal__title" id="modal-2-title">Nova Matéria</h2>
+            </header>
+            <main class="modal__content" id="modal-2-content">
+                <form id="pergunta-form" class="pergunta-form" name="form" action="/uploadmultiple" enctype="multipart/form-data" method="post">
+                    <input id="nome-pergunta" type="text" placeholder="Nome" class="input-field">
+                    <textarea id="desc-pergunta" style="resize: none;" rows="5" maxlength="3000" placeholder="Escreva aqui..." class="input-field input-textarea"></textarea>
+                    <div class="upload-btn-wrapper">
+                        <input id="files" name="files" type="file" multiple onchange="fileupload('files');" />
+                        <button class="option-button">Upload a file</button>
+                    </div>
+                    <button style="margin: auto;" type="submit" class="option-button">Enviar</button>
+                </form>
+            </main>
+        </div>
+    </div>
+</div>
+
+<div class="modal micromodal-slide" id="modal-4" aria-hidden="true">
+    <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+        <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-4-title">
+            <header class="modal__header">
+                <h2 class="modal__title" id="modal-2-title">Gerenciar Matérias</h2>
+            </header>
+            <main class="modal__content" id="modal-2-content">
+                <div class="invite-wrapper">
+                    <div class="invite">
+                        <div class="invite-left">
+                            <div class="invite-info-display">
+                                <h1>Banco de Dados</h1>
+                            </div>
+                        </div>
+                        <div class="invite-right">
+                            <button class="option-button jscolor {valueElement:null,value:'66ccff'}">
+                                Selecionar Cor
+                            </button>
+                            <button class="small-option-button decline-button"><i class="material-icons material-icons-round">clear</i></button>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</div>
+<div id="overlay"></div>
+<!--FOOTER-->
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+
+        function logout() {
+            $.ajax({
+                url: "api/Usuario/LogoutUsuario",
+                type: "GET",
+                success: (data) => {
+                    window.location.reload();
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log('error ' + textStatus + " " + errorThrown);
+                }
+            });
+        }
+
+        MicroModal.init({
+            awaitCloseAnimation: true,
+        });
+
+        function selecionaMateria(e) {
+            var id = this.getAttribute("data-id");
+            var target = document.getElementById(this.getAttribute("data-target"));
+            target.setAttribute("data-id", id);
+            target.textContent = this.textContent;
+        }
+
+        (function () {
+            links = document.getElementById("materia-select-dropdown-content").getElementsByTagName("a");
+            for (var i = 0; i < links.length; i++) {
+                links[i].onclick = selecionaMateria;
+            }
+        })();
+
+        $(document).ready(function () {
+            $("#materia-select-btn").on("click", function () {
+                $("#materia-select-btn").toggleClass("materia-select-btn-after");
+            });
+
+            const $menu = $('.materia-select-check');
+
+            $(document).mouseup(function (e) {
+                if (!$menu.is(e.target) && $menu.has(e.target).length === 0 && $menu.prop("checked", true))//se o target nao for o container ou um dos filhos
+                {
+                    $menu.prop("checked", false);
+                    $(".materia-select-btn").removeClass("materia-select-btn-after");
+                }
+            });
+
+            //MOBILE - BOTAO VER PERFIL
+            // $("#account-header-button").click(function(){
+            //      $(".account-modal-wrapper").fadeToggle(300);
+            // });
+            //-------------------------------------------------------------
+
+            //MOBILE - ABRIR / FECHAR SIDEBAR
+            $("#mobile-sidebar-button").click(function () {
+                $("#overlay").fadeToggle(300);
+                $(".sidebar-wrapper").toggleClass('sidebar-wrapper-after');
+            });
+
+            $("#overlay").click(function () {
+                $("#overlay").fadeOut(300);
+                $(".sidebar-wrapper").removeClass('sidebar-wrapper-after');
+            });
+            //-------------------------------------------------------------
+
+            //FORMATO MOBILE - HOVER PARA NOMES GRANDES DE INBOX            TODO: MOBILE GESTURES (on hold)
+            $(".list-select").hover(function () {
+                var nomeMateriaContainer = $(this).children('.materia-title-container')[0];
+                var nomeMateria = $(this).children('.materia-title-container').children('.materia-title')[0];
+                if (nomeMateria.offsetWidth < nomeMateria.scrollWidth) {
+                    $(nomeMateria).addClass('list-select-overflowing');
+                    var parent_width = nomeMateriaContainer.offsetWidth;
+                    $(this).mouseover(function () {
+                        nomeMateria.style.transform = 'translateX(calc(-100% + ' + parent_width + 'px))'
+                    });
+
+                    $(this).mouseleave(function () {
+                        nomeMateria.style.transform = ''
+                    });
+                }
+            });
+        });
+
+        // SEND FILES
+
+        function fileupload(filename) {
+            var inputfile = document.getElementById(filename);
+            var files = inputfile.files;
+            var fdata = new FormData();
+            for (var i = 0; i != files.length; i++) {
+                fdata.append("files", files[i]);
+            }
+
+            $.ajax({
+                url: "api/PerguntaArquivo/UploadArquivo",
+                data: fdata,
+                processData: false,
+                contentType: false,
+                type: "POST",
+                success: function (data) {
+                    alert("DEU CERTO");
+                }
+            });
+        }
+    </script>
+}
