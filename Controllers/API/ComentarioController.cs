@@ -36,7 +36,7 @@ namespace PI_3.Controllers.API
         }
 
         [HttpPost]
-        public Comentario AddComentario(Comentario requestComentario)
+        public ActionResult<Comentario> AddComentario(Comentario requestComentario)
         {
             _context.Comentario.Add(requestComentario);
             _context.SaveChanges();

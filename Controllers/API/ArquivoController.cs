@@ -36,7 +36,7 @@ namespace PI_3.Controllers.API {
 
             _context.SaveChanges();
 
-            return CreatedAtAction(nameof(GetArquivo), new { id = requestArquivo.ArquivoId }, requestArquivo);
+            return new JsonResult(requestArquivo);
         }
 
         [HttpPut("{id}")]
