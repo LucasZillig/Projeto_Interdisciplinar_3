@@ -322,7 +322,7 @@
 @section Scripts {
     <script type="text/javascript">
 
-        console.log($('tag-color-button').css('background-color'));
+        
         
 
         function logout() {
@@ -345,7 +345,7 @@
             var curso = {
                 'CursoNome': $('#nome-pergunta').val(),
                 'CursoDesc': $('#desc-pergunta').val(),
-                'CursoTag' : $('tag-color-button').css('backgroundColor'), 
+                'CursoTag' : $('#tag-color-button').css( "background-color" ), 
                 'ProfessorId': @ViewBag.ProfessorId,
             }
 
@@ -356,10 +356,11 @@
                 dataType: 'json',
                 data: JSON.stringify(curso),
                 success: function (data) { 
-                    alert("Curso criado!");
+                    alert(data);
+                    window.location.reload();
                 },
-                error: function(jqXHR, textStatus, errorThrown){
-                    console.log(jqXHR + " " + textStatus + " " + errorThrown); 
+                error: function(res){
+                    alert(res.responseText); 
                 }
             });
         });

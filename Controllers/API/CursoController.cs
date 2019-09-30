@@ -37,12 +37,19 @@ namespace PI_3.Controllers.API
 
         [HttpPost]
         public ActionResult<Curso> AddCurso(Curso requestCurso)
-        {
+        {   
 
-            _context.Curso.Add(requestCurso);
-            _context.SaveChanges();
+            if(requestCurso.CursoNome != "" && requestCurso.CursoDesc != ""){
+                _context.Curso.Add(requestCurso);
+                _context.SaveChanges();
 
-            return requestCurso;
+                return new JsonResult("Curso criado!");
+            }else
+            {
+                return new JsonResult("Complete todos os campos") {
+                    StatusCode = 400
+                };
+            }
         }
 
         [HttpPut("{id}")]

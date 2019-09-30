@@ -64,7 +64,7 @@ namespace PI_3
                 entity.Property(e => e.CursoId).HasColumnName("id_curso").ValueGeneratedOnAdd().IsRequired();
                 entity.Property(e => e.CursoNome).HasColumnName("nome_curso").HasColumnType("VARCHAR(45)").IsRequired();
                 entity.Property(e => e.CursoDesc).HasColumnName("desc_curso").HasColumnType("VARCHAR(300)");
-                entity.Property(e => e.CursoTag).HasColumnName("tag_curso").HasColumnType("VARCHAR(7)");
+                entity.Property(e => e.CursoTag).HasColumnName("tag_curso").HasColumnType("VARCHAR(18)");
                 entity.Property(e => e.ProfessorId).HasColumnName("id_professor").IsRequired();
                 entity.HasOne(a => a.Professor).WithMany(b => b.Cursos).OnDelete(DeleteBehavior.Cascade);
             });
@@ -76,6 +76,7 @@ namespace PI_3
                 entity.Property(e => e.CursoAlunoId).HasColumnName("id_cursoAluno").ValueGeneratedOnAdd().IsRequired();
                 entity.Property(e => e.AlunoId).HasColumnName("id_aluno").IsRequired();
                 entity.Property(e => e.CursoId).HasColumnName("id_curso").IsRequired();
+                entity.Property(e => e.CursoAlunoTag).HasColumnName("tag_cursoAluno").HasColumnType("VARCHAR(18)");
                 entity.Property(e => e.statusInvite).HasColumnName("statusinvite_cursoAluno");
                 entity.HasOne(a => a.Aluno).WithMany(b => b.CursoAluno).HasForeignKey(at => at.AlunoId);
                 entity.HasOne(a => a.Curso).WithMany(b => b.CursoAluno).HasForeignKey(at => at.CursoId); 

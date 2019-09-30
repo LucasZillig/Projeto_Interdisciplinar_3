@@ -8,7 +8,7 @@ namespace PI_3.Models
 
 
         public int CursoId { get; set; }
-        public int CursoNome { get; set; }
+        public string CursoNome { get; set; }
         public string CursoDesc { get; set; }
         public string CursoTag { get; set; }
         

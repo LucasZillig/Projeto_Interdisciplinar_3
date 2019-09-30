@@ -340,6 +340,7 @@
                 success: function (data) { 
                     sendFiles(data.perguntaId);
                     alert("Pergunta Postada");
+                    window.location.reload();
                 },
                 error: function(jqXHR, textStatus, errorThrown){
                     console.log(jqXHR + " " + textStatus + " " + errorThrown); 
