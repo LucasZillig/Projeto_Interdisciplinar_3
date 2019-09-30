@@ -147,7 +147,7 @@
             <div class="mobile-content">
                 <div class="mobile-content-header">
                     <div class="current-inbox-title">Inbox</div>
-                    <button class="option-button" data-micromodal-trigger="modal-2"><i class="material-icons material-icons-round toolbar-icon">email</i>CONVITES</button>
+                    <button class="option-button" data-micromodal-trigger="modal-2"><i class="material-icons material-icons-round toolbar-icon">add</i>CONVITES</button>
                 </div>
                 <div class="mobile-content-body">
                     <div class="mail-list-wrapper">
@@ -218,17 +218,19 @@
                 <h2 class="modal__title" id="modal-2-title">Convites</h2>
             </header>
             <main class="modal__content" id="modal-2-content">
+                <div class="send-invite-wrapper">
+                        <input type="text" class="send-invite-searchbar" id="myInput" onkeyup="pesquisaDinamica()" placeholder="Buscar">
+                        <button class="option-button">Enviar Convite</button>
+                </div>
                 <div class="invite-wrapper">
                     <div class="invite">
                         <div class="invite-left">
                             <img class="account-picture-small" src="~/img/porter.jpg">
                             <div class="invite-info-display">
-                                <h1>Banco de Dados</h1>
-                                <h2>Jorge Surian</h2>
+                                <h1>Jorge Surian</h1>
                             </div>
                         </div>
                         <div class="invite-right">
-                            <button class="small-option-button accept-button"><i class="material-icons material-icons-round">check</i></button>
                             <button class="small-option-button decline-button"><i class="material-icons material-icons-round">clear</i></button>
                         </div>
                     </div>
@@ -248,11 +250,8 @@
                 <form id="pergunta-form" class="pergunta-form" name="form" action="/uploadmultiple" enctype="multipart/form-data" method="post">
                     <input id="nome-pergunta" type="text" placeholder="Nome" class="input-field">
                     <textarea id="desc-pergunta" style="resize: none;" rows="5" maxlength="3000" placeholder="Escreva aqui..." class="input-field input-textarea"></textarea>
-                    <div class="upload-btn-wrapper">
-                        <input id="files" name="files" type="file" multiple onchange="fileupload('files');" />
-                        <button class="option-button">Upload a file</button>
-                    </div>
-                    <button style="margin: auto;" type="submit" class="option-button">Enviar</button>
+                    <button style="margin: 15px auto;" class="option-button jscolor {valueElement:null,value:'66ccff'}">Cor da Tag</button>
+                    <button style="margin: auto;" type="submit" class="option-button">Criar Nova Matéria</button>
                 </form>
             </main>
         </div>
@@ -275,7 +274,7 @@
                         </div>
                         <div class="invite-right">
                             <button class="option-button jscolor {valueElement:null,value:'66ccff'}">
-                                Selecionar Cor
+                                Cor da Tag
                             </button>
                             <button class="small-option-button decline-button"><i class="material-icons material-icons-round">clear</i></button>
                         </div>
