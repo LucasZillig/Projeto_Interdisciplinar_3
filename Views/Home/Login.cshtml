@@ -116,8 +116,9 @@
             success: function(data) {
                 window.location.reload(); 
             },
-            error: function(jqXHR, textStatus, errorThrown) {
-                console.log(textStatus + " " + errorThrown);
+            error: function(res) {
+                alert(res.responseText);
+                window.location.reload();
             }
         });
     });

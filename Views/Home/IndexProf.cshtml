@@ -171,6 +171,25 @@
                                     </div>
                                 </a>
                             </div>
+                            <div class="mail-item-wrapper">
+                                <a class="mail-item-container">
+                                    <div class="mail-item-left">
+                                        <img class="account-picture" src="~/img/porter.jpg">
+                                        <span class="tag-icon" style="background: #03a9f4;">
+                                        </span>
+                                    </div>
+                                    <div class="mail-item-right">
+                                        <div class="mail-item-header">
+                                            <div class="mail-sender">Lucas Zillig</div>
+                                            <div class="mail-time">17:35</div>
+                                        </div>
+                                        <div class="mail-subject">Duvida sobre big data</div>
+                                        <div class="mail-summary-text">
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -227,7 +246,18 @@
                         <div class="invite-left">
                             <img class="account-picture-small" src="~/img/porter.jpg">
                             <div class="invite-info-display">
-                                <h1>Jorge Surian</h1>
+                                <h1>Vinicius Junqueira</h1>
+                            </div>
+                        </div>
+                        <div class="invite-right">
+                            <button class="small-option-button decline-button"><i class="material-icons material-icons-round">clear</i></button>
+                        </div>
+                    </div>
+                    <div class="invite">
+                        <div class="invite-left">
+                            <img class="account-picture-small" src="~/img/porter.jpg">
+                            <div class="invite-info-display">
+                                <h1>Lucas Zillig</h1>
                             </div>
                         </div>
                         <div class="invite-right">
@@ -250,7 +280,7 @@
                 <form id="pergunta-form" class="pergunta-form" name="form" action="/uploadmultiple" enctype="multipart/form-data" method="post">
                     <input id="nome-pergunta" type="text" placeholder="Nome" class="input-field">
                     <textarea id="desc-pergunta" style="resize: none;" rows="5" maxlength="3000" placeholder="Escreva aqui..." class="input-field input-textarea"></textarea>
-                    <button style="margin: 15px auto;" class="option-button jscolor {valueElement:null,value:'66ccff'}">Cor da Tag</button>
+                    <button id="tag-color-button" style="margin: 15px auto;" class="option-button jscolor {valueElement:null,value:'66ccff'}">Cor da Tag</button>
                     <button style="margin: auto;" type="submit" class="option-button">Criar Nova Matéria</button>
                 </form>
             </main>
@@ -284,6 +314,7 @@
         </div>
     </div>
 </div>
+
 <div id="overlay"></div>
 <!--FOOTER-->
 </div>
@@ -291,6 +322,8 @@
 @section Scripts {
     <script type="text/javascript">
 
+        console.log($('tag-color-button').css('background-color'));
+        
 
         function logout() {
             $.ajax({
@@ -304,6 +337,32 @@
                 }
             });
         }
+
+        $("#pergunta-form").submit(function(event){
+
+            event.preventDefault();
+
+            var curso = {
+                'CursoNome': $('#nome-pergunta').val(),
+                'CursoDesc': $('#desc-pergunta').val(),
+                'CursoTag' : $('tag-color-button').css('backgroundColor'), 
+                'ProfessorId': @ViewBag.ProfessorId,
+            }
+
+            $.ajax({
+                type: 'POST',
+                url: "api/Curso",    
+                contentType: 'application/json',
+                dataType: 'json',
+                data: JSON.stringify(curso),
+                success: function (data) { 
+                    alert("Curso criado!");
+                },
+                error: function(jqXHR, textStatus, errorThrown){
+                    console.log(jqXHR + " " + textStatus + " " + errorThrown); 
+                }
+            });
+        });
 
         MicroModal.init({
             awaitCloseAnimation: true,

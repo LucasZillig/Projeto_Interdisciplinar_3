@@ -39,11 +39,15 @@ namespace PI_3.Controllers
             if(u != null){
 
                 ViewBag.Usuario = u;
-                var isProfessor = _context.Professor.Where(e => e.UsuarioId == u.UsuarioId).ToList();
+                
+                var professor = _context.Professor.Where(e => e.UsuarioId == u.UsuarioId).ToList();
+                var aluno = _context.Aluno.Where(e => e.UsuarioId == u.UsuarioId).ToList();
 
-                if(isProfessor.Count > 0){
+                if(professor.Count > 0){
+                    ViewBag.ProfessorId = professor[0].ProfessorId;
                     return View("IndexProf");
                 }
+                ViewBag.AlunoId = aluno[0].AlunoId;
                 return View("Index");
             }
             return View();

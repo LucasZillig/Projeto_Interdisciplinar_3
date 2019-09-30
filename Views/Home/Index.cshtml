@@ -307,7 +307,6 @@
 @section Scripts {
     <script type="text/javascript">
 
-        alert()
         function logout() {
             $.ajax({
                 url: "api/Usuario/LogoutUsuario",
@@ -320,7 +319,6 @@
                 }
             });
         }
-        console.log('@ViewBag.Usuario.Aluno');
 
         $("#pergunta-form").submit(function(event){
 
@@ -332,8 +330,6 @@
                 'Arquivado' : 0, 
                 'CursoAlunoId': $('#materias-filtros-label').data('id'),
             }
-
-            var perguntaId;
 
             $.ajax({
                 type: 'POST',
@@ -447,8 +443,8 @@
                 success: function(response) {
                     alert(response);
                 },
-                error: function(jqXHR, textStatus, errorThrown){
-                    console.log(jqXHR + textStatus +  errorThrown)
+                error: function(response){
+                    console.log(jqXHR + " " + textStatus + " " +  errorThrown)
                 }
             })
         }
