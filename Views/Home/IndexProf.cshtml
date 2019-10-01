@@ -207,8 +207,8 @@
             </header>
             <main class="modal__content" id="modal-2-content">
                 <div class="send-invite-wrapper">
-                        <input type="text" class="send-invite-searchbar" id="myInput" onkeyup="pesquisaDinamica()" placeholder="Buscar">
-                        <button class="option-button">Enviar Convite</button>
+                        <input type="email" class="send-invite-searchbar" id="myInput" onkeyup="pesquisaDinamica()" placeholder="Buscar">
+                        <button onclick="enviarConvite('vbbjandrade@gmail.com')" id="enviar-convite-btn" class="option-button">Enviar Convite</button>
                 </div>
                 <div class="invite-wrapper" id="list-invites">
                     <div class="invite">
@@ -415,44 +415,7 @@
             })();
 
             //List convites enviados
-            (function(){
-                $.ajax({
-                    type: 'GET',
-                    url: "api/CursoAluno/GetCursosProfessor?professorId=" + @ViewBag.ProfessorId,
-                    success: function (data) { 
-                        for(var i = 0; i < data.length; i++){
-                            $('.custom-list').append(
-                                '<li id="list-curso-' + data[i].cursoId +'">' +
-                                    '<a class="list-select" href="#">' +
-                                        '<div class="materia-title-container">' +
-                                            '<div class="materia-title">' + data[i].cursoNome + '</div>' +
-                                        '</div>' +
-                                        '<div class="list-label-container">' +
-                                            '<span class="list-label" style="background:' + data[i].cursoTag +';"></span>' +
-                                        '</div>' +
-                                    '</a>' +
-                                '</li>'   
-                            );
-                            $('#edit-cursos').append(
-                                '<div class="invite" id="edit-curso-' + data[i].cursoId +'">' +
-                                    '<div class="invite-left">' +
-                                        '<div class="invite-info-display">' +
-                                            '<h1>' + data[i].cursoNome + '</h1>' + 
-                                        '</div>' +
-                                    '</div>' +
-                                    '<div class="invite-right">' +
-                                        '<button class="option-button jscolor {valueElement:null,value:"66ccff"}">Cor da Tag</button>'+
-                                        '<button onclick="deleteCurso(' + data[i].cursoId + ')" class="small-option-button decline-button"><i class="material-icons material-icons-round">clear</i></button>' +
-                                    '</div>' +
-                                '</div>'  
-                            );
-                        }
-                    },
-                    error: function(res){
-                        console.log(res.responseText); 
-                    }
-                });
-            })();
+            (function(){})();
         });
 
         //Deletar curso
@@ -467,6 +430,51 @@
                 },
                 error: function (res) {
                     alert(res);
+                }
+            });
+        }
+
+        //Busca usuário por email
+        function enviarConvite(email){
+
+            if(email != "" && email != null){
+                $.ajax({
+                    url: "api/Usuario/GetByEmail?email=" + email,
+                    type: "GET",
+                    success: function (data) {
+                        alert("Usuario encontrado");
+                        criarConvite(data.AlunoId, 27);
+                    },
+                    error: function(res){
+                        alert(res.responseJSON);
+                    }
+                });
+            }
+            else{
+                alert("Complete o campo!");
+            }
+        }
+
+        //Criar convite
+        function criarConvite(alunoId, cursoId){
+
+            conviteInfo = {
+                'statusInvite': 1,
+                'CursoAlunoTag': 'rgb(53, 59, 72)',
+                'CursoId': cursoId,
+                'AlunoId': alunoId
+            }
+
+            $.ajax({
+                url: 'api/CursoAluno/Add',
+                type: 'POST',
+                dataType: 'JSON',
+                data: JSON.stringify(conviteInfo),
+                success: function(data){
+                    alert("Convite enviado!");
+                },
+                error: function(res){
+                    alert(res.responseJSON);
                 }
             });
         }

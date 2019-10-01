@@ -18,12 +18,10 @@ namespace PI_3.Controllers.API
         }
         
         [HttpGet]
-        public ActionResult<IEnumerable<CursoAluno>> GetCursosAlunos(int id)
+        public ActionResult<IEnumerable<CursoAluno>> GetCursosAlunos()
         {
-            return _context.CursoAluno.Where(s => s.CursoAlunoId == id).ToList();
+            return _context.CursoAluno.ToList();
         }
-
-        
 
         [HttpGet("{id}")]
         public ActionResult<CursoAluno> GetCursoAluno(int id)
@@ -34,8 +32,11 @@ namespace PI_3.Controllers.API
         }
 
         [HttpPost]
-        public ActionResult<CursoAluno> AddCursoAluno(CursoAluno requestCursoAluno)
+        public ActionResult<CursoAluno> Add(CursoAluno requestCursoAluno)
         {
+            requestCursoAluno.Aluno.CursoAluno = null;
+            requestCursoAluno.Curso.CursoAluno = null;
+            
             if(requestCursoAluno != null)
             {
                 _context.CursoAluno.Add(requestCursoAluno);

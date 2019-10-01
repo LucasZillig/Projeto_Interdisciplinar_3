@@ -41,6 +41,31 @@ namespace PI_3.Controllers.API
 
             return usuario;
         }
+
+        [HttpGet]
+        [Route("[action]")]
+        public ActionResult GetByEmail(string email)
+        {
+            var usuario = _context.Usuario.Where(x => x.UsuarioEmail == email).ToList();
+            
+            if(usuario.Count > 0) 
+            {
+                var aluno = _context.Aluno.Where(e => e.UsuarioId == usuario[0].UsuarioId).ToList();
+                
+                if(aluno.Count > 0)
+                {
+                    aluno[0].Usuario.Aluno = null;
+                    return new JsonResult(aluno[0]);
+                }else
+                {
+                    return new JsonResult("Esse usuário não é um aluno!") { StatusCode = 400};
+                }
+            }else
+            {
+                return new JsonResult("Esse usuário não existe!") { StatusCode = 404 };
+            }
+        }
+
         [HttpGet]
         [Route("[action]")]
         public ActionResult LoginUsuario(string email, string senha)
