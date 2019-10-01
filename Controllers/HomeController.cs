@@ -12,43 +12,48 @@ using PI_3.Services;
 
 namespace PI_3.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
-        public IValidaCookie _cookie;
-        public AppDbContext _context;
-
-        public HomeController(IValidaCookie cookie,AppDbContext context)
+        public HomeController(AppDbContext context) : base(context)
         {
-            _cookie = new ValidaCookie();
-            _context = context;
         }
 
         public IActionResult Index()
         {
-            return View();
-        }
+            if(Usuario == null)
+            {
+                return View("Login");
+            }
+            
+            var professor = _context.Professor.Where(e => e.UsuarioId == Usuario.UsuarioId).ToList();
+            if(professor.Count > 0)
+            {
+                var cursos = _context.Curso.Where(x => x.ProfessorId == professor[0].ProfessorId).ToList();
+                ViewBag.Cursos = cursos;
+                ViewBag.Usuario = Usuario;
+                ViewBag.ProfessorId = professor[0].ProfessorId;
+                return View("IndexProf");
+            }
+            var aluno = _context.Aluno.Where(e => e.UsuarioId == Usuario.UsuarioId).ToList();
 
-        public IActionResult IndexProf()
-        {
-            return View();
+            ViewBag.Usuario = Usuario;
+            ViewBag.AlunoId = aluno[0].AlunoId;
+            return View("Index");
         }
 
         public IActionResult Login()
         {
-            Usuario u = _cookie.validarCookie(Request.HttpContext);
-            if(u != null){
+            if(Usuario != null){
 
-                ViewBag.Usuario = u;
-                
-                var professor = _context.Professor.Where(e => e.UsuarioId == u.UsuarioId).ToList();
-                var aluno = _context.Aluno.Where(e => e.UsuarioId == u.UsuarioId).ToList();
+                var professor = _context.Professor.Where(e => e.UsuarioId == Usuario.UsuarioId).ToList();
+                var aluno = _context.Aluno.Where(e => e.UsuarioId == Usuario.UsuarioId).ToList();
 
                 if(professor.Count > 0){
                     ViewBag.ProfessorId = professor[0].ProfessorId;
-                    return View("IndexProf");
+                    return Redirect("/");
                 }
                 ViewBag.AlunoId = aluno[0].AlunoId;
-                return View("Index");
+                return Redirect("/");
             }
             return View();
         }

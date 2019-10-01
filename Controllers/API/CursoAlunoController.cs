@@ -32,19 +32,16 @@ namespace PI_3.Controllers.API
         }
 
         [HttpPost]
-        public ActionResult<CursoAluno> Add(CursoAluno requestCursoAluno)
-        {
-            requestCursoAluno.Aluno.CursoAluno = null;
-            requestCursoAluno.Curso.CursoAluno = null;
-            
-            if(requestCursoAluno != null)
-            {
-                _context.CursoAluno.Add(requestCursoAluno);
-                _context.SaveChanges();
+        public ActionResult Add([FromBody]CursoAluno requestCursoAluno)
+        {            
+            _context.CursoAluno.Add(requestCursoAluno);
+            _context.SaveChanges();
 
-                return requestCursoAluno;
-            }
-            return null;
+
+            var aluno = _context.Aluno.Where(x => x.AlunoId == requestCursoAluno.AlunoId).ToList();
+            var usuario = _context.Usuario.Where(x => x.UsuarioId == aluno[0].UsuarioId).ToList();
+
+            return new JsonResult(usuario[0]);
         }
 
         [HttpPut("{id}")]

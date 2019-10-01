@@ -45,7 +45,6 @@ namespace PI_3
 
             // services.AddDbContext<AppDbContext>(options => options.UseInMemoryDatabase(databaseName: "databse"));
             services.AddDbContext<AppDbContext>(x => x.UseMySQL("server=localhost;port=3306;database=nossoDB;user=root;password=root"));
-            services.AddScoped<IValidaCookie, ValidaCookie>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
@@ -86,7 +85,7 @@ namespace PI_3
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Login}/{id?}");
+                    template: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

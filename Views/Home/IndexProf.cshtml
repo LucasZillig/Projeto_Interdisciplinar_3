@@ -1,3 +1,5 @@
+@using PI_3.Models;
+
 <div class="wrapper">
     <!--HEADER-->
     <div class="header-wrapper">
@@ -66,6 +68,18 @@
                                     </button>
                                 </div>
                             </li>
+                            @foreach (Curso c in ViewBag.Cursos) {
+                                <li>
+                                    <a class="list-select" href="#">
+                                        <div class="materia-title-container">
+                                            <div class="materia-title">@c.CursoNome</div>
+                                        </div>
+                                        <div class="list-label-container">
+                                            <span class="list-label" style="background: @c.CursoTag"></span>
+                                        </div>
+                                    </a>
+                                </li>
+                            }
                         </ul>
                     </div>
                 </div>
@@ -208,7 +222,7 @@
             <main class="modal__content" id="modal-2-content">
                 <div class="send-invite-wrapper">
                         <input type="email" class="send-invite-searchbar" id="myInput" onkeyup="pesquisaDinamica()" placeholder="Buscar">
-                        <button onclick="enviarConvite('vbbjandrade@gmail.com')" id="enviar-convite-btn" class="option-button">Enviar Convite</button>
+                        <button id="enviar-convite-btn" class="option-button">Enviar Convite</button>
                 </div>
                 <div class="invite-wrapper" id="list-invites">
                     <div class="invite">
@@ -216,17 +230,6 @@
                             <img class="account-picture-small" src="~/img/porter.jpg">
                             <div class="invite-info-display">
                                 <h1>Vinicius Junqueira</h1>
-                            </div>
-                        </div>
-                        <div class="invite-right">
-                            <button class="small-option-button decline-button"><i class="material-icons material-icons-round">clear</i></button>
-                        </div>
-                    </div>
-                    <div class="invite">
-                        <div class="invite-left">
-                            <img class="account-picture-small" src="~/img/porter.jpg">
-                            <div class="invite-info-display">
-                                <h1>Lucas Zillig</h1>
                             </div>
                         </div>
                         <div class="invite-right">
@@ -264,7 +267,7 @@
                 <h2 class="modal__title" id="modal-2-title">Gerenciar Matérias</h2>
             </header>
             <main class="modal__content" id="modal-2-content">
-                <div class="invite-wrapper" id="edit-cursos">
+                <div class="invite-wrapper" id="edit-cursos">  
                     <div class="invite">
                         <div class="invite-left">
                             <div class="invite-info-display">
@@ -278,6 +281,19 @@
                             <button class="small-option-button decline-button"><i class="material-icons material-icons-round">clear</i></button>
                         </div>
                     </div>
+                    @foreach (Curso c in ViewBag.Cursos) {
+                        <div class="invite" id="edit-curso-@c.CursoId">
+                            <div class="invite-left">
+                                <div class="invite-info-display">
+                                    <h1>@c.CursoNome</h1>
+                                </div>
+                            </div>
+                            <div class="invite-right">
+                                <button class="option-button jscolor {valueElement:null,value:'66ccff'}" style="background: @c.CursoTag;">Cor da Tag</button>
+                                <button onclick="deleteCurso(@c.CursoId)" class="small-option-button decline-button"><i class="material-icons material-icons-round">clear</i></button>
+                            </div>
+                        </div>
+                    }
                 </div>
             </main>
         </div>
@@ -374,46 +390,6 @@
                 }
             });
 
-            //List cursos
-            (function() {
-                $.ajax({
-                    type: 'GET',
-                    url: "api/Curso/GetCursosProfessor?professorId=" + @ViewBag.ProfessorId,
-                    success: function (data) { 
-                        for(var i = 0; i < data.length; i++){
-                            $('.custom-list').append(
-                                '<li id="list-curso-' + data[i].cursoId +'">' +
-                                    '<a class="list-select" href="#">' +
-                                        '<div class="materia-title-container">' +
-                                            '<div class="materia-title">' + data[i].cursoNome + '</div>' +
-                                        '</div>' +
-                                        '<div class="list-label-container">' +
-                                            '<span class="list-label" style="background:' + data[i].cursoTag +';"></span>' +
-                                        '</div>' +
-                                    '</a>' +
-                                '</li>'   
-                            );
-                            $('#edit-cursos').append(
-                                '<div class="invite" id="edit-curso-' + data[i].cursoId +'">' +
-                                    '<div class="invite-left">' +
-                                        '<div class="invite-info-display">' +
-                                            '<h1>' + data[i].cursoNome + '</h1>' + 
-                                        '</div>' +
-                                    '</div>' +
-                                    '<div class="invite-right">' +
-                                        '<button class="option-button jscolor {valueElement:null,value:"66ccff"}">Cor da Tag</button>'+
-                                        '<button onclick="deleteCurso(' + data[i].cursoId + ')" class="small-option-button decline-button"><i class="material-icons material-icons-round">clear</i></button>' +
-                                    '</div>' +
-                                '</div>'  
-                            );
-                        }
-                    },
-                    error: function(res){
-                        console.log(res.responseText); 
-                    }
-                });
-            })();
-
             //List convites enviados
             (function(){})();
         });
@@ -435,7 +411,10 @@
         }
 
         //Busca usuário por email
-        function enviarConvite(email){
+        $('#enviar-convite-btn').click( function(){
+            event.preventDefault();
+            
+            var email = $('.send-invite-searchbar').val();
 
             if(email != "" && email != null){
                 $.ajax({
@@ -443,7 +422,7 @@
                     type: "GET",
                     success: function (data) {
                         alert("Usuario encontrado");
-                        criarConvite(data.AlunoId, 27);
+                        criarConvite(data.alunoId, 27);
                     },
                     error: function(res){
                         alert(res.responseJSON);
@@ -453,10 +432,11 @@
             else{
                 alert("Complete o campo!");
             }
-        }
+        });
 
         //Criar convite
         function criarConvite(alunoId, cursoId){
+            event.preventDefault();
 
             conviteInfo = {
                 'statusInvite': 1,
@@ -466,12 +446,26 @@
             }
 
             $.ajax({
-                url: 'api/CursoAluno/Add',
+                url: 'api/CursoAluno',
                 type: 'POST',
                 dataType: 'JSON',
+                contentType: 'application/json',
                 data: JSON.stringify(conviteInfo),
                 success: function(data){
                     alert("Convite enviado!");
+                    $('#list-invites').append(
+                        '<div class="invite">' +
+                            '<div class="invite-left">' +
+                                '<img class="account-picture-small" src="~/img/porter.jpg">' +
+                                '<div class="invite-info-display">' + 
+                                    '<h1>' + data.usuarioNome + '</h1>' +
+                                '</div>' +
+                            '</div>' +
+                            '<div class="invite-right">' +
+                                '<button class="small-option-button decline-button"><i class="material-icons material-icons-round">clear</i></button>' +
+                            '</div>' +
+                        '</div>'
+                    );
                 },
                 error: function(res){
                     alert(res.responseJSON);
