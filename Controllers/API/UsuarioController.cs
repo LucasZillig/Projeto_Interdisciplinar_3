@@ -78,16 +78,12 @@ namespace PI_3.Controllers.API
                 }
                 else
                 {
-                    return new JsonResult("Usuario e/ou senha incorretos") {
-                        StatusCode = 403
-                    };
+                    return new JsonResult("Usuario e/ou senha incorretos") { StatusCode = 403 };
                 }
             }
             else
             {
-                return new JsonResult("Complete todos os campos") {
-                    StatusCode = 400
-                };
+                return new JsonResult("Complete todos os campos") { StatusCode = 400 };
             }
         }
 

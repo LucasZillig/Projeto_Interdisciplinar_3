@@ -6,7 +6,6 @@ namespace PI_3.Models
 {
     public class Curso {
 
-
         public int CursoId { get; set; }
         public string CursoNome { get; set; }
         public string CursoDesc { get; set; }

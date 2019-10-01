@@ -23,6 +23,8 @@ namespace PI_3.Controllers.API
             return _context.CursoAluno.Where(s => s.CursoAlunoId == id).ToList();
         }
 
+        
+
         [HttpGet("{id}")]
         public ActionResult<CursoAluno> GetCursoAluno(int id)
         {

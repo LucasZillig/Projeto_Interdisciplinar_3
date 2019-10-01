@@ -66,37 +66,6 @@
                                     </button>
                                 </div>
                             </li>
-                            <li>
-                                <a class="list-select" href="#">
-                                    <div class="materia-title-container">
-                                        <div class="materia-title">Banco de Dados</div>
-                                    </div>
-                                    <div class="list-label-container">
-                                        <span class="list-label" style="background: #ea4c89;"></span>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a class="list-select" href="#">
-                                    <div class="materia-title-container">
-                                        <div class="materia-title">Programação Web</div>
-                                    </div>
-                                    <div class="list-label-container">
-                                        <span class="list-label" style="background: #673ab7;">
-                                        </span>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a class="list-select" href="#">
-                                    <div class="materia-title-container">
-                                        <div class="materia-title">Arquitetura da Informação</div>
-                                    </div>
-                                    <div class="list-label-container">
-                                        <span class="list-label" style="background: #03a9f4;"></span>
-                                    </div>
-                                </a>
-                            </li>
                         </ul>
                     </div>
                 </div>
@@ -241,7 +210,7 @@
                         <input type="text" class="send-invite-searchbar" id="myInput" onkeyup="pesquisaDinamica()" placeholder="Buscar">
                         <button class="option-button">Enviar Convite</button>
                 </div>
-                <div class="invite-wrapper">
+                <div class="invite-wrapper" id="list-invites">
                     <div class="invite">
                         <div class="invite-left">
                             <img class="account-picture-small" src="~/img/porter.jpg">
@@ -295,7 +264,7 @@
                 <h2 class="modal__title" id="modal-2-title">Gerenciar Matérias</h2>
             </header>
             <main class="modal__content" id="modal-2-content">
-                <div class="invite-wrapper">
+                <div class="invite-wrapper" id="edit-cursos">
                     <div class="invite">
                         <div class="invite-left">
                             <div class="invite-info-display">
@@ -322,9 +291,7 @@
 @section Scripts {
     <script type="text/javascript">
 
-        
-        
-
+        //logout
         function logout() {
             $.ajax({
                 url: "api/Usuario/LogoutUsuario",
@@ -338,6 +305,7 @@
             });
         }
 
+        //Create curso
         $("#pergunta-form").submit(function(event){
 
             event.preventDefault();
@@ -405,10 +373,105 @@
                     });
                 }
             });
+
+            //List cursos
+            (function() {
+                $.ajax({
+                    type: 'GET',
+                    url: "api/Curso/GetCursosProfessor?professorId=" + @ViewBag.ProfessorId,
+                    success: function (data) { 
+                        for(var i = 0; i < data.length; i++){
+                            $('.custom-list').append(
+                                '<li id="list-curso-' + data[i].cursoId +'">' +
+                                    '<a class="list-select" href="#">' +
+                                        '<div class="materia-title-container">' +
+                                            '<div class="materia-title">' + data[i].cursoNome + '</div>' +
+                                        '</div>' +
+                                        '<div class="list-label-container">' +
+                                            '<span class="list-label" style="background:' + data[i].cursoTag +';"></span>' +
+                                        '</div>' +
+                                    '</a>' +
+                                '</li>'   
+                            );
+                            $('#edit-cursos').append(
+                                '<div class="invite" id="edit-curso-' + data[i].cursoId +'">' +
+                                    '<div class="invite-left">' +
+                                        '<div class="invite-info-display">' +
+                                            '<h1>' + data[i].cursoNome + '</h1>' + 
+                                        '</div>' +
+                                    '</div>' +
+                                    '<div class="invite-right">' +
+                                        '<button class="option-button jscolor {valueElement:null,value:"66ccff"}">Cor da Tag</button>'+
+                                        '<button onclick="deleteCurso(' + data[i].cursoId + ')" class="small-option-button decline-button"><i class="material-icons material-icons-round">clear</i></button>' +
+                                    '</div>' +
+                                '</div>'  
+                            );
+                        }
+                    },
+                    error: function(res){
+                        console.log(res.responseText); 
+                    }
+                });
+            })();
+
+            //List convites enviados
+            (function(){
+                $.ajax({
+                    type: 'GET',
+                    url: "api/CursoAluno/GetCursosProfessor?professorId=" + @ViewBag.ProfessorId,
+                    success: function (data) { 
+                        for(var i = 0; i < data.length; i++){
+                            $('.custom-list').append(
+                                '<li id="list-curso-' + data[i].cursoId +'">' +
+                                    '<a class="list-select" href="#">' +
+                                        '<div class="materia-title-container">' +
+                                            '<div class="materia-title">' + data[i].cursoNome + '</div>' +
+                                        '</div>' +
+                                        '<div class="list-label-container">' +
+                                            '<span class="list-label" style="background:' + data[i].cursoTag +';"></span>' +
+                                        '</div>' +
+                                    '</a>' +
+                                '</li>'   
+                            );
+                            $('#edit-cursos').append(
+                                '<div class="invite" id="edit-curso-' + data[i].cursoId +'">' +
+                                    '<div class="invite-left">' +
+                                        '<div class="invite-info-display">' +
+                                            '<h1>' + data[i].cursoNome + '</h1>' + 
+                                        '</div>' +
+                                    '</div>' +
+                                    '<div class="invite-right">' +
+                                        '<button class="option-button jscolor {valueElement:null,value:"66ccff"}">Cor da Tag</button>'+
+                                        '<button onclick="deleteCurso(' + data[i].cursoId + ')" class="small-option-button decline-button"><i class="material-icons material-icons-round">clear</i></button>' +
+                                    '</div>' +
+                                '</div>'  
+                            );
+                        }
+                    },
+                    error: function(res){
+                        console.log(res.responseText); 
+                    }
+                });
+            })();
         });
 
-        // SEND FILES
+        //Deletar curso
+        function deleteCurso(cursoId) {
+            $.ajax({
+                url: "api/Curso/" + cursoId,
+                type: 'DELETE',
+                success: function (data) {
+                    alert(data);
+                    $('#list-curso-' + cursoId).remove();
+                    $('#edit-curso-' + cursoId).remove();
+                },
+                error: function (res) {
+                    alert(res);
+                }
+            });
+        }
 
+        // SEND FILES
         function fileupload(filename) {
             var inputfile = document.getElementById(filename);
             var files = inputfile.files;
