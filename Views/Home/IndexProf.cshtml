@@ -1,3 +1,4 @@
+
 <div class="wrapper">
     <!--HEADER-->
     <div class="header-wrapper">
@@ -147,7 +148,7 @@
             <div class="mobile-content">
                 <div class="mobile-content-header">
                     <div class="current-inbox-title">Inbox</div>
-                    <button class="option-button" data-micromodal-trigger="modal-2"><i class="material-icons material-icons-round toolbar-icon">add</i>CONVITES</button>
+                    <button class="option-button mdc-button" data-micromodal-trigger="modal-2"><i class="material-icons material-icons-round toolbar-icon">add</i>CONVITES</button>
                 </div>
                 <div class="mobile-content-body">
                     <div class="mail-list-wrapper">
@@ -219,6 +220,31 @@
             </header>
             <main class="modal__content" id="modal-2-content">
                 <div class="send-invite-wrapper">
+                        <div class="mdc-select mdc-select--outlined mdc-select-outline-shape-radius demo-width-class ">
+                            <input type="hidden" name="enhanced-select">
+                            <i class="mdc-select__dropdown-icon"></i>
+                            <div class="mdc-select__selected-text"></div>
+                            <div class="mdc-select__menu mdc-menu mdc-menu-surface demo-width-class">
+                                <ul class="mdc-list">
+                                <li class="mdc-list-item" data-value="grains">
+                                    Bread, Cereal, Rice, and Pasta
+                                </li>
+                                <li class="mdc-list-item" data-value="vegetables">
+                                    Vegetables
+                                </li>
+                                <li class="mdc-list-item" data-value="fruit">
+                                    Fruit
+                                </li>
+                                </ul>
+                            </div>
+                            <div class="mdc-notched-outline">
+                                    <div class="mdc-notched-outline__leading"></div>
+                                    <div class="mdc-notched-outline__notch">
+                                      <label class="mdc-floating-label">Pick a Food Group</label>
+                                    </div>
+                                    <div class="mdc-notched-outline__trailing"></div>
+                                  </div>
+                        </div>
                         <input type="text" class="send-invite-searchbar" id="myInput" onkeyup="pesquisaDinamica()" placeholder="Buscar">
                         <button class="option-button">Enviar Convite</button>
                 </div>
@@ -290,6 +316,8 @@
 
 @section Scripts {
     <script type="text/javascript">
+    mdc.select.MDCSelect.attachTo(document.querySelector(".mdc-select"));
+    mdc.ripple.MDCRipple.attachTo(document.querySelector(".mdc-button"));
 
 
         function logout() {
