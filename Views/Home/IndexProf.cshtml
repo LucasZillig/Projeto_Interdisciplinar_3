@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+@using PI_3.Models;
+>>>>>>> 6604afe10637b7d72d30e9c39bc823a68ddbfc99
 
 <div class="wrapper">
     <!--HEADER-->
@@ -67,37 +71,18 @@
                                     </button>
                                 </div>
                             </li>
-                            <li>
-                                <a class="list-select" href="#">
-                                    <div class="materia-title-container">
-                                        <div class="materia-title">Banco de Dados</div>
-                                    </div>
-                                    <div class="list-label-container">
-                                        <span class="list-label" style="background: #ea4c89;"></span>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a class="list-select" href="#">
-                                    <div class="materia-title-container">
-                                        <div class="materia-title">Programação Web</div>
-                                    </div>
-                                    <div class="list-label-container">
-                                        <span class="list-label" style="background: #673ab7;">
-                                        </span>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a class="list-select" href="#">
-                                    <div class="materia-title-container">
-                                        <div class="materia-title">Arquitetura da Informação</div>
-                                    </div>
-                                    <div class="list-label-container">
-                                        <span class="list-label" style="background: #03a9f4;"></span>
-                                    </div>
-                                </a>
-                            </li>
+                            @foreach (Curso c in ViewBag.Cursos) {
+                                <li>
+                                    <a class="list-select" href="#">
+                                        <div class="materia-title-container">
+                                            <div class="materia-title">@c.CursoNome</div>
+                                        </div>
+                                        <div class="list-label-container">
+                                            <span class="list-label" style="background: @c.CursoTag"></span>
+                                        </div>
+                                    </a>
+                                </li>
+                            }
                         </ul>
                     </div>
                 </div>
@@ -172,6 +157,25 @@
                                     </div>
                                 </a>
                             </div>
+                            <div class="mail-item-wrapper">
+                                <a class="mail-item-container">
+                                    <div class="mail-item-left">
+                                        <img class="account-picture" src="~/img/porter.jpg">
+                                        <span class="tag-icon" style="background: #03a9f4;">
+                                        </span>
+                                    </div>
+                                    <div class="mail-item-right">
+                                        <div class="mail-item-header">
+                                            <div class="mail-sender">Lucas Zillig</div>
+                                            <div class="mail-time">17:35</div>
+                                        </div>
+                                        <div class="mail-subject">Duvida sobre big data</div>
+                                        <div class="mail-summary-text">
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -220,6 +224,7 @@
             </header>
             <main class="modal__content" id="modal-2-content">
                 <div class="send-invite-wrapper">
+<<<<<<< HEAD
                         <div class="mdc-select mdc-select--outlined mdc-select-outline-shape-radius demo-width-class ">
                             <input type="hidden" name="enhanced-select">
                             <i class="mdc-select__dropdown-icon"></i>
@@ -247,13 +252,17 @@
                         </div>
                         <input type="text" class="send-invite-searchbar" id="myInput" onkeyup="pesquisaDinamica()" placeholder="Buscar">
                         <button class="option-button">Enviar Convite</button>
+=======
+                        <input type="email" class="send-invite-searchbar" id="myInput" onkeyup="pesquisaDinamica()" placeholder="Buscar">
+                        <button id="enviar-convite-btn" class="option-button">Enviar Convite</button>
+>>>>>>> 6604afe10637b7d72d30e9c39bc823a68ddbfc99
                 </div>
-                <div class="invite-wrapper">
+                <div class="invite-wrapper" id="list-invites">
                     <div class="invite">
                         <div class="invite-left">
                             <img class="account-picture-small" src="~/img/porter.jpg">
                             <div class="invite-info-display">
-                                <h1>Jorge Surian</h1>
+                                <h1>Vinicius Junqueira</h1>
                             </div>
                         </div>
                         <div class="invite-right">
@@ -276,7 +285,7 @@
                 <form id="pergunta-form" class="pergunta-form" name="form" action="/uploadmultiple" enctype="multipart/form-data" method="post">
                     <input id="nome-pergunta" type="text" placeholder="Nome" class="input-field">
                     <textarea id="desc-pergunta" style="resize: none;" rows="5" maxlength="3000" placeholder="Escreva aqui..." class="input-field input-textarea"></textarea>
-                    <button style="margin: 15px auto;" class="option-button jscolor {valueElement:null,value:'66ccff'}">Cor da Tag</button>
+                    <button id="tag-color-button" style="margin: 15px auto;" class="option-button jscolor {valueElement:null,value:'66ccff'}">Cor da Tag</button>
                     <button style="margin: auto;" type="submit" class="option-button">Criar Nova Matéria</button>
                 </form>
             </main>
@@ -291,7 +300,7 @@
                 <h2 class="modal__title" id="modal-2-title">Gerenciar Matérias</h2>
             </header>
             <main class="modal__content" id="modal-2-content">
-                <div class="invite-wrapper">
+                <div class="invite-wrapper" id="edit-cursos">  
                     <div class="invite">
                         <div class="invite-left">
                             <div class="invite-info-display">
@@ -305,11 +314,25 @@
                             <button class="small-option-button decline-button"><i class="material-icons material-icons-round">clear</i></button>
                         </div>
                     </div>
+                    @foreach (Curso c in ViewBag.Cursos) {
+                        <div class="invite" id="edit-curso-@c.CursoId">
+                            <div class="invite-left">
+                                <div class="invite-info-display">
+                                    <h1>@c.CursoNome</h1>
+                                </div>
+                            </div>
+                            <div class="invite-right">
+                                <button class="option-button jscolor {valueElement:null,value:'66ccff'}" style="background: @c.CursoTag;">Cor da Tag</button>
+                                <button onclick="deleteCurso(@c.CursoId)" class="small-option-button decline-button"><i class="material-icons material-icons-round">clear</i></button>
+                            </div>
+                        </div>
+                    }
                 </div>
             </main>
         </div>
     </div>
 </div>
+
 <div id="overlay"></div>
 <!--FOOTER-->
 </div>
@@ -319,7 +342,7 @@
     mdc.select.MDCSelect.attachTo(document.querySelector(".mdc-select"));
     mdc.ripple.MDCRipple.attachTo(document.querySelector(".mdc-button"));
 
-
+        //logout
         function logout() {
             $.ajax({
                 url: "api/Usuario/LogoutUsuario",
@@ -332,6 +355,34 @@
                 }
             });
         }
+
+        //Create curso
+        $("#pergunta-form").submit(function(event){
+
+            event.preventDefault();
+
+            var curso = {
+                'CursoNome': $('#nome-pergunta').val(),
+                'CursoDesc': $('#desc-pergunta').val(),
+                'CursoTag' : $('#tag-color-button').css( "background-color" ), 
+                'ProfessorId': @ViewBag.ProfessorId,
+            }
+
+            $.ajax({
+                type: 'POST',
+                url: "api/Curso",    
+                contentType: 'application/json',
+                dataType: 'json',
+                data: JSON.stringify(curso),
+                success: function (data) { 
+                    alert(data);
+                    window.location.reload();
+                },
+                error: function(res){
+                    alert(res.responseText); 
+                }
+            });
+        });
 
         MicroModal.init({
             awaitCloseAnimation: true,
@@ -373,10 +424,91 @@
                     });
                 }
             });
+
+            //List convites enviados
+            (function(){})();
         });
 
-        // SEND FILES
+        //Deletar curso
+        function deleteCurso(cursoId) {
+            $.ajax({
+                url: "api/Curso/" + cursoId,
+                type: 'DELETE',
+                success: function (data) {
+                    alert(data);
+                    $('#list-curso-' + cursoId).remove();
+                    $('#edit-curso-' + cursoId).remove();
+                },
+                error: function (res) {
+                    alert(res);
+                }
+            });
+        }
 
+        //Busca usuário por email
+        $('#enviar-convite-btn').click( function(){
+            event.preventDefault();
+            
+            var email = $('.send-invite-searchbar').val();
+
+            if(email != "" && email != null){
+                $.ajax({
+                    url: "api/Usuario/GetByEmail?email=" + email,
+                    type: "GET",
+                    success: function (data) {
+                        alert("Usuario encontrado");
+                        criarConvite(data.alunoId, 27);
+                    },
+                    error: function(res){
+                        alert(res.responseJSON);
+                    }
+                });
+            }
+            else{
+                alert("Complete o campo!");
+            }
+        });
+
+        //Criar convite
+        function criarConvite(alunoId, cursoId){
+            event.preventDefault();
+
+            conviteInfo = {
+                'statusInvite': 1,
+                'CursoAlunoTag': 'rgb(53, 59, 72)',
+                'CursoId': cursoId,
+                'AlunoId': alunoId
+            }
+
+            $.ajax({
+                url: 'api/CursoAluno',
+                type: 'POST',
+                dataType: 'JSON',
+                contentType: 'application/json',
+                data: JSON.stringify(conviteInfo),
+                success: function(data){
+                    alert("Convite enviado!");
+                    $('#list-invites').append(
+                        '<div class="invite">' +
+                            '<div class="invite-left">' +
+                                '<img class="account-picture-small" src="~/img/porter.jpg">' +
+                                '<div class="invite-info-display">' + 
+                                    '<h1>' + data.usuarioNome + '</h1>' +
+                                '</div>' +
+                            '</div>' +
+                            '<div class="invite-right">' +
+                                '<button class="small-option-button decline-button"><i class="material-icons material-icons-round">clear</i></button>' +
+                            '</div>' +
+                        '</div>'
+                    );
+                },
+                error: function(res){
+                    alert(res.responseJSON);
+                }
+            });
+        }
+
+        // SEND FILES
         function fileupload(filename) {
             var inputfile = document.getElementById(filename);
             var files = inputfile.files;

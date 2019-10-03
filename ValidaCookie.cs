@@ -11,13 +11,9 @@ using PI_3.Services;
 
 namespace PI_3
 {
-    public class ValidaCookie : IValidaCookie
+    public static class ValidaCookie
     {
-        public ValidaCookie() { }
-
-        public AppDbContext _context = new AppDbContext();
-
-        public Usuario validarCookie(HttpContext req)
+        public static Usuario validarCookie(HttpContext req, AppDbContext context)
         {
             var cookieStr = req.Request.Cookies["Usuario"];
 
@@ -28,7 +24,7 @@ namespace PI_3
             else
             {
                 var id = Int32.Parse(cookieStr.Substring(0, 8));
-                var user = _context.Usuario.Where(u => u.UsuarioId == id).ToList();
+                var user = context.Usuario.Where(u => u.UsuarioId == id).ToList();
                 if (user.Count == 0)
                 {
                     return null;

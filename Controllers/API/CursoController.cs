@@ -18,13 +18,21 @@ namespace PI_3.Controllers.API
         }
         
         [HttpGet]
-        public ActionResult<IEnumerable<Curso>> GetCursos()
+        public ActionResult<IEnumerable<Curso>> Get()
         {
             return _context.Curso.ToList();
         }
 
+        [HttpGet]
+        [Route("[action]")]
+        public ActionResult GetCursosProfessor(int professorId)
+        {
+            var cursos = _context.Curso.Where(x => x.ProfessorId == professorId).ToList();
+            return new JsonResult(cursos);
+        }
+
         [HttpGet("{id}")]
-        public ActionResult<Curso> GetCurso(int id)
+        public ActionResult<Curso> Get(int id)
         {
             var curso = _context.Curso.SingleOrDefault(x => x.CursoId == id);
 
@@ -35,18 +43,24 @@ namespace PI_3.Controllers.API
             return curso;
         }
 
+
         [HttpPost]
-        public ActionResult<Curso> AddCurso(Curso requestCurso)
-        {
+        public ActionResult<Curso> Add(Curso requestCurso)
+        {   
+
+            if(string.IsNullOrWhiteSpace(requestCurso.CursoNome) || string.IsNullOrWhiteSpace(requestCurso.CursoDesc)){
+
+                return new JsonResult("Complete todos os campos") { StatusCode = 400 };
+            }
 
             _context.Curso.Add(requestCurso);
             _context.SaveChanges();
 
-            return requestCurso;
+            return new JsonResult("Curso criado!");
         }
 
         [HttpPut("{id}")]
-        public ActionResult UpdateCurso(int id, Curso requestCurso)
+        public ActionResult Update(int id, Curso requestCurso)
         {
             if (id != requestCurso.CursoId)
             {
@@ -65,19 +79,19 @@ namespace PI_3.Controllers.API
         }
 
         [HttpDelete("{id}")]
-        public ActionResult DeleteCurso(int id)
+        public ActionResult Delete(int id)
         {
             var curso = _context.Curso.SingleOrDefault(x => x.CursoId == id);
 
             if (curso == null)
             {
-                return NotFound();
+                return new JsonResult("Curso não encontrado") { StatusCode = 404 };
             }
 
             _context.Curso.Remove(curso);
             _context.SaveChanges();
             
-            return NoContent();
+            return new JsonResult("Curso deletado!");
         }
     }
 }
