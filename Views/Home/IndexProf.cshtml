@@ -1,7 +1,4 @@
-<<<<<<< HEAD
-=======
 @using PI_3.Models;
->>>>>>> 6604afe10637b7d72d30e9c39bc823a68ddbfc99
 
 <div class="wrapper">
     <!--HEADER-->
@@ -37,7 +34,9 @@
                         <div class="sidebar-logo-container">
                             <i class="material-icons sidebar-logo">book</i>
                         </div>
-                        <button class="new-compose" data-micromodal-trigger="modal-3">NOVA MATÉRIA</button>
+                        <button class="button-reverse mdc-button mdc-button--outlined mdc-ripple-upgraded" data-micromodal-trigger="modal-3">
+                                <span class="mdc-button__label">NOVA MATÉRIA</span>
+                        </button>
                     </div>
                 </div>
                 <div class="sidebar-section notfirst">
@@ -133,7 +132,10 @@
             <div class="mobile-content">
                 <div class="mobile-content-header">
                     <div class="current-inbox-title">Inbox</div>
-                    <button class="option-button mdc-button" data-micromodal-trigger="modal-2"><i class="material-icons material-icons-round toolbar-icon">add</i>CONVITES</button>
+                    <button class="mdc-button mdc-button--outlined" data-micromodal-trigger="modal-2">
+                        <i class="material-icons mdc-button__icon" aria-hidden="true">add</i>
+                        <span class="mdc-button__label">Convites</span>
+                    </button>
                 </div>
                 <div class="mobile-content-body">
                     <div class="mail-list-wrapper">
@@ -224,38 +226,27 @@
             </header>
             <main class="modal__content" id="modal-2-content">
                 <div class="send-invite-wrapper">
-<<<<<<< HEAD
-                        <div class="mdc-select mdc-select--outlined mdc-select-outline-shape-radius demo-width-class ">
+                        <div class="mdc-select mdc-select--outlined demo-width-class">
                             <input type="hidden" name="enhanced-select">
                             <i class="mdc-select__dropdown-icon"></i>
                             <div class="mdc-select__selected-text"></div>
                             <div class="mdc-select__menu mdc-menu mdc-menu-surface demo-width-class">
                                 <ul class="mdc-list">
                                 <li class="mdc-list-item" data-value="grains">
-                                    Bread, Cereal, Rice, and Pasta
-                                </li>
-                                <li class="mdc-list-item" data-value="vegetables">
-                                    Vegetables
-                                </li>
-                                <li class="mdc-list-item" data-value="fruit">
-                                    Fruit
+                                    DB
                                 </li>
                                 </ul>
                             </div>
                             <div class="mdc-notched-outline">
-                                    <div class="mdc-notched-outline__leading"></div>
-                                    <div class="mdc-notched-outline__notch">
-                                      <label class="mdc-floating-label">Pick a Food Group</label>
-                                    </div>
-                                    <div class="mdc-notched-outline__trailing"></div>
-                                  </div>
+                                <div class="mdc-notched-outline__leading"><i class="material-icons mdc-select__icon" tabindex="0" role="button">class</i></div>
+                                <div class="mdc-notched-outline__notch">
+                                    <label class="mdc-floating-label">Curso</label>
+                                </div>
+                                <div class="mdc-notched-outline__trailing"></div>
+                                </div>
                         </div>
-                        <input type="text" class="send-invite-searchbar" id="myInput" onkeyup="pesquisaDinamica()" placeholder="Buscar">
-                        <button class="option-button">Enviar Convite</button>
-=======
                         <input type="email" class="send-invite-searchbar" id="myInput" onkeyup="pesquisaDinamica()" placeholder="Buscar">
                         <button id="enviar-convite-btn" class="option-button">Enviar Convite</button>
->>>>>>> 6604afe10637b7d72d30e9c39bc823a68ddbfc99
                 </div>
                 <div class="invite-wrapper" id="list-invites">
                     <div class="invite">
@@ -339,8 +330,16 @@
 
 @section Scripts {
     <script type="text/javascript">
-    mdc.select.MDCSelect.attachTo(document.querySelector(".mdc-select"));
-    mdc.ripple.MDCRipple.attachTo(document.querySelector(".mdc-button"));
+
+    const selects = document.querySelectorAll('.mdc-select');
+    for (const select of selects) {
+        mdc.select.MDCSelect.attachTo(select);
+    }
+
+    const buttons = document.querySelectorAll('.mdc-button');
+    for (const button of buttons) {
+        mdc.ripple.MDCRipple.attachTo(button);
+    }
 
         //logout
         function logout() {

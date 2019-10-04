@@ -1,5 +1,4 @@
 * {
-    font-size: 16px;
     font-family: 'Rubik', sans-serif;
     padding: 0;
     margin: 0;
@@ -7,6 +6,12 @@
     -webkit-user-select: none;
     -ms-user-select: none;
 }
+
+/* :root {
+    --mdc-theme-primary: #9c27b0;
+    --mdc-theme-secondary: #ffab40;
+    --mdc-theme-background: #fff;
+} */
 
 html,
 body {
@@ -254,7 +259,17 @@ button, input {
     color: #dbdbdb;
 }
 
-.new-compose {
+
+.button-reverse{
+    color: white;
+    border-color: white;
+    border-width: 2px;
+    height: auto;
+    padding: 13px 36px;
+    font-weight: 600;
+}
+
+/* .new-compose {
     background: rgba(0, 0, 0, .15);
     box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.3), 0 1px 3px 1px rgba(0, 0, 0, 0.15);
     /* background: none; */
@@ -276,7 +291,7 @@ button, input {
 
 .new-compose:active {
     background: rgba(0, 0, 0, .35);
-}
+} */
 
 .section-default {
     margin-bottom: 40px;
@@ -534,7 +549,7 @@ button, input {
 
 .upload-btn-wrapper input[type=file]:hover ~ .option-button {
     background: #F2F2F2;
-  }
+}
 
 .input-materia{
     display: flex;
@@ -543,7 +558,7 @@ button, input {
     position: relative;
 }
 
-.option-button {
+/* .option-button {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -555,7 +570,7 @@ button, input {
     font-size: 12px;
     font-weight: 600;
     transition: background 0.2s cubic-bezier(0.250, 0.460, 0.450, 0.940), width 300ms cubic-bezier(0.250, 0.460, 0.450, 0.940);
-}
+} */
 
     .option-button:hover {
         background: #F2F2F2;
