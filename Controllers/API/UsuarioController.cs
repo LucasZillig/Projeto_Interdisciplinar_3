@@ -1,15 +1,10 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using PI_3.Models;
-using System.Web;
-using System.Net.Mime;
+using PI_3.Request;
 
 namespace PI_3.Controllers.API
 {
@@ -50,16 +45,7 @@ namespace PI_3.Controllers.API
             
             if(usuario.Count > 0) 
             {
-                var aluno = _context.Aluno.Where(e => e.UsuarioId == usuario[0].UsuarioId).ToList();
-                
-                if(aluno.Count > 0)
-                {
-                    aluno[0].Usuario.Aluno = null;
-                    return new JsonResult(aluno[0]);
-                }else
-                {
-                    return new JsonResult("Esse usuário não é um aluno!") { StatusCode = 400};
-                }
+                return new JsonResult("Email liberado");
             }else
             {
                 return new JsonResult("Esse usuário não existe!") { StatusCode = 404 };
@@ -122,24 +108,27 @@ namespace PI_3.Controllers.API
 
         [HttpPost]
         [Route("[action]")]
-        public ActionResult<Usuario> RegisterAluno([FromBody]Usuario requestUsuario)
+        public ActionResult<Usuario> RegisterAluno([FromBody]UsuarioRequest usuarioRequest)
         {   
-            _context.Usuario.Add(requestUsuario);
+            Usuario usuario = new Usuario();
+            usuario.UsuarioEmail = usuarioRequest.UsuarioEmail;
+            usuario.UsuarioNome = usuarioRequest.UsuarioNome;
+            usuario.UsuarioSenha = usuarioRequest.UsuarioSenha;
+            
+            _context.Usuario.Add(usuario);
 
             Aluno aluno = new Aluno();
 
-            aluno.UsuarioId = requestUsuario.UsuarioId;
+            aluno.UsuarioId = usuario.UsuarioId;
             _context.Aluno.Add(aluno);
 
             _context.SaveChanges();
 
-            requestUsuario.Aluno.Usuario = null;
+            usuario.Aluno.Usuario = null;
 
-            return new JsonResult(requestUsuario);
+            return new JsonResult(usuario);
         }
 
-
-        //POR QUE STRINGFY? COMO FAZER CORRETAMENTE? TIRAR DATATYPE?
         [HttpPost]
         [Route("[action]")]
         public ActionResult RegisterProfessor([FromBody]Usuario requestUsuario)

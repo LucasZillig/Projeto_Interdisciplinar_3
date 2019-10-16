@@ -103,98 +103,58 @@
         }
     });
 
-    // Login ajax
-    $("#login-form").submit(function(event){
+    // Login
+    $("#login-form").submit(async(event) => {
         event.preventDefault();
 
-        var LoginUsuarioEmail = $("#login-email").val();
-        var LoginUsuarioSenha = $("#login-senha").val();
+        const LoginUsuarioEmail = $("#login-email").val();
+        const LoginUsuarioSenha = $("#login-senha").val();
 
-        $.ajax({
-            type: 'GET',
-            url: "api/Usuario/LoginUsuario?email=" + LoginUsuarioEmail + "&senha=" + LoginUsuarioSenha,
-            success: function(data) {
-                window.location.reload(); 
-            },
-            error: function(res) {
-                alert(res.responseText);
-                window.location.reload();
-            }
-        });
+        const response = await fetch('api/Usuario/LoginUsuario?email=' + LoginUsuarioEmail + '&senha=' + LoginUsuarioSenha)
+        if(!response.ok){
+            console.log(response.statusText);
+            alert(await response.json());
+            window.location.reload();
+        }else{
+            alert(await response.json());
+            window.location.reload();
+        }
     });
-    // Signup ajax
-    $("#register-form").submit(function(event){
+    // Register
+    $("#register-form").submit(async(event) => {
         event.preventDefault();
-        
-        var usuario = {
-            'UsuarioNome': $("#register-nome").val(),
-            'UsuarioEmail': $("#register-email").val(),
-            'UsuarioSenha': $("#register-senha").val(),
-        }
-        
-        var registerString = 'api/Usuario/RegisterAluno';
 
-        if($('#typeuser-input').prop("checked") == true){
-            registerString = 'api/Usuario/RegisterProfessor';
-        }
-
-        $.ajax({
-            type: 'POST',
-            url: registerString,
-            contentType: 'application/json',
-            dataType: 'json',
-            data: JSON.stringify(usuario),
-            success: function(data) {    
-                alert("registrado");
-                window.location.reload();
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-                console.log(textStatus + " " + errorThrown);
-                
+        try{
+            const confirmEmail = await fetch('api/Usuario/GetByEmail?email=' + $("#register-email").val());
+            if(confirmEmail.ok){
+                return alert('Esse email já está em uso!');
             }
-        });
+            if($("#register-senha").val() !== $("#register-senha-repeat").val()){
+                return alert('As senhas não combinam!')
+            }         
+            const data = {
+                'UsuarioNome': $("#register-nome").val(),
+                'UsuarioEmail': $("#register-email").val(),
+                'UsuarioSenha': $("#register-senha").val(),
+            }
+            const url = 'api/Usuario/RegisterAluno';
+
+            if($('#typeuser-input').prop("checked") == true){
+                url = 'api/Usuario/RegisterProfessor';
+            }
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+            
+            window.location.reload();
+        }catch(error){
+            alert(error);
+        }
+        debugger;
     });
-
-    var constraints = {
-        email: {
-            // Email is required
-            presence: true,
-            // and must be an email (duh)
-            email: true
-        },
-        password: {
-            // Password is also required
-            presence: true,
-            // And must be at least 5 characters long
-            length: {
-                minimum: 5
-            }
-        },
-        "confirm-password": {
-            // You need to confirm your password
-            presence: true,
-            // and it needs to be equal to the other password
-            equality: {
-                attribute: "password",
-                message: "^The passwords does not match"
-            }
-        },
-        username: {
-            // You need to pick a username too
-            presence: true,
-            // And it must be between 3 and 20 characters long
-            length: {
-                minimum: 3,
-                maximum: 20
-            },
-            format: {
-                // We don't allow anything that a-z and 0-9
-                pattern: "[a-z0-9]+",
-                // but we don't care if the username is uppercase or lowercase
-                flags: "i",
-                message: "can only contain a-z and 0-9"
-          }
-        }
-    }
 </script>
 }
