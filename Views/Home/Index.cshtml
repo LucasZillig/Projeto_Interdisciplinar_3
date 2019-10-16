@@ -32,7 +32,9 @@
                         <div class="sidebar-logo-container">
                             <i class="material-icons sidebar-logo">book</i>
                         </div>
-                        <button class="new-compose" data-micromodal-trigger="modal-3">ESCREVER</button>
+                        <button class="button-reverse mdc-button mdc-button--outlined mdc-ripple-upgraded" data-micromodal-trigger="modal-3">
+                                <span class="mdc-button__label">ESCREVER</span>
+                        </button>
                     </div>
                 </div>
                 <div class="sidebar-section notfirst">
@@ -147,7 +149,10 @@
             <div class="mobile-content">
                 <div class="mobile-content-header">
                     <div class="current-inbox-title">Inbox</div>
-                    <button class="option-button" data-micromodal-trigger="modal-2"><i class="material-icons material-icons-round toolbar-icon">email</i>CONVITES</button>
+                    <button class="mdc-button mdc-button--outlined" data-micromodal-trigger="modal-2">
+                        <i class="material-icons mdc-button__icon" aria-hidden="true">email</i>
+                        <span class="mdc-button__label">Convites</span>
+                    </button>
                 </div>
                 <div class="mobile-content-body">
                     <div class="mail-list-wrapper">
@@ -194,13 +199,20 @@
                             <h2>@ViewBag.Usuario.UsuarioEmail</h2>
                         </div>
                     </div>
-                    <div class="account-edit-info">
-                        <button class="small-option-button">
-                            <i class="material-icons material-icons-round">settings_application</i>
-                        </button>
+                    <div id="account-edit-info">
+                        <div class="mdc-text-field">
+                            <input type="text" id="pre-filled" class="mdc-text-field__input" value="@ViewBag.Usuario.UsuarioNome">
+                            <label class="mdc-floating-label mdc-floating-label--float-above" for="pre-filled">Nome</label>
+                            <div class="mdc-line-ripple"></div>
+                        </div>
+                        <div class="mdc-text-field">
+                            <input type="text" id="pre-filled" class="mdc-text-field__input" value="@ViewBag.Usuario.UsuarioEmail">
+                            <label class="mdc-floating-label mdc-floating-label--float-above" for="pre-filled">E-Mail</label>
+                            <div class="mdc-line-ripple"></div>
+                        </div>
                     </div>
                 </div>
-                <button onclick="logout()" class="option-button" style="margin-top: 15px;">Fazer Log Out</button>
+                <button onclick="logout()" class="mdc-button mdc-button--outlined mdc-ripple-upgraded" style="margin-top: 15px;">Fazer Log Out</button>
             </main>
             <footer class="modal__footer">
                 <a class="footer-link">Privacy Policy</a>
@@ -228,8 +240,8 @@
                             </div>
                         </div>
                         <div class="invite-right">
-                            <button class="small-option-button accept-button"><i class="material-icons material-icons-round">check</i></button>
-                            <button class="small-option-button decline-button"><i class="material-icons material-icons-round">clear</i></button>
+                            <button class="mdc-icon-button material-icons">check</button>
+                            <button class="mdc-icon-button material-icons">clear</button>
                         </div>
                     </div>
                 </div>
@@ -246,23 +258,38 @@
             </header>
             <main class="modal__content" id="modal-2-content">
                 <form id="pergunta-form" class="pergunta-form" name="form" enctype="multipart/form-data" method="post">
-                    <div class="input-materia">
-                        <div class="materia-select-dropdown">
-                            <button class="materia-select-btn" id="materia-select-btn">
-                                <b id="materias-filtros-label" data-id="">SELECIONAR MATÉRIA</b>
-                                <input type="checkbox" id="materias-filtros" class="materia-select-check">
-                                <i class="material-icons material-icons-round">expand_more</i>
-                                <div class="materia-select-dropdown-content" id="materia-select-dropdown-content">
-                                    <!-- data-id = CursoAlunoId -->
-                                    <a href="#" data-target="materias-filtros-label" data-id="1" style="border-top-left-radius: 6px; border-top-right-radius: 6px;">BANCO DE DADOS</a>
-                                    <a href="#" data-target="materias-filtros-label" data-id="2">PROGRAMAÇÃO WEB</a>
-                                    <a href="#" data-target="materias-filtros-label" data-id="3" style="border-bottom-left-radius: 6px; border-bottom-right-radius: 6px;">SEGURANÇA DE DADOS</a>
-                                </div>
-                            </button>
+                    <div class="mdc-select mdc-select--outlined demo-width-class">
+                        <input type="hidden" name="enhanced-select">
+                        <i class="mdc-select__dropdown-icon"></i>
+                        <div class="mdc-select__selected-text"></div>
+                        <div class="mdc-select__menu mdc-menu mdc-menu-surface demo-width-class">
+                            <ul class="mdc-list">
+                                <li class="mdc-list-item" data-value="grains">DB</li>
+                            </ul>
+                        </div>
+                        <div class="mdc-notched-outline">
+                            <div class="mdc-notched-outline__leading"><i class="material-icons mdc-select__icon" tabindex="0" role="button">class</i></div>
+                            <div class="mdc-notched-outline__notch">
+                                <label class="mdc-floating-label">Curso</label>
+                            </div>
+                            <div class="mdc-notched-outline__trailing"></div>
+                            </div>
+                    </div>
+                    <div class="mdc-text-field" style="margin: 20px 0px;">
+                        <input type="text" id="my-text-field" class="mdc-text-field__input">
+                        <label class="mdc-floating-label" for="my-text-field">Assunto</label>
+                        <div class="mdc-line-ripple"></div>
+                    </div>
+                    <div class="mdc-text-field mdc-text-field--textarea">
+                        <textarea id="textarea" class="mdc-text-field__input" rows="8" cols="40"></textarea>
+                        <div class="mdc-notched-outline">
+                            <div class="mdc-notched-outline__leading"></div>
+                            <div class="mdc-notched-outline__notch">
+                            <label for="textarea" class="mdc-floating-label">Descrição</label>
+                            </div>
+                            <div class="mdc-notched-outline__trailing"></div>
                         </div>
                     </div>
-                    <input id="nome-pergunta" type="text" placeholder="Nome" class="input-field" autocomplete="off">
-                    <textarea id="desc-pergunta" style="resize: none;" rows="5" maxlength="3000" placeholder="Escreva aqui..." class="input-field input-textarea"></textarea>
                     <div class="upload-btn-wrapper">
                         <input id="files" name="files" type="file" multiple/>
                         <button class="option-button">Upload a file</button>
@@ -282,6 +309,7 @@
             </header>
             <main class="modal__content" id="modal-2-content">
                 <div class="invite-wrapper">
+                    
                     <div class="invite">
                         <div class="invite-left">
                             <div class="invite-info-display">
@@ -289,10 +317,8 @@
                             </div>
                         </div>
                         <div class="invite-right">
-                            <button class="option-button jscolor {valueElement:null,value:'66ccff'}">
-                                Cor da Tag
-                            </button>
-                            <button class="small-option-button decline-button"><i class="material-icons material-icons-round">clear</i></button>
+                            <button class="mdc-icon-button material-icons jscolor {valueElement:null,value:'66ccff'}" style="border-radius: 50%; background: ;">brush</button>
+                            <button onclick="" class="mdc-icon-button material-icons">clear</button>
                         </div>
                     </div>
                 </div>
@@ -306,6 +332,22 @@
 
 @section Scripts {
     <script type="text/javascript">
+
+
+    const textFields = document.querySelectorAll('.mdc-text-field');
+    for (const textField of textFields) {
+        mdc.textField.MDCTextField.attachTo(textField);
+    }
+
+    const selects = document.querySelectorAll('.mdc-select');
+    for (const select of selects) {
+        mdc.select.MDCSelect.attachTo(select);
+    }
+
+    const buttons = document.querySelectorAll('.mdc-button');
+    for (const button of buttons) {
+        mdc.ripple.MDCRipple.attachTo(button);
+    }
 
         function logout() {
             $.ajax({
@@ -359,12 +401,12 @@
             target.textContent = this.textContent;
         }
 
-        (function () {
-            links = document.getElementById("materia-select-dropdown-content").getElementsByTagName("a");
-            for (var i = 0; i < links.length; i++) {
-                links[i].onclick = selecionaMateria;
-            }
-        })();
+       //(function () {
+       //     links = document.getElementById("materia-select-dropdown-content").getElementsByTagName("a");
+       //     for (var i = 0; i < links.length; i++) {
+       //         links[i].onclick = selecionaMateria;
+       //     }
+       // })();
 
         $(document).ready(function () {
             $("#materia-select-btn").on("click", function () {

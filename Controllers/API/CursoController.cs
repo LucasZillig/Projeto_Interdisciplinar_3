@@ -48,7 +48,8 @@ namespace PI_3.Controllers.API
         public ActionResult<Curso> Add(Curso requestCurso)
         {   
 
-            if(string.IsNullOrWhiteSpace(requestCurso.CursoNome) || string.IsNullOrWhiteSpace(requestCurso.CursoDesc)){
+            if( string.IsNullOrWhiteSpace(requestCurso.CursoNome) )
+            {
 
                 return new JsonResult("Complete todos os campos") { StatusCode = 400 };
             }
@@ -70,7 +71,6 @@ namespace PI_3.Controllers.API
             var curso = _context.Curso.SingleOrDefault(x => x.CursoId == requestCurso.CursoId);
 
                 curso.CursoNome = requestCurso.CursoNome;
-                curso.CursoDesc = requestCurso.CursoDesc;
 
                 _context.Curso.Update(curso);
                 _context.SaveChanges();

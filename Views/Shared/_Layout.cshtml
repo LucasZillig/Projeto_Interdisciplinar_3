@@ -14,7 +14,7 @@
     <link type="text/css" rel="stylesheet" href="~/css/Index/micromodal.css"/>
     <script src="https://cdn.jsdelivr.net/npm/micromodal/dist/micromodal.min.js"></script>
     <script src="~/js/jscolor.js"></script>
-    <script src=~/js/monaco.js></script>
+    <!-- <script src=~/js/monaco.js></script> -->
 
 </head>
     <body>
@@ -24,7 +24,6 @@
         <environment include="Development">
             <script src="~/lib/jquery/dist/jquery.js"></script>
             <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
-            <script src="~/js/monaco-editor/min/vs/loader.js"></script>
         </environment>
         <environment exclude="Development">
             <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
@@ -33,7 +32,6 @@
                     crossorigin="anonymous"
                     integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=">
             </script>
-            <script src="~/js/monaco-editor/min/vs/loader.js"></script>
         </environment>
         @RenderSection("Scripts", required: false)
     </body>
