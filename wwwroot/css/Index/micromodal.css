@@ -24,15 +24,15 @@
   width: 90%;
   background-color: #fff;
   /* padding: 20px; */
-  max-height: 70vh;
+  max-height: 80vh;
   border-radius: 12px;
-  /* overflow-y: auto; */
-  /* overflow: hidden; */
+  overflow-y: auto;
+  overflow: hidden;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   position: relative;
-  top: -10%;
+  top: 0;
 }
 
 .modal__header {
@@ -69,6 +69,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow: auto;
 }
 
 .modal__btn {

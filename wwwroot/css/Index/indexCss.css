@@ -28,6 +28,10 @@ a{
     color: #060606;
 }
 
+textarea{
+    resize: none
+}
+
 button, input {
     background: none;
     outline: none;
@@ -269,7 +273,7 @@ button, input {
     font-weight: 600;
 }
 
-/* .new-compose {
+.new-compose {
     background: rgba(0, 0, 0, .15);
     box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.3), 0 1px 3px 1px rgba(0, 0, 0, 0.15);
     /* background: none; */
@@ -291,7 +295,7 @@ button, input {
 
 .new-compose:active {
     background: rgba(0, 0, 0, .35);
-} */
+}
 
 .section-default {
     margin-bottom: 40px;
@@ -495,7 +499,15 @@ button, input {
     font-weight: 100;
 }
 
-.account-edit-info {}
+#account-info{
+    display: flex;
+    flex-direction: column;
+}
+
+#account-edit-info {
+    display:none;
+    flex-direction: column;
+}
 
 .edit-info-button {
     background: none;
@@ -572,9 +584,9 @@ button, input {
     transition: background 0.2s cubic-bezier(0.250, 0.460, 0.450, 0.940), width 300ms cubic-bezier(0.250, 0.460, 0.450, 0.940);
 } */
 
-    .option-button:hover {
+    /* .option-button:hover {
         background: #F2F2F2;
-    }
+    } */
 
 .small-option-button {
     box-shadow: 0 1px 1px 0 rgba(65, 69, 73, 0.5), 0 1px 3px 1px rgba(65, 69, 73, 0.35);
@@ -692,6 +704,7 @@ button, input {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin: 20px 0;
 }
 
 .send-invite-searchbar{

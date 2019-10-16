@@ -35,7 +35,7 @@
                             <i class="material-icons sidebar-logo">book</i>
                         </div>
                         <button class="button-reverse mdc-button mdc-button--outlined mdc-ripple-upgraded" data-micromodal-trigger="modal-3">
-                                <span class="mdc-button__label">NOVA MATÉRIA</span>
+                                <span class="mdc-button__label">NOVO CURSO</span>
                         </button>
                     </div>
                 </div>
@@ -71,7 +71,7 @@
                                 </div>
                             </li>
                             @foreach (Curso c in ViewBag.Cursos) {
-                                <li>
+                                <li id="list-curso-@c.CursoId">
                                     <a class="list-select" href="#">
                                         <div class="materia-title-container">
                                             <div class="materia-title">@c.CursoNome</div>
@@ -133,7 +133,7 @@
                 <div class="mobile-content-header">
                     <div class="current-inbox-title">Inbox</div>
                     <button class="mdc-button mdc-button--outlined" data-micromodal-trigger="modal-2">
-                        <i class="material-icons mdc-button__icon" aria-hidden="true">add</i>
+                        <i class="material-icons mdc-button__icon" aria-hidden="true">email</i>
                         <span class="mdc-button__label">Convites</span>
                     </button>
                 </div>
@@ -201,13 +201,20 @@
                             <h2>@ViewBag.Usuario.UsuarioEmail</h2>
                         </div>
                     </div>
-                    <div class="account-edit-info">
-                        <button class="small-option-button">
-                            <i class="material-icons material-icons-round">settings_application</i>
-                        </button>
+                    <div id="account-edit-info">
+                        <div class="mdc-text-field">
+                            <input type="text" id="pre-filled" class="mdc-text-field__input" value="@ViewBag.Usuario.UsuarioNome">
+                            <label class="mdc-floating-label mdc-floating-label--float-above" for="pre-filled">Nome</label>
+                            <div class="mdc-line-ripple"></div>
+                        </div>
+                        <div class="mdc-text-field">
+                            <input type="text" id="pre-filled" class="mdc-text-field__input" value="@ViewBag.Usuario.UsuarioEmail">
+                            <label class="mdc-floating-label mdc-floating-label--float-above" for="pre-filled">E-Mail</label>
+                            <div class="mdc-line-ripple"></div>
+                        </div>
                     </div>
                 </div>
-                <button onclick="logout()" class="option-button" style="margin-top: 15px;">Fazer Log Out</button>
+                <button onclick="logout()" class="mdc-button mdc-button--outlined mdc-ripple-upgraded" style="margin-top: 15px;">Fazer Log Out</button>
             </main>
             <footer class="modal__footer">
                 <a class="footer-link">Privacy Policy</a>
@@ -245,8 +252,12 @@
                                 <div class="mdc-notched-outline__trailing"></div>
                                 </div>
                         </div>
-                        <input type="email" class="send-invite-searchbar" id="myInput" onkeyup="pesquisaDinamica()" placeholder="Buscar">
-                        <button id="enviar-convite-btn" class="option-button">Enviar Convite</button>
+                        <div class="mdc-text-field" style="margin: 20px 0;">
+                            <input type="email" id="my-text-field" class="mdc-text-field__input">
+                            <label class="mdc-floating-label" for="my-text-field">E-Mail</label>
+                            <div class="mdc-line-ripple"></div>
+                        </div>
+                        <button id="enviar-convite-btn" class="option-button mdc-button mdc-button--outlined mdc-ripple-upgraded">Enviar Convite</button>
                 </div>
                 <div class="invite-wrapper" id="list-invites">
                     <div class="invite">
@@ -257,7 +268,7 @@
                             </div>
                         </div>
                         <div class="invite-right">
-                            <button class="small-option-button decline-button"><i class="material-icons material-icons-round">clear</i></button>
+                            <button class="mdc-icon-button material-icons">clear</button>
                         </div>
                     </div>
                 </div>
@@ -270,14 +281,20 @@
     <div class="modal__overlay" tabindex="-1" data-micromodal-close>
         <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-3-title">
             <header class="modal__header">
-                <h2 class="modal__title" id="modal-2-title">Nova Matéria</h2>
+                <h2 class="modal__title" id="modal-3-title">Novo Curso</h2>
             </header>
-            <main class="modal__content" id="modal-2-content">
+            <main class="modal__content" id="modal-3-content">
                 <form id="pergunta-form" class="pergunta-form" name="form" action="/uploadmultiple" enctype="multipart/form-data" method="post">
-                    <input id="nome-pergunta" type="text" placeholder="Nome" class="input-field">
-                    <textarea id="desc-pergunta" style="resize: none;" rows="5" maxlength="3000" placeholder="Escreva aqui..." class="input-field input-textarea"></textarea>
-                    <button id="tag-color-button" style="margin: 15px auto;" class="option-button jscolor {valueElement:null,value:'66ccff'}">Cor da Tag</button>
-                    <button style="margin: auto;" type="submit" class="option-button">Criar Nova Matéria</button>
+                <div class="mdc-text-field">
+                    <input type="text" class="mdc-text-field__input" id="nome-pergunta">
+                    <label class="mdc-floating-label" for="my-text-field">Nome do Curso</label>
+                    <div class="mdc-line-ripple"></div>
+                </div>
+                    <button id="tag-color-button" class="mdc-icon-button material-icons jscolor {valueElement:null,value:'66ccff'}" style="border-radius: 50%; margin: 10px auto;">brush</button>
+                    <button id="pergunta-form" class="mdc-button mdc-button--outlined" style="margin: auto;">
+                        <i class="material-icons mdc-button__icon" aria-hidden="true">add</i>
+                        <span class="mdc-button__label">Criar Nova Matéria</span>
+                    </button>
                 </form>
             </main>
         </div>
@@ -288,23 +305,10 @@
     <div class="modal__overlay" tabindex="-1" data-micromodal-close>
         <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-4-title">
             <header class="modal__header">
-                <h2 class="modal__title" id="modal-2-title">Gerenciar Matérias</h2>
+                <h2 class="modal__title" id="modal-4-title">Gerenciar Matérias</h2>
             </header>
-            <main class="modal__content" id="modal-2-content">
-                <div class="invite-wrapper" id="edit-cursos">  
-                    <div class="invite">
-                        <div class="invite-left">
-                            <div class="invite-info-display">
-                                <h1>Banco de Dados</h1>
-                            </div>
-                        </div>
-                        <div class="invite-right">
-                            <button class="option-button jscolor {valueElement:null,value:'66ccff'}">
-                                Cor da Tag
-                            </button>
-                            <button class="small-option-button decline-button"><i class="material-icons material-icons-round">clear</i></button>
-                        </div>
-                    </div>
+            <main class="modal__content" id="modal-4-content">
+                <div class="invite-wrapper" id="edit-cursos">
                     @foreach (Curso c in ViewBag.Cursos) {
                         <div class="invite" id="edit-curso-@c.CursoId">
                             <div class="invite-left">
@@ -313,8 +317,8 @@
                                 </div>
                             </div>
                             <div class="invite-right">
-                                <button class="option-button jscolor {valueElement:null,value:'66ccff'}" style="background: @c.CursoTag;">Cor da Tag</button>
-                                <button onclick="deleteCurso(@c.CursoId)" class="small-option-button decline-button"><i class="material-icons material-icons-round">clear</i></button>
+                                <button class="mdc-icon-button material-icons jscolor {valueElement:null,value:'66ccff'}" style="border-radius: 50%; background: @c.CursoTag;">brush</button>
+                                <button onclick="deleteCurso(@c.CursoId)" class="mdc-icon-button material-icons">clear</button>
                             </div>
                         </div>
                     }
@@ -330,6 +334,14 @@
 
 @section Scripts {
     <script type="text/javascript">
+
+    function editarperfil(){
+    }
+
+    const textFields = document.querySelectorAll('.mdc-text-field');
+    for (const textField of textFields) {
+        mdc.textField.MDCTextField.attachTo(textField);
+    }
 
     const selects = document.querySelectorAll('.mdc-select');
     for (const select of selects) {
@@ -362,11 +374,9 @@
 
             var curso = {
                 'CursoNome': $('#nome-pergunta').val(),
-                'CursoDesc': $('#desc-pergunta').val(),
                 'CursoTag' : $('#tag-color-button').css( "background-color" ), 
                 'ProfessorId': @ViewBag.ProfessorId,
             }
-
             $.ajax({
                 type: 'POST',
                 url: "api/Curso",    
@@ -415,9 +425,8 @@
                     $(nomeMateria).addClass('list-select-overflowing');
                     var parent_width = nomeMateriaContainer.offsetWidth;
                     $(this).mouseover(function () {
-                        nomeMateria.style.transform = 'translateX(calc(-100% + ' + parent_width + 'px))'
+                        nomeMateria.style.transform = 'translateX(calc(-100% + ' + parent_width + 'px))';
                     });
-
                     $(this).mouseleave(function () {
                         nomeMateria.style.transform = ''
                     });
@@ -448,7 +457,7 @@
         $('#enviar-convite-btn').click( function(){
             event.preventDefault();
             
-            var email = $('.send-invite-searchbar').val();
+            var email = $('#send-invite-searchbar').val();
 
             if(email != "" && email != null){
                 $.ajax({
