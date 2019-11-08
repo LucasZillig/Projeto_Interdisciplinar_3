@@ -12,10 +12,9 @@ namespace PI_3.Models
 
         public int CursoId { get; set; }
         public Curso Curso { get; set; }
-        
+    
         public int AlunoId { get; set; }
         public Aluno Aluno { get; set; }
-
         public ICollection<Pergunta> Perguntas { get; set; }
 
     }

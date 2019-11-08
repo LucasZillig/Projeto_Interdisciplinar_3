@@ -35,7 +35,9 @@ namespace PI_3.Controllers
                 return View("IndexProf");
             }
             var aluno = _context.Aluno.Where(e => e.UsuarioId == Usuario.UsuarioId).ToList();
+            var cursosAluno = _context.CursoAluno.Where(x => x.AlunoId == aluno[0].AlunoId).ToList();
 
+            ViewBag.CursoAluno = cursosAluno;
             ViewBag.Usuario = Usuario;
             ViewBag.AlunoId = aluno[0].AlunoId;
             return View("Index");
