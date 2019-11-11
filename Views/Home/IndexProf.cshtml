@@ -8,16 +8,11 @@
 
             </div>
             <div class="header-center">
+                <div class="mobile-header-backdrop"></div>
                 <div class="mobile-header">
-                    <button class="header-button" type="button" id="mobile-sidebar-button">
-                        <i class="material-icons material-icons-round header-icon">menu</i>
-                    </button>
-                    <form class="header-search-form">
-                        <input type="text" class="header-search-bar" id="myInput" onkeyup="pesquisaDinamica()" placeholder="Buscar">
-                    </form>
-                    <button id="account-header-button" class="header-button header-icon" type="button" data-micromodal-trigger="modal-1">
-                        <img class="account-picture-small" src="~/img/porter.jpg">
-                    </button>
+                    <button class="mdc-icon-button material-icons header-icon-button" style="left: 8px" id="mobile-sidebar-button">menu</button>
+                    <button class="header-search-field" id="mobile-search-button" onclick="SearchModalFocus()">Buscar...</button>
+                    <button class="mdc-icon-button header-icon-button" style="right: 8px;" data-micromodal-trigger="modal-1"><img class="header-img-button" src="~/img/porter.jpg"></button>
                 </div>
             </div>
             <div class="header-right">
@@ -34,93 +29,60 @@
                         <div class="sidebar-logo-container">
                             <i class="material-icons sidebar-logo">book</i>
                         </div>
-                        <button class="button-reverse mdc-button mdc-button--outlined mdc-ripple-upgraded" data-micromodal-trigger="modal-3">
-                                <span class="mdc-button__label">NOVO CURSO</span>
+                        <button class="mdc-button mdc-button--outlined mdc-ripple-upgraded" style="width:100%" data-micromodal-trigger="modal-3">
+                            <span class="mdc-button__label">Novo Curso</span>
                         </button>
                     </div>
                 </div>
-                <div class="sidebar-section notfirst">
+                <div class="sidebar-section">
                     <div class="section-default">
-                        <ul class="default-list">
-                            <li>
-                                <a class="list-select" href="#">
-                                    <div class="materia-title-container">
-                                        <div class="materia-title">Inbox</div>
-                                    </div>
-                                </a>
+                        <ul id="my-list" class="mdc-list" role="listbox">
+                            <li class="mdc-list-item mdc-list-item--selected" style="padding: 0;" role="option" aria-selected="true" >
+                                <span class="mdc-list-item__text materia-title-container">
+                                    <span class="materia-title">
+                                        <span class="materia-title-inner">Inbox
+                                            <span class="selected-underscore"></span>
+                                        </span>
+                                    </span>
+                                </span>
                             </li>
-                            <li>
-                                <a class="list-select" href="#">
-                                    <div class="materia-title-container">
-                                        <div class="materia-title">Arquivadas</div>
-                                    </div>
-                                </a>
+                            <li class="mdc-list-item" style="padding: 0;" role="option" aria-selected="false" tabindex="0">
+                                <span class="mdc-list-item__text materia-title-container">
+                                    <span class="materia-title">
+                                        <span class="materia-title-inner">Arquivadas
+                                            <span class="selected-underscore"></span>
+                                        </span>
+                                    </span>
+                                </span>
                             </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="sidebar-section notfirst">
-                    <div class="section-custom">
-                        <ul class="custom-list">
-                            <li>
-                                <div class="list-title">
-                                    MATÉRIAS
-                                    <button class="edit-label" data-micromodal-trigger="modal-4">
-                                        <i class="material-icons">edit</i>
-                                    </button>
+                            <div class="list-title">Cursos
+                                <button class="mdc-icon-button material-icons" style="font-size: 18px;padding: 0;height: 30px;width: 30px;margin-right: 20px;" data-micromodal-trigger="modal-4">edit</button>
+                            </div>
+                            @foreach (Curso c in ViewBag.Cursos) {
+                            <li class="mdc-list-item list-select" role="option" aria-selected="true" tabindex="0">
+                                <span class="mdc-list-item__text materia-title-container">
+                                    <span class="materia-title">
+                                        <span class="materia-title-inner">@c.CursoNome
+                                            <span class="selected-underscore"></span>
+                                        </span>
+                                    </span>
+                                </span>
+                                <div class="list-label-container">
+                                    <span class="list-label" style="background: red"></span>
                                 </div>
                             </li>
-                            @foreach (Curso c in ViewBag.Cursos) {
-                                <li id="list-curso-@c.CursoId">
-                                    <a class="list-select" href="#">
-                                        <div class="materia-title-container">
-                                            <div class="materia-title">@c.CursoNome</div>
-                                        </div>
-                                        <div class="list-label-container">
-                                            <span class="list-label" style="background: @c.CursoTag"></span>
-                                        </div>
-                                    </a>
-                                </li>
                             }
                         </ul>
                     </div>
                 </div>
             </div>
+
             <div class="desktop-sidebar">
                 <div class="desktop-sidebar-closed">
-                    <div class="sidebar-section">
-                        <div class="section-open">
 
-                        </div>
-                    </div>
-                    <div class="sidebar-section">
-                        <div class="section-all">
-                            <div class="section-all-default">
-
-                            </div>
-                            <div class="section-all-custom">
-
-                            </div>
-                        </div>
-                    </div>
                 </div>
                 <div class="desktop-sidebar-open">
-                    <div class="sidebar-section">
-                        <div class="section-new">
-
-                        </div>
-                    </div>
-
-                    <div class="sidebar-section">
-                        <div class="section-default">
-
-                        </div>
-                    </div>
-                    <div class="sidebar-section">
-                        <div class="section-custom">
-
-                        </div>
-                    </div>
+                    
                 </div>
             </div>
 
@@ -132,7 +94,7 @@
             <div class="mobile-content">
                 <div class="mobile-content-header">
                     <div class="current-inbox-title">Inbox</div>
-                    <button class="mdc-button mdc-button--outlined" data-micromodal-trigger="modal-2">
+                    <button class="mdc-button" data-micromodal-trigger="modal-2">
                         <i class="material-icons mdc-button__icon" aria-hidden="true">email</i>
                         <span class="mdc-button__label">Convites</span>
                     </button>
@@ -192,34 +154,22 @@
 <div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
     <div class="modal__overlay" tabindex="-1" data-micromodal-close>
         <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
-            <main class="modal__content" id="modal-1-content">
-                <div class="account-banner">
-                    <div class="account-info-group">
-                        <img class="account-picture" src="~/img/porter.jpg">
-                        <div class="account-info-display">
-                            <h1>@ViewBag.Usuario.UsuarioNome</h1>
-                            <h2>@ViewBag.Usuario.UsuarioEmail</h2>
-                        </div>
-                    </div>
-                    <div id="account-edit-info">
-                        <div class="mdc-text-field">
-                            <input type="text" id="pre-filled" class="mdc-text-field__input" value="@ViewBag.Usuario.UsuarioNome">
-                            <label class="mdc-floating-label mdc-floating-label--float-above" for="pre-filled">Nome</label>
-                            <div class="mdc-line-ripple"></div>
-                        </div>
-                        <div class="mdc-text-field">
-                            <input type="text" id="pre-filled" class="mdc-text-field__input" value="@ViewBag.Usuario.UsuarioEmail">
-                            <label class="mdc-floating-label mdc-floating-label--float-above" for="pre-filled">E-Mail</label>
-                            <div class="mdc-line-ripple"></div>
-                        </div>
-                    </div>
-                </div>
-                <button onclick="logout()" class="mdc-button mdc-button--outlined mdc-ripple-upgraded" style="margin-top: 15px;">Fazer Log Out</button>
+            <header class="modal__header">
+                <button class="mdc-icon-button material-icons header-icon-button modal__close__custom" data-micromodal-close>chevron_left</button>
+                <h2 class="modal__title" id="modal-1-title">Configurações</h2>
+            </header>
+            <main class="modal__content" id="modal-1-content" style="padding: 0;">
+                <ul class="mdc-list">
+                    <li class="mdc-list-item" tabindex="0" data-micromodal-trigger="modal-6">
+                        <span class="mdc-list-item__text">Conta</span>
+                    </li>
+                    <li class="mdc-list-item" tabindex="0" data-micromodal-trigger="modal-7">
+                        <span class="mdc-list-item__text">Senha</span>
+                    </li>
+                </ul>
             </main>
             <footer class="modal__footer">
-                <a class="footer-link">Privacy Policy</a>
-                <p class="footer-link" style="margin: 0 5px;">•</p>
-                <a class="footer-link">Terms of Service</a>
+                <button onclick="logout()" class="mdc-button mdc-button--outlined mdc-ripple-upgraded" style="width: 100%; margin-top: 15px;height: 46px;width: 100%;margin-top: 15px;">Log Out</button>
             </footer>
         </div>
     </div>
@@ -229,43 +179,42 @@
     <div class="modal__overlay" tabindex="-1" data-micromodal-close>
         <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-2-title">
             <header class="modal__header">
+                <button class="mdc-icon-button material-icons header-icon-button modal__close__custom" data-micromodal-close>chevron_left</button>
                 <h2 class="modal__title" id="modal-2-title">Convites</h2>
             </header>
             <main class="modal__content" id="modal-2-content">
-                <div class="send-invite-wrapper">
-                        <div class="mdc-select mdc-select--outlined demo-width-class">
-                            <input type="hidden" name="enhanced-select">
+                <div class="form-wrapper">
+                        <div class="mdc-select demo-width-class">
+                            <input type="hidden" name="enhanced-select" id="curso-select">
                             <i class="mdc-select__dropdown-icon"></i>
                             <div class="mdc-select__selected-text"></div>
                             <div class="mdc-select__menu mdc-menu mdc-menu-surface demo-width-class">
                                 <ul class="mdc-list">
-                                <li class="mdc-list-item" data-value="grains">
-                                    DB
-                                </li>
+                                    <li class="mdc-list-item" data-value="grains">
+                                        DB
+                                    </li>
                                 </ul>
                             </div>
-                            <div class="mdc-notched-outline">
-                                <div class="mdc-notched-outline__leading"><i class="material-icons mdc-select__icon" tabindex="0" role="button">class</i></div>
+                            <span class="mdc-floating-label">Curso</span>
+                        </div>
+
+                        <label for="email-convite" class="input-label" style="margin-top: 20px;">E-Mail</label>
+                        <div class="mdc-text-field mdc-text-field--outlined">
+                            <input class="mdc-text-field__input" id="email-convite" type="email">
+                            <div class="mdc-notched-outline mdc-notched-outline--no-label">
+                                <div class="mdc-notched-outline__leading"></div>
                                 <div class="mdc-notched-outline__notch">
-                                    <label class="mdc-floating-label">Curso</label>
                                 </div>
                                 <div class="mdc-notched-outline__trailing"></div>
-                                </div>
+                            </div>
                         </div>
-                        <div class="mdc-text-field" style="margin: 20px 0;">
-                            <input type="email" id="my-text-field" class="mdc-text-field__input">
-                            <label class="mdc-floating-label" for="my-text-field">E-Mail</label>
-                            <div class="mdc-line-ripple"></div>
-                        </div>
-                        <button id="enviar-convite-btn" class="option-button mdc-button mdc-button--outlined mdc-ripple-upgraded">Enviar Convite</button>
+                        <button id="enviar-convite-btn" class="option-button mdc-button mdc-button--outlined mdc-ripple-upgraded" style="margin-top: 20px;">Enviar Convite</button>
                 </div>
                 <div class="invite-wrapper" id="list-invites">
                     <div class="invite">
                         <div class="invite-left">
                             <img class="account-picture-small" src="~/img/porter.jpg">
-                            <div class="invite-info-display">
-                                <h1>Vinicius Junqueira</h1>
-                            </div>
+                            Vinicius Junqueira
                         </div>
                         <div class="invite-right">
                             <button class="mdc-icon-button material-icons">clear</button>
@@ -281,20 +230,24 @@
     <div class="modal__overlay" tabindex="-1" data-micromodal-close>
         <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-3-title">
             <header class="modal__header">
+                <button class="mdc-icon-button material-icons header-icon-button modal__close__custom" data-micromodal-close>chevron_left</button>
                 <h2 class="modal__title" id="modal-3-title">Novo Curso</h2>
             </header>
             <main class="modal__content" id="modal-3-content">
-                <form id="pergunta-form" class="pergunta-form" name="form" action="/uploadmultiple" enctype="multipart/form-data" method="post">
-                <div class="mdc-text-field">
-                    <input type="text" class="mdc-text-field__input" id="nome-pergunta">
-                    <label class="mdc-floating-label" for="my-text-field">Nome do Curso</label>
-                    <div class="mdc-line-ripple"></div>
-                </div>
-                    <button id="tag-color-button" class="mdc-icon-button material-icons jscolor {valueElement:null,value:'66ccff'}" style="border-radius: 50%; margin: 10px auto;">brush</button>
-                    <button id="pergunta-form" class="mdc-button mdc-button--outlined" style="margin: auto;">
-                        <i class="material-icons mdc-button__icon" aria-hidden="true">add</i>
-                        <span class="mdc-button__label">Criar Nova Matéria</span>
-                    </button>
+                <form id="curso-form" class="form-wrapper" name="form" action="/uploadmultiple" enctype="multipart/form-data" method="post">
+                    <label for="nome-pergunta" class="input-label" style="margin-top: -10px;">Nome do Curso</label>
+                    <div class="mdc-text-field mdc-text-field--outlined">
+                        <input class="mdc-text-field__input" id="nome-curso" type="text">
+                        <div class="mdc-notched-outline mdc-notched-outline--no-label">
+                            <div class="mdc-notched-outline__leading"></div>
+                            <div class="mdc-notched-outline__notch"></div>
+                            <div class="mdc-notched-outline__trailing"></div>
+                        </div>
+                    </div>
+                <button type="submit" class="mdc-button mdc-button--outlined" style="margin-top: 20px;">
+                    <i class="material-icons mdc-button__icon" aria-hidden="true">add</i>
+                    <span class="mdc-button__label">Criar Novo Curso</span>
+                </button>
                 </form>
             </main>
         </div>
@@ -305,25 +258,136 @@
     <div class="modal__overlay" tabindex="-1" data-micromodal-close>
         <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-4-title">
             <header class="modal__header">
-                <h2 class="modal__title" id="modal-4-title">Gerenciar Matérias</h2>
+                <button class="mdc-icon-button material-icons header-icon-button modal__close__custom" data-micromodal-close>chevron_left</button>
+                <h2 class="modal__title" id="modal-4-title">Gerenciar Curso</h2>
             </header>
             <main class="modal__content" id="modal-4-content">
                 <div class="invite-wrapper" id="edit-cursos">
                     @foreach (Curso c in ViewBag.Cursos) {
                         <div class="invite" id="edit-curso-@c.CursoId">
                             <div class="invite-left">
-                                <div class="invite-info-display">
-                                    <h1>@c.CursoNome</h1>
-                                </div>
+                                @c.CursoNome
                             </div>
                             <div class="invite-right">
-                                <button class="mdc-icon-button material-icons jscolor {valueElement:null,value:'66ccff'}" style="border-radius: 50%; background: @c.CursoTag;">brush</button>
+                                <button class="mdc-icon-button material-icons">edit</button>
                                 <button onclick="deleteCurso(@c.CursoId)" class="mdc-icon-button material-icons">clear</button>
                             </div>
                         </div>
                     }
                 </div>
             </main>
+        </div>
+    </div>
+</div>
+
+<div class="modal micromodal-slide" id="modal-5" aria-hidden="true">
+    <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+        <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-5-title">
+            <header class="modal__header">
+                <button class="mdc-icon-button material-icons header-icon-button modal__close__custom" onclick="SearchModalClose()">chevron_left</button>
+                <input class="modal__header__searchbar" type="text" id="myInput" onkeyup="myFunction()" placeholder="Buscar...">
+            </header>
+            <main class="modal__content" id="modal-5-content">
+
+            </main>
+        </div>
+    </div>
+</div>
+
+<div class="modal micromodal-slide" id="modal-6" aria-hidden="true">
+    <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+        <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-6-title">
+            <header class="modal__header">
+                <button class="mdc-icon-button material-icons header-icon-button modal__close__custom" data-micromodal-trigger="modal-1" data-micromodal-close>chevron_left</button>
+                <h2 class="modal__title" id="modal-6-title">Conta</h2>
+            </header>
+            <main class="modal__content" id="modal-6-content">
+                <form id="perfil-form" class="form-wrapper" name="form" action="/uploadmultiple" enctype="multipart/form-data" method="post">
+                    <label for="nome-usuario" class="input-label" style="margin-top: -10px;">Nome</label>
+                    <div class="mdc-text-field mdc-text-field--outlined">
+                        <input class="mdc-text-field__input" id="nome-usuario" type="text">
+                        <div class="mdc-notched-outline mdc-notched-outline--no-label">
+                            <div class="mdc-notched-outline__leading"></div>
+                            <div class="mdc-notched-outline__notch"></div>
+                            <div class="mdc-notched-outline__trailing"></div>
+                        </div>
+                    </div>
+                    <label for="email-usuario" class="input-label">E-Mail</label>
+                    <div class="mdc-text-field mdc-text-field--outlined">
+                        <input class="mdc-text-field__input" id="email-usuario" type="email">
+                        <div class="mdc-notched-outline mdc-notched-outline--no-label">
+                            <div class="mdc-notched-outline__leading"></div>
+                            <div class="mdc-notched-outline__notch"></div>
+                            <div class="mdc-notched-outline__trailing"></div>
+                        </div>
+                    </div>
+                    <!-- <label for="senha-usuario" class="input-label">Senha</label>
+                    <div class="mdc-text-field mdc-text-field--outlined mdc-text-field--with-trailing-icon">
+                        <i class="material-icons mdc-text-field__icon">lock</i>
+                        <input class="mdc-text-field__input" id="senha-usuario" type="password">
+                        <div class="mdc-notched-outline mdc-notched-outline--no-label">
+                            <div class="mdc-notched-outline__leading"></div>
+                            <div class="mdc-notched-outline__notch"></div>
+                            <div class="mdc-notched-outline__trailing"></div>
+                        </div>
+                    </div>
+                    <label for="senha-confirmar" class="input-label">Repetir Senha</label>
+                    <div class="mdc-text-field mdc-text-field--outlined mdc-text-field--with-trailing-icon">
+                        <i class="material-icons mdc-text-field__icon">lock</i>
+                        <input class="mdc-text-field__input" id="senha-confirmar" type="password">
+                        <div class="mdc-notched-outline mdc-notched-outline--no-label">
+                            <div class="mdc-notched-outline__leading"></div>
+                            <div class="mdc-notched-outline__notch"></div>
+                            <div class="mdc-notched-outline__trailing"></div>
+                        </div>
+                    </div> -->
+
+                    <button type="submit" class="mdc-button mdc-button--outlined" style="margin-top: 20px;">
+                        <span class="mdc-button__label">Salvar</span>
+                    </button>
+                </form>
+            </main>
+            <footer class="modal__footer"></footer>
+        </div>
+    </div>
+</div>
+
+<div class="modal micromodal-slide" id="modal-7" aria-hidden="true">
+    <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+        <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-7-title">
+            <header class="modal__header">
+                <button class="mdc-icon-button material-icons header-icon-button modal__close__custom" data-micromodal-trigger="modal-1" data-micromodal-close>chevron_left</button>
+                <h2 class="modal__title" id="modal-7-title">Senha</h2>
+            </header>
+            <main class="modal__content" id="modal-7-content">
+                <form id="perfil-form" class="form-wrapper" name="form" action="/uploadmultiple" enctype="multipart/form-data" method="post">
+                    <label for="senha-usuario" class="input-label" style="margin-top: -10px;">Senha</label>
+                    <div class="mdc-text-field mdc-text-field--outlined mdc-text-field--with-trailing-icon">
+                        <i class="material-icons mdc-text-field__icon">lock</i>
+                        <input class="mdc-text-field__input" id="senha-usuario" type="password">
+                        <div class="mdc-notched-outline mdc-notched-outline--no-label">
+                            <div class="mdc-notched-outline__leading"></div>
+                            <div class="mdc-notched-outline__notch"></div>
+                            <div class="mdc-notched-outline__trailing"></div>
+                        </div>
+                    </div>
+                    <label for="senha-confirmar" class="input-label">Repetir Senha</label>
+                    <div class="mdc-text-field mdc-text-field--outlined mdc-text-field--with-trailing-icon">
+                        <i class="material-icons mdc-text-field__icon">lock</i>
+                        <input class="mdc-text-field__input" id="senha-confirmar" type="password">
+                        <div class="mdc-notched-outline mdc-notched-outline--no-label">
+                            <div class="mdc-notched-outline__leading"></div>
+                            <div class="mdc-notched-outline__notch"></div>
+                            <div class="mdc-notched-outline__trailing"></div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="mdc-button mdc-button--outlined" style="margin-top: 20px;">
+                        <span class="mdc-button__label">Salvar</span>
+                    </button>
+                </form>
+            </main>
+            <footer class="modal__footer"></footer>
         </div>
     </div>
 </div>
@@ -353,6 +417,14 @@
         mdc.ripple.MDCRipple.attachTo(button);
     }
 
+    const lists = document.querySelectorAll('.mdc-list');
+    const listItems = document.querySelectorAll('.mdc-list-item');
+    for (const list of lists) {
+        mdc.list.MDCList.attachTo(list);
+        for (const listItem of listItems){
+            mdc.ripple.MDCRipple.attachTo(listItem);
+        }
+    }
         //logout
         function logout() {
             $.ajax({
@@ -395,16 +467,22 @@
 
         MicroModal.init({
             awaitCloseAnimation: true,
+            disableFocus: true,
+            disableScroll: true
         });
 
-        $(document).ready(function () {
-            
-            //MOBILE - BOTAO VER PERFIL
-            // $("#account-header-button").click(function(){
-            //      $(".account-modal-wrapper").fadeToggle(300);
-            // });
-            //-------------------------------------------------------------
+        function SearchModalFocus(){
+            $(".mobile-header-backdrop").toggleClass("mobile-header-backdrop--after");
+            setTimeout(function(){
+            MicroModal.show( 'modal-5'); $("#myInput").focus();}, 150 );
+        }
 
+        function SearchModalClose(){
+            MicroModal.close('modal-5');
+            $(".mobile-header-backdrop").removeClass("mobile-header-backdrop--after");
+        }
+
+        $(document).ready(function () {
             //MOBILE - ABRIR / FECHAR SIDEBAR
             $("#mobile-sidebar-button").click(function () {
                 $("#overlay").fadeToggle(300);
@@ -419,11 +497,12 @@
 
             //FORMATO MOBILE - HOVER PARA NOMES GRANDES DE INBOX            TODO: MOBILE GESTURES (on hold)
             $(".list-select").hover(function () {
-                var nomeMateriaContainer = $(this).children('.materia-title-container')[0];
-                var nomeMateria = $(this).children('.materia-title-container').children('.materia-title')[0];
-                if (nomeMateria.offsetWidth < nomeMateria.scrollWidth) {
+                var nomeMateriaContainer = $(this).find('.materia-title-container')[0];
+                var nomeMateria = $(this).find('.materia-title-container').find('.materia-title')[0];
+
+                if (nomeMateria.offsetWidth - 47 < nomeMateria.scrollWidth) {
                     $(nomeMateria).addClass('list-select-overflowing');
-                    var parent_width = nomeMateriaContainer.offsetWidth;
+                    var parent_width = nomeMateriaContainer.offsetWidth - 47;
                     $(this).mouseover(function () {
                         nomeMateria.style.transform = 'translateX(calc(-100% + ' + parent_width + 'px))';
                     });

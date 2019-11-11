@@ -1,21 +1,17 @@
+@using PI_3.Models;
 <div class="wrapper">
-    <!--HEADER-->
+    <!--HEADER-->    
     <div class="header-wrapper">
         <div class="header">
             <div class="header-left">
 
             </div>
             <div class="header-center">
+                <div class="mobile-header-backdrop"></div>
                 <div class="mobile-header">
-                    <button class="header-button" type="button" id="mobile-sidebar-button">
-                        <i class="material-icons material-icons-round header-icon">menu</i>
-                    </button>
-                    <form class="header-search-form">
-                        <input type="text" class="header-search-bar" id="myInput" onkeyup="pesquisaDinamica()" placeholder="Buscar">
-                    </form>
-                    <button id="account-header-button" class="header-button header-icon" type="button" data-micromodal-trigger="modal-1">
-                        <img class="account-picture-small" src="~/img/porter.jpg">
-                    </button>
+                    <button class="mdc-icon-button material-icons header-icon-button" style="left: 8px" id="mobile-sidebar-button">menu</button>
+                    <button class="header-search-field" id="mobile-search-button" onclick="SearchModalFocus()">Buscar...</button>
+                    <button class="mdc-icon-button header-icon-button" style="right: 8px;" data-micromodal-trigger="modal-1"><img class="header-img-button" src="~/img/porter.jpg"></button>
                 </div>
             </div>
             <div class="header-right">
@@ -32,112 +28,60 @@
                         <div class="sidebar-logo-container">
                             <i class="material-icons sidebar-logo">book</i>
                         </div>
-                        <button class="button-reverse mdc-button mdc-button--outlined mdc-ripple-upgraded" data-micromodal-trigger="modal-3">
-                                <span class="mdc-button__label">ESCREVER</span>
+                        <button class="mdc-button mdc-button--outlined mdc-ripple-upgraded" style="width:100%" data-micromodal-trigger="modal-3">
+                            <span class="mdc-button__label">Escrever Pergunta</span>
                         </button>
                     </div>
                 </div>
-                <div class="sidebar-section notfirst">
+                <div class="sidebar-section">
                     <div class="section-default">
-                        <ul class="default-list">
-                            <li>
-                                <a class="list-select" href="#">
-                                    <div class="materia-title-container">
-                                        <div class="materia-title">Inbox</div>
-                                    </div>
-                                </a>
+                        <ul id="my-list" class="mdc-list" role="listbox">
+                            <li class="mdc-list-item mdc-list-item--selected" style="padding: 0;" role="option" aria-selected="true" >
+                                <span class="mdc-list-item__text materia-title-container">
+                                    <span class="materia-title">
+                                        <span class="materia-title-inner">Inbox
+                                            <span class="selected-underscore"></span>
+                                        </span>
+                                    </span>
+                                </span>
                             </li>
-                            <li>
-                                <a class="list-select" href="#">
-                                    <div class="materia-title-container">
-                                        <div class="materia-title">Arquivadas</div>
-                                    </div>
-                                </a>
+                            <li class="mdc-list-item" style="padding: 0;" role="option" aria-selected="false" tabindex="0">
+                                <span class="mdc-list-item__text materia-title-container">
+                                    <span class="materia-title">
+                                        <span class="materia-title-inner">Arquivadas
+                                            <span class="selected-underscore"></span>
+                                        </span>
+                                    </span>
+                                </span>
                             </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="sidebar-section notfirst">
-                    <div class="section-custom">
-                        <ul class="custom-list">
-                            <li>
-                                <div class="list-title">
-                                    MATÉRIAS
-                                    <button class="edit-label" data-micromodal-trigger="modal-4">
-                                        <i class="material-icons">edit</i>
-                                    </button>
+                            <div class="list-title">Cursos
+                                <button class="mdc-icon-button material-icons" style="font-size: 18px;padding: 0;height: 30px;width: 30px;margin-right: 20px;" data-micromodal-trigger="modal-4">edit</button>
+                            </div>
+                            @foreach (CursoAluno c in ViewBag.CursoAluno) {
+                            <li class="mdc-list-item list-select" role="option" aria-selected="true" tabindex="0">
+                                <span class="mdc-list-item__text materia-title-container">
+                                    <span class="materia-title">
+                                        <span class="materia-title-inner">@c.Curso.CursoNome
+                                            <span class="selected-underscore"></span>
+                                        </span>
+                                    </span>
+                                </span>
+                                <div class="list-label-container">
+                                    <span class="list-label" style="background: red"></span>
                                 </div>
                             </li>
-                            <li>
-                                <a class="list-select" href="#">
-                                    <div class="materia-title-container">
-                                        <div class="materia-title">Banco de Dados</div>
-                                    </div>
-                                    <div class="list-label-container">
-                                        <span class="list-label" style="background: #ea4c89;"></span>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a class="list-select" href="#">
-                                    <div class="materia-title-container">
-                                        <div class="materia-title">Programação Web</div>
-                                    </div>
-                                    <div class="list-label-container">
-                                        <span class="list-label" style="background: #673ab7;">
-                                        </span>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a class="list-select" href="#">
-                                    <div class="materia-title-container">
-                                        <div class="materia-title">Arquitetura da Informação</div>
-                                    </div>
-                                    <div class="list-label-container">
-                                        <span class="list-label" style="background: #03a9f4;"></span>
-                                    </div>
-                                </a>
-                            </li>
+                            }
                         </ul>
                     </div>
                 </div>
             </div>
+
             <div class="desktop-sidebar">
                 <div class="desktop-sidebar-closed">
-                    <div class="sidebar-section">
-                        <div class="section-open">
 
-                        </div>
-                    </div>
-                    <div class="sidebar-section">
-                        <div class="section-all">
-                            <div class="section-all-default">
-
-                            </div>
-                            <div class="section-all-custom">
-
-                            </div>
-                        </div>
-                    </div>
                 </div>
                 <div class="desktop-sidebar-open">
-                    <div class="sidebar-section">
-                        <div class="section-new">
-
-                        </div>
-                    </div>
-
-                    <div class="sidebar-section">
-                        <div class="section-default">
-
-                        </div>
-                    </div>
-                    <div class="sidebar-section">
-                        <div class="section-custom">
-
-                        </div>
-                    </div>
+                    
                 </div>
             </div>
 
@@ -149,7 +93,7 @@
             <div class="mobile-content">
                 <div class="mobile-content-header">
                     <div class="current-inbox-title">Inbox</div>
-                    <button class="mdc-button mdc-button--outlined" data-micromodal-trigger="modal-2">
+                    <button class="mdc-button" data-micromodal-trigger="modal-2">
                         <i class="material-icons mdc-button__icon" aria-hidden="true">email</i>
                         <span class="mdc-button__label">Convites</span>
                     </button>
@@ -176,6 +120,25 @@
                                     </div>
                                 </a>
                             </div>
+                            <div class="mail-item-wrapper">
+                                <a class="mail-item-container">
+                                    <div class="mail-item-left">
+                                        <img class="account-picture" src="~/img/porter.jpg">
+                                        <span class="tag-icon" style="background: #03a9f4;">
+                                        </span>
+                                    </div>
+                                    <div class="mail-item-right">
+                                        <div class="mail-item-header">
+                                            <div class="mail-sender">Lucas Zillig</div>
+                                            <div class="mail-time">17:35</div>
+                                        </div>
+                                        <div class="mail-subject">Duvida sobre big data</div>
+                                        <div class="mail-summary-text">
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -190,34 +153,22 @@
 <div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
     <div class="modal__overlay" tabindex="-1" data-micromodal-close>
         <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
-            <main class="modal__content" id="modal-1-content">
-                <div class="account-banner">
-                    <div class="account-info-group">
-                        <img class="account-picture" src="~/img/porter.jpg">
-                        <div class="account-info-display">
-                            <h1>@ViewBag.Usuario.UsuarioNome</h1>
-                            <h2>@ViewBag.Usuario.UsuarioEmail</h2>
-                        </div>
-                    </div>
-                    <div id="account-edit-info">
-                        <div class="mdc-text-field">
-                            <input type="text" id="pre-filled" class="mdc-text-field__input" value="@ViewBag.Usuario.UsuarioNome">
-                            <label class="mdc-floating-label mdc-floating-label--float-above" for="pre-filled">Nome</label>
-                            <div class="mdc-line-ripple"></div>
-                        </div>
-                        <div class="mdc-text-field">
-                            <input type="text" id="pre-filled" class="mdc-text-field__input" value="@ViewBag.Usuario.UsuarioEmail">
-                            <label class="mdc-floating-label mdc-floating-label--float-above" for="pre-filled">E-Mail</label>
-                            <div class="mdc-line-ripple"></div>
-                        </div>
-                    </div>
-                </div>
-                <button onclick="logout()" class="mdc-button mdc-button--outlined mdc-ripple-upgraded" style="margin-top: 15px;">Fazer Log Out</button>
+            <header class="modal__header">
+                <button class="mdc-icon-button material-icons header-icon-button modal__close__custom" data-micromodal-close>chevron_left</button>
+                <h2 class="modal__title" id="modal-1-title">Configurações</h2>
+            </header>
+            <main class="modal__content" id="modal-1-content" style="padding: 0;">
+                <ul class="mdc-list">
+                    <li class="mdc-list-item" tabindex="0" data-micromodal-trigger="modal-6">
+                        <span class="mdc-list-item__text">Conta</span>
+                    </li>
+                    <li class="mdc-list-item" tabindex="0" data-micromodal-trigger="modal-7">
+                        <span class="mdc-list-item__text">Senha</span>
+                    </li>
+                </ul>
             </main>
             <footer class="modal__footer">
-                <a class="footer-link">Privacy Policy</a>
-                <p class="footer-link" style="margin: 0 5px;">•</p>
-                <a class="footer-link">Terms of Service</a>
+                <button onclick="logout()" class="mdc-button mdc-button--outlined mdc-ripple-upgraded" style="width: 100%; margin-top: 15px;height: 46px;width: 100%;margin-top: 15px;">Log Out</button>
             </footer>
         </div>
     </div>
@@ -227,17 +178,15 @@
     <div class="modal__overlay" tabindex="-1" data-micromodal-close>
         <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-2-title">
             <header class="modal__header">
+                <button class="mdc-icon-button material-icons header-icon-button modal__close__custom" data-micromodal-close>chevron_left</button>
                 <h2 class="modal__title" id="modal-2-title">Convites</h2>
             </header>
             <main class="modal__content" id="modal-2-content">
-                <div class="invite-wrapper">
+                <div class="invite-wrapper" id="list-invites">
                     <div class="invite">
                         <div class="invite-left">
-                            <img class="account-picture-small" src="~/img/porter.jpg">
-                            <div class="invite-info-display">
-                                <h1>Banco de Dados</h1>
-                                <h2>Jorge Surian</h2>
-                            </div>
+                            Banco de Dados
+                            <!-- Colocar nome do professor aqui -->
                         </div>
                         <div class="invite-right">
                             <button class="mdc-icon-button material-icons">check</button>
@@ -254,47 +203,54 @@
     <div class="modal__overlay" tabindex="-1" data-micromodal-close>
         <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-3-title">
             <header class="modal__header">
-                <h2 class="modal__title" id="modal-2-title">Nova Pergunta</h2>
+                <button class="mdc-icon-button material-icons header-icon-button modal__close__custom" data-micromodal-close>chevron_left</button>
+                <h2 class="modal__title" id="modal-3-title">Escrever Pergunta</h2>
             </header>
-            <main class="modal__content" id="modal-2-content">
-                <form id="pergunta-form" class="pergunta-form" name="form" enctype="multipart/form-data" method="post">
-                    <div class="mdc-select mdc-select--outlined demo-width-class">
-                        <input type="hidden" name="enhanced-select">
+            <main class="modal__content" id="modal-3-content">
+                <form id="pergunta-form" class="form-wrapper" name="form" enctype="multipart/form-data" method="post">
+                    <label for="nome-pergunta" class="input-label" style="margin-top: -10px; margin-bottom: 5px;">Curso</label>
+                    <div class="mdc-select demo-width-class">
+                        <input type="hidden" name="enhanced-select" id="curso-select">
                         <i class="mdc-select__dropdown-icon"></i>
                         <div class="mdc-select__selected-text"></div>
                         <div class="mdc-select__menu mdc-menu mdc-menu-surface demo-width-class">
                             <ul class="mdc-list">
-                                <li class="mdc-list-item" data-value="grains">DB</li>
+                                <li class="mdc-list-item" data-value="grains">
+                                    DB
+                                </li>
                             </ul>
                         </div>
-                        <div class="mdc-notched-outline">
-                            <div class="mdc-notched-outline__leading"><i class="material-icons mdc-select__icon" tabindex="0" role="button">class</i></div>
-                            <div class="mdc-notched-outline__notch">
-                                <label class="mdc-floating-label">Curso</label>
-                            </div>
+                        <span class="mdc-floating-label">Selecionar...</span>
+                    </div>
+
+                    <label for="nome-pergunta" class="input-label">Assunto</label>
+                    <div class="mdc-text-field mdc-text-field--outlined">
+                        <input class="mdc-text-field__input" id="assunto-pergunta" type="text">
+                        <div class="mdc-notched-outline mdc-notched-outline--no-label">
+                            <div class="mdc-notched-outline__leading"></div>
+                            <div class="mdc-notched-outline__notch"></div>
                             <div class="mdc-notched-outline__trailing"></div>
-                            </div>
+                        </div>
                     </div>
-                    <div class="mdc-text-field" style="margin: 20px 0px;">
-                        <input type="text" id="my-text-field" class="mdc-text-field__input">
-                        <label class="mdc-floating-label" for="my-text-field">Assunto</label>
-                        <div class="mdc-line-ripple"></div>
-                    </div>
-                    <div class="mdc-text-field mdc-text-field--textarea">
-                        <textarea id="textarea" class="mdc-text-field__input" rows="8" cols="40"></textarea>
+                    <div class="mdc-text-field mdc-text-field--textarea" style="margin-top: 20px">
+                        <textarea id="texto-pergunta" class="mdc-text-field__input" rows="8" cols="40"></textarea>
                         <div class="mdc-notched-outline">
                             <div class="mdc-notched-outline__leading"></div>
                             <div class="mdc-notched-outline__notch">
-                            <label for="textarea" class="mdc-floating-label">Descrição</label>
+                            <label for="textarea" class="mdc-floating-label"><b>Descrição</b></label>
                             </div>
                             <div class="mdc-notched-outline__trailing"></div>
                         </div>
                     </div>
-                    <div class="upload-btn-wrapper">
-                        <input id="files" name="files" type="file" multiple/>
-                        <button class="option-button">Upload a file</button>
-                    </div>
-                    <button style="margin: auto;" type="submit" class="option-button">Enviar</button>
+
+                    <label class="mdc-button mdc-button--outlined" style="margin-top: 20px;">
+                        <input id="files" class="file-upload-btn" name="files" type="file" multiple/>
+                        <span class="mdc-button__label">Enviar Arquivos</span>
+                    </label>
+                    
+                    <button type="submit" class="mdc-button mdc-button--outlined" style="margin-top: 20px;">
+                        <span class="mdc-button__label">Enviar</span>
+                    </button>
                 </form>
             </main>
         </div>
@@ -305,24 +261,136 @@
     <div class="modal__overlay" tabindex="-1" data-micromodal-close>
         <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-4-title">
             <header class="modal__header">
-                <h2 class="modal__title" id="modal-2-title">Gerenciar Matérias</h2>
+                <button class="mdc-icon-button material-icons header-icon-button modal__close__custom" data-micromodal-close>chevron_left</button>
+                <h2 class="modal__title" id="modal-4-title">Gerenciar Curso</h2>
             </header>
-            <main class="modal__content" id="modal-2-content">
-                <div class="invite-wrapper">
-                    
-                    <div class="invite">
-                        <div class="invite-left">
-                            <div class="invite-info-display">
-                                <h1>Banco de Dados</h1>
+            <main class="modal__content" id="modal-4-content">
+                <div class="invite-wrapper" id="edit-cursos">
+                    @foreach (CursoAluno c in ViewBag.CursoAluno) {
+                        <div class="invite" id="edit-curso-@c.CursoId">
+                            <div class="invite-left">
+                                @c.Curso.CursoNome
+                            </div>
+                            <div class="invite-right">
+                                <button class="mdc-icon-button material-icons">edit</button>
+                                <button onclick="deleteCurso(@c.CursoId)" class="mdc-icon-button material-icons">clear</button>
                             </div>
                         </div>
-                        <div class="invite-right">
-                            <button class="mdc-icon-button material-icons jscolor {valueElement:null,value:'66ccff'}" style="border-radius: 50%; background: ;">brush</button>
-                            <button onclick="" class="mdc-icon-button material-icons">clear</button>
-                        </div>
-                    </div>
+                    }
                 </div>
             </main>
+        </div>
+    </div>
+</div>
+
+<div class="modal micromodal-slide" id="modal-5" aria-hidden="true">
+    <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+        <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-5-title">
+            <header class="modal__header">
+                <button class="mdc-icon-button material-icons header-icon-button modal__close__custom" onclick="SearchModalClose()">chevron_left</button>
+                <input class="modal__header__searchbar" type="text" id="myInput" onkeyup="myFunction()" placeholder="Buscar...">
+            </header>
+            <main class="modal__content" id="modal-5-content">
+
+            </main>
+        </div>
+    </div>
+</div>
+
+<div class="modal micromodal-slide" id="modal-6" aria-hidden="true">
+    <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+        <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-6-title">
+            <header class="modal__header">
+                <button class="mdc-icon-button material-icons header-icon-button modal__close__custom" data-micromodal-trigger="modal-1" data-micromodal-close>chevron_left</button>
+                <h2 class="modal__title" id="modal-6-title">Conta</h2>
+            </header>
+            <main class="modal__content" id="modal-6-content">
+                <form id="perfil-form" class="form-wrapper" name="form" action="/uploadmultiple" enctype="multipart/form-data" method="post">
+                    <label for="nome-usuario" class="input-label" style="margin-top: -10px;">Nome</label>
+                    <div class="mdc-text-field mdc-text-field--outlined">
+                        <input class="mdc-text-field__input" id="nome-usuario" type="text">
+                        <div class="mdc-notched-outline mdc-notched-outline--no-label">
+                            <div class="mdc-notched-outline__leading"></div>
+                            <div class="mdc-notched-outline__notch"></div>
+                            <div class="mdc-notched-outline__trailing"></div>
+                        </div>
+                    </div>
+                    <label for="email-usuario" class="input-label">E-Mail</label>
+                    <div class="mdc-text-field mdc-text-field--outlined">
+                        <input class="mdc-text-field__input" id="email-usuario" type="email">
+                        <div class="mdc-notched-outline mdc-notched-outline--no-label">
+                            <div class="mdc-notched-outline__leading"></div>
+                            <div class="mdc-notched-outline__notch"></div>
+                            <div class="mdc-notched-outline__trailing"></div>
+                        </div>
+                    </div>
+                    <!-- <label for="senha-usuario" class="input-label">Senha</label>
+                    <div class="mdc-text-field mdc-text-field--outlined mdc-text-field--with-trailing-icon">
+                        <i class="material-icons mdc-text-field__icon">lock</i>
+                        <input class="mdc-text-field__input" id="senha-usuario" type="password">
+                        <div class="mdc-notched-outline mdc-notched-outline--no-label">
+                            <div class="mdc-notched-outline__leading"></div>
+                            <div class="mdc-notched-outline__notch"></div>
+                            <div class="mdc-notched-outline__trailing"></div>
+                        </div>
+                    </div>
+                    <label for="senha-confirmar" class="input-label">Repetir Senha</label>
+                    <div class="mdc-text-field mdc-text-field--outlined mdc-text-field--with-trailing-icon">
+                        <i class="material-icons mdc-text-field__icon">lock</i>
+                        <input class="mdc-text-field__input" id="senha-confirmar" type="password">
+                        <div class="mdc-notched-outline mdc-notched-outline--no-label">
+                            <div class="mdc-notched-outline__leading"></div>
+                            <div class="mdc-notched-outline__notch"></div>
+                            <div class="mdc-notched-outline__trailing"></div>
+                        </div>
+                    </div> -->
+
+                    <button type="submit" class="mdc-button mdc-button--outlined" style="margin-top: 20px;">
+                        <span class="mdc-button__label">Salvar</span>
+                    </button>
+                </form>
+            </main>
+            <footer class="modal__footer"></footer>
+        </div>
+    </div>
+</div>
+
+<div class="modal micromodal-slide" id="modal-7" aria-hidden="true">
+    <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+        <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-7-title">
+            <header class="modal__header">
+                <button class="mdc-icon-button material-icons header-icon-button modal__close__custom" data-micromodal-trigger="modal-1" data-micromodal-close>chevron_left</button>
+                <h2 class="modal__title" id="modal-7-title">Senha</h2>
+            </header>
+            <main class="modal__content" id="modal-7-content">
+                <form id="perfil-form" class="form-wrapper" name="form" action="/uploadmultiple" enctype="multipart/form-data" method="post">
+                    <label for="senha-usuario" class="input-label" style="margin-top: -10px;">Senha</label>
+                    <div class="mdc-text-field mdc-text-field--outlined mdc-text-field--with-trailing-icon">
+                        <i class="material-icons mdc-text-field__icon">lock</i>
+                        <input class="mdc-text-field__input" id="senha-usuario" type="password">
+                        <div class="mdc-notched-outline mdc-notched-outline--no-label">
+                            <div class="mdc-notched-outline__leading"></div>
+                            <div class="mdc-notched-outline__notch"></div>
+                            <div class="mdc-notched-outline__trailing"></div>
+                        </div>
+                    </div>
+                    <label for="senha-confirmar" class="input-label">Repetir Senha</label>
+                    <div class="mdc-text-field mdc-text-field--outlined mdc-text-field--with-trailing-icon">
+                        <i class="material-icons mdc-text-field__icon">lock</i>
+                        <input class="mdc-text-field__input" id="senha-confirmar" type="password">
+                        <div class="mdc-notched-outline mdc-notched-outline--no-label">
+                            <div class="mdc-notched-outline__leading"></div>
+                            <div class="mdc-notched-outline__notch"></div>
+                            <div class="mdc-notched-outline__trailing"></div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="mdc-button mdc-button--outlined" style="margin-top: 20px;">
+                        <span class="mdc-button__label">Salvar</span>
+                    </button>
+                </form>
+            </main>
+            <footer class="modal__footer"></footer>
         </div>
     </div>
 </div>
@@ -333,7 +401,9 @@
 @section Scripts {
     <script type="text/javascript">
 
-
+    function editarperfil(){
+    }
+    
     const textFields = document.querySelectorAll('.mdc-text-field');
     for (const textField of textFields) {
         mdc.textField.MDCTextField.attachTo(textField);
@@ -347,6 +417,16 @@
     const buttons = document.querySelectorAll('.mdc-button');
     for (const button of buttons) {
         mdc.ripple.MDCRipple.attachTo(button);
+    }
+
+    const lists = document.querySelectorAll('.mdc-list');
+
+    const listItems = document.querySelectorAll('.mdc-list-item');
+    for (const list of lists) {
+        mdc.list.MDCList.attachTo(list);
+        for (const listItem of listItems){
+            mdc.ripple.MDCRipple.attachTo(listItem);
+        }
     }
 
         function logout() {
@@ -392,7 +472,21 @@
 
         MicroModal.init({
             awaitCloseAnimation: true,
+            disableFocus: true,
+            disableScroll: true
         });
+
+        function SearchModalFocus(){
+            $(".mobile-header-backdrop").toggleClass("mobile-header-backdrop--after");
+            setTimeout(function(){
+            MicroModal.show( 'modal-5'); $("#myInput").focus();}, 150 );
+        }
+
+        
+        function SearchModalClose(){
+            MicroModal.close('modal-5');
+            $(".mobile-header-backdrop").removeClass("mobile-header-backdrop--after");
+        }
 
         function selecionaMateria(e) {
             var id = this.getAttribute("data-id");
@@ -401,34 +495,7 @@
             target.textContent = this.textContent;
         }
 
-       //(function () {
-       //     links = document.getElementById("materia-select-dropdown-content").getElementsByTagName("a");
-       //     for (var i = 0; i < links.length; i++) {
-       //         links[i].onclick = selecionaMateria;
-       //     }
-       // })();
-
         $(document).ready(function () {
-            $("#materia-select-btn").on("click", function () {
-                $("#materia-select-btn").toggleClass("materia-select-btn-after");
-            });
-
-            const $menu = $('.materia-select-check');
-
-            $(document).mouseup(function (e) {
-                if (!$menu.is(e.target) && $menu.has(e.target).length === 0 && $menu.prop("checked", true))//se o target nao for o container ou um dos filhos
-                {
-                    $menu.prop("checked", false);
-                    $(".materia-select-btn").removeClass("materia-select-btn-after");
-                }
-            });
-
-            //MOBILE - BOTAO VER PERFIL
-            // $("#account-header-button").click(function(){
-            //      $(".account-modal-wrapper").fadeToggle(300);
-            // });
-            //-------------------------------------------------------------
-
             //MOBILE - ABRIR / FECHAR SIDEBAR
             $("#mobile-sidebar-button").click(function () {
                 $("#overlay").fadeToggle(300);
@@ -441,24 +508,23 @@
             });
             //-------------------------------------------------------------
 
-            //FORMATO MOBILE - HOVER PARA NOMES GRANDES DE INBOX            TODO: MOBILE GESTURES (on hold)
+            //FORMATO MOBILE - HOVER PARA NOMES GRANDES DE INBOX            TODO: MOBILE GESTURES (on hold)            //FORMATO MOBILE - HOVER PARA NOMES GRANDES DE INBOX            TODO: MOBILE GESTURES (on hold)
             $(".list-select").hover(function () {
-                var nomeMateriaContainer = $(this).children('.materia-title-container')[0];
-                var nomeMateria = $(this).children('.materia-title-container').children('.materia-title')[0];
-                if (nomeMateria.offsetWidth < nomeMateria.scrollWidth) {
-                    $(nomeMateria).addClass('list-select-overflowing');
-                    var parent_width = nomeMateriaContainer.offsetWidth;
-                    $(this).mouseover(function () {
-                        nomeMateria.style.transform = 'translateX(calc(-100% + ' + parent_width + 'px))'
-                    });
+                var nomeMateriaContainer = $(this).find('.materia-title-container')[0];
+                var nomeMateria = $(this).find('.materia-title-container').find('.materia-title')[0];
 
+                if (nomeMateria.offsetWidth - 47 < nomeMateria.scrollWidth) {
+                    $(nomeMateria).addClass('list-select-overflowing');
+                    var parent_width = nomeMateriaContainer.offsetWidth - 47;
+                    $(this).mouseover(function () {
+                        nomeMateria.style.transform = 'translateX(calc(-100% + ' + parent_width + 'px))';
+                    });
                     $(this).mouseleave(function () {
                         nomeMateria.style.transform = ''
                     });
                 }
             });
         });
-
 
         function sendFiles(perguntaId){
 
