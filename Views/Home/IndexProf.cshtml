@@ -189,10 +189,12 @@
                             <i class="mdc-select__dropdown-icon"></i>
                             <div class="mdc-select__selected-text"></div>
                             <div class="mdc-select__menu mdc-menu mdc-menu-surface demo-width-class">
-                                <ul class="mdc-list">
-                                    <li class="mdc-list-item" data-value="grains">
-                                        DB
+                                <ul id="lista-cursos" class="mdc-list">
+                                    @foreach (Curso c in ViewBag.Cursos) {
+                                    <li class="mdc-list-item" data-value="@c.CursoId">
+                                        @c.CursoNome
                                     </li>
+                                    }
                                 </ul>
                             </div>
                             <span class="mdc-floating-label">Curso</span>
@@ -211,15 +213,20 @@
                         <button id="enviar-convite-btn" class="option-button mdc-button mdc-button--outlined mdc-ripple-upgraded" style="margin-top: 20px;">Enviar Convite</button>
                 </div>
                 <div class="invite-wrapper" id="list-invites">
-                    <div class="invite">
-                        <div class="invite-left">
-                            <img class="account-picture-small" src="~/img/porter.jpg">
-                            Vinicius Junqueira
-                        </div>
-                        <div class="invite-right">
-                            <button class="mdc-icon-button material-icons">clear</button>
-                        </div>
-                    </div>
+                    @foreach(CursoAluno i in ViewBag.Invites){
+                        @if(i.statusInvite == 1)
+                        {
+                        <div class="invite" id="invite-@i.CursoAlunoId">
+                            <div class="invite-left">
+                                <img class="account-picture-small" src="~/img/porter.jpg">
+                                @i.Aluno.Usuario.UsuarioNome
+                            </div>
+                            <div class="invite-right">
+                                <button onclick="deleteInvite(@i.CursoAlunoId)" class="mdc-icon-button material-icons">clear</button>
+                            </div>
+                        </div>    
+                        }
+                    }
                 </div>
             </main>
         </div>
@@ -399,9 +406,6 @@
 @section Scripts {
     <script type="text/javascript">
 
-    function editarperfil(){
-    }
-
     const textFields = document.querySelectorAll('.mdc-text-field');
     for (const textField of textFields) {
         mdc.textField.MDCTextField.attachTo(textField);
@@ -425,6 +429,7 @@
             mdc.ripple.MDCRipple.attachTo(listItem);
         }
     }
+
         //logout
         function logout() {
             $.ajax({
@@ -440,30 +445,89 @@
         }
 
         //Create curso
-        $("#pergunta-form").submit(function(event){
-
+        $("#curso-form").submit(async function(event){
             event.preventDefault();
 
-            var curso = {
-                'CursoNome': $('#nome-pergunta').val(),
-                'CursoTag' : $('#tag-color-button').css( "background-color" ), 
-                'ProfessorId': @ViewBag.ProfessorId,
+            const curso = {
+                'CursoNome': $('#nome-curso').val(), 
+                'ProfessorId': @ViewBag.ProfessorId
             }
-            $.ajax({
-                type: 'POST',
-                url: "api/Curso",    
-                contentType: 'application/json',
-                dataType: 'json',
-                data: JSON.stringify(curso),
-                success: function (data) { 
-                    alert(data);
-                    window.location.reload();
+            console.log(curso)
+
+            await fetch('api/Curso', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
                 },
-                error: function(res){
-                    alert(res.responseText); 
-                }
-            });
+                body: JSON.stringify(curso)
+            })
+            .then(response => {
+                window.location.reload();
+            })
+            .catch(error => alert(error));
+
         });
+
+        $('#enviar-convite-btn').click(async function(){
+            console.log()
+            const url = `api/Usuario/GetByEmail?email=${$('#email-convite').val()}`
+            const response = await fetch(url);
+
+            if(response.ok){
+                const data = await response.json();
+                await sendInvite(data.aluno.alunoId)
+                .then(resp => {
+                    if(resp.ok){
+                        alert('convite enviado');
+                        window.location.reload();
+                    }
+                })
+                .catch(error => alert('Erro:' + error));
+            }else{
+                alert('Esse email não existe!');
+            }
+        
+        });
+
+        async function sendInvite(aluno_id){
+            let cursoId;
+            $('#lista-cursos').children('li').each(function(){
+               if($(this).hasClass('mdc-list-item--selected')){
+                   cursoId = $(this).data('value');
+               }
+            });
+
+            if(cursoId == null){
+                return alert('Selecione um curso!');
+            }
+            
+            const invite = {
+                'statusInvite': 1,               
+                'CursoAlunoTag': '#C4E538',
+                'AlunoId': aluno_id,
+                'CursoId': cursoId
+            }
+
+            const response = await fetch('api/CursoAluno', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(invite)
+            });
+            
+            return response;
+        }
+
+        async function deleteInvite(cursoAluno_id){
+            await fetch('/api/CursoAluno/' + cursoAluno_id, {
+                method: 'DELETE'
+            })
+            .then(response => { 
+                $('#invite-' + cursoAluno_id).remove();
+            })
+            .catch(error => alert(error));
+        }
 
         MicroModal.init({
             awaitCloseAnimation: true,
@@ -511,9 +575,6 @@
                     });
                 }
             });
-
-            //List convites enviados
-            (function(){})();
         });
 
         //Deletar curso
@@ -528,90 +589,6 @@
                 },
                 error: function (res) {
                     alert(res);
-                }
-            });
-        }
-
-        //Busca usuário por email
-        $('#enviar-convite-btn').click( function(){
-            event.preventDefault();
-            
-            var email = $('#send-invite-searchbar').val();
-
-            if(email != "" && email != null){
-                $.ajax({
-                    url: "api/Usuario/GetByEmail?email=" + email,
-                    type: "GET",
-                    success: function (data) {
-                        alert("Usuario encontrado");
-                        criarConvite(data.alunoId, 27);
-                    },
-                    error: function(res){
-                        alert(res.responseJSON);
-                    }
-                });
-            }
-            else{
-                alert("Complete o campo!");
-            }
-        });
-
-        //Criar convite
-        function criarConvite(alunoId, cursoId){
-            event.preventDefault();
-
-            conviteInfo = {
-                'statusInvite': 1,
-                'CursoAlunoTag': 'rgb(53, 59, 72)',
-                'CursoId': cursoId,
-                'AlunoId': alunoId
-            }
-
-            $.ajax({
-                url: 'api/CursoAluno',
-                type: 'POST',
-                dataType: 'JSON',
-                contentType: 'application/json',
-                data: JSON.stringify(conviteInfo),
-                success: function(data){
-                    alert("Convite enviado!");
-                    $('#list-invites').append(
-                        '<div class="invite">' +
-                            '<div class="invite-left">' +
-                                '<img class="account-picture-small" src="~/img/porter.jpg">' +
-                                '<div class="invite-info-display">' + 
-                                    '<h1>' + data.usuarioNome + '</h1>' +
-                                '</div>' +
-                            '</div>' +
-                            '<div class="invite-right">' +
-                                '<button class="small-option-button decline-button"><i class="material-icons material-icons-round">clear</i></button>' +
-                            '</div>' +
-                        '</div>'
-                    );
-                },
-                error: function(res){
-                    alert(res.responseJSON);
-                }
-            });
-        }
-
-        // SEND FILES
-        function fileupload(filename) {
-            var inputfile = document.getElementById(filename);
-            var files = inputfile.files;
-            var fdata = new FormData();
-            for (var i = 0; i != files.length; i++) {
-                fdata.append("files", files[i]);
-            }
-
-            $.ajax({
-                url: "api/PerguntaArquivo/UploadArquivo",
-                data: fdata,
-                processData: false,
-                contentType: false,
-                type: "POST",
-                success: function (data) {
-                    alert("DEU CERTO");
                 }
             });
         }

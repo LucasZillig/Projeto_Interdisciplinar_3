@@ -77,8 +77,8 @@ namespace PI_3
                 entity.Property(e => e.CursoId).HasColumnName("id_curso").IsRequired();
                 entity.Property(e => e.CursoAlunoTag).HasColumnName("tag_cursoAluno").HasColumnType("VARCHAR(18)");
                 entity.Property(e => e.statusInvite).HasColumnName("statusinvite_cursoAluno");
-                entity.HasOne(a => a.Aluno).WithMany(b => b.CursoAluno).HasForeignKey(at => at.AlunoId);
-                entity.HasOne(a => a.Curso).WithMany(b => b.CursoAluno).HasForeignKey(at => at.CursoId); 
+                entity.HasOne(a => a.Aluno).WithMany(b => b.CursoAluno).HasForeignKey(a => a.AlunoId);
+                entity.HasOne(c => c.Curso).WithMany(b => b.CursoAluno).HasForeignKey(b => b.CursoId); 
 
             });
 

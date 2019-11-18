@@ -137,7 +137,7 @@
                 'UsuarioEmail': $("#register-email").val(),
                 'UsuarioSenha': $("#register-senha").val(),
             }
-            const url = 'api/Usuario/RegisterAluno';
+            let url = 'api/Usuario/RegisterAluno';
 
             if($('#typeuser-input').prop("checked") == true){
                 url = 'api/Usuario/RegisterProfessor';
@@ -145,7 +145,7 @@
             const response = await fetch(url, {
                 method: 'POST',
                 headers: {
-                'Content-Type': 'application/json'
+                    'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(data)
             });
