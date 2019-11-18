@@ -58,18 +58,21 @@
                                 <button class="mdc-icon-button material-icons" style="font-size: 18px;padding: 0;height: 30px;width: 30px;margin-right: 20px;" data-micromodal-trigger="modal-4">edit</button>
                             </div>
                             @foreach (CursoAluno c in ViewBag.CursoAluno) {
-                            <li class="mdc-list-item list-select" role="option" aria-selected="true" tabindex="0">
-                                <span class="mdc-list-item__text materia-title-container">
-                                    <span class="materia-title">
-                                        <span class="materia-title-inner">@c.Curso.CursoNome
-                                            <span class="selected-underscore"></span>
+                                @if (@c.statusInvite == 0)
+                                {
+                                <li class="mdc-list-item list-select" role="option" aria-selected="true" tabindex="0" id="list-curso-aluno-@c.CursoId"> 
+                                    <span class="mdc-list-item__text materia-title-container">
+                                        <span class="materia-title">@c.Curso.CursoNome                                        
+                                            <span class="materia-title-inner">
+                                                <span class="selected-underscore"></span>
+                                            </span>
                                         </span>
                                     </span>
-                                </span>
-                                <div class="list-label-container">
-                                    <span class="list-label" style="background: red"></span>
-                                </div>
-                            </li>
+                                    <div class="list-label-container">
+                                        <span class="list-label" style="background: @c.CursoAlunoTag"></span>
+                                    </div>
+                                </li>  
+                                }
                             }
                         </ul>
                     </div>
@@ -183,16 +186,20 @@
             </header>
             <main class="modal__content" id="modal-2-content">
                 <div class="invite-wrapper" id="list-invites">
-                    <div class="invite">
+                @foreach (CursoAluno c in ViewBag.CursoAluno) {
+                    @if (@c.statusInvite == 1)
+                    {
+                    <div class="invite" id="invite-curso-aluno-@c.CursoAlunoId">
                         <div class="invite-left">
-                            Banco de Dados
-                            <!-- Colocar nome do professor aqui -->
+                            @c.Curso.CursoNome
                         </div>
                         <div class="invite-right">
-                            <button class="mdc-icon-button material-icons">check</button>
-                            <button class="mdc-icon-button material-icons">clear</button>
+                            <button onclick="acceptInvite(@c.CursoAlunoId)" class="mdc-icon-button material-icons">check</button>
+                            <button onclick="declineInvite(@c.CursoAlunoId)" class="mdc-icon-button material-icons">clear</button>
                         </div>
                     </div>
+                    }
+                }
                 </div>
             </main>
         </div>
@@ -214,10 +221,12 @@
                         <i class="mdc-select__dropdown-icon"></i>
                         <div class="mdc-select__selected-text"></div>
                         <div class="mdc-select__menu mdc-menu mdc-menu-surface demo-width-class">
-                            <ul class="mdc-list">
-                                <li class="mdc-list-item" data-value="grains">
-                                    DB
+                            <ul class="mdc-list" id="lista-cursos">
+                                @foreach (CursoAluno c in ViewBag.CursoAluno) {
+                                <li class="mdc-list-item" data-value="@c.CursoAlunoId">
+                                    @c.Curso.CursoNome
                                 </li>
+                                }
                             </ul>
                         </div>
                         <span class="mdc-floating-label">Selecionar...</span>
@@ -267,13 +276,16 @@
             <main class="modal__content" id="modal-4-content">
                 <div class="invite-wrapper" id="edit-cursos">
                     @foreach (CursoAluno c in ViewBag.CursoAluno) {
-                        <div class="invite" id="edit-curso-@c.CursoId">
-                            <div class="invite-left">
-                                @c.Curso.CursoNome
-                            </div>
+                        <div class="invite" id="edit-curso-aluno-@c.CursoId">
+                            @if (@c.statusInvite == 0)
+                            {
+                                <div class="invite-left">
+                                    @c.Curso.CursoNome
+                                </div>   
+                            }
                             <div class="invite-right">
                                 <button class="mdc-icon-button material-icons">edit</button>
-                                <button onclick="deleteCurso(@c.CursoId)" class="mdc-icon-button material-icons">clear</button>
+                                <button onclick="declineInvite(@c.CursoAlunoId)" class="mdc-icon-button material-icons">clear</button>
                             </div>
                         </div>
                     }
@@ -379,75 +391,104 @@
 
 @section Scripts {
     <script type="text/javascript">
-
-    function editarperfil(){
-    }
     
-    const textFields = document.querySelectorAll('.mdc-text-field');
-    for (const textField of textFields) {
-        mdc.textField.MDCTextField.attachTo(textField);
-    }
-
-    const selects = document.querySelectorAll('.mdc-select');
-    for (const select of selects) {
-        mdc.select.MDCSelect.attachTo(select);
-    }
-
-    const buttons = document.querySelectorAll('.mdc-button');
-    for (const button of buttons) {
-        mdc.ripple.MDCRipple.attachTo(button);
-    }
-
-    const lists = document.querySelectorAll('.mdc-list');
-
-    const listItems = document.querySelectorAll('.mdc-list-item');
-    for (const list of lists) {
-        mdc.list.MDCList.attachTo(list);
-        for (const listItem of listItems){
-            mdc.ripple.MDCRipple.attachTo(listItem);
+        const textFields = document.querySelectorAll('.mdc-text-field');
+        for (const textField of textFields) {
+            mdc.textField.MDCTextField.attachTo(textField);
         }
-    }
-
-        function logout() {
-            $.ajax({
-                url: "api/Usuario/LogoutUsuario",
-                type: "GET",
-                success: (data) => {
-                    window.location.reload();
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    console.log('error ' + textStatus + " " + errorThrown);
-                }
-            });
+        const selects = document.querySelectorAll('.mdc-select');
+        for (const select of selects) {
+            mdc.select.MDCSelect.attachTo(select);
         }
 
-        $("#pergunta-form").submit(function(event){
+        const buttons = document.querySelectorAll('.mdc-button');
+        for (const button of buttons) {
+            mdc.ripple.MDCRipple.attachTo(button);
+        }
 
-            event.preventDefault();
+        const lists = document.querySelectorAll('.mdc-list');
 
-            var pergunta = {
-                'PerguntaNome': $('#nome-pergunta').val(),
-                'PerguntaDesc': $('#desc-pergunta').val(),
-                'Arquivado' : 0, 
-                'CursoAlunoId': $('#materias-filtros-label').data('id'),
+        const listItems = document.querySelectorAll('.mdc-list-item');
+        for (const list of lists) {
+            mdc.list.MDCList.attachTo(list);
+            for (const listItem of listItems){
+                mdc.ripple.MDCRipple.attachTo(listItem);
+            }
+        }
+        
+        async function logout() {
+            const response = await fetch('api/Usuario/LogoutUsuario');
+            if(!response.ok){
+                throw Error(response.statusText);
             }
 
-            $.ajax({
-                type: 'POST',
-                url: "api/Pergunta/addPergunta",    
-                contentType: 'application/json',
-                dataType: 'json',
-                data: JSON.stringify(pergunta),
-                success: function (data) { 
-                    sendFiles(data.perguntaId);
-                    alert("Pergunta Postada");
-                    window.location.reload();
-                },
-                error: function(jqXHR, textStatus, errorThrown){
-                    console.log(jqXHR + " " + textStatus + " " + errorThrown); 
-                }
+            window.location.reload();
+        }
+
+        $("#pergunta-form").submit(async function(event){
+            event.preventDefault();
+            
+            let cursoAlunoId;
+            $('#lista-cursos').children('li').each(function(){
+               if($(this).hasClass('mdc-list-item--selected')){
+                   cursoAlunoId = $(this).data('value');
+               }
             });
+
+            if(cursoAlunoId == null){
+                return alert('Selecione um curso!');
+            }
+
+            const pergunta = {
+                'PerguntaNome': $('#assunto-pergunta').val(),
+                'PerguntaDesc': $('#texto-pergunta').val(),
+                'Arquivado' : 0, 
+                'CursoAlunoId': cursoAlunoId,
+            }
+
+            const response = await fetch('api/Pergunta/addPergunta', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(pergunta)
+            });
+
+            if(!response.ok){ throw Error(response.statusText); }
+            
+            const data = await response.json();
+            const files = $('#files').prop('files');
+            
+            if(files.length > 0) {
+                console.log(`Foram selecionados ${files.length} arquivos!`);
+                let progressbar = 0;
+                for(file of files){
+                    const formData = new FormData();
+                    formData.append('file', file);
+
+                    await fetch('api/Pergunta/UploadArquivo', {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(response => {
+                        progressbar += 100 / files.length; 
+                        console.log(Math.round(progressbar));
+                    })
+                    .catch(error => console.log(error));
+                }
+            }
+            window.location.reload();
         });
+
+        function pickCursoAlunoId(){
+            $('#lista-cursos').children('li').each(function(){
+               if($(this).hasClass('mdc-list-item--selected')){
+                   const id = $(this).data('value');
+                   console.log(id);
+                   return id;
+               }
+            })
+        }
 
         MicroModal.init({
             awaitCloseAnimation: true,
@@ -458,7 +499,8 @@
         function SearchModalFocus(){
             $(".mobile-header-backdrop").toggleClass("mobile-header-backdrop--after");
             setTimeout(function(){
-            MicroModal.show( 'modal-5'); $("#myInput").focus();}, 150 );
+                MicroModal.show( 'modal-5'); $("#myInput").focus();
+            }, 150 );
         }
 
         
@@ -472,6 +514,32 @@
             var target = document.getElementById(this.getAttribute("data-target"));
             target.setAttribute("data-id", id);
             target.textContent = this.textContent;
+        }
+
+        async function acceptInvite(cursoAluno_id){
+            await fetch('/api/CursoAluno/' + cursoAluno_id, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({CursoAlunoId: cursoAluno_id})
+            })
+            .then(response => {
+                $('#invite-curso-aluno-' + cursoAluno_id).remove();
+                alert('Convite aceito!');
+            })
+            .catch(error => alert(error));
+        }
+
+        async function declineInvite(cursoAluno_id){
+            await fetch('/api/CursoAluno/' + cursoAluno_id, {
+                method: 'DELETE'
+            })
+            .then(response => { 
+                console.log(response);
+                $('#invite-curso-aluno-' + cursoAluno_id).remove();
+            })
+            .catch(error => alert(error));
         }
 
         $(document).ready(function () {
@@ -504,38 +572,5 @@
                 }
             });
         });
-
-        function sendFiles(perguntaId){
-
-            var progressBar = 0; 
-            var perguntaIdStr = perguntaId.toString();
-
-            var files = $('#files').prop("files");;
-            console.log(files);
-
-            
-            var fdata = new FormData();
-            
-            for(var i = 0; i < files.length; i++){
-                console.log(files[i]);
-                fdata.append("files", files[i]);
-            }
-            fdata.append("perguntaId", perguntaId);
-
-            $.ajax({
-                url: 'api/Pergunta/UploadArquivo',
-                type: 'post',
-                contentType: false,
-                processData: false,
-                data: fdata,
-                success: function(response) {
-                    alert(response);
-                },
-                error: function(response){
-                    console.log(jqXHR + " " + textStatus + " " +  errorThrown)
-                }
-            })
-        }
-        
     </script>
 }
