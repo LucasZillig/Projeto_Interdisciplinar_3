@@ -37,11 +37,7 @@ namespace PI_3.Controllers.API
             _context.CursoAluno.Add(requestCursoAluno);
             _context.SaveChanges();
 
-
-            var aluno = _context.Aluno.Where(x => x.AlunoId == requestCursoAluno.AlunoId).ToList();
-            var usuario = _context.Usuario.Where(x => x.UsuarioId == aluno[0].UsuarioId).ToList();
-
-            return new JsonResult(usuario[0]);
+            return new JsonResult("Convite enviado!");
         }
 
         [HttpPut("{id}")]

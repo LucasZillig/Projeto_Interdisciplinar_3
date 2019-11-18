@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using PI_3.Models;
 using PI_3.Services;
+using Microsoft.EntityFrameworkCore;
 
 
 namespace PI_3.Controllers
@@ -29,13 +30,15 @@ namespace PI_3.Controllers
             if(professor.Count > 0)
             {
                 var cursos = _context.Curso.Where(x => x.ProfessorId == professor[0].ProfessorId).ToList();
+                var invites = _context.CursoAluno.Include(c => c.Curso).Include(c => c.Aluno).Include(c => c.Aluno.Usuario).Where(x => x.Curso.ProfessorId == professor[0].ProfessorId).ToList();
                 ViewBag.Cursos = cursos;
+                ViewBag.Invites = invites;
                 ViewBag.Usuario = Usuario;
                 ViewBag.ProfessorId = professor[0].ProfessorId;
                 return View("IndexProf");
             }
             var aluno = _context.Aluno.Where(e => e.UsuarioId == Usuario.UsuarioId).ToList();
-            var cursosAluno = _context.CursoAluno.Where(x => x.AlunoId == aluno[0].AlunoId).ToList();
+            var cursosAluno = _context.CursoAluno.Include(c => c.Curso).Include(c => c.Aluno).Where(x => x.AlunoId == aluno[0].AlunoId).ToList();
 
             ViewBag.CursoAluno = cursosAluno;
             ViewBag.Usuario = Usuario;

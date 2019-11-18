@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PI_3.Models;
 using PI_3.Request;
+using Microsoft.EntityFrameworkCore;
 
 namespace PI_3.Controllers.API
 {
@@ -41,11 +42,13 @@ namespace PI_3.Controllers.API
         [Route("[action]")]
         public ActionResult GetByEmail(string email)
         {
-            var usuario = _context.Usuario.Where(x => x.UsuarioEmail == email).ToList();
+            var Usuarios = _context.Usuario.Include(a => a.Aluno).Where(x => x.UsuarioEmail == email).ToList();
             
-            if(usuario.Count > 0) 
+            if(Usuarios.Count > 0) 
             {
-                return new JsonResult("Email liberado");
+                var usuario = Usuarios[0];
+                usuario.Aluno.Usuario = null;
+                return new JsonResult(usuario);
             }else
             {
                 return new JsonResult("Esse usuário não existe!") { StatusCode = 404 };

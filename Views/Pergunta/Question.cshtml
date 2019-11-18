@@ -2,42 +2,23 @@
     Layout = "~/Views/Shared/_LayoutPergunta.cshtml";
 }
 
-
-<h1>lukita fod</h1>
-<div id="container">
-
-</div>
+<h2>Monaco Editor Sync Loading Sample</h2>
+<div id="container" style="width:800px;height:600px;border:1px solid grey"></div>
 
 @section Scripts {
-    <script>
-        monaco.editor.create(document.getElementById('container'), {
+    
+<script>var require = { paths: { 'vs': '/lib/vs' } };</script>
+<script src="~/lib/vs/loader.js"></script>
+<script src="~/lib/vs/editor/editor.main.nls.js"></script>
+<script src="~/lib/vs/editor/editor.main.js"></script>
+<script>
+    var editor = monaco.editor.create(document.getElementById('container'), {
         value: [
             'function x() {',
             '\tconsole.log("Hello world!");',
             '}'
         ].join('\n'),
         language: 'javascript'
-        });
-
-        var originalModel = monaco.editor.createModel("container", "javascript");
-        var modifiedModel = monaco.editor.createModel("container2", "javascript");
-        var editor = monaco.editor.createDiffEditor(document.getElementById('container'), {
-            language: 'javascript',
-            theme: "vs-dark",
-            automaticLayout: true,
-            scrollbar: {
-                verticalHasArrows: true,
-                horizontalHasArrows: true,
-                vertical: 'visible',
-                horizontal: 'visible',
-                verticalScrollbarSize: 17,
-                horizontalScrollbarSize: 17,
-                arrowSize: 30
-            }
-        });
-        editor.setModel({
-            original: originalModel,
-            modified: modifiedModel
-        });
-    </script>
+    });
+</script>
 }

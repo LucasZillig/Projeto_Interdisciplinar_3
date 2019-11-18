@@ -76,8 +76,8 @@
             $("#register-p").show();
             $("#login-p").hide();
             
-            $('.register-form-wrapper').delay(150).fadeIn(150); 
-            $('.login-form-wrapper').fadeOut(150);
+            $('.register-form-wrapper').show(); 
+            $('.login-form-wrapper').hide();
             
         }
         else if($(this).prop("checked") == false){
@@ -85,8 +85,8 @@
             $("#register-p").hide();
 
 
-            $('.login-form-wrapper').delay(150).fadeIn(150); 
-            $('.register-form-wrapper').fadeOut(150);
+            $('.login-form-wrapper').show(); 
+            $('.register-form-wrapper').hide();
         }
     });
 
@@ -117,7 +117,7 @@
             window.location.reload();
         }else{
             alert(await response.json());
-            window.location.reload();
+            window.location.reload(); 
         }
     });
     // Register
@@ -137,7 +137,7 @@
                 'UsuarioEmail': $("#register-email").val(),
                 'UsuarioSenha': $("#register-senha").val(),
             }
-            const url = 'api/Usuario/RegisterAluno';
+            let url = 'api/Usuario/RegisterAluno';
 
             if($('#typeuser-input').prop("checked") == true){
                 url = 'api/Usuario/RegisterProfessor';
@@ -145,7 +145,7 @@
             const response = await fetch(url, {
                 method: 'POST',
                 headers: {
-                'Content-Type': 'application/json'
+                    'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(data)
             });
