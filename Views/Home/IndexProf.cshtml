@@ -251,10 +251,55 @@
                             <div class="mdc-notched-outline__trailing"></div>
                         </div>
                     </div>
-                <button type="submit" class="mdc-button mdc-button--outlined" style="margin-top: 20px;">
-                    <i class="material-icons mdc-button__icon" aria-hidden="true">add</i>
-                    <span class="mdc-button__label">Criar Novo Curso</span>
-                </button>
+                    <label for="nome-pergunta" class="input-label" style="margin-top: 15px;">Selecionar Cor</label>
+                    <div class="tag-select-wrapper" style="margin-top: 5px">
+                        <div class="mdc-radio" id="tag-1">
+                            <input class="mdc-radio__native-control" type="radio" id="color-1" name="radios">
+                            <div class="mdc-radio__background">
+                                <div class="mdc-radio__outer-circle"></div>
+                                <div class="mdc-radio__inner-circle"></div>
+                            </div>
+                            <div class="mdc-radio__ripple"></div>
+                        </div>
+                        <div class="mdc-radio" id="tag-2">
+                            <input class="mdc-radio__native-control" type="radio" id="color-2" name="radios">
+                            <div class="mdc-radio__background">
+                                <div class="mdc-radio__outer-circle"></div>
+                                <div class="mdc-radio__inner-circle"></div>
+                            </div>
+                            <div class="mdc-radio__ripple"></div>
+                        </div>
+                        <div class="mdc-radio" id="tag-3">
+                            <input class="mdc-radio__native-control" type="radio" id="color-3" name="radios">
+                            <div class="mdc-radio__background">
+                                <div class="mdc-radio__outer-circle"></div>
+                                <div class="mdc-radio__inner-circle"></div>
+                            </div>
+                            <div class="mdc-radio__ripple"></div>
+                        </div>
+                        <div class="mdc-radio" id="tag-4">
+                            <input class="mdc-radio__native-control" type="radio" id="color-4" name="radios">
+                            <div class="mdc-radio__background">
+                                <div class="mdc-radio__outer-circle"></div>
+                                <div class="mdc-radio__inner-circle"></div>
+                            </div>
+                            <div class="mdc-radio__ripple"></div>
+                        </div>
+                        <div class="mdc-radio" id="tag-5">
+                            <input class="mdc-radio__native-control" type="radio" id="color-5" name="radios">
+                            <div class="mdc-radio__background">
+                                <div class="mdc-radio__outer-circle"></div>
+                                <div class="mdc-radio__inner-circle"></div>
+                            </div>
+                            <div class="mdc-radio__ripple"></div>
+                        </div>
+
+                    </div>
+
+                    <button type="submit" class="mdc-button mdc-button--outlined" style="margin-top: 20px;">
+                        <i class="material-icons mdc-button__icon" aria-hidden="true">add</i>
+                        <span class="mdc-button__label">Criar Novo Curso</span>
+                    </button>
                 </form>
             </main>
         </div>
@@ -384,6 +429,11 @@
 
 @section Scripts {
     <script type="text/javascript">
+
+    const radios = document.querySelectorAll('.mdc-radio');
+    for (const radio of radios){
+        mdc.radio.MDCRadio.attachTo(radio);
+    }
 
     const dialogs = document.querySelectorAll('.mdc-dialog');
     for (const dialog of dialogs){

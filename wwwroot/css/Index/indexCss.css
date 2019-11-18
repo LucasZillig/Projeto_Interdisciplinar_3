@@ -664,14 +664,14 @@ button, input {
 }
 
 .invite-left {
-    display: block;
+    display: flex;
     max-width: 70%;
-    text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
     margin: auto 0;
     font-weight: bold;
     font-size: 15px;
+    align-items: center;
 }
 
 .invite-info-display {
@@ -965,4 +965,55 @@ button, input {
     width: 0;
 }
 
-@media only screen and (min-width: 600px) {}
+.tag-select-wrapper{
+    display: flex;
+    justify-content: center;
+}
+
+.tag-select-wrapper .mdc-radio{
+    margin: 0 5px;
+}
+
+#color-1 ~ .mdc-radio__background .mdc-radio__outer-circle, #color-1 ~ .mdc-radio__background .mdc-radio__inner-circle{
+    border-color: #add8e6;
+}
+
+#tag-1::before{
+    background: #add8e6;
+}
+
+#color-2 ~ .mdc-radio__background .mdc-radio__outer-circle, #color-2 ~ .mdc-radio__background .mdc-radio__inner-circle{
+    border-color: #f08080;
+}
+
+#tag-2::before{
+    background: #f08080;
+}
+
+#color-3 ~ .mdc-radio__background .mdc-radio__outer-circle, #color-3 ~ .mdc-radio__background .mdc-radio__inner-circle{
+    border-color: #90ee90;
+}
+
+#tag-3::before{
+    background: #90ee90;
+}
+
+#color-4 ~ .mdc-radio__background .mdc-radio__outer-circle, #color-4 ~ .mdc-radio__background .mdc-radio__inner-circle{
+    border-color: #ffa07a;
+}
+
+#tag-4::before{
+    background: #ffa07a;
+}
+
+#color-5 ~ .mdc-radio__background .mdc-radio__outer-circle, #color-5 ~ .mdc-radio__background .mdc-radio__inner-circle{
+    border-color: #20b2ab;
+}
+
+#tag-5::before{
+    background: #20b2ab;
+}
+
+@media only screen and (min-width: 600px) {
+
+}

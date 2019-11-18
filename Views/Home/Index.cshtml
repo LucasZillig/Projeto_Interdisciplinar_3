@@ -391,11 +391,22 @@
 
 @section Scripts {
     <script type="text/javascript">
-    
+
+        const radios = document.querySelectorAll('.mdc-radio');
+        for (const radio of radios){
+            mdc.radio.MDCRadio.attachTo(radio);
+        }
+
+        const dialogs = document.querySelectorAll('.mdc-dialog');
+        for (const dialog of dialogs){
+            mdc.dialog.MDCDialog.attachTo(dialog);
+        }
+
         const textFields = document.querySelectorAll('.mdc-text-field');
         for (const textField of textFields) {
             mdc.textField.MDCTextField.attachTo(textField);
         }
+
         const selects = document.querySelectorAll('.mdc-select');
         for (const select of selects) {
             mdc.select.MDCSelect.attachTo(select);
@@ -407,7 +418,6 @@
         }
 
         const lists = document.querySelectorAll('.mdc-list');
-
         const listItems = document.querySelectorAll('.mdc-list-item');
         for (const list of lists) {
             mdc.list.MDCList.attachTo(list);
