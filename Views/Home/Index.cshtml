@@ -36,7 +36,7 @@
                 <div class="sidebar-section">
                     <div class="section-default">
                         <ul id="my-list" class="mdc-list" role="listbox">
-                            <li class="mdc-list-item mdc-list-item--selected" style="padding: 0;" role="option" aria-selected="true" >
+                            <li class="mdc-list-item mdc-list-item--selected" style="padding: 0;" role="option" aria-selected="true" onclick="filtrarPerguntas('inbox')">
                                 <span class="mdc-list-item__text materia-title-container">
                                     <span class="materia-title">
                                         <span class="materia-title-inner">Inbox
@@ -45,7 +45,7 @@
                                     </span>
                                 </span>
                             </li>
-                            <li class="mdc-list-item" style="padding: 0;" role="option" aria-selected="false" tabindex="0">
+                            <li class="mdc-list-item" style="padding: 0;" role="option" aria-selected="false" tabindex="0" onclick="filtrarPerguntas('arquivadas')">
                                 <span class="mdc-list-item__text materia-title-container">
                                     <span class="materia-title">
                                         <span class="materia-title-inner">Arquivadas
@@ -60,7 +60,7 @@
                             @foreach (CursoAluno c in ViewBag.CursoAluno) {
                                 @if (@c.statusInvite == 0)
                                 {
-                                <li class="mdc-list-item list-select" role="option" aria-selected="true" tabindex="0" id="list-curso-aluno-@c.CursoId"> 
+                                <li class="mdc-list-item list-select" role="option" aria-selected="true" tabindex="0" id="list-curso-aluno-@c.CursoId" onclick="filtrarPerguntas(@c.CursoAlunoId)"> 
                                     <span class="mdc-list-item__text materia-title-container">
                                         <span class="materia-title">@c.Curso.CursoNome                                        
                                             <span class="materia-title-inner">
@@ -104,44 +104,6 @@
                 <div class="mobile-content-body">
                     <div class="mail-list-wrapper">
                         <div class="mail-list">
-                            <div class="mail-item-wrapper">
-                                <a class="mail-item-container">
-                                    <div class="mail-item-left">
-                                        <img class="account-picture" src="~/img/porter.jpg">
-                                        <span class="tag-icon" style="background: #ea4c89;">
-                                        </span>
-                                    </div>
-                                    <div class="mail-item-right">
-                                        <div class="mail-item-header">
-                                            <div class="mail-sender">Vinícius Bolognini</div>
-                                            <div class="mail-time">14:23</div>
-                                        </div>
-                                        <div class="mail-subject">Assunto Lorem Ipsum Lorem Ipsum</div>
-                                        <div class="mail-summary-text">
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="mail-item-wrapper">
-                                <a class="mail-item-container">
-                                    <div class="mail-item-left">
-                                        <img class="account-picture" src="~/img/porter.jpg">
-                                        <span class="tag-icon" style="background: #03a9f4;">
-                                        </span>
-                                    </div>
-                                    <div class="mail-item-right">
-                                        <div class="mail-item-header">
-                                            <div class="mail-sender">Lucas Zillig</div>
-                                            <div class="mail-time">17:35</div>
-                                        </div>
-                                        <div class="mail-subject">Duvida sobre big data</div>
-                                        <div class="mail-summary-text">
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -320,7 +282,7 @@
                 <form id="perfil-form" class="form-wrapper" name="form" action="/uploadmultiple" enctype="multipart/form-data" method="post">
                     <label for="nome-usuario" class="input-label" style="margin-top: -10px;">Nome</label>
                     <div class="mdc-text-field mdc-text-field--outlined">
-                        <input class="mdc-text-field__input" id="nome-usuario" type="text">
+                        <input class="mdc-text-field__input" id="nome-usuario" type="text" value="@ViewBag.Usuario.UsuarioNome">
                         <div class="mdc-notched-outline mdc-notched-outline--no-label">
                             <div class="mdc-notched-outline__leading"></div>
                             <div class="mdc-notched-outline__notch"></div>
@@ -329,7 +291,7 @@
                     </div>
                     <label for="email-usuario" class="input-label">E-Mail</label>
                     <div class="mdc-text-field mdc-text-field--outlined">
-                        <input class="mdc-text-field__input" id="email-usuario" type="email">
+                        <input class="mdc-text-field__input" id="email-usuario" type="email" value="@ViewBag.Usuario.UsuarioEmail">
                         <div class="mdc-notched-outline mdc-notched-outline--no-label">
                             <div class="mdc-notched-outline__leading"></div>
                             <div class="mdc-notched-outline__notch"></div>
@@ -354,11 +316,11 @@
                 <h2 class="modal__title" id="modal-7-title">Senha</h2>
             </header>
             <main class="modal__content" id="modal-7-content">
-                <form id="perfil-form" class="form-wrapper" name="form" action="/uploadmultiple" enctype="multipart/form-data" method="post">
+                <form id="senha-perfil-form" class="form-wrapper" name="form" action="/uploadmultiple" enctype="multipart/form-data" method="post">
                     <label for="senha-usuario" class="input-label" style="margin-top: -10px;">Senha</label>
                     <div class="mdc-text-field mdc-text-field--outlined mdc-text-field--with-trailing-icon">
                         <i class="material-icons mdc-text-field__icon">lock</i>
-                        <input class="mdc-text-field__input" id="senha-usuario" type="password">
+                        <input class="mdc-text-field__input" id="senha-usuario" type="password" value="@ViewBag.Usuario.UsuarioSenha">
                         <div class="mdc-notched-outline mdc-notched-outline--no-label">
                             <div class="mdc-notched-outline__leading"></div>
                             <div class="mdc-notched-outline__notch"></div>
@@ -368,7 +330,7 @@
                     <label for="senha-confirmar" class="input-label">Repetir Senha</label>
                     <div class="mdc-text-field mdc-text-field--outlined mdc-text-field--with-trailing-icon">
                         <i class="material-icons mdc-text-field__icon">lock</i>
-                        <input class="mdc-text-field__input" id="senha-confirmar" type="password">
+                        <input class="mdc-text-field__input" id="senha-confirmar" type="password" value="@ViewBag.Usuario.UsuarioSenha">
                         <div class="mdc-notched-outline mdc-notched-outline--no-label">
                             <div class="mdc-notched-outline__leading"></div>
                             <div class="mdc-notched-outline__notch"></div>
@@ -434,6 +396,55 @@
 
             window.location.reload();
         }
+
+        $('#perfil-form').submit(async function(event){
+            event.preventDefault();
+
+            const perfilData = {
+                'UsuarioId': @ViewBag.Usuario.UsuarioId,
+                'UsuarioNome': $('#nome-usuario').val(),
+                'UsuarioEmail': $('#email-usuario').val(),
+                'UsuarioSenha': @ViewBag.Usuario.UsuarioSenha,
+            }
+            
+            await fetch('api/Usuario/' + @ViewBag.Usuario.UsuarioId, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(perfilData)
+            })
+            .then(response => {
+                alert('Dados alterados');
+            })
+            .catch(error => alert(error));
+        });
+
+        $('#senha-perfil-form').submit(async function(event){
+            event.preventDefault();
+
+            if($('#senha-usuario').val() != $('#senha-confirmar').val()){
+                return alert('As senhas não combinam!');
+            }
+            const senhaPerfilData = {
+                'UsuarioId': @ViewBag.Usuario.UsuarioId,
+                'UsuarioSenha': $('#senha-usuario').val(),
+                'UsuarioNome': '@ViewBag.Usuario.UsuarioNome',
+                'UsuarioEmail': '@ViewBag.Usuario.UsuarioEmail'
+            }
+
+            await fetch('api/Usuario/' + @ViewBag.Usuario.UsuarioId, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(senhaPerfilData)
+            })
+            .then(response => {
+                alert('Senha alterada');
+            })
+            .catch(error => alert(error));
+        });
 
         $("#pergunta-form").submit(async function(event){
             event.preventDefault();
@@ -582,5 +593,77 @@
                 }
             });
         });
+
+        let perguntas; 
+        
+        getPerguntas()
+            .then(response => {
+                perguntas = response;
+                for(pergunta of perguntas){
+                    criarPergunta(pergunta);
+                }
+            })
+            .catch(err => console.error(err));
+            
+        async function getPerguntas() {
+            const response = await fetch('api/Pergunta/GetPerguntaByAluno?user_id=' + @ViewBag.AlunoId);
+
+            if(!response.ok){
+                console.log('Usuario não encontrado!');
+            }
+
+            const perguntas = await response.json();
+
+            return perguntas;    
+        }
+
+        function filtrarPerguntas(value){
+            $('.mail-list').empty();
+
+            if(value == 'inbox'){
+                for(pergunta of perguntas){
+                    criarPergunta(pergunta);
+                }
+                return;
+            }else if(value == 'arquivado'){
+                for(pergunta of perguntas){
+                    if(pergunta.arquivado == 1){
+                        criarPergunta(pergunta);
+                    }
+                }
+                return;
+            }else{
+                for(pergunta of perguntas){
+                    if(pergunta.cursoAluno.cursoAlunoId == value){
+                        criarPergunta(pergunta);
+                    }
+                }
+                return;
+            }
+        }
+
+        function criarPergunta(pergunta){
+            $('.mail-list').append(`
+                <div class="mail-item-wrapper">
+                    <a class="mail-item-container">
+                        <div class="mail-item-left">
+                            <img class="account-picture" src="/img/porter.jpg">
+                            <span class="tag-icon" style="background: ${pergunta.cursoAluno.cursoAlunoTag};">
+                            </span>
+                        </div>
+                        <div class="mail-item-right">
+                            <div class="mail-item-header">
+                                <div class="mail-sender">${(pergunta.cursoAluno.curso.cursoNome)}</div>
+                                <div class="mail-time">${(pergunta.perguntaData).substring(0, 10)}</div>
+                            </div>
+                            <div class="mail-subject">${pergunta.perguntaNome}</div>
+                            <div class="mail-summary-text">
+                                ${pergunta.perguntaDesc}
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            `);
+        }
     </script>
 }

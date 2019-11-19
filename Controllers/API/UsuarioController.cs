@@ -160,7 +160,7 @@ namespace PI_3.Controllers.API
 
             var usuario = _context.Usuario.SingleOrDefault(x => x.UsuarioId == requestUsuario.UsuarioId);
 
-            usuario.UsuarioSenha = requestUsuario.UsuarioSenha;
+            usuario.UsuarioNome = requestUsuario.UsuarioNome;
             usuario.UsuarioEmail = requestUsuario.UsuarioEmail;
             usuario.UsuarioSenha = requestUsuario.UsuarioSenha;
 
