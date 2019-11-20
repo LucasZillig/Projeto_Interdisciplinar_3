@@ -50,7 +50,6 @@ namespace PI_3.Controllers.API
 
             if( string.IsNullOrWhiteSpace(requestCurso.CursoNome) )
             {
-
                 return new JsonResult("Complete todos os campos") { StatusCode = 400 };
             }
 
