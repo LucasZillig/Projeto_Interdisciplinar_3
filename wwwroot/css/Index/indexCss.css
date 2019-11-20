@@ -727,7 +727,7 @@ button, input {
     background-color: #fafafa;
 }
 
-.content {
+.content-container {
     background: #fafafa;
 }
 
@@ -978,7 +978,7 @@ button, input {
     border-color: #add8e6;
 }
 
-#tag-1::before{
+#tag-1::before, .color-1{
     background: #add8e6;
 }
 
@@ -986,7 +986,7 @@ button, input {
     border-color: #f08080;
 }
 
-#tag-2::before{
+#tag-2::before, .color-2{
     background: #f08080;
 }
 
@@ -994,7 +994,7 @@ button, input {
     border-color: #90ee90;
 }
 
-#tag-3::before{
+#tag-3::before, .color-3{
     background: #90ee90;
 }
 
@@ -1002,7 +1002,7 @@ button, input {
     border-color: #ffa07a;
 }
 
-#tag-4::before{
+#tag-4::before, .color-4{
     background: #ffa07a;
 }
 
@@ -1010,8 +1010,33 @@ button, input {
     border-color: #20b2ab;
 }
 
-#tag-5::before{
+#tag-5::before, .color-5{
     background: #20b2ab;
+}
+
+.editor-header {
+    display:flex;
+}
+
+.editor {
+    width:100%;
+    display:flex;
+}
+
+.container-wrapper {
+    width: 100%;
+    display: flex;
+}
+
+#container {
+    width: 100%;
+    height: 490px;
+    min-width: 550px;
+}
+
+.monaco-editor.vs-dark .decorationsOverviewRuler,
+.monaco-editor.vs .decorationsOverviewRuler {
+    opacity: 0;
 }
 
 @media only screen and (min-width: 600px) {
