@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PI_3.Models;
 using Microsoft.EntityFrameworkCore;
+using PI_3.Request;
 
 namespace PI_3.Controllers.API
 {   
@@ -113,7 +114,7 @@ namespace PI_3.Controllers.API
         }
 
         [HttpPost]
-        [Route("[action]")]
+       	[Route("[action]")]
         public IActionResult UploadArquivo(IFormFile file)
         {
             string filename = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
