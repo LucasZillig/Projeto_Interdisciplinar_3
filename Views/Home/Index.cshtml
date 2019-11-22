@@ -60,18 +60,18 @@
                             @foreach (CursoAluno c in ViewBag.CursoAluno) {
                                 @if (@c.statusInvite == 0)
                                 {
-                                <li class="mdc-list-item list-select" role="option" aria-selected="true" tabindex="0" id="list-curso-aluno-@c.CursoId" onclick="filtrarPerguntas(@c.CursoAlunoId)"> 
-                                    <span class="mdc-list-item__text materia-title-container">
-                                        <span class="materia-title">@c.Curso.CursoNome                                        
-                                            <span class="materia-title-inner">
-                                                <span class="selected-underscore"></span>
-                                            </span>
+                            <li class="mdc-list-item list-select" role="option" aria-selected="true" tabindex="0" onclick="filtrarPerguntas(@c.CursoAlunoId)">
+                                <span class="mdc-list-item__text materia-title-container">
+                                    <span class="materia-title">
+                                        <span class="materia-title-inner">@c.Curso.CursoNome
+                                            <span class="selected-underscore"></span>
                                         </span>
                                     </span>
-                                    <div class="list-label-container">
-                                        <span class="list-label" style="background: @c.CursoAlunoTag"></span>
-                                    </div>
-                                </li>  
+                                </span>
+                                <div class="list-label-container">
+                                    <span class="list-label" style="background: @c.CursoAlunoTag"></span>
+                                </div>
+                            </li>  
                                 }
                             }
                         </ul>
@@ -577,13 +577,14 @@
             //-------------------------------------------------------------
 
             //FORMATO MOBILE - HOVER PARA NOMES GRANDES DE INBOX            TODO: MOBILE GESTURES (on hold)            //FORMATO MOBILE - HOVER PARA NOMES GRANDES DE INBOX            TODO: MOBILE GESTURES (on hold)
+            
             $(".list-select").hover(function () {
                 var nomeMateriaContainer = $(this).find('.materia-title-container')[0];
                 var nomeMateria = $(this).find('.materia-title-container').find('.materia-title')[0];
 
-                if (nomeMateria.offsetWidth - 47 < nomeMateria.scrollWidth) {
+                if (nomeMateria.offsetWidth + 47 < nomeMateria.scrollWidth) {
                     $(nomeMateria).addClass('list-select-overflowing');
-                    var parent_width = nomeMateriaContainer.offsetWidth - 47;
+                    var parent_width = nomeMateriaContainer.offsetWidth + 47;
                     $(this).mouseover(function () {
                         nomeMateria.style.transform = 'translateX(calc(-100% + ' + parent_width + 'px))';
                     });

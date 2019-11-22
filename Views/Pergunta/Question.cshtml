@@ -1,6 +1,24 @@
 @{
     Layout = "~/Views/Shared/_LayoutPergunta.cshtml";
 }
+<div class="header-wrapper">
+    <div class="header">
+        <div class="header-left">
+
+        </div>
+        <div class="header-center">
+            <div class="mobile-header-backdrop"></div>
+            <div class="mobile-header">
+                <button class="mdc-icon-button material-icons header-icon-button" style="left: 8px" id="mobile-sidebar-button">menu</button>
+                <button class="header-search-field" id="mobile-search-button" onclick="SearchModalFocus()">Buscar...</button>
+                <button class="mdc-icon-button header-icon-button" style="right: 8px;" data-micromodal-trigger="modal-1"><img class="header-img-button" src="~/img/porter.jpg"></button>
+            </div>
+        </div>
+        <div class="header-right">
+
+        </div>
+    </div>
+</div>
 <div class="editor">
     <div class="container-wrapper">
         <div id="container"></div>

@@ -1019,8 +1019,9 @@ button, input {
 }
 
 .editor {
-    width:100%;
+    width: 100vw;
     display:flex;
+    overflow: auto;
 }
 
 .container-wrapper {

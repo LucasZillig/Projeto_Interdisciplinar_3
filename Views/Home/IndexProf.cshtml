@@ -459,8 +459,6 @@
 </div>
 
 <div id="overlay"></div>
-<!--FOOTER-->
-</div>
 
 @section Scripts {
     <script type="text/javascript">
@@ -498,9 +496,6 @@
             mdc.ripple.MDCRipple.attachTo(listItem);
         }
     }
-
-        
-
         //logout
         function logout() {
             $.ajax({
@@ -666,7 +661,6 @@
             disableFocus: true,
             disableScroll: true
         });
-
         
         function editarCor(){
             $('#dialog-zap').show();
@@ -733,18 +727,18 @@
         async function editarCurso(curso_id){
             const response = await fetch('api/Curso/' + curso_id);
             const data = await response.json();
-
             MicroModal.show('modal-8');
-        let perguntas; 
+            let perguntas; 
+        }
         
-        getPerguntas()
-            .then(response => {
-                perguntas = response;
-                for(pergunta of perguntas){
-                    criarPergunta(pergunta);
-                }
-            })
-            .catch(err => console.error(err));
+            getPerguntas()
+                .then(response => {
+                    perguntas = response;
+                    for(pergunta of perguntas){
+                        criarPergunta(pergunta);
+                    }
+                })
+                .catch(err => console.error(err));
             
         async function getPerguntas() {
             const response = await fetch('api/Pergunta/GetPerguntaByProfessor?user_id=' + @ViewBag.ProfessorId);
