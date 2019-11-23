@@ -146,21 +146,23 @@
             </header>
             <main class="modal__content" id="modal-2-content">
                 <div class="form-wrapper">
-                        <div class="mdc-select demo-width-class">
+                    <div class="mdc-select">
+                        <div class="mdc-select__anchor mdc-ripple-upgraded">
                             <input type="hidden" name="enhanced-select" id="curso-select">
                             <i class="mdc-select__dropdown-icon"></i>
                             <div class="mdc-select__selected-text"></div>
-                            <div class="mdc-select__menu mdc-menu mdc-menu-surface demo-width-class">
-                                <ul id="lista-cursos" class="mdc-list">
-                                    @foreach (Curso c in ViewBag.Cursos) {
-                                    <li class="mdc-list-item" data-value="@c.CursoId" data-color="@c.CursoTag">
-                                        @c.CursoNome
-                                    </li>
-                                    }
-                                </ul>
-                            </div>
                             <span class="mdc-floating-label">Curso</span>
                         </div>
+                        <div class="mdc-select__menu mdc-menu mdc-menu-surface" style="width: calc(100% - 38px);">
+                            <ul class="mdc-list" id="lista-cursos">
+                                @foreach (Curso c in ViewBag.Cursos) {
+                                <li class="mdc-list-item" data-value="@c.CursoId" data-color="@c.CursoTag">
+                                    @c.CursoNome
+                                </li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
 
                         <label for="email-convite" class="input-label" style="margin-top: 20px;">E-Mail</label>
                         <div class="mdc-text-field mdc-text-field--outlined">
@@ -462,6 +464,11 @@
 
 @section Scripts {
     <script type="text/javascript">
+
+    const tabBars = document.querySelectorAll('.mdc-tab-bar');
+    for (const tabBar of tabBars){
+        mdc.tabBar.MDCTabBar.attachTo(tabBar);
+    }
 
     const radios = document.querySelectorAll('.mdc-radio');
     for (const radio of radios){

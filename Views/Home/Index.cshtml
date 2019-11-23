@@ -178,11 +178,14 @@
             <main class="modal__content" id="modal-3-content">
                 <form id="pergunta-form" class="form-wrapper" name="form" enctype="multipart/form-data" method="post">
                     <label for="nome-pergunta" class="input-label" style="margin-top: -10px; margin-bottom: 5px;">Curso</label>
-                    <div class="mdc-select demo-width-class">
-                        <input type="hidden" name="enhanced-select" id="curso-select">
-                        <i class="mdc-select__dropdown-icon"></i>
-                        <div class="mdc-select__selected-text"></div>
-                        <div class="mdc-select__menu mdc-menu mdc-menu-surface demo-width-class">
+                    <div class="mdc-select">
+                        <div class="mdc-select__anchor mdc-ripple-upgraded">
+                            <input type="hidden" name="enhanced-select" id="curso-select">
+                            <i class="mdc-select__dropdown-icon"></i>
+                            <div class="mdc-select__selected-text"></div>
+                            <span class="mdc-floating-label">Selecionar...</span>
+                        </div>
+                        <div class="mdc-select__menu mdc-menu mdc-menu-surface" style="width: calc(100% - 38px);">
                             <ul class="mdc-list" id="lista-cursos">
                                 @foreach (CursoAluno c in ViewBag.CursoAluno) {
                                 <li class="mdc-list-item" data-value="@c.CursoAlunoId">
@@ -191,7 +194,6 @@
                                 }
                             </ul>
                         </div>
-                        <span class="mdc-floating-label">Selecionar...</span>
                     </div>
 
                     <label for="nome-pergunta" class="input-label">Assunto</label>
@@ -218,7 +220,7 @@
                         <input id="files" class="file-upload-btn" name="files" type="file" multiple/>
                         <span class="mdc-button__label">Enviar Arquivos</span>
                     </label>
-                    
+                    <h4 style="color: rgba(0, 0, 0, 0.6);">*Em caso de múltiplos arquivos, envie um arquivo ZIP contendo os arquivos desejados!</h4>
                     <button type="submit" class="mdc-button mdc-button--outlined" style="margin-top: 20px;">
                         <span class="mdc-button__label">Enviar</span>
                     </button>
@@ -347,12 +349,90 @@
         </div>
     </div>
 </div>
+
+<div class="modal micromodal-slide" id="modal-8" aria-hidden="true">
+    <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+        <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-8-title">
+            <header class="modal__header">
+                <button class="mdc-icon-button material-icons header-icon-button modal__close__custom" data-micromodal-trigger="modal-4" data-micromodal-close>chevron_left</button>
+                <h2 class="modal__title" id="modal-8-title">Editar Curso</h2>
+            </header>
+            <main class="modal__content" id="modal-8-content">
+                <form id="edit-form" class="form-wrapper" name="form" action="/uploadmultiple" enctype="multipart/form-data" method="post">
+                    <label for="nome-pergunta" class="input-label" style="margin-top: -10px;">Nome do Curso</label>
+                    <div class="mdc-text-field mdc-text-field--outlined">
+                        <input class="mdc-text-field__input" id="edit-nome-curso" type="text" value="teste">
+                        <div class="mdc-notched-outline mdc-notched-outline--no-label">
+                            <div class="mdc-notched-outline__leading"></div>
+                            <div class="mdc-notched-outline__notch"></div>
+                            <div class="mdc-notched-outline__trailing"></div>
+                        </div>
+                    </div>
+                    <label for="nome-pergunta" class="input-label" style="margin-top: 15px;">Selecionar Cor</label>
+                    <div class="tag-select-wrapper" style="margin-top: 5px">
+                        <div class="mdc-radio" id="tag-1">
+                            <input class="mdc-radio__native-control" type="radio" id="color-1" name="radios">
+                            <div class="mdc-radio__background">
+                                <div class="mdc-radio__outer-circle"></div>
+                                <div class="mdc-radio__inner-circle"></div>
+                            </div>
+                            <div class="mdc-radio__ripple"></div>
+                        </div>
+                        <div class="mdc-radio" id="tag-2">
+                            <input class="mdc-radio__native-control" type="radio" id="color-2" name="radios">
+                            <div class="mdc-radio__background">
+                                <div class="mdc-radio__outer-circle"></div>
+                                <div class="mdc-radio__inner-circle"></div>
+                            </div>
+                            <div class="mdc-radio__ripple"></div>
+                        </div>
+                        <div class="mdc-radio" id="tag-3">
+                            <input class="mdc-radio__native-control" type="radio" id="color-3" name="radios">
+                            <div class="mdc-radio__background">
+                                <div class="mdc-radio__outer-circle"></div>
+                                <div class="mdc-radio__inner-circle"></div>
+                            </div>
+                            <div class="mdc-radio__ripple"></div>
+                        </div>
+                        <div class="mdc-radio" id="tag-4">
+                            <input class="mdc-radio__native-control" type="radio" id="color-4" name="radios">
+                            <div class="mdc-radio__background">
+                                <div class="mdc-radio__outer-circle"></div>
+                                <div class="mdc-radio__inner-circle"></div>
+                            </div>
+                            <div class="mdc-radio__ripple"></div>
+                        </div>
+                        <div class="mdc-radio" id="tag-5">
+                            <input class="mdc-radio__native-control" type="radio" id="color-5" name="radios">
+                            <div class="mdc-radio__background">
+                                <div class="mdc-radio__outer-circle"></div>
+                                <div class="mdc-radio__inner-circle"></div>
+                            </div>
+                            <div class="mdc-radio__ripple"></div>
+                        </div>
+                    
+                    </div>
+                    
+                    <button type="submit" class="mdc-button mdc-button--outlined" style="margin-top: 20px;">
+                        <span class="mdc-button__label">Salvar Alterações</span>
+                    </button>
+                </form>
+            </main>
+            <footer class="modal__footer"></footer>
+        </div>
+    </div>
+</div>
 <div id="overlay"></div>
 <!--FOOTER-->
 </div>
 
 @section Scripts {
     <script type="text/javascript">
+
+        const tabBars = document.querySelectorAll('.mdc-tab-bar');
+        for (const tabBar of tabBars){
+            mdc.tabBar.MDCTabBar.attachTo(tabBar);
+        }
 
         const radios = document.querySelectorAll('.mdc-radio');
         for (const radio of radios){

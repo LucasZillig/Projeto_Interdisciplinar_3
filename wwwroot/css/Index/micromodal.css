@@ -54,6 +54,10 @@
   box-sizing: border-box;
   color: rgba(0,0,0,1);
   font-size: 18px;
+  padding: 0 56px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .modal__header__searchbar{
