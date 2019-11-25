@@ -183,7 +183,7 @@
                         <div class="invite" id="invite-@i.CursoAlunoId">
                             <div class="invite-left">
                                 <img class="account-picture-small" src="~/img/porter.jpg">
-                                @i.Aluno.Usuario.UsuarioNome
+                                <div class="invite-left-text">@i.Aluno.Usuario.UsuarioNome</div>
                             </div>
                             <div class="invite-right">
                                 <button onclick="deleteInvite(@i.CursoAlunoId)" class="mdc-icon-button material-icons">clear</button>
@@ -282,7 +282,7 @@
                     @foreach (Curso c in ViewBag.Cursos) {
                         <div class="invite" id="edit-curso-@c.CursoId">
                             <div class="invite-left">
-                                @c.CursoNome
+                                <div class="invite-left-text">@c.CursoNome</div>
                             </div>
                             <div class="invite-right">
                                 <button class="mdc-icon-button material-icons" onclick="editarCurso(@c.CursoId)">edit</button>
@@ -707,17 +707,22 @@
             });
             //-------------------------------------------------------------
 
+            (function(){
+                $('.materia-title').each(function(){
+                    if (this.offsetWidth + 47 < this.scrollWidth) {
+                        $(this).addClass('list-select-overflowing');
+                    }
+                });
+            })();
+
             //FORMATO MOBILE - HOVER PARA NOMES GRANDES DE INBOX            TODO: MOBILE GESTURES (on hold)
             $(".list-select").hover(function () {
                 var nomeMateriaContainer = $(this).find('.materia-title-container')[0];
                 var nomeMateria = $(this).find('.materia-title-container').find('.materia-title')[0];
 
-                if (nomeMateria.offsetWidth + 47 < nomeMateria.scrollWidth) {
-                    $(nomeMateria).addClass('list-select-overflowing');
-                    var parent_width = nomeMateriaContainer.offsetWidth + 47;
-                    $(this).mouseover(function () {
-                        nomeMateria.style.transform = 'translateX(calc(-100% + ' + parent_width + 'px))';
-                    });
+                if ($(nomeMateria).hasClass('list-select-overflowing')) {
+                    var parent_width = nomeMateriaContainer.offsetWidth - 47;
+                    nomeMateria.style.transform = 'translateX(calc(-100% + ' + parent_width + 'px))';
                     $(this).mouseleave(function () {
                         nomeMateria.style.transform = ''
                     });

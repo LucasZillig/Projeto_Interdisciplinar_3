@@ -6518,6 +6518,8 @@ a.mdc-list-item {
 
 .mdc-select__native-control,
 .mdc-select__selected-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
     padding-left: 16px;
     padding-right: 52px;
     /* font-family: Roboto, sans-serif; */

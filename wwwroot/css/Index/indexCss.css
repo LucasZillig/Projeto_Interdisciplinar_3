@@ -395,6 +395,7 @@ button, input {
     flex-direction: column;
     width: fit-content; 
     position: relative;
+    letter-spacing: 0.025em;
 }
 
 .selected-underscore{
@@ -693,6 +694,15 @@ button, input {
     font-weight: bold;
     font-size: 15px;
     align-items: center;
+    text-overflow: ellipsis;
+}
+
+.invite-left-text{
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .invite-info-display {
@@ -1224,6 +1234,10 @@ button, input {
     margin-left: 56px;
     line-height: 1.35rem;
     font-size: 14px;
+}
+
+.mdc-select__anchor{
+    width: 100%;
 }
 
 .monaco-editor.vs-dark .decorationsOverviewRuler,
