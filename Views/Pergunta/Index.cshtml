@@ -68,15 +68,15 @@
             </div>
         </div>
         <div class="tabs-content">
-            <div class="question-deion-container tab-ativa">
-                <div class="question-deion">
-                    <div class="question-deion-header">
+            <div class="question-description-container tab-ativa">
+                <div class="question-description">
+                    <div class="question-description-header">
                         <div class="qdh-info">
                             <div class="qdh-user">@ViewBag.Pergunta.CursoAluno.Aluno.Usuario.UsuarioNome</div>
                             <div class="qdh-time">@ViewBag.Pergunta.PerguntaData</div>
                         </div>
                     </div>
-                    <div class="question-deion-content">
+                    <div class="question-description-content">
                         @ViewBag.Pergunta.PerguntaDesc
                     </div>
                 </div>
@@ -244,5 +244,9 @@ pell.init({
                 mdc.ripple.MDCRipple.attachTo(listItem);
             }
         }
+
+        $('#mobile-sidebar-button').click(() => {
+            location.href= "/"
+        })
 </script>
 }
