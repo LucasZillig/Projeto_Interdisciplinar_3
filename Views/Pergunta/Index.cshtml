@@ -20,7 +20,7 @@
 <div class="content-wrapper" style="top: 48px; overflow-x: hidden;">
     <div class="content-container">
         <div class="question-content-header">
-            <div class="question-title">Título da Pergunta</div>
+            <div class="question-title">@ViewBag.Pergunta.PerguntaNome</div>
             <div class="question-info">
                     <div class="question-info-left">
                         <img class="account-picture" src="/img/porter.jpg">
@@ -28,10 +28,9 @@
                     </div>
                     <div class="question-info-right">
                         <div class="question-info-header">
-                            <div class="question-sender">Rafael Mira Pignataro</div>
-                            <div class="question-time">2019-11-20</div>
+                            <div class="question-sender">@ViewBag.Pergunta.CursoAluno.Aluno.Usuario.UsuarioNome</div>
                         </div>
-                        <div class="question-subject">Matéria aqui</div>
+                        <div class="question-subject">@ViewBag.Pergunta.CursoAluno.Curso.CursoNome</div>
                     </div>
             </div>
         </div>
@@ -72,18 +71,13 @@
             <div class="question-description-container tab-ativa">
                 <div class="question-description">
                     <div class="question-description-header">
-                        <img class="account-picture" src="/img/porter.jpg">
                         <div class="qdh-info">
-                            <div class="qdh-user">Nome do Usuário</div>
-                            <div class="qdh-time">22:59 20/11/2019</div>
+                            <div class="qdh-user">@ViewBag.Pergunta.CursoAluno.Aluno.Usuario.UsuarioNome</div>
+                            <div class="qdh-time">@ViewBag.Pergunta.PerguntaData</div>
                         </div>
                     </div>
                     <div class="question-description-content">
-                        LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUMLOREM IPSUM
-                        LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUMLOREM IPSUM
-                        LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUMLOREM IPSUM
-                        LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUMLOREM IPSUM
-                        LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUMLOREM IPSUM
+                        @ViewBag.Pergunta.PerguntaDesc
                     </div>
                 </div>
                 <button class="mdc-button" onclick="toggleDescricao()" style="margin: auto; margin-top: 8px;">
@@ -103,6 +97,31 @@
                 </div>
             </div>
         </div>
+        <div class="comment-section">
+            <div class="comment-list">
+                @if ((ViewBag.Pergunta.Comentarios).Count > 0) 
+                {
+                    @foreach (Comentario c in ViewBag.Pergunta.Comentarios){
+                    <div class="comment-section">
+                        <div class="comment-list">
+                            <div class="question-comment">
+                                <div class="question-comment-header">
+                                    <img class="account-picture" src="/img/porter.jpg">
+                                    <div class="question-comment-info">
+                                        <div class="question-comment-user">@c.Pergunta.CursoAluno.Aluno.Usuario.UsuarioNome</div>
+                                        <div class="question-comment-time">@c.ComentarioData</div>
+                                    </div>
+                                </div>
+                                <div class="question-comment-content">
+                                    @c.ComentarioConteudo
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    }
+                } 
+            </div>
+        </div>
     </div>
 </div>
 
@@ -112,7 +131,7 @@
 <script src="~/lib/vs/loader.js"></script>
 <script src="~/lib/vs/editor/editor.main.nls.js"></script>
 <script src="~/lib/vs/editor/editor.main.js"></script>
-<!-- <script type="text/javascript" src="~/lib/pell/pell.js"></script> -->\
+<!-- <script type="text/javascript" src="~/lib/pell/pell.js"></script> -->
 <script src="https://unpkg.com/pell"></script>
 
 <script>
@@ -225,5 +244,9 @@ pell.init({
                 mdc.ripple.MDCRipple.attachTo(listItem);
             }
         }
+
+        $('#mobile-sidebar-button').click(() => {
+            location.href= "/"
+        })
 </script>
 }

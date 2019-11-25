@@ -101,7 +101,7 @@ namespace PI_3
                 entity.HasKey(e => e.ComentarioId);
                 entity.Property(e => e.ComentarioId).HasColumnName("id_comentario").ValueGeneratedOnAdd().IsRequired();
                 entity.Property(e => e.ComentarioConteudo).HasColumnName("conteudo_comentario").HasColumnType("VARCHAR(100)").IsRequired();
-                entity.Property(e => e.ComentarioData).HasColumnName("data_comentario").HasColumnType("VARCHAR(45)").IsRequired();
+                entity.Property(e => e.ComentarioData).HasColumnName("data_comentario").HasColumnType("Date").IsRequired();
                 entity.Property(e => e.PerguntaId).HasColumnName("id_pergunta").IsRequired();
                 entity.HasOne(a => a.Pergunta).WithMany(b => b.Comentarios).OnDelete(DeleteBehavior.Cascade);
             });

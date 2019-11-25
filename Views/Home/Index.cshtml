@@ -715,10 +715,12 @@
 
             if(value == 'inbox'){
                 for(pergunta of perguntas){
+                    $('.current-inbox-title').text('Inbox');
                     criarPergunta(pergunta);
                 }
                 return;
-            }else if(value == 'arquivado'){
+            }else if(value == 'arquivadas'){
+                $('.current-inbox-title').text('Arquivadas');
                 for(pergunta of perguntas){
                     if(pergunta.arquivado == 1){
                         criarPergunta(pergunta);
@@ -726,6 +728,7 @@
                 }
                 return;
             }else{
+                $('.current-inbox-title').text('Curso');
                 for(pergunta of perguntas){
                     if(pergunta.cursoAluno.cursoAlunoId == value){
                         criarPergunta(pergunta);
@@ -738,7 +741,7 @@
         function criarPergunta(pergunta){
             $('.mail-list').append(`
                 <div class="mail-item-wrapper">
-                    <a class="mail-item-container">
+                    <a class="mail-item-container" href="Pergunta/index/${pergunta.perguntaId}">
                         <div class="mail-item-left">
                             <img class="account-picture" src="/img/porter.jpg">
                             <span class="tag-icon" style="background: ${pergunta.cursoAluno.cursoAlunoTag};">

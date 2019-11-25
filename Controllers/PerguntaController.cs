@@ -5,9 +5,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Filters;
 using PI_3.Models;
-using PI_3.Services;
+using Microsoft.EntityFrameworkCore;
 
 
 namespace PI_3.Controllers
@@ -17,10 +16,33 @@ namespace PI_3.Controllers
         public PerguntaController(AppDbContext context) : base(context)
         {
         }
-
-        public IActionResult Index()
+        public IActionResult Index(int id)
         {
-            return View("Question");
+            var perguntas = _context.Pergunta
+                                .Include(c3 => c3.Comentarios)
+                                .Include(c => c.CursoAluno)
+                                    .ThenInclude(c => c.Aluno)
+                                    .ThenInclude(u => u.Usuario)
+                                .Include(c2 => c2.CursoAluno)
+                                    .ThenInclude(c2 => c2.Curso)
+                                    .ThenInclude(p2 => p2.Professor)
+                                .Where(x => x.PerguntaId == id)
+                                .ToList();
+
+            var pergunta = perguntas[0];
+
+            pergunta.CursoAluno.Perguntas = null;
+            pergunta.CursoAluno.Aluno.CursoAluno = null;
+            pergunta.CursoAluno.Aluno.Usuario.Aluno = null;
+            pergunta.CursoAluno.Curso.CursoAluno = null;
+            pergunta.CursoAluno.Curso.Professor.Cursos = null;
+
+            foreach (Comentario comentario in pergunta.Comentarios)
+            {
+                comentario.Pergunta.Comentarios = null;
+            }
+            ViewBag.Pergunta = pergunta;            
+            return View("Index");
         }
 
     }
