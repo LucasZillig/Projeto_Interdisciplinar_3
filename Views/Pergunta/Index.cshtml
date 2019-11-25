@@ -85,8 +85,8 @@
                 </button>
             </div>
             <div class="question-write">
-                <div id="pell" class="mdc-text-field mdc-text-field--textarea" style="margin-top: 20px">
-                    <textarea id="texto-resposta" class="mdc-text-field__input" rows="8" cols="40"></textarea>
+                <div  class="mdc-text-field mdc-text-field--textarea" style="margin-top: 20px">
+                    <textarea id="pell" class="mdc-text-field__input" rows="8" cols="40"></textarea>
                     <div class="mdc-notched-outline">
                         <div class="mdc-notched-outline__leading"></div>
                         <div class="mdc-notched-outline__notch">
@@ -96,6 +96,11 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div id="editor" contenteditable="true" class="pell"></div>
+        <div>
+            HTML output:
+            <div id="html-output" style="white-space:pre-wrap;"></div>
         </div>
         <div class="comment-section">
             <div class="comment-list">
@@ -127,25 +132,62 @@
 
 @section Scripts {
     
-<script>var require = { paths: { 'vs': '/lib/vs' } };</script>
+<script>var require = { paths: { 'vs': '/lib/vs'} };</script>
 <script src="~/lib/vs/loader.js"></script>
 <script src="~/lib/vs/editor/editor.main.nls.js"></script>
 <script src="~/lib/vs/editor/editor.main.js"></script>
-<!-- <script type="text/javascript" src="~/lib/pell/pell.js"></script> -->
-<script src="https://unpkg.com/pell"></script>
+<script type="module" src="~/lib/pell/pell.js">
+    const pell = window.pell;
+    import { exec, init } from 'pell'
 
+    const editor2 = init({
+        element: document.getElementById('editor'),
+        onChange: html => {
+            document.getElementById('html-output').textContent = html
+        },
+        defaultParagraphSeparator: 'p',
+        styleWithCSS: true,
+        actions: [
+            'bold',
+            'underline',
+            {
+            name: 'italic',
+            result: () => exec('italic')
+            },
+            {
+            name: 'backColor',
+            icon: '<div style="background-color:pink;">A</div>',
+            title: 'Highlight Color',
+            result: () => exec('backColor', 'pink')
+            },
+            {
+            name: 'image',
+            result: () => {
+                const url = window.prompt('Enter the image URL')
+                if (url) exec('insertImage', url)
+            }
+            },
+            {
+            name: 'link',
+            result: () => {
+                const url = window.prompt('Enter the link URL')
+                if (url) exec('createLink', url)
+            }
+            }
+        ],
+        classes: {
+            actionbar: 'pell-actionbar-custom-name',
+            button: 'pell-button-custom-name',
+            content: 'pell-content-custom-name',
+            selected: 'pell-button-selected-custom-name'
+        }
+        })
+        
+        editor2.content.innerHTML = '<b><u><i>Initial content!</i></u></b>';
+
+</script>
 <script>
-const pell = window.pell;
-const pelleditor = document.getElementById("pell");
-const markup = document.getElementById("markup");
 
-pell.init({
-  element: pelleditor,
-  onChange: (html) => {
-    markup.innerHTML = "HTML Output: <br /><br />";
-    markup.innerText += html;
-  }
-})
 </script>
 
 <script>

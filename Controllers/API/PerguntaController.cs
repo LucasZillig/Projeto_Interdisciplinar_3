@@ -42,6 +42,8 @@ namespace PI_3.Controllers.API
             return pergunta;
         }
 
+        
+
         [HttpGet]
         [Route("[action]")]
         public ActionResult<IEnumerable<Pergunta>> GetPerguntaByAluno(int user_id)

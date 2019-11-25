@@ -301,7 +301,7 @@
         <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-5-title">
             <header class="modal__header">
                 <button class="mdc-icon-button material-icons header-icon-button modal__close__custom" onclick="SearchModalClose()">chevron_left</button>
-                <input class="modal__header__searchbar" type="text" id="myInput" onkeyup="myFunction()" placeholder="Buscar...">
+                <input class="modal__header__searchbar" type="text" id="myInput" onkeydown="search(this)" placeholder="Buscar...">
             </header>
             <main class="modal__content" id="modal-5-content">
 
@@ -819,6 +819,35 @@
                     </a>
                 </div>
             `);
+        }
+
+        function search(ele){
+            $('.modal-5-content-list').empty();   
+            for(pergunta of perguntas){
+                if(((pergunta.perguntaNome).toLowerCase()).indexOf(ele.value) == 0 || ((pergunta.perguntaDesc).toLowerCase()).indexOf(ele.value) == 0 || ((pergunta.cursoAluno.curso.cursoNome).toLowerCase()).indexOf(ele.value) == 0){
+                    $('.modal-5-content-list').append(`
+                        <div class="mail-item-wrapper">
+                            <a class="mail-item-container" href="Pergunta/index/${pergunta.perguntaId}">
+                                <div class="mail-item-left">
+                                    <img class="account-picture" src="/img/porter.jpg">
+                                    <span class="tag-icon" style="background: ${pergunta.cursoAluno.cursoAlunoTag};">
+                                    </span>
+                                </div>
+                                <div class="mail-item-right">
+                                    <div class="mail-item-header">
+                                        <div class="mail-sender">${(pergunta.cursoAluno.curso.cursoNome)}</div>
+                                        <div class="mail-time">${(pergunta.perguntaData).substring(0, 10)}</div>
+                                    </div>
+                                    <div class="mail-subject">${pergunta.perguntaNome}</div>
+                                    <div class="mail-summary-text">
+                                        ${pergunta.perguntaDesc}
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    `);
+                }
+            }
         }
     </script>
 }
