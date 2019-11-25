@@ -8,6 +8,10 @@
     caret-color: #9A44FF;
 }
 
+.custom-enhanced-select-width{
+    width: 100%;
+}
+
 /* :root {
     --mdc-theme-primary: #9c27b0;
     --mdc-theme-secondary: #ffab40;
@@ -66,7 +70,7 @@ button, input {
 
 ::-webkit-scrollbar {
     height: 11px;
-    width: 5px;
+    width: 10px;
 }
 
 ::-webkit-scrollbar-button {
@@ -93,7 +97,7 @@ button, input {
 ::-webkit-scrollbar-thumb:vertical,
 ::-webkit-scrollbar-thumb:horizontal {
     border-style: solid;
-    border-color: transparent
+    border-color: transparent;
 }
 
 ::-webkit-scrollbar-track:vertical::-webkit-scrollbar-track:horizontal {
@@ -102,23 +106,21 @@ button, input {
 }
 
 ::-webkit-scrollbar-thumb {
-    /* -webkit-box-shadow: inset 1px 1px 0 rgba(0, 0, 0, .1), inset 0 -1px 0 rgba(0, 0, 0, .07);
-    box-shadow: inset 1px 1px 0 rgba(0, 0, 0, .1), inset 0 -1px 0 rgba(0, 0, 0, .07); */
     background-clip: padding-box;
     background-color: rgba(0, 0, 0, .2);
     min-height: 28px;
-    border-radius: 20px;
+    /* border-radius: 20px; */
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    border-radius: 20px;
+    /* border-radius: 20px; */
     /* -webkit-box-shadow: inset 1px 1px 1px rgba(0, 0, 0, .25);
     box-shadow: inset 1px 1px 1px rgba(0, 0, 0, .25); */
     background-color: rgba(0, 0, 0, .4)
 }
 
 ::-webkit-scrollbar-thumb:active {
-    border-radius: 20px;
+    /* border-radius: 20px; */
     /* box-shadow: inset 1px 1px 3px rgba(0, 0, 0, .35);
     -webkit-box-shadow: inset 1px 1px 3px rgba(0, 0, 0, .35); */
     background-color: rgba(0, 0, 0, .5)
@@ -129,6 +131,12 @@ button, input {
 ::-webkit-scrollbar-thumb:vertical,
 ::-webkit-scrollbar-thumb:horizontal {
     border-width: 0;
+}
+
+::-webkit-scrollbar-track {
+    /* -webkit-box-shadow: inset 1px 0 0 rgba(0, 0, 0, .1);
+    box-shadow: inset 1px 0 0 rgba(0, 0, 0, .1); */
+    background-color: rgba(0, 0, 0, .025);
 }
 
 ::-webkit-scrollbar-track:hover {
@@ -1101,11 +1109,69 @@ button, input {
 #container {
     width: 100%;
     height: 490px;
-    min-width: 550px;
+    min-width: 730px;
+}
+
+.tabs-content{
+    display: flex;
+    margin: 0 16px;
+    flex-direction: column;
+    align-items: center;
+    border-bottom: 1px solid rgba(0, 0, 0, .05);
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+}
+
+.question-description-container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 .question-description{
+    padding-top: 16px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
 
+.question-description-header{
+    display: flex;
+    margin-bottom: 12px;
+}
+
+.qdh-info{
+    display: flex;
+    flex-direction: column;
+    margin-left: 16px;
+}
+
+.qdh-user{
+    font-size: 16px;
+    color: rgba(0,0,0,0.8);
+    font-family: Roobert Semibold;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.qdh-time{
+    font-size: 12px;
+    color: rgba(0,0,0,0.6);
+    font-family: Roobert Semibold;
+}
+
+.question-description-content{
+    margin-left: 56px;
+    max-height: 3em;
+    overflow: hidden;
+    line-height: 1.35rem;
+    font-size: 14px;
+    transition: all 50ms ease;
+}
+
+.question-write{
+    display: none;
 }
 
 .monaco-editor.vs-dark .decorationsOverviewRuler,

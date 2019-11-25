@@ -321,12 +321,15 @@
                 <form id="perfil-form" class="form-wrapper" name="form" action="/uploadmultiple" enctype="multipart/form-data" method="post">
                     <label for="nome-usuario" class="input-label" style="margin-top: -10px;">Nome</label>
                     <div class="mdc-text-field mdc-text-field--outlined">
-                        <input class="mdc-text-field__input" id="nome-usuario" type="text" value="@ViewBag.Usuario.UsuarioNome">
+                        <input class="mdc-text-field__input" id="nome-usuario" type="text" maxlength="30" value="@ViewBag.Usuario.UsuarioNome">
                         <div class="mdc-notched-outline mdc-notched-outline--no-label">
                             <div class="mdc-notched-outline__leading"></div>
                             <div class="mdc-notched-outline__notch"></div>
                             <div class="mdc-notched-outline__trailing"></div>
                         </div>
+                    </div>
+                    <div class="mdc-text-field-helper-line">
+                        <div class="mdc-text-field-character-counter">0 / 30</div>
                     </div>
                     <label for="email-usuario" class="input-label">E-Mail</label>
                     <div class="mdc-text-field mdc-text-field--outlined">
@@ -357,25 +360,32 @@
             <main class="modal__content" id="modal-7-content">
                 <form id="senha-perfil-form" class="form-wrapper" name="form" action="/uploadmultiple" enctype="multipart/form-data" method="post">
                     <label for="senha-usuario" class="input-label" style="margin-top: -10px;">Senha</label>
-                    <div class="mdc-text-field mdc-text-field--outlined mdc-text-field--with-trailing-icon">
+                   <div class="mdc-text-field mdc-text-field--outlined mdc-text-field--with-trailing-icon">
                         <i class="material-icons mdc-text-field__icon">lock</i>
-                        <input class="mdc-text-field__input" id="senha-usuario" type="password" value="@ViewBag.Usuario.UsuarioSenha">
+                        <input class="mdc-text-field__input" id="senha-usuario" type="password" minlength="3" maxlength="25" value="@ViewBag.Usuario.UsuarioSenha">
                         <div class="mdc-notched-outline mdc-notched-outline--no-label">
                             <div class="mdc-notched-outline__leading"></div>
                             <div class="mdc-notched-outline__notch"></div>
                             <div class="mdc-notched-outline__trailing"></div>
                         </div>
+                    </div>
+                    <div class="mdc-text-field-helper-line">
+                        <div class="mdc-text-field-character-counter">0 / 25</div>
                     </div>
                     <label for="senha-confirmar" class="input-label">Repetir Senha</label>
                     <div class="mdc-text-field mdc-text-field--outlined mdc-text-field--with-trailing-icon">
                         <i class="material-icons mdc-text-field__icon">lock</i>
-                        <input class="mdc-text-field__input" id="senha-confirmar" type="password" value="@ViewBag.Usuario.UsuarioSenha">
+                        <input class="mdc-text-field__input" id="senha-confirmar" type="password" minlength="3" maxlength="25" value="@ViewBag.Usuario.UsuarioSenha">
                         <div class="mdc-notched-outline mdc-notched-outline--no-label">
                             <div class="mdc-notched-outline__leading"></div>
                             <div class="mdc-notched-outline__notch"></div>
                             <div class="mdc-notched-outline__trailing"></div>
                         </div>
                     </div>
+                    <div class="mdc-text-field-helper-line">
+                        <div class="mdc-text-field-character-counter">0 / 25</div>
+                    </div>
+                    
 
                     <button type="submit" class="mdc-button mdc-button--outlined" style="margin-top: 20px;">
                         <span class="mdc-button__label">Salvar</span>

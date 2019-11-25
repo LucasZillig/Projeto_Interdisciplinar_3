@@ -179,13 +179,13 @@
                 <form id="pergunta-form" class="form-wrapper" name="form" enctype="multipart/form-data" method="post">
                     <label for="nome-pergunta" class="input-label" style="margin-top: -10px; margin-bottom: 5px;">Curso</label>
                     <div class="mdc-select">
-                        <div class="mdc-select__anchor mdc-ripple-upgraded">
+                        <div class="mdc-menu-surface--anchor mdc-select__anchor custom-enhanced-select-width mdc-ripple-upgraded">
                             <input type="hidden" name="enhanced-select" id="curso-select">
                             <i class="mdc-select__dropdown-icon"></i>
                             <div class="mdc-select__selected-text"></div>
                             <span class="mdc-floating-label">Selecionar...</span>
                         </div>
-                        <div class="mdc-select__menu mdc-menu mdc-menu-surface" style="width: calc(100% - 38px);">
+                        <div class="mdc-select__menu mdc-menu mdc-menu-surface demo-enhanced-select custom-enhanced-select-width">
                             <ul class="mdc-list" id="lista-cursos">
                                 @foreach (CursoAluno c in ViewBag.CursoAluno) {
                                 <li class="mdc-list-item" data-value="@c.CursoAlunoId">
@@ -198,13 +198,16 @@
 
                     <label for="nome-pergunta" class="input-label">Assunto</label>
                     <div class="mdc-text-field mdc-text-field--outlined">
-                        <input class="mdc-text-field__input" id="assunto-pergunta" type="text">
+                        <input class="mdc-text-field__input" id="assunto-pergunta" type="text" maxlength="50">
                         <div class="mdc-notched-outline mdc-notched-outline--no-label">
                             <div class="mdc-notched-outline__leading"></div>
                             <div class="mdc-notched-outline__notch"></div>
                             <div class="mdc-notched-outline__trailing"></div>
                         </div>
                     </div>
+                    <div class="mdc-text-field-helper-line">
+                        <div class="mdc-text-field-character-counter">0 / 50</div>
+                      </div>
                     <div class="mdc-text-field mdc-text-field--textarea" style="margin-top: 20px">
                         <textarea id="texto-pergunta" class="mdc-text-field__input" rows="8" cols="40"></textarea>
                         <div class="mdc-notched-outline">
@@ -284,12 +287,15 @@
                 <form id="perfil-form" class="form-wrapper" name="form" action="/uploadmultiple" enctype="multipart/form-data" method="post">
                     <label for="nome-usuario" class="input-label" style="margin-top: -10px;">Nome</label>
                     <div class="mdc-text-field mdc-text-field--outlined">
-                        <input class="mdc-text-field__input" id="nome-usuario" type="text" value="@ViewBag.Usuario.UsuarioNome">
+                        <input class="mdc-text-field__input" id="nome-usuario" type="text" maxlength="30" value="@ViewBag.Usuario.UsuarioNome">
                         <div class="mdc-notched-outline mdc-notched-outline--no-label">
                             <div class="mdc-notched-outline__leading"></div>
                             <div class="mdc-notched-outline__notch"></div>
                             <div class="mdc-notched-outline__trailing"></div>
                         </div>
+                    </div>
+                    <div class="mdc-text-field-helper-line">
+                        <div class="mdc-text-field-character-counter">0 / 30</div>
                     </div>
                     <label for="email-usuario" class="input-label">E-Mail</label>
                     <div class="mdc-text-field mdc-text-field--outlined">
@@ -322,22 +328,28 @@
                     <label for="senha-usuario" class="input-label" style="margin-top: -10px;">Senha</label>
                     <div class="mdc-text-field mdc-text-field--outlined mdc-text-field--with-trailing-icon">
                         <i class="material-icons mdc-text-field__icon">lock</i>
-                        <input class="mdc-text-field__input" id="senha-usuario" type="password" value="@ViewBag.Usuario.UsuarioSenha">
+                        <input class="mdc-text-field__input" id="senha-usuario" type="password" minlength="3" maxlength="25" value="@ViewBag.Usuario.UsuarioSenha">
                         <div class="mdc-notched-outline mdc-notched-outline--no-label">
                             <div class="mdc-notched-outline__leading"></div>
                             <div class="mdc-notched-outline__notch"></div>
                             <div class="mdc-notched-outline__trailing"></div>
                         </div>
                     </div>
+                    <div class="mdc-text-field-helper-line">
+                        <div class="mdc-text-field-character-counter">0 / 25</div>
+                    </div>
                     <label for="senha-confirmar" class="input-label">Repetir Senha</label>
                     <div class="mdc-text-field mdc-text-field--outlined mdc-text-field--with-trailing-icon">
                         <i class="material-icons mdc-text-field__icon">lock</i>
-                        <input class="mdc-text-field__input" id="senha-confirmar" type="password" value="@ViewBag.Usuario.UsuarioSenha">
+                        <input class="mdc-text-field__input" id="senha-confirmar" type="password" minlength="3" maxlength="25" value="@ViewBag.Usuario.UsuarioSenha">
                         <div class="mdc-notched-outline mdc-notched-outline--no-label">
                             <div class="mdc-notched-outline__leading"></div>
                             <div class="mdc-notched-outline__notch"></div>
                             <div class="mdc-notched-outline__trailing"></div>
                         </div>
+                    </div>
+                    <div class="mdc-text-field-helper-line">
+                        <div class="mdc-text-field-character-counter">0 / 25</div>
                     </div>
 
                     <button type="submit" class="mdc-button mdc-button--outlined" style="margin-top: 20px;">
