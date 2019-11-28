@@ -57,6 +57,34 @@ namespace PI_3.Controllers.API
 
         [HttpGet]
         [Route("[action]")]
+        public ActionResult CheckCoursePresence(int alunoID, int courseID)
+        {
+            var alunos = _context.Aluno
+                                    .Include(u => u.Usuario)
+                                    .Include(c => c.CursoAluno)
+                                    .Where(x => x.AlunoId == alunoID)
+                                    .ToList();
+            
+            if(alunos != null) 
+            {
+                var aluno = alunos[0];
+                aluno.Usuario.Aluno = null;
+                var cursoAluno = aluno.CursoAluno;
+
+                foreach(CursoAluno c in cursoAluno){
+                    if(c.CursoId == courseID){
+                        return new JsonResult(new {onCourse = true});
+                    }
+                }
+                return new JsonResult(new {onCourse = false});
+            }else
+            {
+                return new JsonResult(new {onCourse = false});
+            }
+        }
+
+        [HttpGet]
+        [Route("[action]")]
         public ActionResult LoginUsuario(string email, string senha)
         {
 
