@@ -153,7 +153,7 @@
                     {
                     <div class="invite" id="invite-curso-aluno-@c.CursoAlunoId">
                         <div class="invite-left">
-                            @c.Curso.CursoNome
+                            <div class="invite-left-text">@c.Curso.CursoNome</div>
                         </div>
                         <div class="invite-right">
                             <button onclick="acceptInvite(@c.CursoAlunoId)" class="mdc-icon-button material-icons">check</button>
@@ -198,7 +198,7 @@
 
                     <label for="nome-pergunta" class="input-label">Assunto</label>
                     <div class="mdc-text-field mdc-text-field--outlined">
-                        <input class="mdc-text-field__input" id="assunto-pergunta" type="text" maxlength="50">
+                        <input class="mdc-text-field__input" id="assunto-pergunta" type="text" maxlength="75">
                         <div class="mdc-notched-outline mdc-notched-outline--no-label">
                             <div class="mdc-notched-outline__leading"></div>
                             <div class="mdc-notched-outline__notch"></div>
@@ -206,7 +206,7 @@
                         </div>
                     </div>
                     <div class="mdc-text-field-helper-line">
-                        <div class="mdc-text-field-character-counter">0 / 50</div>
+                        <div class="mdc-text-field-character-counter">0 / 75</div>
                       </div>
                     <div class="mdc-text-field mdc-text-field--textarea" style="margin-top: 20px">
                         <textarea id="texto-pergunta" class="mdc-text-field__input" rows="8" cols="40"></textarea>
@@ -243,18 +243,18 @@
             <main class="modal__content" id="modal-4-content">
                 <div class="invite-wrapper" id="edit-cursos">
                     @foreach (CursoAluno c in ViewBag.CursoAluno) {
+                        @if (@c.statusInvite == 0)
+                        {
                         <div class="invite" id="edit-curso-aluno-@c.CursoId">
-                            @if (@c.statusInvite == 0)
-                            {
-                                <div class="invite-left">
-                                    @c.Curso.CursoNome
-                                </div>   
-                            }
+                            <div class="invite-left">
+                                <div class="invite-left-text">@c.Curso.CursoNome</div>
+                            </div>   
                             <div class="invite-right">
                                 <button class="mdc-icon-button material-icons">edit</button>
                                 <button onclick="declineInvite(@c.CursoAlunoId)" class="mdc-icon-button material-icons">clear</button>
                             </div>
                         </div>
+                        }
                     }
                 </div>
             </main>
