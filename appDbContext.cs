@@ -88,7 +88,7 @@ namespace PI_3
                 entity.HasKey(e => e.PerguntaId);
                 entity.Property(e => e.PerguntaId).HasColumnName("id_pergunta").ValueGeneratedOnAdd().IsRequired();
                 entity.Property(e => e.PerguntaNome).HasColumnName("nome_pergunta").HasColumnType("VARCHAR(45)").IsRequired();
-                entity.Property(e => e.PerguntaDesc).HasColumnName("desc_pergunta").HasColumnType("VARCHAR(45)");
+                entity.Property(e => e.PerguntaDesc).HasColumnName("desc_pergunta").HasColumnType("VARCHAR(300)");
                 entity.Property(e => e.PerguntaData).HasColumnName("data_pergunta").HasColumnType("Date").ValueGeneratedOnAdd().IsRequired();
                 entity.Property(e => e.Arquivado).HasColumnName("arquivado_pergunta").HasColumnType("int").IsRequired();
                 entity.Property(e => e.CursoAlunoId).HasColumnName("id_cursoAluno").IsRequired();

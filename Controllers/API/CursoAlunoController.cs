@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using PI_3.Models;
+using PI_3.Request;
 
 namespace PI_3.Controllers.API
 {   
@@ -51,6 +52,26 @@ namespace PI_3.Controllers.API
             var cursoAluno = _context.CursoAluno.SingleOrDefault(x => x.CursoAlunoId == requestCursoAluno.CursoAlunoId);
 
             cursoAluno.statusInvite = 0;
+
+            _context.CursoAluno.Update(cursoAluno);
+            _context.SaveChanges();
+
+            return NoContent();
+        }
+
+        [HttpPut]
+        [Route("[action]")]
+        public ActionResult ChangeColor(ChangeColorRequest changeColorRequest)
+        {
+
+            var cursoAluno = _context.CursoAluno.SingleOrDefault(x => x.CursoAlunoId == changeColorRequest.CursoAlunoID);
+
+            if (cursoAluno == null)
+            {
+                return BadRequest();
+            }
+
+            cursoAluno.CursoAlunoTag = changeColorRequest.Color;
 
             _context.CursoAluno.Update(cursoAluno);
             _context.SaveChanges();

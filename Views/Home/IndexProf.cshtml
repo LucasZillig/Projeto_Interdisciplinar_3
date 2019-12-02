@@ -37,7 +37,7 @@
                 <div class="sidebar-section">
                     <div class="section-default">
                         <ul id="my-list" class="mdc-list" role="listbox">
-                            <li class="mdc-list-item mdc-list-item--selected" style="padding: 0;" role="option" aria-selected="true" onclick="filtrarPerguntas('inbox')">
+                            <li class="mdc-list-item mdc-list-item--selected" style="padding: 0;" role="option" aria-selected="true">
                                 <span class="mdc-list-item__text materia-title-container">
                                     <span class="materia-title">
                                         <span class="materia-title-inner">Inbox
@@ -46,7 +46,7 @@
                                     </span>
                                 </span>
                             </li>
-                            <li class="mdc-list-item" style="padding: 0;" role="option" aria-selected="false" tabindex="0" onclick="filtrarPerguntas('arquivadas')">
+                            <li class="mdc-list-item" style="padding: 0;" role="option" aria-selected="false" tabindex="0">
                                 <span class="mdc-list-item__text materia-title-container">
                                     <span class="materia-title">
                                         <span class="materia-title-inner">Arquivadas
@@ -59,7 +59,7 @@
                                 <button class="mdc-icon-button material-icons" style="font-size: 18px;padding: 0;height: 30px;width: 30px;margin-right: 20px;" data-micromodal-trigger="modal-4">edit</button>
                             </div>
                             @foreach (Curso c in ViewBag.Cursos) {
-                            <li class="mdc-list-item list-select" role="option" aria-selected="true" tabindex="0" onclick="filtrarPerguntas(@c.CursoId)">
+                            <li class="mdc-list-item list-select" role="option" aria-selected="true" tabindex="0" data-id='@c.CursoId'>
                                 <span class="mdc-list-item__text materia-title-container">
                                     <span class="materia-title">
                                         <span class="materia-title-inner">@c.CursoNome
@@ -216,7 +216,7 @@
                         </div>
                     </div>
                     <label for="nome-pergunta" class="input-label" style="margin-top: 15px;">Selecionar Cor</label>
-                    <div class="tag-select-wrapper" data-selected="#add8e6" style="margin-top: 5px">
+                    <div class="tag-select-wrapper" id="create-tag-select-wrapper" data-selected="#add8e6" style="margin-top: 5px">
                         <div class="mdc-radio" id="tag-1">
                             <input class="mdc-radio__native-control" data-color="#add8e6" type="radio" id="color-1" name="radios" checked>
                             <div class="mdc-radio__background">
@@ -285,7 +285,7 @@
                                 <div class="invite-left-text">@c.CursoNome</div>
                             </div>
                             <div class="invite-right">
-                                <button class="mdc-icon-button material-icons" onclick="editarCurso(@c.CursoId)">edit</button>
+                                <button class="mdc-icon-button material-icons" onclick="openCourseEdit(@c.CursoId, '@c.CursoNome')">edit</button>
                                 <button onclick="deleteCurso(@c.CursoId)" class="mdc-icon-button material-icons">clear</button>
                             </div>
                         </div>
@@ -405,7 +405,7 @@
                 <h2 class="modal__title" id="modal-8-title">Editar Curso</h2>
             </header>
             <main class="modal__content" id="modal-8-content">
-                <form id="edit-form" class="form-wrapper" name="form" action="/uploadmultiple" enctype="multipart/form-data" method="post">
+                <form id="edit-form" class="form-wrapper" data-cursoId="">
                     <label for="nome-pergunta" class="input-label" style="margin-top: -10px;">Nome do Curso</label>
                     <div class="mdc-text-field mdc-text-field--outlined">
                         <input class="mdc-text-field__input" id="edit-nome-curso" type="text" value="teste">
@@ -416,9 +416,9 @@
                         </div>
                     </div>
                     <label for="nome-pergunta" class="input-label" style="margin-top: 15px;">Selecionar Cor</label>
-                    <div class="tag-select-wrapper" style="margin-top: 5px">
+                    <div class="tag-select-wrapper" id="edit-tag-select-wrapper" data-selected="#add8e6" style="margin-top: 5px">
                         <div class="mdc-radio" id="tag-1">
-                            <input class="mdc-radio__native-control" type="radio" id="color-1" name="radios">
+                            <input class="mdc-radio__native-control" data-color="#add8e6" type="radio" id="color-1" name="radios" checked>
                             <div class="mdc-radio__background">
                                 <div class="mdc-radio__outer-circle"></div>
                                 <div class="mdc-radio__inner-circle"></div>
@@ -426,7 +426,7 @@
                             <div class="mdc-radio__ripple"></div>
                         </div>
                         <div class="mdc-radio" id="tag-2">
-                            <input class="mdc-radio__native-control" type="radio" id="color-2" name="radios">
+                            <input class="mdc-radio__native-control" data-color="#f08080" type="radio" id="color-2" name="radios">
                             <div class="mdc-radio__background">
                                 <div class="mdc-radio__outer-circle"></div>
                                 <div class="mdc-radio__inner-circle"></div>
@@ -434,7 +434,7 @@
                             <div class="mdc-radio__ripple"></div>
                         </div>
                         <div class="mdc-radio" id="tag-3">
-                            <input class="mdc-radio__native-control" type="radio" id="color-3" name="radios">
+                            <input class="mdc-radio__native-control" data-color="#90ee90" type="radio" id="color-3" name="radios">
                             <div class="mdc-radio__background">
                                 <div class="mdc-radio__outer-circle"></div>
                                 <div class="mdc-radio__inner-circle"></div>
@@ -442,7 +442,7 @@
                             <div class="mdc-radio__ripple"></div>
                         </div>
                         <div class="mdc-radio" id="tag-4">
-                            <input class="mdc-radio__native-control" type="radio" id="color-4" name="radios">
+                            <input class="mdc-radio__native-control" data-color="#ffa07a" type="radio" id="color-4" name="radios">
                             <div class="mdc-radio__background">
                                 <div class="mdc-radio__outer-circle"></div>
                                 <div class="mdc-radio__inner-circle"></div>
@@ -450,14 +450,13 @@
                             <div class="mdc-radio__ripple"></div>
                         </div>
                         <div class="mdc-radio" id="tag-5">
-                            <input class="mdc-radio__native-control" type="radio" id="color-5" name="radios">
+                            <input class="mdc-radio__native-control" data-color="#20b2ab" type="radio" id="color-5" name="radios">
                             <div class="mdc-radio__background">
                                 <div class="mdc-radio__outer-circle"></div>
                                 <div class="mdc-radio__inner-circle"></div>
                             </div>
                             <div class="mdc-radio__ripple"></div>
                         </div>
-                    
                     </div>
                     
                     <button type="submit" class="mdc-button mdc-button--outlined" style="margin-top: 20px;">
@@ -588,7 +587,7 @@
 
             const curso = {
                 'CursoNome': $('#nome-curso').val(),
-                'CursoTag': $('.tag-select-wrapper').attr('data-selected'),
+                'CursoTag': $('#create-tag-select-wrapper').attr('data-selected'),
                 'ProfessorId': @ViewBag.ProfessorId
             }
 
@@ -607,29 +606,9 @@
         });
 
         $('#enviar-convite-btn').click(async function(){
-            console.log()
-            const url = `api/Usuario/GetByEmail?email=${$('#email-convite').val()}`
-            const response = await fetch(url);
-
-            if(response.ok){
-                const data = await response.json();
-                await sendInvite(data.aluno.alunoId)
-                .then(resp => {
-                    if(resp.ok){
-                        alert('convite enviado');
-                        window.location.reload();
-                    }
-                })
-                .catch(error => alert('Erro:' + error));
-            }else{
-                alert('Esse email não existe!');
-            }
-        
-        });
-
-        async function sendInvite(aluno_id){
             let cursoId;
             let cursoTag;
+
             $('#lista-cursos').children('li').each(function(){
                if($(this).hasClass('mdc-list-item--selected')){
                    cursoId = $(this).data('value');
@@ -640,12 +619,41 @@
             if(cursoId == null){
                 return alert('Selecione um curso!');
             }
-            
+
+            const url = `api/Usuario/GetByEmail?email=${$('#email-convite').val()}`;
+
+            const response = await fetch(url);
+
+            if(!response.ok) {
+                alert('Esse email não existe!');
+            }
+            const { aluno } = await response.json();
+
+            const url2 = `api/Usuario/CheckCoursePresence?alunoID=${aluno.alunoId}&courseID=${cursoId}`;
+
+            const checkEmail = await fetch(url2);
+            const { onCourse } = await checkEmail.json();
+
+            if(onCourse){
+                return alert('Esse aluno ja está nesse curso!');
+            }
+
+            await sendInvite(aluno.alunoId, cursoId, cursoTag)
+            .then(resp => {
+                if(resp.ok){
+                    alert('convite enviado');
+                    window.location.reload();
+                }
+            })
+            .catch(error => alert('Erro:' + error));
+        });
+
+        async function sendInvite(aluno_id, curso_id, tag){            
             const invite = {
                 'statusInvite': 1,               
-                'CursoAlunoTag': cursoTag,
+                'CursoAlunoTag': tag,
                 'AlunoId': aluno_id,
-                'CursoId': cursoId
+                'CursoId': curso_id
             }
 
             const response = await fetch('api/CursoAluno', {
@@ -669,8 +677,8 @@
             .catch(error => alert(error));
         }
 
-        $('.mdc-radio input').on('change', function() {
-            $('.tag-select-wrapper').attr('data-selected', $(this).attr('data-color'));
+        $('#create-tag-select-wrapper .mdc-radio input').on('change', function() {
+            $('#create-tag-select-wrapper').attr('data-selected', $(this).attr('data-color'));
         });
 
         MicroModal.init({
@@ -746,21 +754,82 @@
             });
         }
 
-        async function editarCurso(curso_id){
-            const response = await fetch('api/Curso/' + curso_id);
-            const data = await response.json();
+        $('#edit-tag-select-wrapper .mdc-radio input').on('change', function() {
+            $('#edit-tag-select-wrapper').attr('data-selected', $(this).attr('data-color'));
+        });
+
+        function openCourseEdit(id, name){
             MicroModal.show('modal-8');
-            let perguntas; 
+            $('#edit-form').data('cursoId', id);
+            $('#edit-nome-curso').val(name);
         }
-        
-            getPerguntas()
-                .then(response => {
-                    perguntas = response;
-                    for(pergunta of perguntas){
+
+        $('#edit-form').submit(async function(event){
+            event.preventDefault();
+            
+            const cursoId = $(this).data('cursoId');
+
+            const curso = {
+                CursoId: cursoId,
+                CursoNome: $('#edit-nome-curso').val(),
+                CursoTag: $('#edit-tag-select-wrapper').data('selected'),
+                ProfessorId: @ViewBag.ProfessorId
+            }
+
+            await fetch('api/Curso/' + cursoId, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(curso)
+            })
+            .then(response => {
+                alert('Curso editado!');
+                window.location.reload();
+            })
+            .catch(err => alert(err));
+        });
+
+        let perguntas; 
+    
+        getPerguntas()
+            .then(response => {
+                perguntas = response;
+                for(pergunta of perguntas){
+                    criarPergunta(pergunta);
+                }
+            })
+            .catch(err => console.error(err));
+
+        $('#my-list li').click(function (){
+           $('.mail-list').empty();
+
+           const option = $(this).text().trim();
+
+            if(option == 'inbox'){
+                for(pergunta of perguntas){
+                    $('.current-inbox-title').text(option);
+                    criarPergunta(pergunta);
+                }
+                return;
+            }else if(option == 'arquivadas'){
+                $('.current-inbox-title').text(option);
+                for(pergunta of perguntas){
+                    if(pergunta.arquivado == 1){
                         criarPergunta(pergunta);
                     }
-                })
-                .catch(err => console.error(err));
+                }
+                return;
+            }else{
+                $('.current-inbox-title').text(option);
+                for(pergunta of perguntas){
+                    if(pergunta.cursoAluno.cursoId == $(this).data('id')){
+                        criarPergunta(pergunta);
+                    }
+                }
+                return;
+            }
+        });
             
         async function getPerguntas() {
             const response = await fetch('api/Pergunta/GetPerguntaByProfessor?user_id=' + @ViewBag.ProfessorId);
@@ -774,7 +843,7 @@
             return perguntas;    
         }
 
-        function filtrarPerguntas(value){
+        $('myList li').click(function (){
             $('.mail-list').empty();
 
             if(value == 'inbox'){
@@ -800,7 +869,7 @@
                 }
                 return;
             }
-        }
+        });
 
         function criarPergunta(pergunta){
             $('.mail-list').append(`
@@ -808,7 +877,7 @@
                     <a class="mail-item-container" href="Pergunta/index/${pergunta.perguntaId}">
                         <div class="mail-item-left">
                             <img class="account-picture" src="/img/porter.jpg">
-                            <span class="tag-icon" style="background: ${pergunta.cursoAluno.cursoAlunoTag};">
+                            <span class="tag-icon" style="background: ${pergunta.cursoAluno.curso.cursoTag};">
                             </span>
                         </div>
                         <div class="mail-item-right">

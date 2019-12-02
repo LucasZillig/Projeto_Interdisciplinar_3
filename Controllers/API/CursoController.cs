@@ -69,10 +69,11 @@ namespace PI_3.Controllers.API
 
             var curso = _context.Curso.SingleOrDefault(x => x.CursoId == requestCurso.CursoId);
 
-                curso.CursoNome = requestCurso.CursoNome;
+            curso.CursoNome = requestCurso.CursoNome;
+            curso.CursoTag = requestCurso.CursoTag;
 
-                _context.Curso.Update(curso);
-                _context.SaveChanges();
+            _context.Curso.Update(curso);
+            _context.SaveChanges();
 
             return NoContent();
         }
