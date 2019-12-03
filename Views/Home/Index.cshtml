@@ -685,7 +685,6 @@
             $('#lista-cursos').children('li').each(function(){
                if($(this).hasClass('mdc-list-item--selected')){
                    const id = $(this).data('value');
-                   console.log(id);
                    return id;
                }
             })
@@ -839,17 +838,17 @@
         }
 
         $('#my-list li').click(function (){
-           $('.mail-list').empty();
+            $('.mail-list').empty();
 
-           const option = $(this).text().trim();
+            const option = $(this).text().trim();
 
-            if(option == 'inbox'){
+            if(option == 'Inbox'){
                 for(pergunta of perguntas){
                     $('.current-inbox-title').text(option);
                     criarPergunta(pergunta);
                 }
                 return;
-            }else if(option == 'arquivadas'){
+            }else if(option == 'Arquivadas'){
                 $('.current-inbox-title').text(option);
                 for(pergunta of perguntas){
                     if(pergunta.arquivado == 1){
