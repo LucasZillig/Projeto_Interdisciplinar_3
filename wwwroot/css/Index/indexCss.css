@@ -412,7 +412,7 @@ button, input {
 }
 
 .list-select-overflowing {
-    transform: translateX(0);
+    /* transform: translateX(0); */
 }
 
 .list-select:hover .list-select-overflowing {
@@ -502,9 +502,9 @@ button, input {
     border-radius: 50%;
     width: 40px;
     height: 40px;
-    /* 95px no desktop */
-    background: red;
+    background: url(../../img/default-profile.png);
     object-fit: cover;
+    background-size: 40px;
 }
 
 .account-picture-small {
@@ -900,7 +900,7 @@ button, input {
     font-size: 14px;
     color: rgba(0,0,0,0.6);
     font-family: Roobert Semibold;
-    max-width: 80%;
+    max-width: 70%;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;

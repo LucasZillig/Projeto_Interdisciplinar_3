@@ -1,36 +1,64 @@
 * {
     margin: 0;
     padding: 0;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Roobert', 'Roobert Semibold';
     box-sizing: border-box;
 }
 
 .container {
     width: 100%;
-    height: 100vh;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #443483;
-    color: #a29bfe;
+    flex-direction: column;
+    /* justify-content: center; */
+    /* align-items: center; */
+}
+
+.selector-wrapper{
+    
+}
+
+.forms-wrapper{
+    
+}
+
+.modal-wrapper{
+    display: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 50;
+}
+
+.form-wrapper{
+    display: flex;
+    flex-direction: column;
+}
+
+.login-form-wrapper{
+    /* display: none; */
+}
+
+.register-form-wrapper{
+    display: none;
+}
+
+.input-label{
+    font-family: Roobert Semibold;
+    margin-top: 20px;
+}
+
+.form-radios{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
 }
 
 .login-wrapper {
-    position: relative;
-    width: 850px;
-    height: 500px;
-    background-color: #2f3640;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    width: 100%;
+    height: 100%;
     padding: 20px;
-    border-radius: 5px;
+    /* border: 2px solid #9A55FF; */
 }
 
-.login-wrapper i {
-    font-size: 120px;
-    color: #a29bfe;
-}
 
 .login-form-input-wrapper {
     height: 200px;
@@ -182,20 +210,4 @@ input:checked+.slider:before {
 ::placeholder {
     color: #a29bfe;
     opacity: 0.5;
-}
-
-@media only screen and (max-width: 1024px) {
-    .login-wrapper {
-        width: 100%;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-    }
-    .register-form-input-wrapper {
-        display: block;
-    }
-    .register-form-wrapper form {
-        height: 480px;
-    }
 }

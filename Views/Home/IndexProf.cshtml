@@ -59,7 +59,7 @@
                                 <button class="mdc-icon-button material-icons" style="font-size: 18px;padding: 0;height: 30px;width: 30px;margin-right: 20px;" data-micromodal-trigger="modal-4">edit</button>
                             </div>
                             @foreach (Curso c in ViewBag.Cursos) {
-                            <li class="mdc-list-item list-select" role="option" aria-selected="true" tabindex="0" data-id='@c.CursoId'>
+                            <li class="mdc-list-item list-select" role="option" aria-selected="true" tabindex="0" data-id='@c.CursoId' id="list-curso-@c.CursoId">
                                 <span class="mdc-list-item__text materia-title-container">
                                     <span class="materia-title">
                                         <span class="materia-title-inner">@c.CursoNome
@@ -196,6 +196,26 @@
         </div>
     </div>
 </div>
+<div class="mdc-snackbar" id="snack-aluno-matriculado">
+    <div class="mdc-snackbar__surface">
+        <div class="mdc-snackbar__label" role="status" aria-live="polite">
+            Este aluno já faz parte deste curso.
+        </div>
+        <div class="mdc-snackbar__actions">
+            <button class="mdc-icon-button mdc-snackbar__dismiss material-icons" title="Dismiss">close</button>
+        </div>
+    </div>
+</div>
+<div class="mdc-snackbar" id="snack-convite-enviado">
+    <div class="mdc-snackbar__surface">
+        <div class="mdc-snackbar__label" role="status" aria-live="polite">
+            Convite enviado.
+        </div>
+        <div class="mdc-snackbar__actions">
+            <button class="mdc-icon-button mdc-snackbar__dismiss material-icons" title="Dismiss">close</button>
+        </div>
+    </div>
+</div>
 
 <div class="modal micromodal-slide" id="modal-3" aria-hidden="true">
     <div class="modal__overlay" tabindex="-1" data-micromodal-close>
@@ -257,7 +277,6 @@
                             </div>
                             <div class="mdc-radio__ripple"></div>
                         </div>
-
                     </div>
 
                     <button type="submit" class="mdc-button mdc-button--outlined" style="margin-top: 20px;">
@@ -266,6 +285,36 @@
                     </button>
                 </form>
             </main>
+        </div>
+    </div>
+</div>
+<div class="mdc-snackbar" id="snack-curso-nome-erro">
+    <div class="mdc-snackbar__surface">
+        <div class="mdc-snackbar__label" role="status" aria-live="polite">
+            O curso precisa de um nome.
+        </div>
+        <div class="mdc-snackbar__actions">
+            <button class="mdc-icon-button mdc-snackbar__dismiss material-icons" title="Dismiss">close</button>
+        </div>
+    </div>
+</div>
+<div class="mdc-snackbar" id="snack-selecionar-curso">
+    <div class="mdc-snackbar__surface">
+        <div class="mdc-snackbar__label" role="status" aria-live="polite">
+            É preciso selecionar um curso.
+        </div>
+        <div class="mdc-snackbar__actions">
+            <button class="mdc-icon-button mdc-snackbar__dismiss material-icons" title="Dismiss">close</button>
+        </div>
+    </div>
+</div>
+<div class="mdc-snackbar" id="snack-email-erro">
+    <div class="mdc-snackbar__surface">
+        <div class="mdc-snackbar__label" role="status" aria-live="polite">
+            Não encontramos nenhum usuário com este e-mail.
+        </div>
+        <div class="mdc-snackbar__actions">
+            <button class="mdc-icon-button mdc-snackbar__dismiss material-icons" title="Dismiss">close</button>
         </div>
     </div>
 </div>
@@ -295,6 +344,26 @@
         </div>
     </div>
 </div>
+<div class="mdc-snackbar" id="snack-delete-curso">
+    <div class="mdc-snackbar__surface">
+        <div class="mdc-snackbar__label" role="status" aria-live="polite">
+            Curso deletado.
+        </div>
+        <div class="mdc-snackbar__actions">
+            <button class="mdc-icon-button mdc-snackbar__dismiss material-icons" title="Dismiss">close</button>
+        </div>
+    </div>
+</div>
+<div class="mdc-snackbar" id="snack-curso-notfound">
+    <div class="mdc-snackbar__surface">
+        <div class="mdc-snackbar__label" role="status" aria-live="polite">
+            Curso não encontrado.
+        </div>
+        <div class="mdc-snackbar__actions">
+            <button class="mdc-icon-button mdc-snackbar__dismiss material-icons" title="Dismiss">close</button>
+        </div>
+    </div>
+</div>
 
 <div class="modal micromodal-slide" id="modal-5" aria-hidden="true">
     <div class="modal__overlay" tabindex="-1" data-micromodal-close>
@@ -319,7 +388,11 @@
             </header>
             <main class="modal__content" id="modal-6-content">
                 <form id="perfil-form" class="form-wrapper" name="form" action="/uploadmultiple" enctype="multipart/form-data" method="post">
-                    <label for="nome-usuario" class="input-label" style="margin-top: -10px;">Nome</label>
+                    <label class="mdc-button mdc-button--outlined" style="margin-top: -10px;">
+                        <input id="files" class="file-upload-btn" name="files" type="file" multiple/>
+                        <span class="mdc-button__label">Enviar Foto de Perfil</span>
+                    </label>
+                    <label for="nome-usuario" class="input-label">Nome</label>
                     <div class="mdc-text-field mdc-text-field--outlined">
                         <input class="mdc-text-field__input" id="nome-usuario" type="text" maxlength="30" value="@ViewBag.Usuario.UsuarioNome">
                         <div class="mdc-notched-outline mdc-notched-outline--no-label">
@@ -346,6 +419,16 @@
                 </form>
             </main>
             <footer class="modal__footer"></footer>
+        </div>
+    </div>
+</div>
+<div class="mdc-snackbar" id="snack-alterar-dados">
+    <div class="mdc-snackbar__surface">
+        <div class="mdc-snackbar__label" role="status" aria-live="polite">
+            Dados alterados com sucesso.
+        </div>
+        <div class="mdc-snackbar__actions">
+            <button class="mdc-icon-button mdc-snackbar__dismiss material-icons" title="Dismiss">close</button>
         </div>
     </div>
 </div>
@@ -385,14 +468,32 @@
                     <div class="mdc-text-field-helper-line">
                         <div class="mdc-text-field-character-counter">0 / 25</div>
                     </div>
-                    
-
                     <button type="submit" class="mdc-button mdc-button--outlined" style="margin-top: 20px;">
                         <span class="mdc-button__label">Salvar</span>
                     </button>
                 </form>
             </main>
             <footer class="modal__footer"></footer>
+        </div>
+    </div>
+</div>
+<div class="mdc-snackbar" id="snack-senha">
+    <div class="mdc-snackbar__surface">
+        <div class="mdc-snackbar__label" role="status" aria-live="polite">
+            Senha alterada com sucesso.
+        </div>
+        <div class="mdc-snackbar__actions">
+            <button class="mdc-icon-button mdc-snackbar__dismiss material-icons" title="Dismiss">close</button>
+        </div>
+    </div>
+</div>
+<div class="mdc-snackbar" id="snack-senha-errada">
+    <div class="mdc-snackbar__surface">
+        <div class="mdc-snackbar__label" role="status" aria-live="polite">
+            As senhas não combinam.
+        </div>
+        <div class="mdc-snackbar__actions">
+            <button class="mdc-icon-button mdc-snackbar__dismiss material-icons" title="Dismiss">close</button>
         </div>
     </div>
 </div>
@@ -468,11 +569,31 @@
         </div>
     </div>
 </div>
+<div class="mdc-snackbar" id="snack-curso-editado">
+    <div class="mdc-snackbar__surface">
+        <div class="mdc-snackbar__label" role="status" aria-live="polite">
+            Curso editado.
+        </div>
+        <div class="mdc-snackbar__actions">
+            <button class="mdc-icon-button mdc-snackbar__dismiss material-icons" title="Dismiss">close</button>
+        </div>
+    </div>
+</div>
 
 <div id="overlay"></div>
 
 @section Scripts {
     <script type="text/javascript">
+
+    // Instancia só uma snackbar com todas as funcionalidades
+    // const snackbar = new mdc.snackbar.MDCSnackbar(document.querySelector('.mdc-snackbar')); 
+
+    const snackbarArray = [];
+    const snackbars = document.querySelectorAll('.mdc-snackbar');
+    for (const snackbar of snackbars){
+        var snackbarId = snackbar.id;
+        snackbarArray[snackbarId] = new mdc.snackbar.MDCSnackbar(snackbar);
+    }
 
     const tabBars = document.querySelectorAll('.mdc-tab-bar');
     for (const tabBar of tabBars){
@@ -544,16 +665,16 @@
                 body: JSON.stringify(perfilData)
             })
             .then(response => {
-                alert('Dados alterados');
+                snackbarArray["snack-alterar-dados"].open();
             })
-            .catch(error => alert(error));
+            .catch(error => console.error(error));
         });
 
         $('#senha-perfil-form').submit(async function(event){
             event.preventDefault();
 
             if($('#senha-usuario').val() != $('#senha-confirmar').val()){
-                return alert('As senhas não combinam!');
+                snackbarArray["snack-senha-errada"].open();
             }
             const senhaPerfilData = {
                 'UsuarioId': @ViewBag.Usuario.UsuarioId,
@@ -570,9 +691,9 @@
                 body: JSON.stringify(senhaPerfilData)
             })
             .then(response => {
-                alert('Senha alterada');
+                snackbarArray["snack-senha"].open();
             })
-            .catch(error => alert(error));
+            .catch(error => console.error(error));
         });
 
         //Create curso
@@ -582,7 +703,7 @@
             const CursoNome = $('#nome-curso').val();
 
             if(CursoNome === null || CursoNome.match(/^ *$/) !== null){
-                return alert('O curso precisa de nome!');
+                snackbarArray["snack-curso-nome-erro"].open();
             }
 
             const curso = {
@@ -601,7 +722,7 @@
             .then(response => {
                 window.location.reload();
             })
-            .catch(error => alert(error));
+            .catch(error => console.error(error));
 
         });
 
@@ -617,7 +738,7 @@
             });
 
             if(cursoId == null){
-                return alert('Selecione um curso!');
+                snackbarArray["snack-selecionar-curso"].open();
             }
 
             const url = `api/Usuario/GetByEmail?email=${$('#email-convite').val()}`;
@@ -625,7 +746,7 @@
             const response = await fetch(url);
 
             if(!response.ok) {
-                alert('Esse email não existe!');
+                snackbarArray["snack-email-erro"].open();
             }
             const { aluno } = await response.json();
 
@@ -635,17 +756,17 @@
             const { onCourse } = await checkEmail.json();
 
             if(onCourse){
-                return alert('Esse aluno ja está nesse curso!');
+                snackbarArray["snack-aluno-matriculado"].open();
+                return;
             }
-
             await sendInvite(aluno.alunoId, cursoId, cursoTag)
             .then(resp => {
                 if(resp.ok){
-                    alert('convite enviado');
+                    snackbarArray["snack-convite-enviado"].open();
                     window.location.reload();
                 }
             })
-            .catch(error => alert('Erro:' + error));
+            .catch(error => console.error(error));
         });
 
         async function sendInvite(aluno_id, curso_id, tag){            
@@ -674,7 +795,7 @@
             .then(response => { 
                 $('#invite-' + cursoAluno_id).remove();
             })
-            .catch(error => alert(error));
+            .catch(error => console.error(error));
         }
 
         $('#create-tag-select-wrapper .mdc-radio input').on('change', function() {
@@ -717,7 +838,7 @@
 
             (function(){
                 $('.materia-title').each(function(){
-                    if (this.offsetWidth + 47 < this.scrollWidth) {
+                    if (this.offsetWidth - 47 < this.scrollWidth) {
                         $(this).addClass('list-select-overflowing');
                     }
                 });
@@ -744,12 +865,14 @@
                 url: "api/Curso/" + cursoId,
                 type: 'DELETE',
                 success: function (data) {
-                    alert(data);
+                    snackbarArray["snack-delete-curso"].open();
                     $('#list-curso-' + cursoId).remove();
                     $('#edit-curso-' + cursoId).remove();
+                    $(".mdc-list-item[data-value='" + cursoId + "']").remove();
                 },
                 error: function (res) {
-                    alert(res);
+                    snackbarArray["snack-curso-notfound"].open();
+                    window.location.reload();
                 }
             });
         }
@@ -784,10 +907,10 @@
                 body: JSON.stringify(curso)
             })
             .then(response => {
-                alert('Curso editado!');
+                snackbarArray["snack-curso-editado"].open();
                 window.location.reload();
             })
-            .catch(err => alert(err));
+            .catch(err => console.error(err));
         });
 
         let perguntas; 
@@ -872,6 +995,9 @@
         });
 
         function criarPergunta(pergunta){
+            var ano = pergunta.perguntaData.substring(0, 10).split('-')[0];
+            var mes = pergunta.perguntaData.substring(0, 10).split('-')[1];
+            var dia = pergunta.perguntaData.substring(0, 10).split('-')[2];
             $('.mail-list').append(`
                 <div class="mail-item-wrapper">
                     <a class="mail-item-container" href="Pergunta/index/${pergunta.perguntaId}">
@@ -883,7 +1009,7 @@
                         <div class="mail-item-right">
                             <div class="mail-item-header">
                                 <div class="mail-sender">${(pergunta.cursoAluno.aluno.usuario.usuarioNome)}</div>
-                                <div class="mail-time">${(pergunta.perguntaData).substring(0, 10)}</div>
+                                <div class="mail-time">${dia+"/"+mes+"/"+ano}</div>
                             </div>
                             <div class="mail-subject">${pergunta.perguntaNome}</div>
                             <div class="mail-summary-text">

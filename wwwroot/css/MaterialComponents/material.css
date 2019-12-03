@@ -7323,7 +7323,8 @@ a.mdc-list-item {
 }
 
 .mdc-snackbar {
-    z-index: 8;
+    /* z-index: 8; */
+    z-index: 51;
     margin: 8px;
     display: none;
     position: fixed;

@@ -1,122 +1,255 @@
 @{
     Layout = "~/Views/Shared/_LayoutLogin.cshtml";
 }
-
-<div class="login-wrapper">
-    <div class="switch-wrapper login-switch">
-            <p id="login-p">LOGIN</p>
-            <p id="register-p">REGISTER</p>
-        <label class="switch">
-            <input id="typelogin-input" type="checkbox" id="sliderCheck">
-            <span class="slider"></span>
-        </label>
-    </div>
-    <i class="material-icons">donut_small</i>
-    <div class="login-form-wrapper">
-        <form id="login-form" class="form-style" action="GET">
-            <div class="login-form-input-wrapper">
-                <div>
-                    <p>E-mail</p>
-                    <input id="login-email" name="email" placeholder="E-mail" type="email"/>
-                </div>
-                <div>
-                    <p>Password</p>
-                    <input id="login-senha" name="password" placeholder="Password" type="password"/>
-                </div>
-            </div>
-            <button type="submit">Login</button>
-        </form>
-    </div>
-    <div class="register-form-wrapper">
-        <form id="register-form" class="form-style" action="POST">
-            <div class="register-form-input-wrapper">
-                <div class="input-container">
-                    <div>
-                        <p>E-mail</p>
-                        <input id="register-email" name="email" placeholder="E-mail" type="email"/>
-                    </div>
-                    <div>
-                        <p>Nome</p>
-                        <input id="register-nome" name="username" placeholder="Nome" type="text"/>
-                    </div>
-                </div>
-                <div class="input-container">
-                    <div>
-                        <p>Password</p>
-                        <input id="register-senha" name="password" placeholder="Password" type="password"/>
-                    </div>
-                    <div>
-                        <p>Repeat Password</p>
-                        <input id="register-senha-repeat" name="password-repeat" placeholder="Repeat Password" type="password"/>
-                    </div>
+<div class="selector-wrapper">
+    <div class="mdc-tab-bar" role="tablist">
+        <div class="mdc-tab-scroller">
+            <div class="mdc-tab-scroller__scroll-area">
+                <div class="mdc-tab-scroller__scroll-content">
+                    <button id="login-button" class="mdc-tab mdc-tab--stacked mdc-tab--active" role="tab" aria-selected="true" tabindex="0" onclick="changeTab(this)">
+                        <span class="mdc-tab__content">
+                            <span class="mdc-tab__icon material-icons" aria-hidden="true">exit_to_app</span>
+                            <span class="mdc-tab__text-label">Login</span>
+                            <span class="mdc-tab-indicator mdc-tab-indicator--active">
+                                <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+                            </span>
+                        </span>
+                    <span class="mdc-tab__ripple"></span>
+                    </button>
+                    <button id="register-button" class="mdc-tab mdc-tab--stacked" role="tab" aria-selected="true" tabindex="0" onclick="changeTab(this)">
+                        <span class="mdc-tab__content">
+                            <span class="mdc-tab__icon material-icons material-icons-outlined" aria-hidden="true">edit</span>
+                            <span class="mdc-tab__text-label">Registro</span>
+                            <span class="mdc-tab-indicator">
+                                <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+                            </span>
+                        </span>
+                        <span class="mdc-tab__ripple"></span>
+                    </button>
                 </div>
             </div>
-            <div class="switch-wrapper typeuser-switch">
-                <p id="aluno-p">ALUNO</p>
-                <p id="professor-p">PROFESSOR</p>
-                <label class="switch">
-                    <input id="typeuser-input" type="checkbox" id="sliderCheck">
-                    <span class="slider"></span>
-                </label>
-            </div>
-            <button type="submit">Register</button>
-        </form>
+        </div>
     </div>
 </div>
+
+<div class="login-wrapper">
+    <div class="forms-wrapper">
+        <div class="login-form-wrapper form--selected">
+            <form class="form-wrapper" id="login-form" action="">
+                <label for="email-usuario-login" class="input-label" style="margin-top: -10px;">E-Mail</label>
+                <div class="mdc-text-field mdc-text-field--outlined">
+                    <input class="mdc-text-field__input" id="email-usuario-login" type="email" maxlength="45">
+                    <div class="mdc-notched-outline mdc-notched-outline--no-label">
+                        <div class="mdc-notched-outline__leading"></div>
+                        <div class="mdc-notched-outline__notch"></div>
+                        <div class="mdc-notched-outline__trailing"></div>
+                    </div>
+                </div>
+                <label for="senha-usuario-login" class="input-label">Senha</label>
+                <div class="mdc-text-field mdc-text-field--outlined mdc-text-field--with-trailing-icon">
+                    <i class="material-icons mdc-text-field__icon">lock</i>
+                    <input class="mdc-text-field__input" id="senha-usuario-login" type="password" minlength="3" maxlength="25">
+                    <div class="mdc-notched-outline mdc-notched-outline--no-label">
+                        <div class="mdc-notched-outline__leading"></div>
+                        <div class="mdc-notched-outline__notch"></div>
+                        <div class="mdc-notched-outline__trailing"></div>
+                    </div>
+                </div>
+                <button type="submit" class="mdc-button mdc-button--outlined" style="margin-top: 20px;">
+                    <span class="mdc-button__label">Entrar</span>
+                </button>
+            </form>
+        </div>
+
+        <div class="register-form-wrapper">
+            <form class="form-wrapper" id="register-form" action="">
+                <label for="nome-usuario" class="input-label" style="margin-top: -10px;">Nome</label>
+                <div class="mdc-text-field mdc-text-field--outlined">
+                    <input class="mdc-text-field__input" id="nome-usuario" type="text" maxlength="30">
+                    <div class="mdc-notched-outline mdc-notched-outline--no-label">
+                        <div class="mdc-notched-outline__leading"></div>
+                        <div class="mdc-notched-outline__notch"></div>
+                        <div class="mdc-notched-outline__trailing"></div>
+                    </div>
+                </div>
+                <div class="mdc-text-field-helper-line">
+                    <div class="mdc-text-field-character-counter">0 / 30</div>
+                </div>
+                <label for="email-usuario" class="input-label">E-Mail</label>
+                <div class="mdc-text-field mdc-text-field--outlined">
+                    <input class="mdc-text-field__input" id="email-usuario" type="email" maxlength="45">
+                    <div class="mdc-notched-outline mdc-notched-outline--no-label">
+                        <div class="mdc-notched-outline__leading"></div>
+                        <div class="mdc-notched-outline__notch"></div>
+                        <div class="mdc-notched-outline__trailing"></div>
+                    </div>
+                </div>
+                <div class="mdc-text-field-helper-line">
+                    <div class="mdc-text-field-character-counter">0 / 45</div>
+                </div>
+                <label for="senha-usuario" class="input-label">Senha</label>
+                <div class="mdc-text-field mdc-text-field--outlined mdc-text-field--with-trailing-icon">
+                    <i class="material-icons mdc-text-field__icon">lock</i>
+                    <input class="mdc-text-field__input" id="senha-usuario" type="password" minlength="3" maxlength="25">
+                    <div class="mdc-notched-outline mdc-notched-outline--no-label">
+                        <div class="mdc-notched-outline__leading"></div>
+                        <div class="mdc-notched-outline__notch"></div>
+                        <div class="mdc-notched-outline__trailing"></div>
+                    </div>
+                </div>
+                <div class="mdc-text-field-helper-line">
+                    <div class="mdc-text-field-character-counter">0 / 25</div>
+                </div>
+                <label for="senha-usuario" class="input-label">Repetir Senha</label>
+                <div class="mdc-text-field mdc-text-field--outlined mdc-text-field--with-trailing-icon">
+                    <i class="material-icons mdc-text-field__icon">lock</i>
+                    <input class="mdc-text-field__input" id="senha-usuario-repetir" type="password" minlength="3" maxlength="25">
+                    <div class="mdc-notched-outline mdc-notched-outline--no-label">
+                        <div class="mdc-notched-outline__leading"></div>
+                        <div class="mdc-notched-outline__notch"></div>
+                        <div class="mdc-notched-outline__trailing"></div>
+                    </div>
+                </div>
+                <div class="mdc-text-field-helper-line">
+                    <div class="mdc-text-field-character-counter">0 / 25</div>
+                </div>
+                <label for="form-radios" class="input-label">Tipo de Conta</label>
+    
+                <div class="form-radios">
+                    <div class="mdc-form-field" style="display: flex; flex-direction: column; align-items: center;">
+                        <div class="mdc-radio">
+                            <input class="mdc-radio__native-control" type="radio" id="radio-aluno" name="radios" checked>
+                            <div class="mdc-radio__background">
+                                <div class="mdc-radio__outer-circle"></div>
+                                <div class="mdc-radio__inner-circle"></div>
+                            </div>
+                            <div class="mdc-radio__ripple"></div>
+                        </div>
+                        <label for="radio-aluno">Aluno</label>
+                    </div>
+    
+                    <div class="mdc-form-field" style="display: flex; flex-direction: column; align-items: center;">
+                        <div class="mdc-radio">
+                            <input class="mdc-radio__native-control" type="radio" id="radio-professor" name="radios">
+                            <div class="mdc-radio__background">
+                                <div class="mdc-radio__outer-circle"></div>
+                                <div class="mdc-radio__inner-circle"></div>
+                            </div>
+                            <div class="mdc-radio__ripple"></div>
+                        </div>
+                        <label for="radio-professor">Professor</label>
+                    </div>
+                </div>
+                <button type="submit" class="mdc-button mdc-button--outlined" style="margin-top: 20px;">
+                    <span class="mdc-button__label">Registrar</span>
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal-wrapper">
+    <div class="mdc-snackbar" id="snack-info-errada">
+        <div class="mdc-snackbar__surface">
+            <div class="mdc-snackbar__label" role="status" aria-live="polite">
+                Seu e-mail e/ou senha estão incorretos.
+            </div>
+            <div class="mdc-snackbar__actions">
+                <button class="mdc-icon-button mdc-snackbar__dismiss material-icons" title="Dismiss">close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal-wrapper">
+    <div class="mdc-snackbar" id="senha-repetir">
+        <div class="mdc-snackbar__surface">
+            <div class="mdc-snackbar__label" role="status" aria-live="polite">
+                As senhas não combinam.
+            </div>
+            <div class="mdc-snackbar__actions">
+                <button class="mdc-icon-button mdc-snackbar__dismiss material-icons" title="Dismiss">close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal-wrapper">
+        <div class="mdc-snackbar" id="email-repetido">
+            <div class="mdc-snackbar__surface">
+                <div class="mdc-snackbar__label" role="status" aria-live="polite">
+                    Este e-mail já está em uso.
+                </div>
+                <div class="mdc-snackbar__actions">
+                    <button class="mdc-icon-button mdc-snackbar__dismiss material-icons" title="Dismiss">close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 @section Scripts {
 <script type="text/javascript">
-    $("#register-p").hide();
-    $("#professor-p").hide();
-    $('.register-form-wrapper').hide();
 
-    $('#typelogin-input').click(function(){
-        if($(this).prop("checked") == true){
-            $("#register-p").show();
-            $("#login-p").hide();
-            
-            $('.register-form-wrapper').show(); 
-            $('.login-form-wrapper').hide();
-            
+    const textFields = document.querySelectorAll('.mdc-text-field');
+    for (const textField of textFields) {
+        mdc.textField.MDCTextField.attachTo(textField);
+    }
+
+    const buttons = document.querySelectorAll('.mdc-button');
+    for (const button of buttons) {
+        mdc.ripple.MDCRipple.attachTo(button);
+    }
+
+    const lists = document.querySelectorAll('.mdc-list');
+    const listItems = document.querySelectorAll('.mdc-list-item');
+    for (const list of lists) {
+        mdc.list.MDCList.attachTo(list);
+        for (const listItem of listItems){
+            mdc.ripple.MDCRipple.attachTo(listItem);
         }
-        else if($(this).prop("checked") == false){
-            $("#login-p").show();
-            $("#register-p").hide();
+    }
 
+    const tabBars = document.querySelectorAll('.mdc-tab-bar');
+    for (const tabBar of tabBars){
+        mdc.tabBar.MDCTabBar.attachTo(tabBar);
+    }
 
-            $('.login-form-wrapper').show(); 
-            $('.register-form-wrapper').hide();
+    const snackbarArray = [];
+    const snackbars = document.querySelectorAll('.mdc-snackbar');
+    for (const snackbar of snackbars){
+        var snackbarId = snackbar.id;
+        snackbarArray[snackbarId] = new mdc.snackbar.MDCSnackbar(snackbar);
+    }
+
+    function changeTab(botao){
+        if($('.login-form-wrapper').hasClass('form--selected') && $(botao).is('#register-button')){
+            $('.login-form-wrapper').clearQueue().removeClass('form--selected').stop().fadeOut(300, function(){
+                $('.register-form-wrapper').clearQueue().addClass('form--selected').fadeIn(300);
+            });
         }
-    });
-
-    $('#typeuser-input').click(function(){
-        if($(this).prop("checked") == true){
-            $("#professor-p").show();
-            $("#aluno-p").hide();
-                     
+        else if($('.register-form-wrapper').hasClass('form--selected') && $(botao).is('#login-button')){
+            $('.register-form-wrapper').removeClass('form--selected').clearQueue().fadeOut(300, function(){
+                $('.login-form-wrapper').clearQueue().addClass('form--selected').fadeIn(300);
+            });
         }
-        else if($(this).prop("checked") == false){
-            $("#aluno-p").show();
-            $("#professor-p").hide();
-
+        else{
         }
-    });
+    }
 
     // Login
     $("#login-form").submit(async(event) => {
         event.preventDefault();
 
-        const LoginUsuarioEmail = $("#login-email").val();
-        const LoginUsuarioSenha = $("#login-senha").val();
+        const LoginUsuarioEmail = $("#email-usuario-login").val();
+        const LoginUsuarioSenha = $("#senha-usuario-login").val();
 
         const response = await fetch('api/Usuario/LoginUsuario?email=' + LoginUsuarioEmail + '&senha=' + LoginUsuarioSenha)
         if(!response.ok){
-            console.log(response.statusText);
-            alert(await response.json());
-            window.location.reload();
+            snackbarArray["snack-info-errada"].open();
+            $("#email-usuario-login").closest('.mdc-text-field').addClass('mdc-text-field--invalid');
+            $("#senha-usuario-login").closest('.mdc-text-field').addClass('mdc-text-field--invalid');
         }else{
-            alert(await response.json());
             window.location.reload(); 
         }
     });
@@ -125,21 +258,23 @@
         event.preventDefault();
 
         try{
-            const confirmEmail = await fetch('api/Usuario/GetByEmail?email=' + $("#register-email").val());
+            const confirmEmail = await fetch('api/Usuario/GetByEmail?email=' + $("#email-usuario").val());
             if(confirmEmail.ok){
-                return alert('Esse email já está em uso!');
+                snackbarArray["email-repetido"].open();
+                return;
             }
-            if($("#register-senha").val() !== $("#register-senha-repeat").val()){
-                return alert('As senhas não combinam!')
+            if($("#senha-usuario").val() !== $("#senha-usuario-repetir").val()){
+                snackbarArray["senha-repetir"].open();
+                return;
             }         
             const data = {
-                'UsuarioNome': $("#register-nome").val(),
-                'UsuarioEmail': $("#register-email").val(),
-                'UsuarioSenha': $("#register-senha").val(),
+                'UsuarioNome': $("#nome-usuario").val(),
+                'UsuarioEmail': $("#email-usuario").val(),
+                'UsuarioSenha': $("#senha-usuario").val(),
             }
             let url = 'api/Usuario/RegisterAluno';
 
-            if($('#typeuser-input').prop("checked") == true){
+            if($('#radio-professor').prop("checked") == true){
                 url = 'api/Usuario/RegisterProfessor';
             }
             const response = await fetch(url, {

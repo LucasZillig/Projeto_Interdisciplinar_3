@@ -22,16 +22,16 @@
         <div class="question-content-header">
             <div class="question-title">@ViewBag.Pergunta.PerguntaNome</div>
             <div class="question-info">
-                    <div class="question-info-left">
-                        <img class="account-picture" src="/img/porter.jpg">
-                        </span>
+                <div class="question-info-left">
+                    <img class="account-picture" src="/img/porter.jpg">
+                    </span>
+                </div>
+                <div class="question-info-right">
+                    <div class="question-info-header">
+                        <div class="question-sender">@ViewBag.Pergunta.CursoAluno.Aluno.Usuario.UsuarioNome</div>
                     </div>
-                    <div class="question-info-right">
-                        <div class="question-info-header">
-                            <div class="question-sender">@ViewBag.Pergunta.CursoAluno.Aluno.Usuario.UsuarioNome</div>
-                        </div>
-                        <div class="question-subject">@ViewBag.Pergunta.CursoAluno.Curso.CursoNome</div>
-                    </div>
+                    <div class="question-subject">@ViewBag.Pergunta.CursoAluno.Curso.CursoNome</div>
+                </div>
             </div>
         </div>
         <div class="editor">
@@ -43,7 +43,7 @@
             <div class="mdc-tab-scroller">
                 <div class="mdc-tab-scroller__scroll-area">
                     <div class="mdc-tab-scroller__scroll-content">
-                        <button class="mdc-tab mdc-tab--active" role="tab" aria-selected="true" tabindex="0" id="descrption-tab" onclick="changeTab(this)">
+                        <button class="mdc-tab mdc-tab--active" role="tab" aria-selected="true" tabindex="0" id="description-tab" onclick="changeTab(this)">
                             <span class="mdc-tab__content">
                                 <span class="mdc-tab__icon material-icons" aria-hidden="true">subtitles</span>
                                 <span class="mdc-tab__text-label">Descrição</span>
@@ -84,8 +84,8 @@
                     <span class="mdc-button__label" id="mostrar-button">Mostrar Mais</span>
                 </button>
             </div>
-            <div class="question-write">
-                <div  class="mdc-text-field mdc-text-field--textarea" style="margin-top: 20px">
+            <div class="question-write" style="width:100%;">
+                <div  class="mdc-text-field mdc-text-field--textarea" style="margin-top: 20px; width: 100%;">
                     <textarea id="pell" class="mdc-text-field__input" rows="8" cols="40"></textarea>
                     <div class="mdc-notched-outline">
                         <div class="mdc-notched-outline__leading"></div>
@@ -232,13 +232,13 @@
 
     function changeTab(botao){
         if($('.question-description-container').hasClass('tab-ativa') && $(botao).is('#comment-tab')){
-            $('.question-description-container').removeClass('tab-ativa').stop().fadeOut(300, function(){
-                $('.question-write').stop().addClass('tab-ativa').fadeIn(300);
+            $('.question-description-container').removeClass('tab-ativa').clearQueue().fadeOut(300, function(){
+                $('.question-write').clearQueue().addClass('tab-ativa').fadeIn(300);
             });
         }
         else if($('.question-write').hasClass('tab-ativa') && $(botao).is('#description-tab')){
-            $('.question-write').removeClass('tab-ativa').stop().fadeOut(300, function(){
-                $('.question-description-container').stop().addClass('tab-ativa').fadeIn(300);
+            $('.question-write').removeClass('tab-ativa').clearQueue().fadeOut(300, function(){
+                $('.question-description-container').clearQueue().addClass('tab-ativa').fadeIn(300);
             });
         }
         else{
