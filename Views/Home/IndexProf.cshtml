@@ -477,20 +477,21 @@
         </div>
     </div>
 </div>
-<div class="mdc-snackbar" id="snack-senha">
+
+<div class="mdc-snackbar" id="snack-senha-errada">
     <div class="mdc-snackbar__surface">
         <div class="mdc-snackbar__label" role="status" aria-live="polite">
-            Senha alterada com sucesso.
+            As senhas não combinam.
         </div>
         <div class="mdc-snackbar__actions">
             <button class="mdc-icon-button mdc-snackbar__dismiss material-icons" title="Dismiss">close</button>
         </div>
     </div>
 </div>
-<div class="mdc-snackbar" id="snack-senha-errada">
+<div class="mdc-snackbar" id="snack-senha">
     <div class="mdc-snackbar__surface">
         <div class="mdc-snackbar__label" role="status" aria-live="polite">
-            As senhas não combinam.
+            Senha alterada com sucesso.
         </div>
         <div class="mdc-snackbar__actions">
             <button class="mdc-icon-button mdc-snackbar__dismiss material-icons" title="Dismiss">close</button>
@@ -676,24 +677,26 @@
             if($('#senha-usuario').val() != $('#senha-confirmar').val()){
                 snackbarArray["snack-senha-errada"].open();
             }
-            const senhaPerfilData = {
-                'UsuarioId': @ViewBag.Usuario.UsuarioId,
-                'UsuarioSenha': $('#senha-usuario').val(),
-                'UsuarioNome': '@ViewBag.Usuario.UsuarioNome',
-                'UsuarioEmail': '@ViewBag.Usuario.UsuarioEmail'
-            }
+            else{
+                const senhaPerfilData = {
+                    'UsuarioId': @ViewBag.Usuario.UsuarioId,
+                    'UsuarioSenha': $('#senha-usuario').val(),
+                    'UsuarioNome': '@ViewBag.Usuario.UsuarioNome',
+                    'UsuarioEmail': '@ViewBag.Usuario.UsuarioEmail'
+                }
 
-            await fetch('api/Usuario/' + @ViewBag.Usuario.UsuarioId, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(senhaPerfilData)
-            })
-            .then(response => {
-                snackbarArray["snack-senha"].open();
-            })
-            .catch(error => console.error(error));
+                await fetch('api/Usuario/' + @ViewBag.Usuario.UsuarioId, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(senhaPerfilData)
+                })
+                .then(response => {
+                    snackbarArray["snack-senha"].open();
+                })
+                .catch(error => console.error(error));
+            }
         });
 
         //Create curso
@@ -815,12 +818,14 @@
         function SearchModalFocus(){
             $(".mobile-header-backdrop").toggleClass("mobile-header-backdrop--after");
             setTimeout(function(){
-            MicroModal.show( 'modal-5'); $("#myInput").focus();}, 150 );
+                MicroModal.show( 'modal-5'); $("#myInput").focus();
+            }, 150 );
         }
 
         function SearchModalClose(){
             MicroModal.close('modal-5');
             $(".mobile-header-backdrop").removeClass("mobile-header-backdrop--after");
+            $('.modal-5-content-list').empty();
         }
 
         $(document).ready(function () {
@@ -1022,6 +1027,9 @@
         }
 
         function search(ele){
+            var ano = pergunta.perguntaData.substring(0, 10).split('-')[0];
+            var mes = pergunta.perguntaData.substring(0, 10).split('-')[1];
+            var dia = pergunta.perguntaData.substring(0, 10).split('-')[2];
             $('.modal-5-content-list').empty();   
             for(pergunta of perguntas){
                 if(((pergunta.perguntaNome).toLowerCase()).indexOf(ele.value) == 0 || ((pergunta.perguntaDesc).toLowerCase()).indexOf(ele.value) == 0 || ((pergunta.cursoAluno.curso.cursoNome).toLowerCase()).indexOf(ele.value) == 0){
@@ -1030,13 +1038,13 @@
                             <a class="mail-item-container" href="Pergunta/index/${pergunta.perguntaId}">
                                 <div class="mail-item-left">
                                     <img class="account-picture" src="/img/porter.jpg">
-                                    <span class="tag-icon" style="background: ${pergunta.cursoAluno.cursoAlunoTag};">
+                                    <span class="tag-icon" style="background: ${pergunta.curso.cursoTag};">
                                     </span>
                                 </div>
                                 <div class="mail-item-right">
                                     <div class="mail-item-header">
                                         <div class="mail-sender">${(pergunta.cursoAluno.curso.cursoNome)}</div>
-                                        <div class="mail-time">${(pergunta.perguntaData).substring(0, 10)}</div>
+                                        <div class="mail-time">${dia+"/"+mes+"/"+ano}</div>
                                     </div>
                                     <div class="mail-subject">${pergunta.perguntaNome}</div>
                                     <div class="mail-summary-text">

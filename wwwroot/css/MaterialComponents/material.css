@@ -5713,12 +5713,14 @@ a.mdc-list-item {
 
 .mdc-radio .mdc-radio__native-control:enabled:checked+.mdc-radio__background .mdc-radio__outer-circle {
     border-color: #018786;
-    border-color: var(--mdc-theme-secondary, #018786)
+    border-color: var(--mdc-theme-secondary, #018786);
+    border-color: var(--mdc-theme-primary, #9A55FF);
 }
 
 .mdc-radio .mdc-radio__native-control:enabled+.mdc-radio__background .mdc-radio__inner-circle {
     border-color: #018786;
-    border-color: var(--mdc-theme-secondary, #018786)
+    border-color: var(--mdc-theme-secondary, #018786);
+    border-color: var(--mdc-theme-primary, #9A55FF);
 }
 
 .mdc-radio .mdc-radio__background::before {

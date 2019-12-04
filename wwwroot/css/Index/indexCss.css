@@ -799,7 +799,7 @@ button, input {
     align-items: center;
     color: #fff;
     right: -5px;
-    bottom: 15px;
+    bottom: -3px;
     position: absolute;
     height: 18px;
     width: 18px;
@@ -877,7 +877,9 @@ button, input {
     display: flex;
     flex-direction: column;
     position: relative;
-    justify-content: center;    
+    justify-content: center; 
+    height: 100%;
+    margin: auto 0;
 }
 
 .mail-item-right {
@@ -900,7 +902,7 @@ button, input {
     font-size: 14px;
     color: rgba(0,0,0,0.6);
     font-family: Roobert Semibold;
-    max-width: 70%;
+    max-width: 65%;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -956,7 +958,8 @@ button, input {
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-height: 32px;
+    max-height: 2.5em;
+    line-height: 1.2em;
     color: rgba(0,0,0,0.6);
     font-size: 14px;
     font-family: Roobert Semibold;
