@@ -80,27 +80,24 @@
                         @ViewBag.Pergunta.PerguntaDesc
                     </div>
                 </div>
-                <button class="mdc-button" onclick="toggleDescricao()" style="margin: auto; margin-top: 8px;">
-                    <span class="mdc-button__label" id="mostrar-button">Mostrar Mais</span>
-                </button>
             </div>
             <div class="question-write" style="width:100%;">
-                <div  class="mdc-text-field mdc-text-field--textarea" style="margin-top: 20px; width: 100%;">
-                    <textarea id="pell" class="mdc-text-field__input" rows="8" cols="40"></textarea>
-                    <div class="mdc-notched-outline">
-                        <div class="mdc-notched-outline__leading"></div>
-                        <div class="mdc-notched-outline__notch">
-                        <label for="textarea" class="mdc-floating-label"><b>Escreva</b></label>
+                <form id="comment-form">
+                    <div class="mdc-text-field mdc-text-field--textarea" style="margin-top: 20px; width: 100%;">
+                        <textarea class="mdc-text-field__input" rows="8" cols="40"></textarea>
+                        <div class="mdc-notched-outline">
+                            <div class="mdc-notched-outline__leading"></div>
+                            <div class="mdc-notched-outline__notch">
+                            <label for="textarea" class="mdc-floating-label"><b>Escreva</b></label>
+                            </div>
+                            <div class="mdc-notched-outline__trailing"></div>
                         </div>
-                        <div class="mdc-notched-outline__trailing"></div>
                     </div>
-                </div>
+                    <button type="submit" class="mdc-button mdc-button--outlined mdc-ripple-upgraded" style="width:100%;margin-top: 20px;">
+                        <span class="mdc-button__label">Responder</span>
+                    </button>
+                </form>
             </div>
-        </div>
-        <div id="editor" contenteditable="true" class="pell"></div>
-        <div>
-            HTML output:
-            <div id="html-output" style="white-space:pre-wrap;"></div>
         </div>
         <div class="comment-section">
             <div class="comment-list">
@@ -211,20 +208,32 @@
 </script>
 
 <script>
+    $(document).ready(function (){
+            var descHeight = $('.question-description-content').prop('scrollHeight');
+            var maxHeight = $('.question-description-content').css('max-height').substr(0,2);
+            if(descHeight <= maxHeight){
+                $('#mostrar-button').remove();
+            }
+            else{
+                $('.question-description-container').append('<button class="mdc-button" onclick="toggleDescricao()" style="margin: auto; margin-top: 8px;"><span class="mdc-button__label" id="mostrar-button">Mostrar Mais</span></button>');
+            }
+    });
     var descOpen = false;
     
     function toggleDescricao(){
         var descHeight = $('.question-description-content').prop('scrollHeight');
-        if(descOpen == false){
-            $('.question-description-content').css("max-height", descHeight + "px");
-            $('#mostrar-button').html("Mostrar Menos");
-            descOpen = true;
-        }
-        else{
-            $('.question-description-content').css("max-height", "");
-            $('#mostrar-button').html("Mostrar Mais");
-            descOpen = false;
-        }
+        var maxHeight = $('.question-description-content').css('maxheight');
+
+            if(descOpen == false){
+                $('.question-description-content').css("max-height", descHeight + "px");
+                $('#mostrar-button').html("Mostrar Menos");
+                descOpen = true;
+            }
+            else{
+                $('.question-description-content').css("max-height", "");
+                $('#mostrar-button').html("Mostrar Mais");
+                descOpen = false;
+            }
     }
 
     function changeTab(botao){
