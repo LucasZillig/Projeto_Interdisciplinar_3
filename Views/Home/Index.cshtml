@@ -146,23 +146,23 @@
                 <button class="mdc-icon-button material-icons header-icon-button modal__close__custom" data-micromodal-close>chevron_left</button>
                 <h2 class="modal__title" id="modal-2-title">Convites</h2>
             </header>
-            <main class="modal__content" id="modal-2-content">
-                <div class="invite-wrapper" id="list-invites">
-                @foreach (CursoAluno c in ViewBag.CursoAluno) {
-                    @if (@c.statusInvite == 1)
-                    {
-                    <div class="invite" id="invite-curso-aluno-@c.CursoAlunoId">
-                        <div class="invite-left">
-                            <div class="invite-left-text">@c.Curso.CursoNome</div>
+            <main class="modal__content" style="height: 100%;" id="modal-2-content">
+                    <div class="invite-wrapper" id="list-invites">
+                    @foreach (CursoAluno c in ViewBag.CursoAluno) {
+                        @if (@c.statusInvite == 1)
+                        {
+                        <div class="invite" id="invite-curso-aluno-@c.CursoAlunoId">
+                            <div class="invite-left">
+                                <div class="invite-left-text">@c.Curso.CursoNome</div>
+                            </div>
+                            <div class="invite-right">
+                                <button onclick="acceptInvite(@c.CursoAlunoId)" class="mdc-icon-button material-icons">check</button>
+                                <button onclick="declineInvite(@c.CursoAlunoId)" class="mdc-icon-button material-icons">clear</button>
+                            </div>
                         </div>
-                        <div class="invite-right">
-                            <button onclick="acceptInvite(@c.CursoAlunoId)" class="mdc-icon-button material-icons">check</button>
-                            <button onclick="declineInvite(@c.CursoAlunoId)" class="mdc-icon-button material-icons">clear</button>
-                        </div>
-                    </div>
+                        }
                     }
-                }
-                </div>
+                    </div>
             </main>
         </div>
     </div>
@@ -291,10 +291,11 @@
         <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-5-title">
             <header class="modal__header">
                 <button class="mdc-icon-button material-icons header-icon-button modal__close__custom" onclick="SearchModalClose()">chevron_left</button>
-                <input class="modal__header__searchbar" type="text" id="myInput" onkeydown="search(this)" placeholder="Buscar...">
+                <input class="modal__header__searchbar" type="text" id="myInput" onkeyup="search(this)" placeholder="Buscar...">
+                <button class="mdc-icon-button material-icons header-icon-button material-icons header-icon-button" onclick="document.getElementById('myInput').value = ''" style="right:16px;transform:rotate(45deg);">add_circle</button>
             </header>
-            <main class="modal__content" id="modal-5-content" style="padding:0;">
-                <div class="modal-5-content-list"></div>
+            <main class="modal__content" id="modal-5-content" style="padding: 16px 0;height: 100%;">
+                <div class="modal-5-content-list" style="width: 100%;"></div>
             </main>
         </div>
     </div>
@@ -310,7 +311,7 @@
             <main class="modal__content" id="modal-6-content">
                 <form id="perfil-form" class="form-wrapper" name="form" method="post">
                      <label class="mdc-button mdc-button--outlined" style="margin-top: -10px;">
-                        <input id="files" class="file-upload-btn" name="files" type="file" multiple/>
+                        <input id="profile-pic" class="file-upload-btn" name="profile-pic" type="file"/>
                         <span class="mdc-button__label">Enviar Foto de Perfil</span>
                     </label>
                     <label for="nome-usuario" class="input-label">Nome</label>
@@ -781,6 +782,15 @@
         });
 
         $(document).ready(function () {
+            (function(){
+                if($('#list-invites').children().length > 0){
+                }
+                else{
+                    $('#modal-2-content').append('<div class="empty-list"><i class="material-icons material-icons-outlined empty-drawing-element">visibility_off</i><h2 class="empty-drawing-element empty-list-text">Nada por aqui!</h2><img src="../img/splatter.svg" alt="" class="empty-list-bg"></div>');
+                }
+            })();
+            
+            
             //MOBILE - ABRIR / FECHAR SIDEBAR
             $("#mobile-sidebar-button").click(function () {
                 $("#overlay").fadeToggle(300);
@@ -794,9 +804,9 @@
             //-------------------------------------------------------------
 
             (function(){
-                $('.materia-title').each(function(){
-                    if (this.offsetWidth - 47 < this.scrollWidth) {
-                        $(this).addClass('list-select-overflowing');
+                $('.materia-title-inner').each(function(){
+                    if (this.offsetWidth + 61 > this.closest('.materia-title').scrollWidth) {
+                        $(this).closest('.materia-title').addClass('list-select-overflowing');
                     }
                 });
             })();
@@ -805,9 +815,10 @@
             $(".list-select").hover(function () {
                 var nomeMateriaContainer = $(this).find('.materia-title-container')[0];
                 var nomeMateria = $(this).find('.materia-title-container').find('.materia-title')[0];
+                var nomeMateriaInner = $(this).find('.materia-title-container').find('.materia-title-inner')[0];
 
                 if ($(nomeMateria).hasClass('list-select-overflowing')) {
-                    var parent_width = nomeMateriaContainer.offsetWidth - 47;
+                    var parent_width = nomeMateriaContainer.offsetWidth - 60;
                     nomeMateria.style.transform = 'translateX(calc(-100% + ' + parent_width + 'px))';
                     $(this).mouseleave(function () {
                         nomeMateria.style.transform = ''
@@ -897,36 +908,47 @@
             `);
         }
 
+        let lastSearchValue = '';
         function search(ele){
-            var ano = pergunta.perguntaData.substring(0, 10).split('-')[0];
-            var mes = pergunta.perguntaData.substring(0, 10).split('-')[1];
-            var dia = pergunta.perguntaData.substring(0, 10).split('-')[2];
-            $('.modal-5-content-list').empty();   
-            for(pergunta of perguntas){
-                if(((pergunta.perguntaNome).toLowerCase()).indexOf(ele.value) == 0 || ((pergunta.perguntaDesc).toLowerCase()).indexOf(ele.value) == 0 || ((pergunta.cursoAluno.curso.cursoNome).toLowerCase()).indexOf(ele.value) == 0){
-                    $('.modal-5-content-list').append(`
-                        <div class="mail-item-wrapper">
-                            <a class="mail-item-container" href="Pergunta/index/${pergunta.perguntaId}">
-                                <div class="mail-item-left">
-                                    <img class="account-picture" src="/img/porter.jpg">
-                                    <span class="tag-icon" style="background: ${pergunta.cursoAluno.cursoAlunoTag};">
-                                    </span>
-                                </div>
-                                <div class="mail-item-right">
-                                    <div class="mail-item-header">
-                                        <div class="mail-sender">${(pergunta.cursoAluno.curso.cursoNome)}</div>
-                                        <div class="mail-time">${dia+"/"+mes+"/"+ano}</div>
+            currentSearchValue = ele.value;
+            if(currentSearchValue == lastSearchValue){   
+            }
+            else{
+                $('#modal-5-content').children().remove('.empty-list');
+                var ano = pergunta.perguntaData.substring(0, 10).split('-')[0];
+                var mes = pergunta.perguntaData.substring(0, 10).split('-')[1];
+                var dia = pergunta.perguntaData.substring(0, 10).split('-')[2];
+                $('.modal-5-content-list').empty();   
+                for(pergunta of perguntas){
+                    if(((pergunta.perguntaNome).toLowerCase()).indexOf(ele.value) == 0 || ((pergunta.perguntaDesc).toLowerCase()).indexOf(ele.value) == 0 || ((pergunta.cursoAluno.curso.cursoNome).toLowerCase()).indexOf(ele.value) == 0){
+                        $('.modal-5-content-list').append(`
+                            <div class="mail-item-wrapper">
+                                <a class="mail-item-container" href="Pergunta/index/${pergunta.perguntaId}">
+                                    <div class="mail-item-left">
+                                        <img class="account-picture" src="/img/porter.jpg">
+                                        <span class="tag-icon" style="background: ${pergunta.cursoAluno.cursoAlunoTag};">
+                                        </span>
                                     </div>
-                                    <div class="mail-subject">${pergunta.perguntaNome}</div>
-                                    <div class="mail-summary-text">
-                                        ${pergunta.perguntaDesc}
+                                    <div class="mail-item-right">
+                                        <div class="mail-item-header">
+                                            <div class="mail-sender">${(pergunta.cursoAluno.curso.cursoNome)}</div>
+                                            <div class="mail-time">${dia+"/"+mes+"/"+ano}</div>
+                                        </div>
+                                        <div class="mail-subject">${pergunta.perguntaNome}</div>
+                                        <div class="mail-summary-text">
+                                            ${pergunta.perguntaDesc}
+                                        </div>
                                     </div>
-                                </div>
-                            </a>
-                        </div>
-                    `);
+                                </a>
+                            </div>
+                        `);
+                    }
+                }
+                if($('.modal-5-content-list').children().length == 0){
+                        $('#modal-5-content').append('<div class="empty-list"><i class="material-icons material-icons-outlined empty-drawing-element">visibility_off</i><h2 class="empty-drawing-element empty-list-text">Nada por aqui!</h2><img src="../img/splatter.svg" alt="" class="empty-list-bg"></div>');
                 }
             }
+            lastSearchValue = currentSearchValue;
         }
     </script>
 }
