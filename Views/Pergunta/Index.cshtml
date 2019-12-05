@@ -84,7 +84,7 @@
             <div class="question-write" style="width:100%;">
                 <form id="comment-form">
                     <div class="mdc-text-field mdc-text-field--textarea" style="margin-top: 20px; width: 100%;">
-                        <textarea class="mdc-text-field__input" rows="8" cols="40"></textarea>
+                        <textarea class="mdc-text-field__input" rows="8" cols="40" id="content-area"></textarea>
                         <div class="mdc-notched-outline">
                             <div class="mdc-notched-outline__leading"></div>
                             <div class="mdc-notched-outline__notch">
@@ -295,6 +295,17 @@
 
         $('#mobile-sidebar-button').click(() => {
             location.href= "/"
-        })
+        });
+
+        $('#comment-form').submit(function(event){
+            event.preventDefault();
+
+            const comentario = {
+                $('#content-area').val();
+            }
+
+            $('#content-area').val()
+
+        });
 </script>
 }

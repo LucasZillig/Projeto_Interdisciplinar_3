@@ -36,12 +36,13 @@ namespace PI_3.Controllers.API
         }
 
         [HttpPost]
-        public ActionResult<Comentario> AddComentario(Comentario requestComentario)
+        public ActionResult<Comentario> AddComentario([FromBody]Comentario comentario)
         {
-            _context.Comentario.Add(requestComentario);
+            comentario.ComentarioData = DateTime.Now;
+            _context.Comentario.Add(comentario);
             _context.SaveChanges();
-            
-            return requestComentario;
+
+            return new JsonResult(comentario);
         }
 
         [HttpPut("{id}")]

@@ -667,6 +667,7 @@
                 let progressbar = 0;
                 for(file of files){
                     const formData = new FormData();
+                    formData.append('id', data.PerguntaId);
                     formData.append('file', file);
 
                     await fetch('api/Pergunta/UploadArquivo', {
