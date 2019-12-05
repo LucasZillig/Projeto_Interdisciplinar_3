@@ -9,7 +9,6 @@
         <div class="header-center">
             <div class="question-header">
                 <button class="mdc-icon-button material-icons header-icon-button" style="left: 16px" id="mobile-sidebar-button">chevron_left</button>
-                <button class="mdc-icon-button material-icons header-icon-button" style="right: 16px" id="mobile-sidebar-button">archive</button>
             </div>
         </div>
         <div class="header-right">
@@ -217,6 +216,14 @@
             else{
                 $('.question-description-container').append('<button class="mdc-button" onclick="toggleDescricao()" style="margin: auto; margin-top: 8px;"><span class="mdc-button__label" id="mostrar-button">Mostrar Mais</span></button>');
             }
+
+            if(@ViewBag.Pergunta.Arquivado == 0){
+                $('.question-header').append('<button class="mdc-icon-button material-icons header-icon-button" style="right: 16px" id="mobile-sidebar-button" onclick="arquivarPergunta()">archive</button>');
+            }
+            else{
+                $('.question-header').append('<button class="mdc-icon-button material-icons header-icon-button" style="right: 16px" id="mobile-sidebar-button" onclick="abrirPergunta()">unarchive</button>');
+            }
+
     });
     var descOpen = false;
     

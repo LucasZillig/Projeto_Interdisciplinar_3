@@ -1248,6 +1248,56 @@ button, input {
     opacity: 0;
 }
 
-@media only screen and (min-width: 600px) {
+.empty-list{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 100px;
+}
 
+.empty-drawing-element{
+    color: rgba(0,0,0,1);
+    /* color: rgba(50,50,50,1); */
+    position: relative;
+    font-size: 40vw;
+    left: 0;
+    right: 0;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 2;
+}
+
+.empty-list-text{
+    font-size: 10vw;
+    font-family: Roobert Semibold;
+    margin-top: -3vh;
+}
+
+.empty-list-bg{
+    position: absolute;
+    z-index: 1;
+    width: 62vw;
+    margin-top: 2vw;
+}
+
+@media only screen and (min-width: 600px) {
+    .empty-drawing-element{
+        font-size: 20vw;
+    }
+
+    .empty-list-text{
+        font-size: 5vw;
+    }
+
+    .empty-list-bg{
+        width: 30vw;
+        margin-top: 1vw;
+    }
 }
