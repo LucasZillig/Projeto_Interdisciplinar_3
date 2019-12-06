@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PI_3.Models;
 using Microsoft.EntityFrameworkCore;
-using PI_3.Request;
+using PI_3.Response;
 
 namespace PI_3.Controllers.API
 {   
@@ -139,6 +139,28 @@ namespace PI_3.Controllers.API
             }
             
             return new JsonResult("Arquivo enviado");
+        }
+        [HttpGet]
+        [Route("[action]")]
+        public IActionResult GetFiles(int id)
+        {
+            List<FilesResponse> returnFiles = new List<FilesResponse>();
+
+            string path = System.IO.Path.Join(_hostingEnvironment.WebRootPath, "Arquivos", (id).ToString());
+            if (!System.IO.Directory.Exists(path)) {
+                return new JsonResult("Essa pergunta não possui arquivos!") { StatusCode = 404};
+            }
+
+            string[] filePaths = Directory.GetFiles(@path);
+            foreach(string filePath in filePaths){
+                returnFiles.Add(new FilesResponse{
+                    Nome = Path.GetFileName(filePath) ,
+                    Conteudo = System.IO.File.ReadAllText(filePath)
+                });
+
+            }
+
+            return new JsonResult(returnFiles);
         }
 
         [HttpPut("{id}")]

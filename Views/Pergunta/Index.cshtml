@@ -182,30 +182,6 @@
         editor2.content.innerHTML = '<b><u><i>Initial content!</i></u></b>';
 
 </script>
-
-<script>
-    var originalModel = monaco.editor.createModel("zap", "javascript");
-    var modifiedModel = monaco.editor.createModel("zap2", "javascript");
-    var editor = monaco.editor.createDiffEditor(document.getElementById('container'), {
-        language: 'javascript',
-        theme: "vs-dark",
-        automaticLayout: true,
-        scrollbar: {
-            verticalHasArrows: true,
-            horizontalHasArrows: true,
-            vertical: 'visible',
-            horizontal: 'visible',
-            verticalScrollbarSize: 17,
-            horizontalScrollbarSize: 17,
-            arrowSize: 30
-        }
-    });
-    editor.setModel({
-        original: originalModel,
-        modified: modifiedModel
-    });
-</script>
-
 <script>
     $(document).ready(function (){
             var descHeight = $('.question-description-content').prop('scrollHeight');
@@ -343,5 +319,40 @@
             return await response.json();
         }
 
+        async function getFiles(pergunta_id){
+            const response = await fetch('/api/pergunta/getFiles?id=' + pergunta_id);
+
+            return await response.json();
+        }
+
+        getFiles(@ViewBag.Pergunta.PerguntaId)
+            .then(response => {
+                populateMonaco(response);
+            })
+            .catch(err => console.error(err));
+        
+
+        function populateMonaco(files){
+            var originalModel = monaco.editor.createModel(files[0].conteudo, "javascript");
+            var modifiedModel = monaco.editor.createModel(files[0].conteudo, "javascript");
+            var editor = monaco.editor.createDiffEditor(document.getElementById('container'), {
+                language: 'javascript',
+                theme: "vs-dark",
+                automaticLayout: true,
+                scrollbar: {
+                    verticalHasArrows: true,
+                    horizontalHasArrows: true,
+                    vertical: 'visible',
+                    horizontal: 'visible',
+                    verticalScrollbarSize: 17,
+                    horizontalScrollbarSize: 17,
+                    arrowSize: 30
+                }
+            });
+            editor.setModel({
+                original: originalModel,
+                modified: modifiedModel
+            });
+        }
 </script>
 }
