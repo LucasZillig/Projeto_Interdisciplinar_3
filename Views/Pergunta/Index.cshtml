@@ -100,27 +100,27 @@
         </div>
         <div class="comment-section">
             <div class="comment-list">
-                @if ((ViewBag.Pergunta.Comentarios).Count > 0) 
-                {
-                    @foreach (Comentario c in ViewBag.Pergunta.Comentarios){
-                    <div class="comment-section">
-                        <div class="comment-list">
-                            <div class="question-comment">
-                                <div class="question-comment-header">
-                                    <img class="account-picture" src="/img/porter.jpg">
-                                    <div class="question-comment-info">
-                                        <div class="question-comment-user">@c.Pergunta.CursoAluno.Aluno.Usuario.UsuarioNome</div>
-                                        <div class="question-comment-time">@c.ComentarioData</div>
-                                    </div>
-                                </div>
-                                <div class="question-comment-content">
-                                    @c.ComentarioConteudo
+                @foreach (Comentario c in ViewBag.Comentarios){
+
+                        <div class="question-comment">
+                            <div class="question-comment-header">
+                                <img class="account-picture" src="/img/porter.jpg">
+                                <div class="question-comment-info">
+                                    @if(c.UsuarioId == ViewBag.Usuario.UsuarioId) 
+                                    {
+                                        <div class="question-comment-user">Você</div>
+                                    }else
+                                    {
+                                        <div class="question-comment-user">Outro</div>
+                                    }
+                                    <div class="question-comment-time">@c.ComentarioData</div>
                                 </div>
                             </div>
+                            <div class="question-comment-content">
+                                @c.ComentarioConteudo
+                            </div>
                         </div>
-                    </div>
-                    }
-                } 
+                }
             </div>
         </div>
     </div>
@@ -308,11 +308,28 @@
             event.preventDefault();
 
             const comentario = {
-                $('#content-area').val();
+                ComentarioConteudo: $('#content-area').val(),
+                PerguntaId: @ViewBag.Pergunta.PerguntaId,
+                UsuarioId: @ViewBag.Usuario.UsuarioId
             }
-
-            $('#content-area').val()
+            
+            sendComment(comentario)
+                .then(response => console.log(response))
+                .catch(err => console.error(err));
 
         });
+
+        async function sendComment(comentario){
+            const response = await fetch('/api/Comentario', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(comentario)
+            })
+
+            return await response.json();
+        }
+
 </script>
 }

@@ -12,5 +12,7 @@ namespace PI_3.Models
         public string ComentarioConteudo { get; set; }
         public int PerguntaId { get; set; }
         public Pergunta Pergunta { get; set; }
+
+        public int UsuarioId { get; set; }
     }
 }
