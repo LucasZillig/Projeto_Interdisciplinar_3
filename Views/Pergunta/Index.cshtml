@@ -218,10 +218,10 @@
             }
 
             if(@ViewBag.Pergunta.Arquivado == 0){
-                $('.question-header').append('<button class="mdc-icon-button material-icons header-icon-button" style="right: 16px" id="mobile-sidebar-button" onclick="arquivarPergunta()">archive</button>');
+                $('.question-header').append('<button class="mdc-icon-button material-icons header-icon-button" style="right: 16px" id="mobile-sidebar-button" onclick="arquivar()">archive</button>');
             }
             else{
-                $('.question-header').append('<button class="mdc-icon-button material-icons header-icon-button" style="right: 16px" id="mobile-sidebar-button" onclick="abrirPergunta()">unarchive</button>');
+                $('.question-header').append('<button class="mdc-icon-button material-icons header-icon-button" style="right: 16px" id="mobile-sidebar-button" onclick="arquivar()">unarchive</button>');
             }
 
     });
@@ -303,6 +303,18 @@
         $('#mobile-sidebar-button').click(() => {
             location.href= "/"
         });
+
+        async function arquivar(){
+            const response = await fetch('/api/Pergunta/' + @ViewBag.Pergunta.PerguntaId, {
+                method: 'PUT',
+                headers: {
+                    'Content-type': 'application/json',
+                },
+                body: JSON.stringify({'PerguntaId': @ViewBag.Pergunta.PerguntaId,'Arquivado': @ViewBag.Pergunta.Arquivado})
+            })
+            console.log(await response.json());
+            window.location.replace('/');
+        }
 
         $('#comment-form').submit(function(event){
             event.preventDefault();

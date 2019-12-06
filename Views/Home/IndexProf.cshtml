@@ -934,15 +934,15 @@
             if(option == 'Inbox'){
                 for(pergunta of perguntas){
                     $('.current-inbox-title').text(option);
-                    criarPergunta(pergunta);
+                    if(pergunta.arquivado == 0){
+                        criarPergunta(pergunta);
+                    }
                 }
                 return;
             }else if(option == 'Arquivadas'){
                 $('.current-inbox-title').text(option);
                 for(pergunta of perguntas){
-                    if(pergunta.arquivado == 1){
-                        criarPergunta(pergunta);
-                    }
+                    i
                 }
                 return;
             }else{

@@ -149,16 +149,19 @@ namespace PI_3.Controllers.API
                 return BadRequest();
             }
 
-            var pergunta = _context.Pergunta.SingleOrDefault(x => x.PerguntaId == requestPergunta.PerguntaId);
-                
-            pergunta.PerguntaNome = requestPergunta.PerguntaNome;
-            pergunta.PerguntaDesc = requestPergunta.PerguntaDesc;
-            pergunta.Arquivado = requestPergunta.Arquivado;
+            var perguntas = _context.Pergunta.Where(x => x.PerguntaId == requestPergunta.PerguntaId).ToList();
+            var pergunta = perguntas[0];
 
+            if(requestPergunta.Arquivado == 1){
+                pergunta.Arquivado = 0;
+            }else{
+                pergunta.Arquivado = 1;
+            }
+            
             _context.Pergunta.Update(pergunta);
             _context.SaveChanges();
 
-            return NoContent();
+            return new JsonResult("Pergunta" + (pergunta.Arquivado == 1 ? " arquivada" : " não arquivada"));
         }
 
         [HttpDelete("{id}")]
