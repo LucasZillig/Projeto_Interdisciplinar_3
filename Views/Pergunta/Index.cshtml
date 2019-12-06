@@ -34,8 +34,9 @@
             </div>
         </div>
         <div class="editor">
+            <div class="editor-pages">
+            </div>
             <div class="container-wrapper">
-                <div id="container"></div>
             </div>
         </div>
         <div class="mdc-tab-bar" role="tablist" style="-webkit-box-shadow: 0 1px 1px 0 rgba(65, 69, 73, 0.3), 0 1px 3px 1px rgba(65, 69, 73, 0.15);box-shadow: 0 1px 1px 0 rgba(65, 69, 73, 0.3), 0 1px 3px 1px rgba(65, 69, 73, 0.15);">
@@ -333,26 +334,47 @@
         
 
         function populateMonaco(files){
-            var originalModel = monaco.editor.createModel(files[0].conteudo, "javascript");
-            var modifiedModel = monaco.editor.createModel(files[0].conteudo, "javascript");
-            var editor = monaco.editor.createDiffEditor(document.getElementById('container'), {
-                language: 'javascript',
-                theme: "vs-dark",
-                automaticLayout: true,
-                scrollbar: {
-                    verticalHasArrows: true,
-                    horizontalHasArrows: true,
-                    vertical: 'visible',
-                    horizontal: 'visible',
-                    verticalScrollbarSize: 17,
-                    horizontalScrollbarSize: 17,
-                    arrowSize: 30
+            let counter = 0;
+            for(file of files){
+                if(counter == 0){
+                    $('.container-wrapper').append(`<div id="container-${ counter }" class="container"></div>`)
+                }else{
+                    $('.container-wrapper').append(`<div id="container-${ counter }" class="container" style="display: none;"></div>`)
                 }
-            });
-            editor.setModel({
-                original: originalModel,
-                modified: modifiedModel
-            });
+                $('.editor-pages').append(`<div class="page" id="file-${ counter }" onclick="selectTab(${ counter })">${ file.nome }</div>`)
+                
+                const originalModel = monaco.editor.createModel(file.conteudo, "javascript");
+                const modifiedModel = monaco.editor.createModel(file.conteudo, "javascript");
+                let editor = monaco.editor.createDiffEditor(document.getElementById(`container-${ counter }`), {
+                    language: 'javascript',
+                    theme: "vs-dark",
+                    automaticLayout: true,
+                    scrollbar: {
+                        verticalHasArrows: true,
+                        horizontalHasArrows: true,
+                        vertical: 'visible',
+                        horizontal: 'visible',
+                        verticalScrollbarSize: 17,
+                        horizontalScrollbarSize: 17,
+                        arrowSize: 30
+                    }
+                });
+                editor.setModel({
+                    original: originalModel,
+                    modified: modifiedModel
+                });
+                counter++;
+            }
+        }
+
+        function selectTab(file_id) {
+            $('.container').each(function(){
+                if($(this).attr('id') != `container-${ file_id }`){
+                    $(this).hide();
+                }else {
+                    $(this).show();
+                }
+            })
         }
 </script>
 }

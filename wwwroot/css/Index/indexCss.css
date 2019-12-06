@@ -1108,6 +1108,24 @@ button, input {
 .editor {
     display:flex;
     overflow: auto;
+    flex-direction: column;
+}
+
+.editor-pages {
+    display: flex;
+}
+
+.page {
+    padding: 0.4em;
+    border: 1px solid black;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.page:hover {
+    cursor: pointer;
+    background: #9A44FF;
+    color: white;
 }
 
 .container-wrapper {
@@ -1115,7 +1133,7 @@ button, input {
     display: flex;
 }
 
-#container {
+.container {
     width: 100%;
     height: 490px;
     min-width: 730px;
