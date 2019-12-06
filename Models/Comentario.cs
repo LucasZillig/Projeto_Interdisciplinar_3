@@ -10,8 +10,9 @@ namespace PI_3.Models
         public int ComentarioId { get; set; }
         public DateTime ComentarioData { get; set; }
         public string ComentarioConteudo { get; set; }
-
         public int PerguntaId { get; set; }
         public Pergunta Pergunta { get; set; }
+
+        public int UsuarioId { get; set; }
     }
 }

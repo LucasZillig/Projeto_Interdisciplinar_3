@@ -18,6 +18,11 @@ namespace PI_3.Controllers
         }
         public IActionResult Index(int id)
         {
+            if(Usuario == null)
+            {
+                return View("Login");
+            }
+            
             var perguntas = _context.Pergunta
                                 .Include(c3 => c3.Comentarios)
                                 .Include(c => c.CursoAluno)
@@ -29,7 +34,9 @@ namespace PI_3.Controllers
                                 .Where(x => x.PerguntaId == id)
                                 .ToList();
 
+            
             var pergunta = perguntas[0];
+            var comentarios = _context.Comentario.Where(i => i.PerguntaId == pergunta.PerguntaId).ToList();
 
             pergunta.CursoAluno.Perguntas = null;
             pergunta.CursoAluno.Aluno.CursoAluno = null;
@@ -41,7 +48,10 @@ namespace PI_3.Controllers
             {
                 comentario.Pergunta.Comentarios = null;
             }
-            ViewBag.Pergunta = pergunta;            
+
+            ViewBag.Comentarios = comentarios;    
+            ViewBag.Usuario = Usuario;
+            ViewBag.Pergunta = pergunta;        
             return View("Index");
         }
 

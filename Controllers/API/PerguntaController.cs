@@ -117,31 +117,28 @@ namespace PI_3.Controllers.API
 
         [HttpPost]
        	[Route("[action]")]
-        public IActionResult UploadArquivo(IFormFile file)
+        public IActionResult UploadArquivo()
         {
-            string filename = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
-            filename = this.EnsureFilename(filename);
-            using (FileStream filestream = System.IO.File.Create(this.GetPath(filename, 1)))
-            {
+            Console.WriteLine(Request.Form.Files.Count);
+            Console.WriteLine(Request.Form["id"]);
 
+
+            if (!int.TryParse(Request.Form["id"], out int id)) {
+                // erro!
             }
 
+            string path = System.IO.Path.Join(_hostingEnvironment.WebRootPath, "Arquivos", id.ToString());
+            if (!System.IO.Directory.Exists(path)) {
+                System.IO.Directory.CreateDirectory(path);
+            }
+
+            using (System.IO.Stream stream = Request.Form.Files[0].OpenReadStream()) {
+                using (System.IO.FileStream destination = new System.IO.FileStream(System.IO.Path.Join(path, Request.Form.Files[0].FileName), FileMode.Create)) {
+                    stream.CopyTo(destination);
+                }
+            }
+            
             return new JsonResult("Arquivo enviado");
-        }
-
-        private string GetPath(string filename, int id)
-        {
-            string path = $"{_hostingEnvironment.WebRootPath}\\Perguntas\\{id}\\";
-            if (!Directory.Exists(path))
-                Directory.CreateDirectory(path);
-            return path + filename;
-        }
-
-        private string EnsureFilename(string filename)
-        {
-            if (filename.Contains("\\"))
-                filename = filename.Substring(filename.LastIndexOf("\\") + 1);
-            return filename;
         }
 
         [HttpPut("{id}")]
