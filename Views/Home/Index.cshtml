@@ -26,7 +26,7 @@
                 <div class="sidebar-section">
                     <div class="section-new">
                         <div class="sidebar-logo-container">
-                            <i class="material-icons sidebar-logo">book</i>
+                            <img src="../img/logo.png" alt="" style="width: 100%;max-width:245px">
                         </div>
                         <button class="mdc-button mdc-button--outlined mdc-ripple-upgraded" style="width:100%" data-micromodal-trigger="modal-3">
                             <span class="mdc-button__label">Escrever Pergunta</span>
@@ -800,18 +800,13 @@
                 $("#overlay").fadeOut(300);
                 $(".sidebar-wrapper").removeClass('sidebar-wrapper-after');
             });
-            //-------------------------------------------------------------
 
-            (function(){
-                $('.materia-title-inner').each(function(){
+            $(".list-select").hover(function () {
+                $(this).find('.materia-title-inner').each(function(){
                     if (this.offsetWidth + 61 > this.closest('.materia-title').scrollWidth) {
                         $(this).closest('.materia-title').addClass('list-select-overflowing');
                     }
                 });
-            })();
-
-            //FORMATO MOBILE - HOVER PARA NOMES GRANDES DE INBOX            TODO: MOBILE GESTURES (on hold)
-            $(".list-select").hover(function () {
                 var nomeMateriaContainer = $(this).find('.materia-title-container')[0];
                 var nomeMateria = $(this).find('.materia-title-container').find('.materia-title')[0];
                 var nomeMateriaInner = $(this).find('.materia-title-container').find('.materia-title-inner')[0];
