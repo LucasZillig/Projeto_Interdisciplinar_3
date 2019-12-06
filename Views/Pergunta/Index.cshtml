@@ -34,8 +34,9 @@
             </div>
         </div>
         <div class="editor">
+            <div class="editor-pages">
+            </div>
             <div class="container-wrapper">
-                <div id="container"></div>
             </div>
         </div>
         <div class="mdc-tab-bar" role="tablist" style="-webkit-box-shadow: 0 1px 1px 0 rgba(65, 69, 73, 0.3), 0 1px 3px 1px rgba(65, 69, 73, 0.15);box-shadow: 0 1px 1px 0 rgba(65, 69, 73, 0.3), 0 1px 3px 1px rgba(65, 69, 73, 0.15);">
@@ -182,30 +183,6 @@
         editor2.content.innerHTML = '<b><u><i>Initial content!</i></u></b>';
 
 </script>
-
-<script>
-    var originalModel = monaco.editor.createModel("zap", "javascript");
-    var modifiedModel = monaco.editor.createModel("zap2", "javascript");
-    var editor = monaco.editor.createDiffEditor(document.getElementById('container'), {
-        language: 'javascript',
-        theme: "vs-dark",
-        automaticLayout: true,
-        scrollbar: {
-            verticalHasArrows: true,
-            horizontalHasArrows: true,
-            vertical: 'visible',
-            horizontal: 'visible',
-            verticalScrollbarSize: 17,
-            horizontalScrollbarSize: 17,
-            arrowSize: 30
-        }
-    });
-    editor.setModel({
-        original: originalModel,
-        modified: modifiedModel
-    });
-</script>
-
 <script>
     $(document).ready(function (){
             var descHeight = $('.question-description-content').prop('scrollHeight');
@@ -218,10 +195,10 @@
             }
 
             if(@ViewBag.Pergunta.Arquivado == 0){
-                $('.question-header').append('<button class="mdc-icon-button material-icons header-icon-button" style="right: 16px" id="mobile-sidebar-button" onclick="arquivarPergunta()">archive</button>');
+                $('.question-header').append('<button class="mdc-icon-button material-icons header-icon-button" style="right: 16px" id="mobile-sidebar-button" onclick="arquivar()">archive</button>');
             }
             else{
-                $('.question-header').append('<button class="mdc-icon-button material-icons header-icon-button" style="right: 16px" id="mobile-sidebar-button" onclick="abrirPergunta()">unarchive</button>');
+                $('.question-header').append('<button class="mdc-icon-button material-icons header-icon-button" style="right: 16px" id="mobile-sidebar-button" onclick="arquivar()">unarchive</button>');
             }
 
     });
@@ -304,6 +281,18 @@
             location.href= "/"
         });
 
+        async function arquivar(){
+            const response = await fetch('/api/Pergunta/' + @ViewBag.Pergunta.PerguntaId, {
+                method: 'PUT',
+                headers: {
+                    'Content-type': 'application/json',
+                },
+                body: JSON.stringify({'PerguntaId': @ViewBag.Pergunta.PerguntaId,'Arquivado': @ViewBag.Pergunta.Arquivado})
+            })
+            console.log(await response.json());
+            window.location.replace('/');
+        }
+
         $('#comment-form').submit(function(event){
             event.preventDefault();
 
@@ -331,5 +320,61 @@
             return await response.json();
         }
 
+        async function getFiles(pergunta_id){
+            const response = await fetch('/api/pergunta/getFiles?id=' + pergunta_id);
+
+            return await response.json();
+        }
+
+        getFiles(@ViewBag.Pergunta.PerguntaId)
+            .then(response => {
+                populateMonaco(response);
+            })
+            .catch(err => console.error(err));
+        
+
+        function populateMonaco(files){
+            let counter = 0;
+            for(file of files){
+                if(counter == 0){
+                    $('.container-wrapper').append(`<div id="container-${ counter }" class="container"></div>`)
+                }else{
+                    $('.container-wrapper').append(`<div id="container-${ counter }" class="container" style="display: none;"></div>`)
+                }
+                $('.editor-pages').append(`<div class="page" id="file-${ counter }" onclick="selectTab(${ counter })">${ file.nome }</div>`)
+                
+                const originalModel = monaco.editor.createModel(file.conteudo, "javascript");
+                const modifiedModel = monaco.editor.createModel(file.conteudo, "javascript");
+                let editor = monaco.editor.createDiffEditor(document.getElementById(`container-${ counter }`), {
+                    language: 'javascript',
+                    theme: "vs-dark",
+                    automaticLayout: true,
+                    scrollbar: {
+                        verticalHasArrows: true,
+                        horizontalHasArrows: true,
+                        vertical: 'visible',
+                        horizontal: 'visible',
+                        verticalScrollbarSize: 17,
+                        horizontalScrollbarSize: 17,
+                        arrowSize: 30
+                    }
+                });
+                editor.setModel({
+                    original: originalModel,
+                    modified: modifiedModel
+                });
+                counter++;
+            }
+        }
+
+        function selectTab(file_id) {
+            $('.container').each(function(){
+                if($(this).attr('id') != `container-${ file_id }`){
+                    $(this).hide();
+                }else {
+                    $(this).show();
+                }
+            })
+        }
 </script>
 }

@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PI_3.Models;
 using Microsoft.EntityFrameworkCore;
-using PI_3.Request;
+using PI_3.Response;
 
 namespace PI_3.Controllers.API
 {   
@@ -140,6 +140,28 @@ namespace PI_3.Controllers.API
             
             return new JsonResult("Arquivo enviado");
         }
+        [HttpGet]
+        [Route("[action]")]
+        public IActionResult GetFiles(int id)
+        {
+            List<FilesResponse> returnFiles = new List<FilesResponse>();
+
+            string path = System.IO.Path.Join(_hostingEnvironment.WebRootPath, "Arquivos", (id).ToString());
+            if (!System.IO.Directory.Exists(path)) {
+                return new JsonResult("Essa pergunta não possui arquivos!") { StatusCode = 404};
+            }
+
+            string[] filePaths = Directory.GetFiles(@path);
+            foreach(string filePath in filePaths){
+                returnFiles.Add(new FilesResponse{
+                    Nome = Path.GetFileName(filePath) ,
+                    Conteudo = System.IO.File.ReadAllText(filePath)
+                });
+
+            }
+
+            return new JsonResult(returnFiles);
+        }
 
         [HttpPut("{id}")]
         public ActionResult UpdatePergunta(int id, Pergunta requestPergunta)
@@ -149,16 +171,19 @@ namespace PI_3.Controllers.API
                 return BadRequest();
             }
 
-            var pergunta = _context.Pergunta.SingleOrDefault(x => x.PerguntaId == requestPergunta.PerguntaId);
-                
-            pergunta.PerguntaNome = requestPergunta.PerguntaNome;
-            pergunta.PerguntaDesc = requestPergunta.PerguntaDesc;
-            pergunta.Arquivado = requestPergunta.Arquivado;
+            var perguntas = _context.Pergunta.Where(x => x.PerguntaId == requestPergunta.PerguntaId).ToList();
+            var pergunta = perguntas[0];
 
+            if(requestPergunta.Arquivado == 1){
+                pergunta.Arquivado = 0;
+            }else{
+                pergunta.Arquivado = 1;
+            }
+            
             _context.Pergunta.Update(pergunta);
             _context.SaveChanges();
 
-            return NoContent();
+            return new JsonResult("Pergunta" + (pergunta.Arquivado == 1 ? " arquivada" : " não arquivada"));
         }
 
         [HttpDelete("{id}")]
