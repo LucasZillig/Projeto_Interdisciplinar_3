@@ -852,7 +852,7 @@
                 var nomeMateriaInner = $(this).find('.materia-title-container').find('.materia-title-inner')[0];
 
                 if ($(nomeMateria).hasClass('list-select-overflowing')) {
-                    var parent_width = nomeMateriaContainer.offsetWidth - 60;
+                    var parent_width = nomeMateriaContainer.offsetWidth;
                     nomeMateria.style.transform = 'translateX(calc(-100% + ' + parent_width + 'px))';
                     $(this).mouseleave(function () {
                         nomeMateria.style.transform = ''

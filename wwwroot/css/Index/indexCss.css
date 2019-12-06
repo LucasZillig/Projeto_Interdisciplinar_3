@@ -376,8 +376,8 @@ button, input {
 }
 
 .materia-title-container {
-    /* width: calc(100% - 60px); */
-    width: 100%;
+    width: calc(100% - 60px);
+    /* width: 100%; */
 }
 
 .materia-title {
